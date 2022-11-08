@@ -18,8 +18,8 @@ const Header = () => {
    {
     data.map(d =>  <div style={{ 
       backgroundImage: `url(${d.image})` 
-    }} className="bg-center h-full bg-cover flex flex-col text-4xl font-bold  items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
-   <p className='italic text-sm '> Welcome to our Doctor Portal</p>
+    }} className="bg-center text-white h-full bg-cover flex flex-col text-4xl font-bold  items-center justify-center  dark:bg-gray-700 dark:text-white">
+   <p className='italic text-sm text-gray-500'> Welcome to our Doctor Portal</p>
    Our Medical Experts
     </div>)
    }
