@@ -1,3 +1,4 @@
+
 import CardView from "./components/CardView/CardView";
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Menu";
@@ -10,6 +11,7 @@ const  App=()=> {
    <Navbar/>
    <Header/>
    <CardView/>
+  
  
    </>
   );
