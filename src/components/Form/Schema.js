@@ -12,11 +12,9 @@ export const PatientRegistarSchema = Yup.object({
     password: Yup.string().required()
   });
   export const logInSchema = Yup.object({
-    email: Yup.string('Enter your email')
-      .email('Enter a valid email')
-      .required('Email is required'),
-      firstName: Yup.string().required(),
-    password: Yup.string().required('Enter Valid Password'),
-    confPassword: Yup.string().required('Enter Valid Password'),
+      firstName: Yup.string().required(" first Name is required"),
+      lastName: Yup.string().required("Last Name is required"),
+      contactNo: Yup.string().required("contact Number is required"),
+
   });
   

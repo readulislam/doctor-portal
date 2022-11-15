@@ -1,6 +1,15 @@
 export const data={
     firstName: '',
-    email: '',
-    password: '',
-    confPassword: '',
+    middleName:'',
+    lastName:'',
+    contactNo:'',
+    Dob:'',
+    address:'',
+    hospitalName:'',
+    gender:'',
+    countryName:'',
+    stateName:'',
+    cityName:'',
+    pincode:'',
+    martialStatus:'',
 }

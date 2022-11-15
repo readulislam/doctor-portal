@@ -1,4 +1,4 @@
-import { Button, Modal, TextInput } from 'flowbite-react'
+import { Button, Modal } from 'flowbite-react'
 import React from 'react'
 
 const AppointmentBookedModal = ({setDone,done,name}) => {
@@ -12,15 +12,14 @@ const AppointmentBookedModal = ({setDone,done,name}) => {
                 Appointment is Booked
             </h1>
             <p>
-                DoctorName
-                <TextInput
-                  id="email1"
-                  type="text"
-                  placeholder="name@flowbite.com"
-                  disabled
-                  value={name}
-                />
+                Doctor Name
+                <span>{name}</span>
             </p>
+            <p>
+                Patient Name
+                <span></span>
+            </p>
+            <p>Time of Slot<span></span> Date<span></span></p>
           </Modal.Body>
           <Modal.Footer className="flex justify-between">
             <Button
