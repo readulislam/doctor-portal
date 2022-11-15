@@ -34,53 +34,110 @@ export const slots = [
     
     {
       id: 1,
+      name:'DR. RITESH AGGARWAL',
+      designation:'SR. CONSULTANT',
+      location:'mSmart Hospital, jaipur',
+      speciality:'Medical Oncology',
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOQeM37N_ZG5L9ANpnuE45M5Lf96DfjjMRlKbPLhs6dZXkuKYB3NUVZSycRwmGGpWijh4&usqp=CAU",
     },
     {
-      id: 1,
+      id: 2,
+      name:'DR. RUDRA PRATAP',
+      designation:'Director Surgical Oncology',
+      location:'mSmart Hospital, Delhi',
+      speciality:'Oncology',
       image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOQeM37N_ZG5L9ANpnuE45M5Lf96DfjjMRlKbPLhs6dZXkuKYB3NUVZSycRwmGGpWijh4&usqp=CAU",
+        "https://api.parashospitals.com/storage/doctors/October2022/UqFjvxa0ipeGKjGKT3Im.jpg",
     },
     {
-      id: 1,
+      id: 3,
+      name:'DR. SURESH SHARMA',
+      designation:'DIRECTOR-PLASTIC SURGEON',
+      location:'mSmart Hospital, jaipur',
+      speciality:'Plastic And Reconstructive Surgeries',
       image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOQeM37N_ZG5L9ANpnuE45M5Lf96DfjjMRlKbPLhs6dZXkuKYB3NUVZSycRwmGGpWijh4&usqp=CAU",
+        "https://api.parashospitals.com/storage/doctors/October2022/zefRYl6WURSP1FWJEEEY.jpg",
     },
     {
-      id: 1,
+      id: 4,
+      name:'DR. PRADEEP SINGH',
+      designation:'Chairman',
+      location:'mSmart Hospital, Gurugram',
+      speciality:'Orthopedics & Joint Replacement',
       image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOQeM37N_ZG5L9ANpnuE45M5Lf96DfjjMRlKbPLhs6dZXkuKYB3NUVZSycRwmGGpWijh4&usqp=CAU",
+      "https://api.parashospitals.com/storage/doctors/October2022/bUQvygFvIjHfVhrus394.jpg",
     },
     {
-      id: 1,
+      id: 5,
+      name:'DR. MUHAMMAD SHAHEEN',
+      designation:'Consultant',
+      location:'mSmart Hospital, Ajmer',
+      speciality:'Medical Oncology',
       image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOQeM37N_ZG5L9ANpnuE45M5Lf96DfjjMRlKbPLhs6dZXkuKYB3NUVZSycRwmGGpWijh4&usqp=CAU",
+        "https://api.parashospitals.com/storage/doctors/October2022/Pax3Hi843qgWaeZ4sMnF.jpg",
     },
     {
-      id: 1,
+      id: 6,
+      name:'DR RUDRA ',
+      designation:'Chairman',
+      location:'mSmart Hospital, Delhi',
+      speciality:'Cardiology',
       image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOQeM37N_ZG5L9ANpnuE45M5Lf96DfjjMRlKbPLhs6dZXkuKYB3NUVZSycRwmGGpWijh4&usqp=CAU",
+        "https://api.parashospitals.com/storage/doctors/October2022/xxBk2CUdtatkvf4ub26x.jpg",
     },
     {
-      id: 1,
+      id: 7,
+      name:'DR. SURUJ WADHWA',
+      designation:'Chairman',
+      location:'mSmart Hospital, Gurugram',
+      speciality:'Orthopedics & Joint Replacement',
       image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOQeM37N_ZG5L9ANpnuE45M5Lf96DfjjMRlKbPLhs6dZXkuKYB3NUVZSycRwmGGpWijh4&usqp=CAU",
+        "https://api.parashospitals.com/storage/doctors/October2022/2BpjtH2fPMVEboCTnMHc.jpg",
     },
     {
-      id: 1,
+      id: 8,
+      name:'DR S R Rao',
+      designation:'Chairman',
+      location:'mSmart Hospital, jaipur',
+      speciality:'Oncology',
       image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOQeM37N_ZG5L9ANpnuE45M5Lf96DfjjMRlKbPLhs6dZXkuKYB3NUVZSycRwmGGpWijh4&usqp=CAU",
+        "https://api.parashospitals.com/storage/doctors/October2022/KOcv5cW2KImmOPtXQjJy.jpg",
     },
     {
-      id: 1,
+      id: 9,
+      name:'DR. V S SHARMA',
+      designation:'Chairman Neurosciences',
+      location:'mSmart Hospital, Ajmer',
+      speciality:'Neuro Surgery',
       image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOQeM37N_ZG5L9ANpnuE45M5Lf96DfjjMRlKbPLhs6dZXkuKYB3NUVZSycRwmGGpWijh4&usqp=CAU",
+        "https://api.parashospitals.com/storage/doctors/October2022/BicYlWjUe8sH7WnlfFD6.jpg",
     },
     {
-      id: 1,
+      id: 10,
+      name:'DR. HARSHIT KHANDELWAL',
+      designation:'Director & HOD',
+      location:'mSmart Hospital, Delhi',
+      speciality:'Cardiology - Interventional',
       image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOQeM37N_ZG5L9ANpnuE45M5Lf96DfjjMRlKbPLhs6dZXkuKYB3NUVZSycRwmGGpWijh4&usqp=CAU",
+        "https://api.parashospitals.com/storage/doctors/September2022/7IKigx0IUWwlBe2DOx86.jpg",
     },
-    
+    {
+      id: 11,
+      name:'DR. R K SHARMA',
+      designation:'Director & HOD - Nephrology & Transplant Surgey ',
+      location:'mSmart Hospital, Gurugram',
+      speciality:'Nephrology',
+      image:
+        "https://api.parashospitals.com/storage/doctors/September2022/nKvtlYvqtEUyIZg7M0cK.jpg",
+    },
+    {
+      id: 12,
+      name:'DR. INDARJEET Gupta',
+      designation:'Consultant General & Laparoscopic Surgery',
+      location:'mSmart Hospital, Ajmer',
+      speciality:(<br/>),
+      image:
+        "https://api.parashospitals.com/storage/doctors/September2022/0gt3x16BfPMzFkP5UmDT.jpg",
+    },
   ];

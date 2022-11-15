@@ -7,6 +7,9 @@ import ModalView from "../Modal/ModalView";
 const CardView = () => {
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState(1);
+  const [modalName, setModalName] = useState("");
+  const [modalSpeciality, setModalSpeciality] = useState("");
+  const [modalLocation, setModalLocation] = useState("");
 
  
   return (
@@ -14,20 +17,28 @@ const CardView = () => {
     <Filtering/>
       <div className="grid grid-cols-4 gap-y-10 gap-4  mt-16 place-items-center">
         {data.map((d) => (
-          <div className="max-w-xs ">
+          <div className="max-w-sm ">
             <Card 
               imgAlt="Meaningful alt text for an image that is not purely decorative"
+              
               imgSrc={d.image}
             >
               <h5 className="text-xl font-bold    text-gray-900 dark:text-white">
-                Abishek Yaduv
+                {d.name}
               </h5>
-              <p className="font-normal text-gray-700 dark:text-gray-400">
-                Here are the biggest enterprise technology acquisitions
+              <p className="font-normal text-xs text-gray-500 dark:text-gray-400">
+                {d.designation}
+              </p>
+              <p className=" text-gray-600 text-xs font-bold dark:text-gray-400">
+                {d.location}
+              </p>
+              <hr/>
+              <p className="font-normal text-gray-700 text-xs dark:text-gray-400">
+                {d.speciality}
               </p>
               <div>
                 <Button
-                  onClick={() => setOpen(true)}
+                  onClick={() => {setOpen(true);setModalName(d.name);setModalLocation(d.location);setModalSpeciality(d.speciality)}}
                   className="w-full rounded-full"
                   gradientDuoTone="cyanToBlue"
                 >
@@ -38,14 +49,15 @@ const CardView = () => {
           </div>
         ))}
       </div>
-      <ModalView open={open} setOpen={setOpen} />
+      <ModalView open={open} setOpen={setOpen} name={modalName} speciality={modalSpeciality} location={modalLocation} />
      <div className="w-full flex justify-center mt-6 mb-32">
      <Pagination
-  currentPage={page}
-  onPageChange={(e)=> setPage(e)}
-  showIcons={true}
-  totalPages={100}
-/>
+      currentPage={page}
+      
+      onPageChange={(e)=> setPage(e)}
+      showIcons={true}
+      totalPages={100}
+    />
      </div>
     </>
   );

@@ -12,19 +12,19 @@ const Filtering = () => {
           className=" border-t-0 w-52 px-2 border-r-0 border-l-0
         border-b-2 focus:outline-none focus:ring-0 border-gray-200 appearance-none"
         />
-        <div className="w-60 ">
+        <div className="w-80 ">
           <Label className="flex items-center gap-1">
             <span className="text-sm whitespace-nowrap">Filter by :</span>
 
             <select
               id="underline_select"
-              class=" py-2.5  w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+              className=" py-2.5  w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
             >
               <option selected>Location</option>
-              <option value="US">United States</option>
-              <option value="CA">Canada</option>
-              <option value="FR">France</option>
-              <option value="DE">Germany</option>
+              <option value="JA">mSmart Hospital,jaipur</option>
+              <option value="DE">mSmart Hospital,Delhi</option>
+              <option value="GR">mSmart Hospital,Gurugram</option>
+              <option value="Aj">mSmart Hospital,Ajmer</option>
             </select>
           </Label>
         </div>
@@ -33,11 +33,31 @@ const Filtering = () => {
             id="underline_select"
             class=" py-2.5  w-full  text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
           >
-            <option selected>Choose a country</option>
-            <option value="US">United States</option>
-            <option value="CA">Canada</option>
-            <option value="FR">France</option>
-            <option value="DE">Germany</option>
+            <option selected>Speciality</option>
+              <option value="JA">Cardiology</option>
+              <option value="DE">Neurology</option>
+              <option value="GR">Nephrology</option>
+              <option value="Aj">Urology</option>
+              <option value="JA">Gastroenterology</option>
+              <option value="DE">Radiaton Oncology</option>
+              <option value="GR">CTVS</option>
+              <option value="Aj">Neuro Surgery</option>
+              <option value="JA">Orthopedics</option>
+              <option value="DE">Obstetrics & Gynaecology</option>
+              <option value="GR">Kidney Transplant</option>
+              <option value="Aj">Plastic Surgery</option>
+              <option value="JA">Internal Medicine</option>
+              <option value="DE">Critical Care</option>
+              <option value="GR">Endocrinology</option>
+              <option value="Aj">ENT</option>
+              <option value="JA">Emergency Medicine</option>
+              <option value="DE">Dermatology</option>
+              <option value="GR">Psychiatry</option>
+              <option value="Aj">Rheumatology And Clinical Immunology</option>
+              <option value="JA">Opthalmollogy</option>
+              <option value="DE">Pediatrics</option>
+              <option value="GR">Respiratory Medicine</option>
+              
           </select>
         </div>
 

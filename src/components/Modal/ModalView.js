@@ -2,7 +2,7 @@ import { Button, Modal, TextInput } from "flowbite-react";
 import React, { useState } from "react";
 import { slots } from "../../Utils/mockData";
 
-const ModalView = ({ open, setOpen }) => {
+const ModalView = ({ open, setOpen ,name,location,speciality}) => {
   const [selected, setSelected] = useState(null);
 
   const selectedSlot = (id) => {
@@ -21,21 +21,21 @@ const ModalView = ({ open, setOpen }) => {
                   type="text"
                   placeholder="name@flowbite.com"
                   disabled
-                  value={"Paras Hospitals, Delhi"}
+                  value={location}
                 />
                 <TextInput
                   id="email1"
                   type="text"
                   placeholder="name@flowbite.com"
                   disabled
-                  value={"Medical Oncology"}
+                  value={speciality}
                 />
                 <TextInput
                   id="email1"
                   type="text"
                   placeholder="name@flowbite.com"
                   disabled
-                  value={"Dr. Himanshu Dotto"}
+                  value={name}
                 />
 
                 <TextInput id="email1" type="date" required={true} />

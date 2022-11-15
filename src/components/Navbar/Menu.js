@@ -1,7 +1,11 @@
-import { Avatar, Dropdown, Navbar } from 'flowbite-react'
-import React from 'react'
+import { Avatar, Button, Dropdown, Navbar } from 'flowbite-react'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { authActions } from '../../Store/Auth-Slice'
 
 const Menu = () => {
+ 
+  const dispatch=useDispatch()
   return (
    <div className='sticky z-10 top-0 '>
     <Navbar  className='mx-5 my-4'
@@ -19,7 +23,9 @@ const Menu = () => {
     </span>
   </Navbar.Brand>
   <div className="flex md:order-2">
+  <Button className='mr-4' onClick={()=>{ dispatch(authActions.logout())}}>Registar</Button>
     <Dropdown
+
       arrowIcon={false}
       inline={true}
       label={<Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded={true}/>}
@@ -42,7 +48,7 @@ const Menu = () => {
         Earnings
       </Dropdown.Item>
       <Dropdown.Divider />
-      <Dropdown.Item>
+      <Dropdown.Item onClick={()=>{ dispatch(authActions.logout())}}>
         Sign out
       </Dropdown.Item>
     </Dropdown>

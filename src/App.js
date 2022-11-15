@@ -1,18 +1,15 @@
+import { useSelector } from 'react-redux'
+import Auth from './components/Auth/Auth';
+import Dashboard from './components/Dashboard/Dashboard';
 
-import CardView from "./components/CardView/CardView";
-import Header from "./components/Header/Header";
-import Navbar from "./components/Navbar/Menu";
 
 
 const  App=()=> {
- 
+  const isLoggedIn=useSelector(state=>state.auth.isLoggedIn)
   return (
    <>
-   <Navbar/>
-   <Header/>
-   <CardView/>
-
- 
+   {!isLoggedIn && <Auth/>}
+   {isLoggedIn && <Dashboard/> }
    </>
   );
 }
