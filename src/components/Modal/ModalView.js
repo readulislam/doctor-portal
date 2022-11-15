@@ -2,9 +2,8 @@ import { Button, Modal, TextInput } from "flowbite-react";
 import React, { useState } from "react";
 import { slots } from "../../Utils/mockData";
 
-const ModalView = ({ open, setOpen ,name,location,speciality}) => {
+const ModalView = ({ open, setOpen ,name,location,speciality,existingUser,setDone,setRegistarOpen}) => {
   const [selected, setSelected] = useState(null);
-
   const selectedSlot = (id) => {
     setSelected(id);
   };
@@ -60,6 +59,21 @@ const ModalView = ({ open, setOpen ,name,location,speciality}) => {
                   </div>
                 ))}
               </div>
+              <div>
+                <input
+                id="number"
+                className="w-full"
+                type="number"
+                placeholder=" "
+                />
+              </div>
+              {existingUser && <select
+              id="underline_select"
+              className=" py-2.5  w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+            >
+              <option selected>From Whom You Booking</option>
+              <option value="JA">user</option>
+            </select>}
             </div>
           </Modal.Body>
           <Modal.Footer className="flex justify-between">
@@ -70,6 +84,12 @@ const ModalView = ({ open, setOpen ,name,location,speciality}) => {
               type="submit"
               className="px-2 "
               gradientDuoTone="cyanToBlue"
+              onClick={()=>{if(existingUser){
+                setDone(true);setOpen(false)
+              }else{
+                setRegistarOpen(true);setOpen(false)
+              }
+                }}
             >
               Submit
             </Button>

@@ -2,6 +2,7 @@ import { Button, Card, Pagination } from "flowbite-react";
 import React, { useState } from "react";
 import { data } from "../../Utils/mockData";
 import Filtering from "../Filtering/Filtering";
+import AppointmentRegistar from "../Form/AppoinmentRegistar/AppointmentRegistar";
 import ModalView from "../Modal/ModalView";
 
 const CardView = () => {
@@ -49,7 +50,7 @@ const CardView = () => {
           </div>
         ))}
       </div>
-      <ModalView open={open} setOpen={setOpen} name={modalName} speciality={modalSpeciality} location={modalLocation} />
+      <AppointmentRegistar open={open} setOpen={setOpen} name={modalName} speciality={modalSpeciality} location={modalLocation} />
      <div className="w-full flex justify-center mt-6 mb-32">
      <Pagination
       currentPage={page}

@@ -36,10 +36,10 @@ const Registar = () => {
               className=" py-2.5  w-auto text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
             >
               <option selected>Title</option>
-              <option value="JA">Baby</option>
-              <option value="DE">Baby Of</option>
-              <option value="GR">Mr.</option>
-              <option value="Aj">Mrs.</option>
+              <option value="B">Baby</option>
+              <option value="Bo">Baby Of</option>
+              <option value="Mr">Mr.</option>
+              <option value="Mrs">Mrs.</option>
             </select>    
                   <label className='w-full' >
                     <Field
