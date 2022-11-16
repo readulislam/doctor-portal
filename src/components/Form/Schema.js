@@ -15,6 +15,8 @@ export const PatientRegistarSchema = Yup.object({
       firstName: Yup.string().required(" first Name is required"),
       lastName: Yup.string().required("Last Name is required"),
       contactNo: Yup.string().required("contact Number is required"),
+      address: Yup.string().required("address is required"),
+      pincode: Yup.string().required("pincode is required"),
 
   });
   

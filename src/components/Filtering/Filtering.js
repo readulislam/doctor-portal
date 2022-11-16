@@ -16,16 +16,16 @@ const Filtering = () => {
           <Label className="flex items-center gap-1">
             <span className="text-sm whitespace-nowrap">Filter by :</span>
 
-            <select
-              id="underline_select"
-              className=" py-2.5  w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
-            >
-              <option selected>Location</option>
-              <option value="JA">mSmart Hospital,jaipur</option>
-              <option value="DE">mSmart Hospital,Delhi</option>
-              <option value="GR">mSmart Hospital,Gurugram</option>
-              <option value="Aj">mSmart Hospital,Ajmer</option>
-            </select>
+              <select
+                id="underline_select"
+                className=" py-2.5  w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+              >
+                <option selected>Location</option>
+                <option value="JA">mSmart Hospital,jaipur</option>
+                <option value="DE">mSmart Hospital,Delhi</option>
+                <option value="GR">mSmart Hospital,Gurugram</option>
+                <option value="Aj">mSmart Hospital,Ajmer</option>
+              </select>
           </Label>
         </div>
         <div className="w-52">
