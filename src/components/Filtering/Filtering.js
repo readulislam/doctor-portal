@@ -18,20 +18,20 @@ const Filtering = () => {
 
               <select
                 id="underline_select"
-                className=" py-2.5  w-full  text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+                className=" py-2.5  w-full  text-md  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
               >
                 <option selected>Location</option>
-                <option value="JA">mSmart Hospital, jaipur</option>
-                <option value="DE">mSmart Hospital, Delhi</option>
-                <option value="GR">mSmart Hospital, Gurugram</option>
-                <option value="Aj">mSmart Hospital, Ajmer</option>
+                <option className="" value="JA">mSmart Hospital, jaipur</option>
+                <option  value="DE">mSmart Hospital, Delhi</option>
+                <option  value="GR">mSmart Hospital, Gurugram</option>
+                <option  value="Aj">mSmart Hospital, Ajmer</option>
               </select>
           </Label>
         </div>
         <div className="w-52">
           <select
             id="underline_select"
-            className=" py-2.5  w-full  text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+            className=" py-2.5  w-full  text-md  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
           >
             <option selected>Speciality</option>
               <option value="JA">Cardiology</option>
