@@ -11,6 +11,8 @@ const CardView = () => {
   const [modalName, setModalName] = useState("");
   const [modalSpeciality, setModalSpeciality] = useState("");
   const [modalLocation, setModalLocation] = useState("");
+  const [location, setLocation] = useState("");
+  const [speciality, setSpeciality] = useState("");
 
  
   return (
@@ -30,11 +32,11 @@ const CardView = () => {
               <p className="font-normal text-xs text-gray-500 dark:text-gray-400">
                 {d.designation}
               </p>
-              <p className=" text-gray-600 text-xs font-bold dark:text-gray-400">
+              <p className="  text-gray-600 text-xs p-0 -mt-2 font-bold dark:text-gray-400">
                 {d.location}
               </p>
               <hr/>
-              <p className="font-normal text-gray-700 text-xs dark:text-gray-400">
+              <p className="font-normal text-gray-500 text-xs dark:text-gray-400">
                 {d.speciality}
               </p>
               <div>

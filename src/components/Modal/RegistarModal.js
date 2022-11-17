@@ -1,4 +1,6 @@
 import { Button, Modal, TextInput } from 'flowbite-react'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import React from 'react'
 
 const RegistarModal = ({setDone, open ,setOpen,location}) => {
@@ -6,7 +8,7 @@ const RegistarModal = ({setDone, open ,setOpen,location}) => {
     <React.Fragment>
         <Modal show={open} position="center" onClose={() => {setOpen(false)}}>
         <form>
-          <Modal.Header>Book An Appointment</Modal.Header>
+          <Modal.Header className=''>Register now</Modal.Header>
           <Modal.Body>
             <div className="space-y-6 p-6">
                 <div className="grid grid-cols-2 gap-4 ">
@@ -20,20 +22,17 @@ const RegistarModal = ({setDone, open ,setOpen,location}) => {
                         <option value="Mr">Mr.</option>
                         <option value="Mrs">Mrs.</option>
                     </select>    
-                <TextInput
+                <input
                   id="email1"
+                  className="mt-4 border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
                   type="text"
                   placeholder="FirstName"
                 />
-                <TextInput
+                <input
                   id="email1"
+                  className="mt-4 border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
                   type="text"
                   placeholder="Lastname"
-                />
-                <TextInput
-                  id="email1"
-                  type="text"
-                  placeholder="Email"
                 />
                 <select
                     id="underline_select"
@@ -44,24 +43,27 @@ const RegistarModal = ({setDone, open ,setOpen,location}) => {
                         <option value="F">Female</option>
                         <option value="O">other.</option>
                     </select>    
-                <TextInput
+                <input
                   id="email1"
                   type="text"
-                  placeholder="name@flowbite.com"
+                  className="mt-4 border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
                   disabled
                   value={location}
                 />
-                <TextInput
-                id='email'
+                <input
+                id='email2'
                 type="text"
+                className="mt-4 border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
                 placeholder='Address line 1'
                 />
-                <TextInput
-                id='email'
+                <input
+                id='email2'
                 type="text"
+                className="mt-4 border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
                 placeholder='Address line 2'
                 />
-                <TextInput id="email1" type="date" required={true} />
+                <DatePicker  className="mt-4 w-full border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer" 
+                 placeholderText='Date of birth' required={true} />
                 <select
               id="underline_select"
               className=" py-2.5  w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
@@ -131,6 +133,14 @@ const RegistarModal = ({setDone, open ,setOpen,location}) => {
               <option value="Ahm">Ahmedabad</option>
               <option value="Ali">Aligarh</option>
             </select>
+            <label>
+                <input
+                  type="number"
+                  className="mt-4 border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+                  placeholder='*pincode'
+                  name="pincode"
+                />
+              </label>
               </div>
             </div>
           </Modal.Body>

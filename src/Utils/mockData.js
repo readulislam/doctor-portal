@@ -33,15 +33,6 @@ export const slots = [
     
     
     {
-      id: 1,
-      name:'DR. RITESH AGGARWAL',
-      designation:'SR. CONSULTANT',
-      location:'mSmart Hospital, jaipur',
-      speciality:'Medical Oncology',
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOQeM37N_ZG5L9ANpnuE45M5Lf96DfjjMRlKbPLhs6dZXkuKYB3NUVZSycRwmGGpWijh4&usqp=CAU",
-    },
-    {
       id: 2,
       name:'DR. RUDRA PRATAP',
       designation:'Director Surgical Oncology',

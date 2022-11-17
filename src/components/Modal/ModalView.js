@@ -2,7 +2,7 @@ import { Button, Modal, TextInput } from "flowbite-react";
 import React, { useState } from "react";
 import { slots } from "../../Utils/mockData";
 
-const ModalView = ({ open, setOpen ,name,location,speciality,existingUser,setDone,setRegistarOpen}) => {
+const ModalView = ({ open, setOpen ,name,location,speciality,existingUser,setDone,setRegistarOpen,setTime,setDate}) => {
   const [selected, setSelected] = useState(null);
   const selectedSlot = (id) => {
     setSelected(id);
@@ -37,7 +37,7 @@ const ModalView = ({ open, setOpen ,name,location,speciality,existingUser,setDon
                   value={name}
                 />
 
-                <TextInput id="email1" type="date" required={true} />
+                <TextInput id="email1" type="date" required={true} onChange={(e)=>{setDate(e.target.value);}} />
               </div>
 
               <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">

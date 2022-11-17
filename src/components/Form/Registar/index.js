@@ -3,6 +3,8 @@ import React from 'react'
 import { Field, Formik ,ErrorMessage} from 'formik';
 import { useDispatch } from 'react-redux'
 import { authActions } from '../../../Store/Auth-Slice'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { logInSchema } from '../Schema'
 import { data } from './const'
 
@@ -10,7 +12,7 @@ const Registar = () => {
   const dispatch=useDispatch()
   const handleSubmit=(e)=>{
     console.log(e);
-    dispatch(authActions.login())
+    // dispatch(authActions.login())
   }
   return (
     <Formik
@@ -38,6 +40,7 @@ const Registar = () => {
                 <select
                 id="underline_select"
                 className=" mt-5 w-full text-gray-500 grid-cols-1 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+                onChange={(e)=>{data.title=e.target.value}}
                 >
                   <option selected>Title</option>
                   <option value="B">Baby</option>
@@ -50,7 +53,7 @@ const Registar = () => {
                 <label>
                   <Field
                     type="text"
-                    className="mt-4 border-b-2"
+                    className="mt-4  border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
                     placeholder='ENTER_YOUR_NAME'
                     name="firstName"
                   />
@@ -61,7 +64,7 @@ const Registar = () => {
                 <label>
                   <Field
                     type="number"
-                    className="mt-4 w-full"
+                    className="mt-4 w-full border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
                     placeholder='*contactNo'
                     name="contactNo"
                   />
@@ -70,7 +73,7 @@ const Registar = () => {
                 <label>
                   <Field
                     type="text"
-                    className="mt-4 w-full"
+                    className="mt-4 w-full border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
                     placeholder='*address'
                     name="address"
                   />
@@ -79,16 +82,18 @@ const Registar = () => {
                 <select
                   id="underline_select"
                   className=" py-2.5 mt-4 w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+                  onChange={(e)=>{data.gender=e.target.value}}
                 >   
                   <option selected>Gender</option>
-                  <option value="M">Male</option>
-                  <option value="F">Female</option>
-                  <option value="O">other.</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">other.</option>
                 </select> 
                 <select
-              id="underline_select"
-              className=" py-2.5 mt-4 w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
-            >
+                id="underline_select"
+                className=" py-2.5 mt-4 w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+                onChange={(e)=>{data.stateName=e.target.value}}
+              >
                 <option selected > State</option>
                   <option value="AN">Andaman and Nicobar Islands</option>
                   <option value="AP">Andhra Pradesh</option>
@@ -131,7 +136,7 @@ const Registar = () => {
                 <label>
                   <Field
                     type="number"
-                    className="mt-4 w-full"
+                    className="mt-4 w-full border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
                     placeholder='*pincode'
                     name="pincode"
                   />
@@ -160,7 +165,7 @@ const Registar = () => {
                     <label>
                       <Field
                         type="text"
-                        className="mt-4 "
+                        className="mt-4  border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
                         placeholder='middleName'
                         name="middleName"
                       />
@@ -170,7 +175,7 @@ const Registar = () => {
                     <label>
                       <Field
                         type="text"
-                        className="mt-4 "
+                        className="mt-4  border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
                         placeholder='lastName'
                         name="lastName"
                       />
@@ -178,10 +183,12 @@ const Registar = () => {
                     <ErrorMessage name="lastName" />
                   </div>
                 </div>
-                <TextInput  id="date" className="mt-4 " type="date" required={true} />
+                <DatePicker  className="mt-4 w-full border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer" 
+                 placeholderText='Date of birth' required={true} />
                 <select
                   id="underline_select"
                   className=" py-2.5 mt-4 w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+                  onChange={(e)=>{data.hospitalName=e.target.value}}
                 >
                   <option selected>Location</option>
                   <option value="JA">mSmart Hospital,jaipur</option>
@@ -192,17 +199,15 @@ const Registar = () => {
                 <select
                   id="underline_select"
                   className=" py-2.5 mt-4 w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+                  onChange={(e)=>{data.countryName=e.target.value}}
                 >
                   <option selected>India</option>
-                  <option value="widowed">Widowed</option>
-                  <option value="single">Single</option>
-                  <option value="married">Married</option>
-                  <option value="divorced">Divorced</option>
-                  <option value="seperated">Seperated</option>
+                  
                 </select>
                 <select
                   id="underline_select"
                   className=" py-2.5  mt-4 w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+                  onChange={(e)=>{data.cityName=e.target.value}}
                 >
                   <option selected>City</option>
                   <option value="Jai">jaipur</option>
@@ -223,8 +228,14 @@ const Registar = () => {
                 <select
                   id="underline_select"
                   className=" py-2.5 mt-4 w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+                  onChange={(e)=>{data.martialStatus=e.target.value}}
                 >
                   <option selected>Select Martial Status</option>
+                  <option value="widowed">Widowed</option>
+                  <option value="single">Single</option>
+                  <option value="married">Married</option>
+                  <option value="divorced">Divorced</option>
+                  <option value="seperated">Seperated</option>
                 </select>
               </div>
             </form>

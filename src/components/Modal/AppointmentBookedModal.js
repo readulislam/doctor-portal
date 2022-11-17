@@ -1,25 +1,21 @@
 import { Button, Modal } from 'flowbite-react'
 import React from 'react'
 
-const AppointmentBookedModal = ({setDone,done,name}) => {
+const AppointmentBookedModal = ({setDone,done,name ,date,time}) => {
   return (
     <React.Fragment>
         <Modal show={done} position="center" onClose={() => setDone(false)}>
         <form>
-          <Modal.Header>Book An Appointment</Modal.Header>
+          <Modal.Header>Appointment is booked </Modal.Header>
           <Modal.Body>
-          <h1>
-                Appointment is Booked
-            </h1>
             <p>
-                Doctor Name
-                <span>{name}</span>
+                Doctor Name : <span>{name}</span>
             </p>
             <p>
-                Patient Name
-                <span></span>
+                Patient Name : <span></span>
             </p>
-            <p>Time of Slot<span></span> Date<span></span></p>
+            <p>Time : <span>{time}</span> </p>
+            <p>Date : <span>{date}</span></p>
           </Modal.Body>
           <Modal.Footer className="flex justify-between">
             <Button
