@@ -1,15 +1,21 @@
 import { Button, Label, TextInput } from 'flowbite-react'
-import React from 'react'
+import React, { useState } from 'react'
 import { Field, Formik ,ErrorMessage} from 'formik';
 import { useDispatch } from 'react-redux'
 import { authActions } from '../../../Store/Auth-Slice'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { logInSchema } from '../Schema'
+import { PatientRegisterSchema } from '../Schema'
 import { data } from './const'
 
 const Registar = () => {
   const dispatch=useDispatch()
+  const [gender, setGender] = useState("");
+  const [date, setDate] = useState("");
+  const [cityName, setCityName] = useState("");
+  const [stateName, setStateName] = useState("");
+  const [countryName, setCountryName] = useState("");
+  const [martialStatus, setMartialStatus] = useState("");
   const handleSubmit=(e)=>{
     console.log(e);
     // dispatch(authActions.login())
@@ -18,7 +24,7 @@ const Registar = () => {
     <Formik
     initialValues={data}
     onSubmit={handleSubmit}
-    validationSchema={logInSchema}
+    validationSchema={PatientRegisterSchema}
   >
     {({ handleSubmit, isSubmitting }) => (
       <div className="flex items-center mt-10 p-6 bg-gray-50 dark:bg-gray-900">
@@ -184,7 +190,8 @@ const Registar = () => {
                   </div>
                 </div>
                 <DatePicker  className="mt-4 w-full border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer" 
-                 placeholderText='Date of birth' required={true} />
+                  name='dob' onChange={(e)=>{data.name=e}}
+                 placeholderText='Date of birth' />
                 <select
                   id="underline_select"
                   className=" py-2.5 mt-4 w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"

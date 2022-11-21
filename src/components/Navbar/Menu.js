@@ -23,7 +23,9 @@ const Menu = () => {
     </span>
   </Navbar.Brand>
   <div className="flex md:order-2">
-  <Button className='mr-4' onClick={()=>{ dispatch(authActions.logout())}}>Register</Button>
+  <Button className='mr-4' onClick={()=>{ dispatch(authActions.logout());dispatch(authActions.registering())}}>Login</Button>
+  <Button className='mr-4' onClick={()=>{ dispatch(authActions.logout());dispatch(authActions.registered())}}>Register</Button>
+
     <Dropdown
 
       arrowIcon={false}

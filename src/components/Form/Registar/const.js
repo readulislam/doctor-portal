@@ -4,7 +4,7 @@ export const data={
     middleName:'',
     lastName:'',
     contactNo:'',
-    Dob:'',
+    dob:'',
     address:'',
     hospitalName:'',
     gender:'',
