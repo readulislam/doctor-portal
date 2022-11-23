@@ -1,3 +1,5 @@
+import { Button } from "flowbite-react";
+
 export const slots = [
     { id: 1, slot: "9:15" ,status:true},
     { id: 2, slot: "9:15" ,status:true},
@@ -132,3 +134,50 @@ export const slots = [
         "https://api.parashospitals.com/storage/doctors/September2022/0gt3x16BfPMzFkP5UmDT.jpg",
     },
   ];
+  export const doctorHeading=["Patient Name","Date","Time","Prescription"];
+  export const doctorPastData=[
+    {
+      name:'Prachi Bansal',
+      date:'21/11/2022',
+      time:'2:30 - 2:45',
+      prescription:(<Button>View</Button>)
+    },
+    {
+      name:'Hema Sharma',
+      date:'14/11/2022',
+      time:'11:15 - 11:30',
+      prescription:(<Button>View</Button>)
+    },
+    {
+      name:'Ritu Bhat',
+      date:'7/11/2022',
+      time:'2:00 - 2:15 PM',
+      prescription:(<Button>View</Button>)
+    },
+    {
+      name:'Rakesh Khatri',
+      date:'1/11/2022',
+      time:'1:20 - 1:35 PM',
+      prescription:(<Button>View</Button>)
+    }
+  ];
+  export const doctorUpComingData=[
+    {
+      name:'Umesh Bansal',
+      date:'25/11/2022',
+      time:'2:30 - 2:45',
+      prescription:(<Button>upload</Button>)
+    },
+    {
+      name:'Rekha Sharma',
+      date:'27/11/2022',
+      time:'11:15 - 11:30',
+      prescription:(<Button>upload</Button>)
+    },
+    {
+      name:'surbhi Goyal',
+      date:'5/12/2022',
+      time:'2:00 - 2:15 PM',
+      prescription:(<Button>upload</Button>)
+    },
+  ]

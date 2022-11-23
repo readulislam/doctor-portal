@@ -190,7 +190,7 @@ const Registar = () => {
                   </div>
                 </div>
                 <DatePicker  className="mt-4 w-full border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer" 
-                  name='dob' onChange={(e)=>{data.name=e}}
+                  name='dob' onChange={(e)=>{data.dob=e}}
                  placeholderText='Date of birth' />
                 <select
                   id="underline_select"

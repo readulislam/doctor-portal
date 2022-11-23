@@ -1,11 +1,10 @@
 import { Button } from 'flowbite-react'
 import { Field, Formik,ErrorMessage } from 'formik';
-import React, { useState } from 'react'
+import React from 'react'
 import { PatientLogInSchema } from '../../Schema'
 import { data } from './const'
 
 const PatientLogin = () => {
-  const [hospitalLocation, setHospitalLocation] = useState("");
     const handleSubmit=(e)=>{
       console.log(e);
     }
@@ -31,15 +30,6 @@ const PatientLogin = () => {
                 </h1>
                 <label>
                   <Field
-                    type="text"
-                    className="mt-4 w-full  border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
-                    placeholder='ENTER_YOUR_NAME'
-                    name="patientName"
-                  />
-                </label>
-                <ErrorMessage name="patientName" />
-                <label>
-                  <Field
                     type="number"
                     className="mt-4 w-full border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
                     placeholder='*contactNo'
@@ -47,17 +37,6 @@ const PatientLogin = () => {
                   />
                 </label>
                 <ErrorMessage name="contactNo" />
-                <select
-                  id="underline_select"
-                  className=" py-2.5 mt-4 w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
-                  onChange={(e)=>{setHospitalLocation(e.target.value)}}
-                >
-                  <option selected>Location</option>
-                  <option value="JA">mSmart Hospital,jaipur</option>
-                  <option value="DE">mSmart Hospital,Delhi</option>
-                  <option value="GR">mSmart Hospital,Gurugram</option>
-                  <option value="Aj">mSmart Hospital,Ajmer</option>
-                </select>
                 <Button
                   className="mt-4"
                   type="submit"
