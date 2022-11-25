@@ -46,16 +46,17 @@ const DoctorView = () => {
           className='mt-5'
           style="underline"
         >
-          <Tabs.Item 
-          active={true}
-          title="Past Appointment">
-           <TableView heading={doctorHeading} data={doctorPastData} />
-          </Tabs.Item>
+         
           <Tabs.Item
-            
+            active={true}
             title="Upcoming Appointment"
           >
             <TableView heading={doctorHeading} data={doctorUpComingData} />
+          </Tabs.Item>
+          <Tabs.Item 
+          
+          title="Past Appointment">
+           <TableView heading={doctorHeading} data={doctorPastData} />
           </Tabs.Item>
           <Tabs.Item title="Availabilty">
 

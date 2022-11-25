@@ -126,7 +126,7 @@ export const slots = [
     },
     {
       id: 12,
-      name:'DR. INDARJEET Gupta',
+      name:'DR. INDARJEET GUPTA',
       designation:'Consultant General & Laparoscopic Surgery',
       location:'mSmart Hospital, Ajmer',
       speciality:(<br/>),
@@ -179,5 +179,53 @@ export const slots = [
       date:'5/12/2022',
       time:'2:00 - 2:15 PM',
       prescription:(<Button>upload</Button>)
+    },
+  ]
+  export const patientHeading=["Doctor Name","Date","Time","Prescription"]
+  export const patientUpComingHeading=["Doctor Name","Date","Time",""]
+  export const patientPastData=[
+    {
+      name:'DR. SURESH SHARMA',
+      date:'21/11/2022',
+      time:'2:30 - 2:45',
+      prescription:(<Button>View</Button>)
+    },
+    {
+      name:'DR. MUHAMMAD SHAHEEN',
+      date:'14/11/2022',
+      time:'11:15 - 11:30',
+      prescription:(<Button>View</Button>)
+    },
+    {
+      name:'DR. INDARJEET GUPTA',
+      date:'7/11/2022',
+      time:'2:00 - 2:15 PM',
+      prescription:(<Button>View</Button>)
+    },
+    {
+      name:'DR. HARSHIT KHANDELWAL',
+      date:'1/11/2022',
+      time:'1:20 - 1:35 PM',
+      prescription:(<Button>View</Button>)
+    }
+  ];
+  export const patientUpComingData=[
+    {
+      name:'DR. RUDRA PRATAP',
+      date:'25/11/2022',
+      time:'2:30 - 2:45',
+      prescription:''
+    },
+    {
+      name:'DR. PRADEEP SINGH',
+      date:'27/11/2022',
+      time:'11:15 - 11:30',
+      prescription:''
+    },
+    {
+      name:'DR RUDRA ',
+      date:'5/12/2022',
+      time:'2:00 - 2:15 PM',
+      prescription:''
     },
   ]
