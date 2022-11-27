@@ -19,6 +19,7 @@ const OtpVerifyModal = ({
       const verify = await OTPresult.confirm(otp);
       alert("verify successfully submitted");
     } catch (error) {
+      alert('OTP Invalid')
       console.log(error);
     }
   };
