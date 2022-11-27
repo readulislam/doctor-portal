@@ -1,13 +1,17 @@
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import auth from "../Utils/firebase.init";
 const useFirebaseAuth = ()=>{
 
-    const authentication = ()=>{
-console.log('hello')
+    const setupRecaptcha = (number)=>{
+      const   recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {}, auth);
+      recaptchaVerifier.render();
+      return signInWithPhoneNumber(auth, number, recaptchaVerifier)
     }
 
+    return{
+        setupRecaptcha
+    }
 
-return{
-    authentication
-}
 }
 
 export default  useFirebaseAuth
