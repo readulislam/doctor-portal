@@ -16,8 +16,8 @@ const Dashboard = () => {
    <Header/>
    <CardView/>
     </>}
-    {/* {isLogged && <DoctorView/>} */}
-    {isLogged && <PatientView/>}
+    {isLogged && <DoctorView/>}
+    {/* {isLogged && <PatientView/>} */}
     </>
   )
 }
