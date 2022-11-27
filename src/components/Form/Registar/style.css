@@ -1,0 +1,20 @@
+.PhoneInputInput {
+  border: none !important;
+  border-bottom: 1px solid gray !important;
+}
+/* .PhoneInputInput:focus {
+  border: none !important;
+  offset: none !important;
+  outline: 0 !important;
+}
+input input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+ */
+input:focus,
+input:active {
+  outline: none;
+}
