@@ -7,6 +7,7 @@ import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { useDispatch } from "react-redux";
 import useFirebaseAuth from '../../../hooks/useFirebaseAuth';
+import OtpVerifyModal from "../../Modal/OtpVerifyModal";
 import { PatientRegisterSchema } from "../Schema";
 import { data } from "./const";
 import './style.css';
@@ -19,14 +20,19 @@ const Registar = () => {
   const [countryName, setCountryName] = useState("");
   const [martialStatus, setMartialStatus] = useState("");
   const [value, setValue] = useState("");
+  const [openOtp, setOpenOtp] = useState(true);
   const handleSubmit = (e) => {
-    console.log(e);
-    // dispatch(authActions.login())
+    setOpenOtp(true)
+     
   };
+  const handleOtpSubmit=()=>{
+    //dispatch(authActions.login())
+  }
   const {authentication} = useFirebaseAuth();
   authentication()
   return (
-    <Formik
+   <React.Fragment>
+     <Formik
       initialValues={data}
       onSubmit={handleSubmit}
       validationSchema={PatientRegisterSchema}
@@ -275,10 +281,12 @@ const Registar = () => {
               </main>
             </div>
           </div>
-          div
+          
         </div>
       )}
     </Formik>
+    <OtpVerifyModal open={openOtp} setOpen={setOpenOtp} handleOtpSubmit={handleOtpSubmit} />
+   </React.Fragment>
   );
 };
 

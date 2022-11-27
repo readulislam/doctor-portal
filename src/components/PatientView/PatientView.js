@@ -37,8 +37,12 @@ const PatientView = () => {
             9876587451
           </p>
           <p className="font-normal text-gray-700 dark:text-gray-400">
+            Male
+          </p>
+          <p className="font-normal text-gray-700 dark:text-gray-400">
             address - 41 Vaishali, Jaipur
           </p>
+          
         </Card>
       </div>
       <Tabs.Group
