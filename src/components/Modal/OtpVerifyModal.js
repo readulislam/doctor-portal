@@ -40,7 +40,7 @@ const OtpVerifyModal = ({
             <br />{" "}
             <span className="font-bold">
               {" "}
-              ({`${number.slice(0, 3)}  ${number.slice(3)} `})
+              ({`${number?.slice(0, 3)}  ${number?.slice(3)} `})
             </span>
           </h4>
           <Modal.Body>
