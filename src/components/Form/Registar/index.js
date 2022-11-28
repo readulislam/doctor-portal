@@ -1,4 +1,4 @@
-import { Button } from "flowbite-react";
+import { Button, TextInput } from "flowbite-react";
 import { ErrorMessage, Field, Formik } from "formik";
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
@@ -116,7 +116,7 @@ const Registar = () => {
                         id="underline_select"
                         className=" py-2.5 mt-4 w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
                         onChange={(e) => {
-                          data.gender = e.target.value;
+                          setGender(e.target.value);
                         }}
                       >
                         <option selected>Gender</option>
@@ -180,19 +180,12 @@ const Registar = () => {
                       </label>
                       <ErrorMessage name="pincode" />
                       <div className="my-4" id="recaptcha-container" />
-                      <div className="flex gap-4">
+                      
                       <Button className="mt-4 ml-6 px-6" type="reset">
                           Reset
                         </Button>
-                        <Button
-                          className="mt-4 px-6"
-                          type="submit"
-                          disabled={isSubmitting}
-                        >
-                          Submit
-                        </Button>
-                       
-                      </div>
+                        
+                      
                     </div>
                     <div className="w-1/2">
                       <div className="flex">
@@ -218,14 +211,16 @@ const Registar = () => {
                           <ErrorMessage name="lastName" />
                         </div>
                       </div>
-                      <DatePicker
+                      {/* <DatePicker
                         className="mt-4 w-full border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
                         name="dob"
                         onChange={(e) => {
                           data.dob = e;
                         }}
                         placeholderText="Date of birth"
-                      />
+                      /> */}
+                      <TextInput id="email1" className="mt-4 w-full border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer" 
+                      type="date" required={true} onChange={(e)=>{setDate(e.target.value);}} />
                       <select
                         id="underline_select"
                         className=" py-2.5 mt-4 w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
@@ -285,6 +280,13 @@ const Registar = () => {
                         <option value="divorced">Divorced</option>
                         <option value="seperated">Seperated</option>
                       </select>
+                      <Button
+                          className="mt-4 px-6 flex justify-end"
+                          type="submit"
+                          disabled={isSubmitting}
+                        >
+                          Submit
+                        </Button>
                     </div>
                   </form>
                 </main>
