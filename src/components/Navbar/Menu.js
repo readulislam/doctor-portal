@@ -1,6 +1,7 @@
 import { Avatar, Button, Dropdown, Navbar } from 'flowbite-react'
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { authActions } from '../../Store/Auth-Slice'
 
 const Menu = () => {
@@ -23,9 +24,13 @@ const Menu = () => {
     </span>
   </Navbar.Brand>
   <div className="flex md:order-2">
-   
-  <Button className='mr-4' onClick={()=>{ dispatch(authActions.logout());dispatch(authActions.registering())}}>Login</Button>
-  <Button className='mr-4' onClick={()=>{ dispatch(authActions.logout());dispatch(authActions.registered())}}>Register</Button>
+  <Link to='/login'>
+    <Button className='mr-4'>Login</Button>
+  </Link> 
+  <Link to='/register'>
+    <Button className='mr-4' >Register</Button>
+  </Link>
+  
 
     <Dropdown
 

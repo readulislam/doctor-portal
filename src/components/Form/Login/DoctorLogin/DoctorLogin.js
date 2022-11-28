@@ -1,16 +1,33 @@
+import { async } from '@firebase/util';
 import { Button } from 'flowbite-react'
 import { Field, Formik,ErrorMessage } from 'formik';
 import React, { useState } from 'react'
+import PhoneInput from 'react-phone-number-input';
+import useFirebaseAuth from '../../../../hooks/useFirebaseAuth';
+import OtpVerifyModal from '../../../Modal/OtpVerifyModal';
 import { DoctorLogInSchema } from '../../Schema'
 import { data } from './const'
 
 const DoctorLogin = () => {
   const [hospitalLocation, setHospitalLocation] = useState("");
-    const handleSubmit=(e)=>{
-      console.log("hi");
+  const [number, setNumber] = useState("");
+  const [openOtp, setOpenOtp] = useState(false);
+  const [OTPresult, setOTPResult] = useState('')
+  const { setupRecaptcha } = useFirebaseAuth();
+    const handleSubmit=async(values)=>{
+      console.log(values);
+      if (values && number) {
+        const response = await setupRecaptcha(number);
+        setOTPResult(response);
+        if(response){
+          setOpenOtp(true)
+        }
+      }
     }
+    const handleOtpSubmit = () => {};
   return (    
-    <Formik
+    <React.Fragment>
+      <Formik
       initialValues={data}
       onSubmit={handleSubmit}
       validationSchema={DoctorLogInSchema}
@@ -28,15 +45,12 @@ const DoctorLogin = () => {
                   <h1 className="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
                     DOCTOR LOGIN
                   </h1>
-                <label>
-                  <Field
-                    type="number"
-                    className="mt-4 w-full border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
-                    placeholder='*contactNo'
-                    name="contactNo"
+                  <PhoneInput
+                    className="border-none"
+                    placeholder="Enter phone number"
+                    value={number}
+                    onChange={setNumber}
                   />
-                </label>
-                <ErrorMessage name="contactNo" />
                   <Button
                     className="mt-4"
                     type="submit"
@@ -52,6 +66,14 @@ const DoctorLogin = () => {
         </div>
       )}
     </Formik>
+    <OtpVerifyModal
+      OTPresult={OTPresult}
+        open={openOtp}
+        number={number}
+        setOpen={setOpenOtp}
+        handleOtpSubmit={handleOtpSubmit}
+      />
+    </React.Fragment>
    
   )
 }
