@@ -34,29 +34,30 @@ const Filtering = () => {
             className=" py-2.5  w-full  text-md  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
           >
             <option selected>Speciality</option>
-              <option value="JA">Cardiology</option>
-              <option value="DE">Neurology</option>
-              <option value="GR">Nephrology</option>
-              <option value="Aj">Urology</option>
-              <option value="JA">Gastroenterology</option>
-              <option value="DE">Radiaton Oncology</option>
-              <option value="GR">CTVS</option>
-              <option value="Aj">Neuro Surgery</option>
-              <option value="JA">Orthopedics</option>
-              <option value="DE">Obstetrics & Gynaecology</option>
-              <option value="GR">Kidney Transplant</option>
-              <option value="Aj">Plastic Surgery</option>
-              <option value="JA">Internal Medicine</option>
-              <option value="DE">Critical Care</option>
-              <option value="GR">Endocrinology</option>
-              <option value="Aj">ENT</option>
-              <option value="JA">Emergency Medicine</option>
-              <option value="DE">Dermatology</option>
-              <option value="GR">Psychiatry</option>
-              <option value="Aj">Rheumatology And Clinical Immunology</option>
-              <option value="JA">Opthalmollogy</option>
-              <option value="DE">Pediatrics</option>
-              <option value="GR">Respiratory Medicine</option>
+              <option value="Cardiology">Cardiology</option>
+              <option value="Oncology">Oncology</option>
+              <option value="Neurology">Neurology</option>
+              <option value="Nephrology">Nephrology</option>
+              <option value="Urology">Urology</option>
+              <option value="Gastroenterology">Gastroenterology</option>
+              <option value="Radiaton Oncology<">Radiaton Oncology</option>
+              <option value="CtYS">CTVS</option>
+              <option value="Neuro Surgery">Neuro Surgery</option>
+              <option value="Orthopedics">Orthopedics</option>
+              <option value="Obstetrics  & Gynaecology">Obstetrics & Gynaecology</option>
+              <option value="Kidney Transplant">Kidney Transplant</option>
+              <option value="Plastic Surgery">Plastic Surgery</option>
+              <option value="Internal Medicine">Internal Medicine</option>
+              <option value="Critical Care">Critical Care</option>
+              <option value="Endocrinology">Endocrinology</option>
+              <option value="ENT">ENT</option>
+              <option value="Emergency Medicine">Emergency Medicine</option>
+              <option value="Dermatology">Dermatology</option>
+              <option value="Psychiatry">Psychiatry</option>
+              <option value="Rheumatology And Clinical Immunology">Rheumatology And Clinical Immunology</option>
+              <option value="Opthalmollogy">Opthalmollogy</option>
+              <option value="Pediatrics">Pediatrics</option>
+              <option value="Respiratory Medicine">Respiratory Medicine</option>
               
           </select>
         </div>
