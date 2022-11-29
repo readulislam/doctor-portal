@@ -7,6 +7,7 @@ import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { useDispatch } from "react-redux";
 import useFirebaseAuth from "../../../hooks/useFirebaseAuth";
+import { genderValue, location, martial, state, title } from "../../../Utils/mockData";
 import OtpVerifyModal from "../../Modal/OtpVerifyModal";
 import { PatientRegisterSchema } from "../Schema";
 import { data } from "./const";
@@ -67,10 +68,7 @@ const Registar = () => {
                             }}
                           >
                             <option selected>Title</option>
-                            <option value="B">Baby</option>
-                            <option value="Bo">Baby Of</option>
-                            <option value="Mr">Mr.</option>
-                            <option value="Mrs">Mrs.</option>
+                            {title.map((values)=>(<option value={values} >{values}</option>))}
                           </select>
                         </div>
                         <div className="w-1/2">
@@ -120,9 +118,7 @@ const Registar = () => {
                         }}
                       >
                         <option selected>Gender</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">other.</option>
+                        {genderValue.map((values)=>(<option value={values} >{values}</option>))}
                       </select>
                       <select
                         id="underline_select"
@@ -132,43 +128,7 @@ const Registar = () => {
                         }}
                       >
                         <option selected> State</option>
-                        <option value="AN">Andaman and Nicobar Islands</option>
-                        <option value="AP">Andhra Pradesh</option>
-                        <option value="AR">Arunachal Pradesh</option>
-                        <option value="AS">Assam</option>
-                        <option value="BR">Bihar</option>
-                        <option value="CH">Chandigarh</option>
-                        <option value="CT">Chhattisgarh</option>
-                        <option value="DN">Dadra and Nagar Haveli</option>
-                        <option value="DD">Daman and Diu</option>
-                        <option value="DL">Delhi</option>
-                        <option value="GA">Goa</option>
-                        <option value="GJ">Gujarat</option>
-                        <option value="HR">Haryana</option>
-                        <option value="HP">Himachal Pradesh</option>
-                        <option value="JK">Jammu and Kashmir</option>
-                        <option value="JH">Jharkhand</option>
-                        <option value="KA">Karnataka</option>
-                        <option value="KL">Kerala</option>
-                        <option value="LA">Ladakh</option>
-                        <option value="LD">Lakshadweep</option>
-                        <option value="MP">Madhya Pradesh</option>
-                        <option value="MH">Maharashtra</option>
-                        <option value="MN">Manipur</option>
-                        <option value="ML">Meghalaya</option>
-                        <option value="MZ">Mizoram</option>
-                        <option value="NL">Nagaland</option>
-                        <option value="OR">Odisha</option>
-                        <option value="PY">Puducherry</option>
-                        <option value="PB">Punjab</option>
-                        <option value="RJ">Rajasthan</option>
-                        <option value="SK">Sikkim</option>
-                        <option value="TN">Tamil Nadu</option>
-                        <option value="TG">Telangana</option>
-                        <option value="TR">Tripura</option>
-                        <option value="UP">Uttar Pradesh</option>
-                        <option value="UT">Uttarakhand</option>
-                        <option value="WB">West Bengal</option>
+                        {state.map ((i,values)=>(<option id={i} value={values} >{values}</option>))}
                       </select>
                       <label>
                         <Field
@@ -229,10 +189,7 @@ const Registar = () => {
                         }}
                       >
                         <option selected>Location</option>
-                        <option value="JA">mSmart Hospital,jaipur</option>
-                        <option value="DE">mSmart Hospital,Delhi</option>
-                        <option value="GR">mSmart Hospital,Gurugram</option>
-                        <option value="Aj">mSmart Hospital,Ajmer</option>
+                       {location.map((values)=>(<option value={values} >{values}</option>))}
                       </select>
                       <select
                         id="underline_select"
@@ -274,11 +231,8 @@ const Registar = () => {
                         }}
                       >
                         <option selected>Select Martial Status</option>
-                        <option value="widowed">Widowed</option>
-                        <option value="single">Single</option>
-                        <option value="married">Married</option>
-                        <option value="divorced">Divorced</option>
-                        <option value="seperated">Seperated</option>
+                        {martial.map((values)=>(<option value={values} >{values}</option>
+                        ))}
                       </select>
                       <Button
                           className="mt-4 px-6 flex justify-end"

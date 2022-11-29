@@ -2,6 +2,7 @@ import { Button, Modal, TextInput } from 'flowbite-react'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import React from 'react'
+import { genderValue, title } from '../../Utils/mockData';
 
 const RegistarModal = ({setDone, open ,setOpen,location}) => {
   return (
@@ -17,10 +18,7 @@ const RegistarModal = ({setDone, open ,setOpen,location}) => {
                     className=" py-2.5  w-auto text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
                     >   
                         <option selected>Title</option>
-                        <option value="B">Baby</option>
-                        <option value="Bo">Baby Of</option>
-                        <option value="Mr">Mr.</option>
-                        <option value="Mrs">Mrs.</option>
+                        {title.map((values)=>(<option value={values} >{values}</option>))}
                     </select>    
                 <input
                   id="email1"
@@ -39,9 +37,7 @@ const RegistarModal = ({setDone, open ,setOpen,location}) => {
                     className=" py-2.5  w-auto text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
                     >   
                         <option selected>Gender</option>
-                        <option value="M">Male</option>
-                        <option value="F">Female</option>
-                        <option value="O">other.</option>
+                        {genderValue.map((values)=>(<option value={values} >{values}</option>))}
                     </select>    
                 <input
                   id="email1"

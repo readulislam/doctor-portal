@@ -229,3 +229,158 @@ export const slots = [
       prescription:''
     },
   ]
+  export const location=['mSmart Hospital,jaipur','mSmart Hospital,Delhi','mSmart Hospital,Ajmer','mSmart Hospital,Gurugram']
+  export const genderValue=['male','female','other']
+  export const title=['Baby','Baby Of','Mr','Mrs']
+  export const martial=["widowed","single","married","divorced","seperated"]
+    
+  export const state=[
+    {
+      id:1,
+      values:'Andaman and Nicobar Islands'
+    } ,
+    {
+      id:2,
+      values:'Andhra Pradesh'
+    } ,
+    {
+      id:3,
+      values:'Arunachal Pradesh'
+    } ,
+    {
+      id:4,
+      values:'Assam'
+    } ,
+    {
+      id:5,
+      values:'Bihar'
+    } ,
+    {
+      id:6,
+      values:'Chandigarh'
+    } ,
+    {
+      id:7,
+      values:'Chhattisgarh'
+    } ,
+    {
+      id:8,
+      values:'Dadra and Nagar Haveli'
+    } ,
+    {
+      id:9,
+      values:'Daman and Diu'
+    } ,
+    {
+      id:10,
+      values:'Delhi'
+    } ,
+    {
+      id:11,
+      values:'Goa'
+    } ,
+    {
+      id:12,
+      values:'Gujarat'
+    } ,
+    {
+      id:13,
+      values:'Haryana'
+    } ,
+    {
+      id:14,
+      values:'Himachal Pradesh'
+    } ,
+    {
+      id:15,
+      values:'Jammu and Kashmir'
+    } ,
+    {
+      id:16,
+      values:'Jharkhand'
+    } ,
+    {
+      id:17,
+      values:'Karnataka'
+    } ,
+    {
+      id:18,
+      values:'Kerala'
+    } ,
+    {
+      id:19,
+      values:'Ladakh'
+    } ,
+    {
+      id:20,
+      values:'Lakshadweep'
+    } ,
+    {
+      id:21,
+      values:'Madhya Pradesh'
+    } ,
+    {
+      id:22,
+      values:'Maharashtra'
+    } ,
+    {
+      id:23,
+      values:'Manipur'
+    } ,
+    {
+      id:24,
+      values:'Meghalaya'
+    } ,
+    {
+      id:25,
+      values:'Mizoram'
+    } ,
+    {
+      id:26,
+      values:'Nagaland'
+    } ,
+    {
+      id:27,
+      values:'Odisha'
+    } ,
+    {
+      id:28,
+      values:'Puducherry'
+    } ,
+    {
+      id:29,
+      values:'Punjab'
+    } ,
+    {
+      id:30,
+      values:'Rajasthan'
+    } ,
+    {
+      id:31,
+      values:'Sikkim'
+    } ,
+    {
+      id:32,
+      values:'Tamil Nadu'
+    } ,
+    {
+      id:33,
+      values:'Telangana'
+    } ,
+    {
+      id:34,
+      values:'Tripura'
+    } ,
+    {
+      id:35,
+      values:'Uttar Pradesh'
+    } ,
+    {
+      id:36,
+      values:'Uttarakhand'
+    } ,
+    {
+      id:37,
+      values:'West Bengal'
+    } ,
+  ]
