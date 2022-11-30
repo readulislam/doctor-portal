@@ -1,12 +1,12 @@
 import { Button, Modal } from 'flowbite-react';
 import React from 'react'
 
-const availabilityModal = ({setOpen,open,setEvent,setEventTitle,eventTitle,eventDate}) => {
+const AvailabilityModal = ({setOpen,open,setEvent,setEventTitle,eventTitle,event,eventDate}) => {
   return (
     <React.Fragment>
       <Modal show={open} position="center" onClose={() => setOpen(false)}>
         <form>
-          <Modal.Header>Enter event Title</Modal.Header>
+          <Modal.Header>Enter Time</Modal.Header>
           <Modal.Body>
             <div className="space-y-6 p-6">
                 <input type='text' onChange={(e)=>{setEventTitle(e.target.value)}}/>
@@ -20,10 +20,9 @@ const availabilityModal = ({setOpen,open,setEvent,setEventTitle,eventTitle,event
               Decline
             </Button>
             <Button
-              type="submit"
               className="px-2 "
               gradientDuoTone="cyanToBlue"
-              onClick={()=>{setEvent(event=>{return[...event,{title:eventTitle,date:eventDate}]})}}
+              onClick={()=>{setEvent(event=>{return[...event,{title:eventTitle,date:eventDate}]});setOpen(false);console.log(event);}}
             >
               Submit
             </Button>
@@ -34,4 +33,4 @@ const availabilityModal = ({setOpen,open,setEvent,setEventTitle,eventTitle,event
   )
 }
 
-export default availabilityModal
+export default AvailabilityModal
