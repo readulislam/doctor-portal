@@ -12,7 +12,7 @@ const AvailabilitySelect = () => {
   const [open, setOpen] = useState(false);
   const handleEventClick=(info)=>{
     console.log(info.event);
-    
+     setEvent((event)=>event.filter((event)=>(event.title!==info.event.title && event.date!==info.event.start.str))) 
   }
   const handleClick=(arg)=>{
     setOpen(true);

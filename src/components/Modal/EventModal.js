@@ -1,5 +1,5 @@
 import { Button, Modal } from 'flowbite-react';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactDatePicker from 'react-datepicker';
 
 const AvailabilityModal = ({setOpen,open,setEvent,setEventTitle,eventTitle,event,eventDate}) => {
@@ -7,9 +7,10 @@ const AvailabilityModal = ({setOpen,open,setEvent,setEventTitle,eventTitle,event
   const [input, setInput] = useState([
     {
       inputTag:<input type='text' onChange={(e)=>{setEventTitle(e.target.value)}}/>
-    },
+    }
   ]);
   const [endDate, setEndDate] = useState(null);
+
   const handleAdd=()=>{
     setInput(input=>{return[...input,{inputTag:<input type='text' onChange={(e)=>{setEventTitle(e.target.value)}}/>}]})
   }
@@ -21,11 +22,12 @@ const AvailabilityModal = ({setOpen,open,setEvent,setEventTitle,eventTitle,event
   const handleSubmit=()=>{
     setEvent(event=>{return[...event,{title:eventTitle,date:eventDate}]});
     setOpen(false);
+    setInput(input=>{return[{inputTag:<input type='text' onChange={(e)=>{setEventTitle(e.target.value)}}/>}]})
     console.log(event);
   }
   return (
     <React.Fragment>
-      <Modal show={open} position="center" onClose={() => {setOpen(false)}}>
+      <Modal show={open} position="center" onClose={() => {setOpen(false);setInput(input=>{return[{inputTag:<input type='text' onChange={(e)=>{setEventTitle(e.target.value)}}/>}]})}}>
         <form>
           <Modal.Header>Enter Time</Modal.Header>
           <Modal.Body>
@@ -47,7 +49,7 @@ const AvailabilityModal = ({setOpen,open,setEvent,setEventTitle,eventTitle,event
             </div>
           </Modal.Body>
           <Modal.Footer className="flex justify-between">
-            <Button color="gray" onClick={() => setOpen(false)}>
+            <Button color="gray" onClick={() => {setOpen(false);setInput(input=>{return[{inputTag:<input type='text' onChange={(e)=>{setEventTitle(e.target.value)}}/>}]})}}>
               Decline
             </Button>
             <Button
