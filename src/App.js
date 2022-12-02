@@ -6,6 +6,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import DoctorView from './components/DoctorView/DoctorView';
 import Login from './components/Form/Login';
 import Registar from './components/Form/Registar';
+import PatientView from './components/PatientView/PatientView';
 
 
 
@@ -18,6 +19,7 @@ const  App=()=> {
       <Route path='/AddDoctor' element={<AddDoctor/>}/>
       <Route path="/register" element={<Registar />} />
       <Route path="/doctorView" element={<DoctorView />} />
+      <Route path='/patientView' element={<PatientView/>}/>
       <Route path="/dashboard" element={<Dashboard />} />
     </Routes>
   );

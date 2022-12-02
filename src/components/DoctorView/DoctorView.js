@@ -1,10 +1,20 @@
+import axios from 'axios';
 import { Card, Sidebar, Tabs } from 'flowbite-react';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { data , doctorHeading, doctorPastData, doctorUpComingData } from '../../Utils/mockData';
 import TableView from '../../Utils/TableView';
 import AvailabilitySelect from './Availability/AvailabilitySelect';
 
 const DoctorView = () => {
+  // useEffect(() => {
+  //   const fetching=async()=>{
+  //     const {data} = await axios.get('http://3.108.42.74:5000/get-departments')    
+  //     console.log(data);
+  //   }
+  //   fetching();
+  // }, [])
+  
+  
   return (
     <div className='flex '>
       <div className="w-fit ">

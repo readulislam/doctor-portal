@@ -41,9 +41,10 @@ const AvailabilityModal = ({setOpen,open,startTime,setStartTime,endTime,setEndTi
         <form>
           <Modal.Header>Enter Time</Modal.Header>
           <Modal.Body>
-            <div className="space-y-6 p-6">
+            <div className="space-y-6 w-full p-6">
             <ReactDatePicker
               selected={startDate}
+              className="w-full"
               onChange={onChange}
               startDate={startDate}
               endDate={endDate}

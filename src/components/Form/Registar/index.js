@@ -6,7 +6,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 import useFirebaseAuth from "../../../hooks/useFirebaseAuth";
+import { authActions } from "../../../Store/Auth-Slice";
 import { genderValue, location, martial, state, title } from "../../../Utils/mockData";
 import OtpVerifyModal from "../../Modal/OtpVerifyModal";
 import { PatientRegisterSchema } from "../Schema";
@@ -14,6 +16,7 @@ import { data } from "./const";
 import "./style.css";
 const Registar = () => {
   const dispatch = useDispatch();
+  const naviagte=useNavigate()
   const [gender, setGender] = useState("");
   const [date, setDate] = useState("");
   const [cityName, setCityName] = useState("");
@@ -35,6 +38,10 @@ const Registar = () => {
       }
     }
   };
+  const handleDispatch=()=>{
+    dispatch(authActions.registered())
+    naviagte('/dashboard', { replace: true });
+  }
   const handleOtpSubmit = () => {};
 
   return (
@@ -128,7 +135,7 @@ const Registar = () => {
                         }}
                       >
                         <option selected> State</option>
-                        {state.map ((i,values)=>(<option id={i} value={values} >{values}</option>))}
+                        {state.map (({id,values})=>(<option id={id} value={values} >{values}</option>))}
                       </select>
                       <label>
                         <Field
@@ -251,6 +258,7 @@ const Registar = () => {
       </Formik>
       <OtpVerifyModal
       OTPresult={OTPresult}
+      handleDispatch={handleDispatch}
         open={openOtp}
         number={number}
         setOpen={setOpenOtp}

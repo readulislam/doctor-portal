@@ -4,7 +4,6 @@ import CardView from '../CardView/CardView';
 import DoctorView from '../DoctorView/DoctorView';
 import Header from '../Header/Header';
 import Menu from '../Navbar/Menu';
-import PatientView from '../PatientView/PatientView';
 
 
 const Dashboard = () => {
@@ -17,7 +16,6 @@ const Dashboard = () => {
    <CardView/>
     </>}
     {isLogged && <DoctorView/>}
-    {/* {isLogged && <PatientView/>} */}
     </>
   )
 }

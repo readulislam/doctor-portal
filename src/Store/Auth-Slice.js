@@ -2,19 +2,20 @@ import {  createSlice } from'@reduxjs/toolkit'
 
 const authSlice=createSlice({
     name:'auth',
-    initialState:{isLoggedIn:true,isRegister:false},
+    initialState:{isLoggedIn:false,isRegister:false},
     reducers:{
         login(state){
             state.isLoggedIn=true;
         },
         logout(state){
             state.isLoggedIn=false;
+            state.isRegister=false;
         },
         registering(state){
-            state.isRegister=true;
+            state.isRegister=false;
         },
         registered(state){
-            state.isRegister=false;
+            state.isRegister=true;
         },
     }
 });
