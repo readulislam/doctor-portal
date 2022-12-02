@@ -1,18 +1,26 @@
 import { Button, Modal } from 'flowbite-react';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import ReactDatePicker from 'react-datepicker';
 
-const AvailabilityModal = ({setOpen,open,setEvent,setEventTitle,eventTitle,event,eventDate}) => {
+const AvailabilityModal = ({setOpen,open,startTime,setStartTime,endTime,setEndTime,setEvent,event,eventDate}) => {
   const [startDate, setStartDate] = useState(new Date());
+  const handleStartTime=(e)=>{
+    setStartTime(startTime=>{return[...startTime,e.target.value]})
+  }
+  const handleEndTime=(e)=>{
+    setEndTime(endTime=>{return[...endTime,e.target.value]})
+  }
   const [input, setInput] = useState([
     {
-      inputTag:<input type='text' onChange={(e)=>{setEventTitle(e.target.value)}}/>
+      startDate:<input type="time" min="00:00" max="23:59" onChange={handleStartTime}/>,
+      endDate:<input type="time" min="00:00" max="23:59" onChange={handleEndTime}/>
     }
   ]);
   const [endDate, setEndDate] = useState(null);
 
   const handleAdd=()=>{
-    setInput(input=>{return[...input,{inputTag:<input type='text' onChange={(e)=>{setEventTitle(e.target.value)}}/>}]})
+    setInput(input=>{return[...input,{startDate:<input type="time" min="00:00" max="23:59" onChange={handleStartTime}/>,
+  endDate:<input type="time" min="00:00" max="23:59" onChange={handleEndTime}/>}]})
   }
   const onChange = (dates) => {
     const [start, end] = dates;
@@ -20,14 +28,16 @@ const AvailabilityModal = ({setOpen,open,setEvent,setEventTitle,eventTitle,event
     setEndDate(end);
   };
   const handleSubmit=()=>{
-    setEvent(event=>{return[...event,{title:eventTitle,date:eventDate}]});
+    console.log(startTime,endTime);
+    setEvent(event=>{return[...event,{title:(startTime+' - '+endTime),date:eventDate}]});
     setOpen(false);
-    setInput(input=>{return[{inputTag:<input type='text' onChange={(e)=>{setEventTitle(e.target.value)}}/>}]})
+    setInput(input=>{return[{startDate:<input type="time" min="00:00" max="23:59" onChange={handleStartTime}/>,
+  endDate:<input type="time" min="00:00" max="23:59" onChange={handleEndTime}/>}]})
     console.log(event);
   }
   return (
     <React.Fragment>
-      <Modal show={open} position="center" onClose={() => {setOpen(false);setInput(input=>{return[{inputTag:<input type='text' onChange={(e)=>{setEventTitle(e.target.value)}}/>}]})}}>
+      <Modal show={open} position="center" onClose={() => {setOpen(false);setInput(input=>{return[{startDate:<input type="time" min="00:00" max="23:59" onChange={handleStartTime}/>,endDate:<input type="time" min="00:00" max="23:59" onChange={handleEndTime}/>}]})}}>
         <form>
           <Modal.Header>Enter Time</Modal.Header>
           <Modal.Body>
@@ -42,14 +52,14 @@ const AvailabilityModal = ({setOpen,open,setEvent,setEventTitle,eventTitle,event
             />
                 {input.map((value)=>(
                   <div>
-                    {value.inputTag}
+                    {value.startDate} - {value.endDate} <Button onClick={()=>{setInput(input=>input.filter(input=>input!==value))}}>Delete</Button>
                   </div>
                 ))}
                 <Button onClick={handleAdd} >Add</Button>
             </div>
           </Modal.Body>
           <Modal.Footer className="flex justify-between">
-            <Button color="gray" onClick={() => {setOpen(false);setInput(input=>{return[{inputTag:<input type='text' onChange={(e)=>{setEventTitle(e.target.value)}}/>}]})}}>
+            <Button color="gray" onClick={() => {setOpen(false);setInput(input=>{return[{startDate:<input type="time" min="00:00" max="23:59" onChange={handleStartTime}/>,endDate:<input type="time" min="00:00" max="23:59" onChange={handleEndTime}/>}]})}}>
               Decline
             </Button>
             <Button

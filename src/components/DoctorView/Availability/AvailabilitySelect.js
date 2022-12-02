@@ -6,7 +6,8 @@ import AvailabilityModal from '../../Modal/EventModal'
 import { Alert } from 'flowbite-react';
 
 const AvailabilitySelect = () => {
-  const [eventTitle, setEventTitle] = useState("");
+  const [startTime, setStartTime] = useState({});
+  const [endTime, setEndTime] = useState({});
   const [eventDate, setEventDate] = useState('');
   const [event, setEvent] = useState([]);
   const [open, setOpen] = useState(false);
@@ -31,7 +32,7 @@ const AvailabilitySelect = () => {
         dateClick={handleClick}
         events={event}
       />
-      <AvailabilityModal open={open} setOpen={setOpen} setEvent={setEvent} setEventTitle={setEventTitle} eventTitle={eventTitle} event={event} eventDate={eventDate} />
+      <AvailabilityModal open={open} setOpen={setOpen} setEvent={setEvent} startTime={startTime} setStartTime={setStartTime} endTime={endTime} setEndTime={setEndTime} event={event} eventDate={eventDate} />
     </React.Fragment>
     
   )
