@@ -7,6 +7,7 @@ import AvailabilityModal from '../../Modal/EventModal'
 import { Alert, Button, Checkbox, Label } from 'flowbite-react';
 
 const AvailabilitySelect = () => {
+  const [open, setOpen] = useState(false);
   const [startMondaytime, setStartMondaytime] = useState([]);
   const [endMondaytime, setEndMondaytime] = useState([]);
   const [startTuesdaytime, setStartTuesdaytime] = useState([]);
@@ -40,9 +41,9 @@ const AvailabilitySelect = () => {
   }
   return (
     <React.Fragment>
-     <div>
+     <div className='flex'>
       <div
-          className="flex flex-col gap-4"
+          className="flex flex-col gap-4 w-4/5"
           id="checkbox"
         >
           <div className="flex items-center gap-2">
@@ -105,8 +106,15 @@ const AvailabilitySelect = () => {
             </Label>
           </div>
         </div>
-      
+      <div className='w-1/5' >
+        <div>
+          <h2 className='font-bold' >Add Date Overrrides</h2>
+          <p className='font-light' >Add dates when your availability changes from your weekly hours</p>
+          <Button onClick={()=>setOpen(true)} >Add a date Over Ride</Button>
+        </div>
+      </div>
      </div>
+     <AvailabilityModal open={open} setOpen={setOpen}/>
     </React.Fragment>
     
   )
