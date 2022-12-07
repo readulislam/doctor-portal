@@ -2,10 +2,13 @@ import { Card, Sidebar, Tabs } from 'flowbite-react'
 import React from 'react'
 import { patientHeading, patientPastData, patientUpComingData, patientUpComingHeading } from '../../Utils/mockData'
 import TableView from '../../Utils/TableView'
+import Menu from '../Navbar/Menu'
 
 const PatientView = () => {
   return (
-    <div className='flex '>
+    <div>
+      <Menu/>
+      <div className='flex '>
     <div className="w-fit ">
       <Sidebar aria-label="Default sidebar example" className=' mt-20'>
         <Sidebar.Items>
@@ -66,7 +69,9 @@ const PatientView = () => {
       </Tabs.Group>
       
     </div>
-  </div>
+    </div>
+    </div>
+    
   )
 }
 

@@ -5,10 +5,12 @@ const OtpVerifyModal = ({
   open,
   setOpen,
   handleOtpSubmit,
+  handleDispatch,
   OTPresult,
   number,
 }) => {
   const [otp, setOtp] = useState("");
+  
   const otpHandler = (Otp) => {
     setOtp(Otp);
     console.log(otp);
@@ -18,6 +20,7 @@ const OtpVerifyModal = ({
     try {
       const verify = await OTPresult.confirm(otp);
       alert("verify successfully submitted");
+      handleDispatch()
     } catch (error) {
       alert('OTP Invalid')
       console.log(error);

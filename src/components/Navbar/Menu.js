@@ -1,10 +1,12 @@
 import { Avatar, Button, Dropdown, Navbar } from 'flowbite-react'
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { authActions } from '../../Store/Auth-Slice'
 
 const Menu = () => {
+  const isLoggedIn=useSelector(state=>state.auth.isLoggedIn)
+  const isRegister=useSelector(state=>state.auth.isRegister)
  
   const dispatch=useDispatch()
   return (
@@ -24,15 +26,15 @@ const Menu = () => {
     </span>
   </Navbar.Brand>
   <div className="flex md:order-2">
-  <Link to='/login'>
+ {!isLoggedIn &&  <Link to='/login'>
     <Button className='mr-4'>Login</Button>
-  </Link> 
-  <Link to='/register'>
+  </Link> }
+  {(!isLoggedIn && !isRegister) && <Link to='/register'>
     <Button className='mr-4' >Register</Button>
-  </Link>
+  </Link>}
   
 
-    <Dropdown
+   {isLoggedIn && <Dropdown
 
       arrowIcon={false}
       inline={true}
@@ -46,8 +48,10 @@ const Menu = () => {
           name@flowbite.com
         </span>
       </Dropdown.Header>
-      <Dropdown.Item>
-        Dashboard
+      <Dropdown.Item >
+        <Link to='/patientView'>
+          Dashboard
+        </Link>
       </Dropdown.Item>
       <Dropdown.Item>
         Settings
@@ -59,12 +63,12 @@ const Menu = () => {
       <Dropdown.Item onClick={()=>{ dispatch(authActions.logout())}}>
         Sign out
       </Dropdown.Item>
-    </Dropdown>
+    </Dropdown>}
     <Navbar.Toggle />
   </div>
   <Navbar.Collapse>
     <Navbar.Link
-    
+    href='/dashboard'
     >
       Home
     </Navbar.Link>

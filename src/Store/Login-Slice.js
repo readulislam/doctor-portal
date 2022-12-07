@@ -7,7 +7,7 @@ const loginSlice=createSlice({
         doctorLogin(state){
             state.isLogged=true;
         },
-        patientLogin(state){
+        doctorLogout(state){
             state.isLogged=false;
         },
     }

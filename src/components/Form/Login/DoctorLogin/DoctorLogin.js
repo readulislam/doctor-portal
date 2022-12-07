@@ -3,34 +3,45 @@ import { Button } from 'flowbite-react'
 import { Field, Formik,ErrorMessage } from 'formik';
 import React, { useState } from 'react'
 import PhoneInput from 'react-phone-number-input';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
 import useFirebaseAuth from '../../../../hooks/useFirebaseAuth';
+import { loginActions } from '../../../../Store/Login-Slice';
 import OtpVerifyModal from '../../../Modal/OtpVerifyModal';
 import { DoctorLogInSchema } from '../../Schema'
 import { data } from './const'
 
 const DoctorLogin = () => {
   const [hospitalLocation, setHospitalLocation] = useState("");
+  const dispatch=useDispatch()
+  const naviagte=useNavigate()
   const [number, setNumber] = useState("");
   const [openOtp, setOpenOtp] = useState(false);
   const [OTPresult, setOTPResult] = useState('')
   const { setupRecaptcha } = useFirebaseAuth();
+  const handleDispatch=()=>{
+    dispatch(loginActions.doctorLogin())
+    naviagte('/dashboard', { replace: true });
+  }
     const handleSubmit=async(values)=>{
-      console.log(values);
-      if (values && number) {
-        const response = await setupRecaptcha(number);
-        setOTPResult(response);
-        if(response){
-          setOpenOtp(true)
-        }
-      }
+      // console.log(values);
+      // if (values && number) {
+      //   const response = await setupRecaptcha(number);
+      //   setOTPResult(response);
+      //   if(response){
+      //     setOpenOtp(true)
+      //   }
+      // }
+      handleDispatch()
     }
+    
+    
     const handleOtpSubmit = () => {};
   return (    
     <React.Fragment>
       <Formik
       initialValues={data}
       onSubmit={handleSubmit}
-      validationSchema={DoctorLogInSchema}
     >
       {({ handleSubmit, isSubmitting }) => (
         <div className="flex items-center  bg-gray-50 dark:bg-gray-900">
@@ -68,6 +79,7 @@ const DoctorLogin = () => {
     </Formik>
     <OtpVerifyModal
       OTPresult={OTPresult}
+      handleDispatch={handleDispatch}
         open={openOtp}
         number={number}
         setOpen={setOpenOtp}

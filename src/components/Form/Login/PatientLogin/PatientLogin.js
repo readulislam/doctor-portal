@@ -1,34 +1,46 @@
 import { Button } from 'flowbite-react'
-import { Field, Formik,ErrorMessage } from 'formik';
+import {  Formik } from 'formik';
 import React, { useState } from 'react'
 import PhoneInput from 'react-phone-number-input';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
 import useFirebaseAuth from '../../../../hooks/useFirebaseAuth';
+import { authActions } from '../../../../Store/Auth-Slice';
 import OtpVerifyModal from '../../../Modal/OtpVerifyModal';
 import { PatientLogInSchema } from '../../Schema'
 import { data } from './const'
 
 const PatientLogin = () => {
   const [number, setNumber] = useState("");
+  const naviagte=useNavigate()
   const [openOtp, setOpenOtp] = useState(false);
+  const dispatch=useDispatch();
   const [OTPresult, setOTPResult] = useState('')
   const { setupRecaptcha } = useFirebaseAuth();
-    const handleSubmit=async(values)=>{
-      console.log(values);
-      if (values && number) {
-        const response = await setupRecaptcha(number);
-        setOTPResult(response);
-        if(response){
-          setOpenOtp(true)
-        }
-      }
+  const handleDispatch=()=>{
+
+    dispatch(authActions.login())
+    naviagte('/dashboard', { replace: true });
+  }
+    const handleSubmit=(values)=>{
+      
+      // console.log(values);
+      // if (values && number) {
+      //   const response = await setupRecaptcha(number);
+      //   setOTPResult(response);
+      //   if(response){
+      //     setOpenOtp(true)
+      //   }
+      // }
+      handleDispatch()
     }
+    
     const handleOtpSubmit = () => {};
   return (    
    <React.Fragment>
      <Formik
     initialValues={data}
     onSubmit={handleSubmit}
-    validationSchema={PatientLogInSchema}
   >
     {({ handleSubmit, isSubmitting }) => (
       <div className="flex items-center  bg-gray-50 dark:bg-gray-900">
@@ -63,13 +75,14 @@ const PatientLogin = () => {
       </div>
     )}
   </Formik>
-  <OtpVerifyModal
+  {/* <OtpVerifyModal
       OTPresult={OTPresult}
+      handleDispatch={handleDispatch}
         open={openOtp}
         number={number}
         setOpen={setOpenOtp}
         handleOtpSubmit={handleOtpSubmit}
-      />
+      /> */}
    </React.Fragment>
   )
 }

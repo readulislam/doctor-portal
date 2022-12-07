@@ -1,9 +1,14 @@
+
 import { Card, Sidebar, Tabs } from 'flowbite-react';
 import React from 'react'
 import { data , doctorHeading, doctorPastData, doctorUpComingData } from '../../Utils/mockData';
 import TableView from '../../Utils/TableView';
+import AvailabilitySelect from './Availability/AvailabilitySelect';
 
 const DoctorView = () => {
+ 
+  
+  
   return (
     <div className='flex '>
       <div className="w-fit ">
@@ -59,7 +64,7 @@ const DoctorView = () => {
            <TableView heading={doctorHeading} data={doctorPastData} />
           </Tabs.Item>
           <Tabs.Item title="Availabilty">
-
+            <AvailabilitySelect/>
           </Tabs.Item>
         </Tabs.Group>
         
