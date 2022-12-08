@@ -21,27 +21,37 @@ const Registar = () => {
   const naviagte=useNavigate()
   const [gender, setGender] = useState("");
   const [date, setDate] = useState("");
-  const [cityName, setCityName] = useState("");
   const [stateId, setStateId] = useState(1);
+  const [hospitalName, setHospitalName] = useState("");
   const [countryName, setCountryName] = useState("");
   const [martialStatus, setMartialStatus] = useState("");
   const [state, setState] = useState([]);
+  const [cityId, setCityId] = useState("");
+  const [apiData, setApiData] = useState({});
   const [city, setCity] = useState([]);
   const [number, setNumber] = useState("");
   const [openOtp, setOpenOtp] = useState(false);
   const [OTPresult, setOTPResult] = useState('')
   const { setupRecaptcha } = useFirebaseAuth();
   const handleSubmit = async (values) => {
-    console.log(values);
-    
-    // if (values && number) {
-    //   const response = await setupRecaptcha(number);
-    //   setOTPResult(response);
-    //   if(response){
-    //     setOpenOtp(true)
-    //   }
-    // }
-
+    // console.log(values);
+    setApiData({title: values.title,
+        firstName: values.firstName,
+        middleName: values.middleName,
+        lastName: values.lastName,
+        contact: number,
+        dateOfBirth: date,
+        address: values.address,
+        location: hospitalName,
+        gender: gender,
+        country: "india",
+        state: "",
+        stateId:stateId,
+        cityId:cityId,
+        city: "",
+        pinCode: values.pincode,
+        martialStatus: martialStatus})
+  // console.log(apiData);
   };
   useEffect(() => {
     const fetching=async()=>{
@@ -58,7 +68,7 @@ const Registar = () => {
     }
     cityfetching()
   }, [stateId])
-  
+  console.log(apiData);
   const handleDispatch=async()=>{
       // const {data} = await axios.post(`${BaseUrl}/patient-registration`,{
         
@@ -234,7 +244,7 @@ const Registar = () => {
                         id="underline_select"
                         className=" py-2.5 mt-4 w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
                         onChange={(e) => {
-                          data.hospitalName = e.target.value;
+                          setHospitalName(e.target.value)
                         }}
                       >
                         <option selected>Location</option>
@@ -244,7 +254,7 @@ const Registar = () => {
                         id="underline_select"
                         className=" py-2.5 mt-4 w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
                         onChange={(e) => {
-                          data.countryName = e.target.value;
+                          setCountryName(e.target.value)
                         }}
                       >
                         <option selected>India</option>
@@ -253,7 +263,7 @@ const Registar = () => {
                         id="underline_select"
                         className=" py-2.5  mt-4 w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
                         onChange={(e) => {
-                          data.cityName = e.target.value;
+                          setCityId(e.target.value)
                         }}
                       >
                         <option selected>City</option>
@@ -263,7 +273,7 @@ const Registar = () => {
                         id="underline_select"
                         className=" py-2.5 mt-4 w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
                         onChange={(e) => {
-                          data.martialStatus = e.target.value;
+                          setMartialStatus(e.target.value)
                         }}
                       >
                         <option selected>Select Martial Status</option>
