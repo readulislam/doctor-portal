@@ -1,12 +1,26 @@
+import { async } from "@firebase/util";
+import axios from "axios";
 import { Button, Modal, TextInput } from "flowbite-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { BaseUrl } from "../../APi/api";
 import { slots } from "../../Utils/mockData";
 
-const ModalView = ({ open, setOpen ,name,location,speciality,existingUser,setDone,setRegistarOpen,setTime,setDate}) => {
+const ModalView = ({ open, setOpen,date ,id,name,location,speciality,existingUser,setDone,setRegistarOpen,setTime,setDate}) => {
   const [selected, setSelected] = useState(null);
   const selectedSlot = (id) => {
     setSelected(id);
   };
+  useEffect(() => {
+    const fetching=async()=>{
+      const {data} =await axios.post(`
+        ${BaseUrl}/get-slots?date=8/12/2022&doctorId=2`)
+        
+        // console.log(JSON.parse(data.slots),"hi");
+        console.log(data);
+    }
+    fetching()
+  }, [])
+  
   return (
     <React.Fragment>
       <Modal show={open} position="center" onClose={() => setOpen(false)}>

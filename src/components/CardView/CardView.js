@@ -7,6 +7,7 @@ import ModalView from "../Modal/ModalView";
 
 const CardView = () => {
   const [open, setOpen] = useState(false);
+  const [id, setId] = useState(1);
   const [page, setPage] = useState(1);
   const [modalName, setModalName] = useState("");
   const [modalSpeciality, setModalSpeciality] = useState("");
@@ -41,7 +42,7 @@ const CardView = () => {
               </p>
               <div>
                 <Button
-                  onClick={() => {setOpen(true);setModalName(d.name);setModalLocation(d.location);setModalSpeciality(d.speciality)}}
+                  onClick={() => {setOpen(true);setModalName(d.name);setId();setModalLocation(d.location);setModalSpeciality(d.speciality)}}
                   className="w-full rounded-full"
                   gradientDuoTone="cyanToBlue"
                 >
@@ -52,7 +53,7 @@ const CardView = () => {
           </div>
         ))}
       </div>
-      <AppointmentRegistar open={open} setOpen={setOpen} name={modalName} speciality={modalSpeciality} location={modalLocation} />
+      <AppointmentRegistar open={open} id={id} setOpen={setOpen} name={modalName} speciality={modalSpeciality} location={modalLocation} />
      <div className="w-full flex justify-center mt-6 mb-32">
      <Pagination
       currentPage={page}
