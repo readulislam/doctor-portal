@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom'
 import { authActions } from '../../Store/Auth-Slice'
 
 const Menu = () => {
-  const isLoggedIn=useSelector(state=>state.auth.isLoggedIn)
-  const isRegister=useSelector(state=>state.auth.isRegister)
+  // const isLoggedIn=useSelector(state=>state.auth.isLoggedIn)
+  
  
   const dispatch=useDispatch()
   return (
@@ -26,15 +26,15 @@ const Menu = () => {
     </span>
   </Navbar.Brand>
   <div className="flex md:order-2">
- {!isLoggedIn &&  <Link to='/login'>
+ {/* {!isLoggedIn &&  <Link to='/login'>
     <Button className='mr-4'>Login</Button>
   </Link> }
   {(!isLoggedIn && !isRegister) && <Link to='/register'>
     <Button className='mr-4' >Register</Button>
-  </Link>}
+  </Link>} */}
   
 
-   {isLoggedIn && <Dropdown
+   {/* {isLoggedIn && <Dropdown
 
       arrowIcon={false}
       inline={true}
@@ -63,7 +63,7 @@ const Menu = () => {
       <Dropdown.Item onClick={()=>{ dispatch(authActions.logout())}}>
         Sign out
       </Dropdown.Item>
-    </Dropdown>}
+    </Dropdown>} */}
     <Navbar.Toggle />
   </div>
   <Navbar.Collapse>

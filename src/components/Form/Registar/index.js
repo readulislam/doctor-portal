@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { BaseUrl } from "../../../APi/api";
 import useFirebaseAuth from "../../../hooks/useFirebaseAuth";
-import { authActions } from "../../../Store/Auth-Slice";
+// import { authActions } from "../../../Store/Auth-Slice";
 import { genderValue, location, martial, title } from "../../../Utils/mockData";
 import OtpVerifyModal from "../../Modal/OtpVerifyModal";
 import { PatientRegisterSchema } from "../Schema";
@@ -90,8 +90,8 @@ const Registar = () => {
       //     martialStatus: "single"
       
       // })
-    dispatch(authActions.registered())
-    naviagte('/dashboard', { replace: true });
+    // dispatch(authActions.registered())
+    // naviagte('/dashboard', { replace: true });
   }
   const handleOtpSubmit = () => {};
 

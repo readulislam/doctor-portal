@@ -1,10 +1,16 @@
 import { Button, Modal, TextInput } from 'flowbite-react'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import React from 'react'
+import React, { useState } from 'react'
 import { genderValue, title } from '../../Utils/mockData';
 
 const RegistarModal = ({setDone, open ,setOpen,location}) => {
+  const [personTitle, setPersonTitle] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [gender, setGender] = useState("");
+  const [stateId, setStateId] = useState("");
+  const [cityId, setCityId] = useState("");
+  const [pincode, setpincode] = useState("");
   return (
     <React.Fragment>
         <Modal show={open} position="center" onClose={() => {setOpen(false)}}>
@@ -131,7 +137,7 @@ const RegistarModal = ({setDone, open ,setOpen,location}) => {
             </select>
             <label>
                 <input
-                  type="number"
+                  type="text"
                   className="mt-4 border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
                   placeholder='*pincode'
                   name="pincode"

@@ -13,15 +13,15 @@ import { data } from './const'
 
 const DoctorLogin = () => {
   const [hospitalLocation, setHospitalLocation] = useState("");
-  const dispatch=useDispatch()
-  const naviagte=useNavigate()
+  // const dispatch=useDispatch()
+  // const naviagte=useNavigate()
   const [number, setNumber] = useState("");
   const [openOtp, setOpenOtp] = useState(false);
   const [OTPresult, setOTPResult] = useState('')
   const { setupRecaptcha } = useFirebaseAuth();
   const handleDispatch=()=>{
-    dispatch(loginActions.doctorLogin())
-    naviagte('/dashboard', { replace: true });
+    // dispatch(loginActions.doctorLogin())
+    // naviagte('/dashboard', { replace: true });
   }
     const handleSubmit=async(values)=>{
       // console.log(values);
