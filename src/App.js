@@ -11,7 +11,7 @@ import PatientView from './components/PatientView/PatientView';
 
 
 const  App=()=> {
-  const isLoggedIn=useSelector(state=>state.auth.isLoggedIn)
+  // const isLoggedIn=useSelector(state=>state.auth.isLoggedIn)
   return (
     <Routes>
       <Route path="/" element={<Navigate replace to="/dashboard" />} />

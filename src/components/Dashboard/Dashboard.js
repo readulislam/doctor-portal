@@ -7,16 +7,20 @@ import Menu from '../Navbar/Menu';
 
 
 const Dashboard = () => {
-  const isLogged=useSelector(state=>state.login.isLogged)
+  // const isLogged=useSelector(state=>state.login.isLogged)
   return (
     <>
-    {!isLogged && <>
+    {/* {!isLogged && <>
       <Menu/>
    <Header/>
    <CardView/>
     </>}
     {isLogged && <DoctorView/>}
-    </>
+    */}
+    <Menu/>
+   <Header/>
+   <CardView/>
+   </> 
   )
 }
 
