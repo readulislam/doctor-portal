@@ -191,7 +191,7 @@ const Registar = () => {
                       </select>
                       <label>
                         <Field
-                          type="number"
+                          type="text"
                           className="mt-4 w-full border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
                           placeholder="*pincode"
                           name="pincode"
