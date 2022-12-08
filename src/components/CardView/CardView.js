@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Button, Card, Pagination } from "flowbite-react";
 import React, { useEffect, useState } from "react";
-import { BaseUrl } from "../../APi/api";
+import { BaseUrl, ListDepartments, ListStates } from "../../APi/api";
 import Filtering from "../Filtering/Filtering";
 import AppointmentRegistar from "../Form/AppoinmentRegistar/AppointmentRegistar";
 
@@ -19,9 +19,15 @@ console.log(doctorId)
     const fetching = async()=>{
       const {data} = await axios.get(`${BaseUrl}/get-doctors`)
       console.log(data)
+      const da =await ListStates()
+      console.log(da)
       setDoctors(data)
+      const d =await ListDepartments()
+console.log(d,'jj')
     }
     fetching()
+   
+
   },[])
 
  

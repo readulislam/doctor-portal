@@ -64,10 +64,10 @@ const ModalView = ({ open, setOpen ,name,location,speciality,existingUser,setDon
               <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
                 Consultation Charge : <span className="text-black">800 Rs</span>
               </p>
-              {slotsInfo.data &&  <h3 className="font-semibold w-full  text-center text-xl">{slotsInfo.data}</h3>}
+              {slotsInfo?.data &&  <h3 className="font-semibold w-full  text-center text-xl">{slotsInfo.data}</h3>}
               <div className="grid grid-cols-6 gap-4">
-               {slotsInfo.slots &&  slotsInfo?.slots?.map((data) => (
-                  <div
+               {slotsInfo?.slots &&  slotsInfo?.slots?.map((data,index) => (
+                  <div key={index}
                     onClick={() => selectedSlot(data.id)}
                     className={`text-base ${
                       selected === data.id && "bg-blue-600 text-white"
@@ -82,7 +82,7 @@ const ModalView = ({ open, setOpen ,name,location,speciality,existingUser,setDon
                 ))}
               </div>
               <div>
-               {!slotsInfo.data &&  <input
+               {!slotsInfo?.data &&  <input
                 id="number"
                 className="w-full"
                 type="number"
