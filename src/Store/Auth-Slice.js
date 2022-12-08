@@ -1,8 +1,8 @@
-import {  createSlice } from'@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const authSlice=createSlice({
     name:'auth',
-    initialState:{isLoggedIn:false,isRegister:false},
+    initialState:{isLoggedIn:false,isRegister:false, userId:''},
     reducers:{
         login(state){
             state.isLoggedIn=true;
@@ -14,8 +14,9 @@ const authSlice=createSlice({
         registering(state){
             state.isRegister=false;
         },
-        registered(state){
+        registered(state,action){
             state.isRegister=true;
+            state.userId = action.payload
         },
     }
 });

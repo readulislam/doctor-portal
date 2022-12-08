@@ -1,26 +1,33 @@
-import { async } from "@firebase/util";
 import axios from "axios";
 import { Button, Modal, TextInput } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { BaseUrl } from "../../APi/api";
-import { slots } from "../../Utils/mockData";
 
-const ModalView = ({ open, setOpen,date ,id,name,location,speciality,existingUser,setDone,setRegistarOpen,setTime,setDate}) => {
+const ModalView = ({ open, setOpen ,name,location,speciality,existingUser,setDone,doctorId,setRegistarOpen,setTime}) => {
+  const [date, setDate] = useState("");
+
   const [selected, setSelected] = useState(null);
+  const [slotsInfo, setSlotsInfo] = useState(null);
   const selectedSlot = (id) => {
     setSelected(id);
   };
-  useEffect(() => {
-    const fetching=async()=>{
-      const {data} =await axios.post(`
-        ${BaseUrl}/get-slots?date=8/12/2022&doctorId=2`)
-        
-        // console.log(JSON.parse(data.slots),"hi");
-        console.log(data);
+
+ 
+  useEffect(()=>{
+    const fetching = async()=>{
+      if(date && doctorId){
+        console.log(date)
+        const splitting = date.split('-');
+        const newDate = splitting[2]+'/'+splitting[1] +'/'+splitting[0]
+        console.log(newDate,doctorId);
+        const {data} = await axios.post(`${BaseUrl}/get-slots?date=${newDate}&doctorId=${doctorId}`)
+        console.log(data)
+        setSlotsInfo(data)
+       }
+      
     }
     fetching()
-  }, [])
-  
+  },[date,doctorId])
   return (
     <React.Fragment>
       <Modal show={open} position="center" onClose={() => setOpen(false)}>
@@ -51,35 +58,36 @@ const ModalView = ({ open, setOpen,date ,id,name,location,speciality,existingUse
                   value={name}
                 />
 
-                <TextInput id="email1" type="date" required={true} onChange={(e)=>{setDate(e.target.value);}} />
+                <TextInput  id="date" type="date" required={true} onChange={(e)=>{setDate(e.target.value);}} />
               </div>
 
               <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
                 Consultation Charge : <span className="text-black">800 Rs</span>
               </p>
+              {slotsInfo.data &&  <h3 className="font-semibold w-full  text-center text-xl">{slotsInfo.data}</h3>}
               <div className="grid grid-cols-6 gap-4">
-                {slots.map((data) => (
+               {slotsInfo.slots &&  slotsInfo?.slots?.map((data) => (
                   <div
                     onClick={() => selectedSlot(data.id)}
                     className={`text-base ${
                       selected === data.id && "bg-blue-600 text-white"
                     } ${
-                      data.status
+                      !data.isAvailable
                         ? "bg-gray-400/10 text-gray-400/50"
                         : "shadow-md hover:bg-sky-500 hover:text-white cursor-pointer  "
                     } border   py-1 px-3 text-center rounded-md`}
                   >
-                    {data.slot}
+                    {data.time }
                   </div>
                 ))}
               </div>
               <div>
-                <input
+               {!slotsInfo.data &&  <input
                 id="number"
                 className="w-full"
                 type="number"
                 placeholder=" "
-                />
+                />}
               </div>
               {existingUser && <select
               id="underline_select"
