@@ -1,16 +1,18 @@
 import axios from "axios";
 import { Button, Modal, TextInput } from "flowbite-react";
 import React, { useEffect, useState } from "react";
-import { BaseUrl } from "../../APi/api";
+import { useSelector } from "react-redux";
+import { AddDoctorAppointment, BaseUrl, updateTimeSlot } from "../../APi/api";
 
 const ModalView = ({ open, setOpen ,name,location,speciality,existingUser,setDone,doctorId,setRegistarOpen,setTime}) => {
+  const {isLoggedIn ,isRegister,userInfo, userId} =useSelector(state=>state.Auth)
   const [date, setDate] = useState("");
 
   const [selected, setSelected] = useState(null);
   const [slotsInfo, setSlotsInfo] = useState(null);
-  const selectedSlot = (id) => {
-    setSelected(id);
-  };
+ 
+   
+ 
 
  
   useEffect(()=>{
@@ -28,12 +30,58 @@ const ModalView = ({ open, setOpen ,name,location,speciality,existingUser,setDon
     }
     fetching()
   },[date,doctorId])
+
+  const handleSubmit = async(event)=>{
+    const {date} = slotsInfo;
+event.preventDefault();
+
+if(doctorId && userId){
+  const appointmentInfo={
+    doctorId,
+    patientId:userId,
+    time:selected.time,
+    timeSlotId:selected.id,
+    requestedByEmail:'',
+    requestedByPhone:'',
+    date,
+    status:false 
+  
+  }
+try {
+  const data = await AddDoctorAppointment(appointmentInfo)
+
+  if(data){
+    console.log(data,'boking tur')
+    // doctorId, date, timeRange, slotId
+    console.log(slotsInfo,'slotsInfo')
+    const query ={doctorId,timeRange:slotsInfo.timeRange, slotId:selected.id,date,weekday:slotsInfo.weekday}
+    const update = await updateTimeSlot(query);
+    console.log(update,'done')
+    setSelected(null)
+    setDate('')
+  }
+} catch (error) {
+  console.log(error)
+}
+
+  
+}
+
+if(existingUser){
+  setDone(true);setOpen(false)
+}else{
+  setRegistarOpen(true);setOpen(false)
+}
+  }
+  
+  
   return (
-    <React.Fragment>
+   
       <Modal show={open} position="center" onClose={() => setOpen(false)}>
-        <form>
+        <form id='form' onSubmit={handleSubmit}>
           <Modal.Header>Book An Appointment</Modal.Header>
           <Modal.Body>
+           
             <div className="space-y-6 p-6">
               <div className="grid grid-cols-2 gap-4 ">
                 <TextInput
@@ -68,9 +116,9 @@ const ModalView = ({ open, setOpen ,name,location,speciality,existingUser,setDon
               <div className="grid grid-cols-6 gap-4">
                {slotsInfo?.slots &&  slotsInfo?.slots?.map((data,index) => (
                   <div key={index}
-                    onClick={() => selectedSlot(data.id)}
+                    onClick={() =>  setSelected(data)}
                     className={`text-base ${
-                      selected === data.id && "bg-blue-600 text-white"
+                      selected?.id === data.id && "bg-blue-600 text-white"
                     } ${
                       !data.isAvailable
                         ? "bg-gray-400/10 text-gray-400/50"
@@ -81,21 +129,21 @@ const ModalView = ({ open, setOpen ,name,location,speciality,existingUser,setDon
                   </div>
                 ))}
               </div>
-              <div>
+              {/* <div>
                {!slotsInfo?.data &&  <input
                 id="number"
                 className="w-full"
                 type="number"
                 placeholder=" "
                 />}
-              </div>
-              {existingUser && <select
+              </div> */}
+              {/* {isLoggedIn && <select
               id="underline_select"
               className=" py-2.5  w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
             >
               <option selected>From Whom You Booking</option>
               <option value="JA">user</option>
-            </select>}
+            </select>} */}
             </div>
           </Modal.Body>
           <Modal.Footer className="flex justify-between">
@@ -103,22 +151,17 @@ const ModalView = ({ open, setOpen ,name,location,speciality,existingUser,setDon
               Decline
             </Button>
             <Button
-              type="submit"
+              type="submit" color
               className="px-2 "
               gradientDuoTone="cyanToBlue"
-              onClick={()=>{if(existingUser){
-                setDone(true);setOpen(false)
-              }else{
-                setRegistarOpen(true);setOpen(false)
-              }
-                }}
+             
             >
               Submit
             </Button>
           </Modal.Footer>
         </form>
       </Modal>
-    </React.Fragment>
+    
   );
 };
 

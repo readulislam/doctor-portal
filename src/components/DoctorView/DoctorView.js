@@ -1,14 +1,15 @@
 
 import { Card, Sidebar, Tabs } from 'flowbite-react';
-import React from 'react'
-import { data , doctorHeading, doctorPastData, doctorUpComingData } from '../../Utils/mockData';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { doctorHeading, doctorPastData, doctorUpComingData } from '../../Utils/mockData';
 import TableView from '../../Utils/TableView';
 import AvailabilitySelect from './Availability/AvailabilitySelect';
 
 const DoctorView = () => {
- 
+  const {doctorId, doctorInfo}=useSelector(state=>state.Doctor)
   
-  
+  console.log(doctorId, doctorInfo)
   return (
     <div className='flex '>
       <div className="w-fit ">
@@ -33,16 +34,16 @@ const DoctorView = () => {
           <Card
             horizontal={true}
             className="h-80"
-            imgSrc={data[0].image}
+            imgSrc={doctorInfo.img}
           >
             <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              {data[0].name}
+              {doctorInfo?.name}
             </h5>
             <p className="font-normal text-gray-700 dark:text-gray-400">
-              {data[0].designation} - {data[0].speciality}
+              {doctorInfo?.designation}
             </p>
             <p className="font-normal text-gray-700 dark:text-gray-400">
-              {data[0].location}
+              {doctorInfo?.hospital.name+ ', '+doctorInfo?.hospital.address}
             </p>
           </Card>
         </div>

@@ -1,16 +1,18 @@
-import { Button } from 'flowbite-react'
-import {  Formik } from 'formik';
-import React, { useState } from 'react'
+import { Button } from 'flowbite-react';
+import { Formik } from 'formik';
+import React, { useEffect, useState } from 'react';
 import PhoneInput from 'react-phone-number-input';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import useFirebaseAuth from '../../../../hooks/useFirebaseAuth';
-import { authActions } from '../../../../Store/Auth-Slice';
+import { patientLoginByPhone } from '../../../../Store/Auth-Slice';
 import OtpVerifyModal from '../../../Modal/OtpVerifyModal';
-import { PatientLogInSchema } from '../../Schema'
-import { data } from './const'
+import { data } from './const';
 
 const PatientLogin = () => {
+  const navigate = useNavigate()
+  const {userId} =useSelector(state=>state.Auth)
+  const dispatch = useDispatch()
   const [number, setNumber] = useState("");
   // const naviagte=useNavigate()
   const [openOtp, setOpenOtp] = useState(false);
@@ -19,22 +21,30 @@ const PatientLogin = () => {
   const { setupRecaptcha } = useFirebaseAuth();
   const handleDispatch=()=>{
 
-    // dispatch(authActions.login())
-    // naviagte('/dashboard', { replace: true });
+    
+    navigate('/dashboard');
   }
-    const handleSubmit=(values)=>{
-      
+    const handleSubmit=async(values)=>{
+      console.log('fonr')
+      await dispatch(patientLoginByPhone(number))
       // console.log(values);
       // if (values && number) {
-      //   const response = await setupRecaptcha(number);
-      //   setOTPResult(response);
-      //   if(response){
-      //     setOpenOtp(true)
-      //   }
+      //   
       // }
-      handleDispatch()
+      //handleDispatch()
     }
-    
+    useEffect(()=>{
+     const verify =async()=>{
+      if(userId && number){
+        const response = await setupRecaptcha(number,'patientLogin');
+        setOTPResult(response);
+        if(response){
+          setOpenOtp(true)
+        }
+      }
+     }
+     verify()
+    },[userId,number])
     const handleOtpSubmit = () => {};
   return (    
    <React.Fragment>
@@ -61,10 +71,11 @@ const PatientLogin = () => {
                     value={number}
                     onChange={setNumber}
                   />
+                    <div className="my-4" id="patientLogin" />
                 <Button
                   className="mt-4"
                   type="submit"
-                  disabled={isSubmitting}
+                
                 >
                    LOGIN
                 </Button>
@@ -75,14 +86,14 @@ const PatientLogin = () => {
       </div>
     )}
   </Formik>
-  {/* <OtpVerifyModal
+  <OtpVerifyModal
       OTPresult={OTPresult}
       handleDispatch={handleDispatch}
         open={openOtp}
         number={number}
         setOpen={setOpenOtp}
         handleOtpSubmit={handleOtpSubmit}
-      /> */}
+      />
    </React.Fragment>
   )
 }

@@ -1,10 +1,12 @@
 import { Card, Sidebar, Tabs } from 'flowbite-react'
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { patientHeading, patientPastData, patientUpComingData, patientUpComingHeading } from '../../Utils/mockData'
 import TableView from '../../Utils/TableView'
 import Menu from '../Navbar/Menu'
 
 const PatientView = () => {
+  const {isLoggedIn ,isRegister,userInfo} =useSelector(state=>state.Auth)
   return (
     <div>
       <Menu/>
@@ -34,13 +36,13 @@ const PatientView = () => {
           imgSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHgD-7kP3hbPiQYBy6N3-pWaFqUNgsUwKE9XVydJQ&s"
         >
           <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-          Umesh Bansal
+        {userInfo.firstName+' '+userInfo.middleName}
           </h5>
           <p className="font-normal text-gray-700 dark:text-gray-400">
-            9876587451
+          {userInfo.contact}
           </p>
           <p className="font-normal text-gray-700 dark:text-gray-400">
-            Male
+          {userInfo.gender}
           </p>
           <p className="font-normal text-gray-700 dark:text-gray-400">
             address - 41 Vaishali, Jaipur

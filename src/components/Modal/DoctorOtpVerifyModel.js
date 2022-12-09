@@ -1,7 +1,7 @@
 import { Button, Modal } from "flowbite-react";
 import OTPInput from "otp-input-react";
 import React, { useState } from "react";
-const OtpVerifyModal = ({
+const DoctorOtpVerifyModel = ({
   open,
   setOpen,
   handleOtpSubmit,
@@ -33,7 +33,7 @@ const OtpVerifyModal = ({
       if (!verify) {
         return;
       }
-      handleDispatch();
+      handleDispatch()
       console.log("done");
     } catch (error) {
       alert("OTP Invalid");
@@ -112,4 +112,4 @@ const OtpVerifyModal = ({
   );
 };
 
-export default OtpVerifyModal;
+export default DoctorOtpVerifyModel;

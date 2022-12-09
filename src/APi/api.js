@@ -9,13 +9,18 @@ GET_HOSPITALS:() =>'/add-hospitals',
 ADD_DOCTOR:() =>'/add-doctor',
 GET_DOCTORS:() =>'/get-doctors',
 ADD_PATIENT:() =>'/patient-registration',
+LOGIN_PATIENT:() =>'/patient-login',//  query CONTACT NUMBER
 ADD_DATE_OVERRIDE:() =>'/add-dateOverride',
 ADD_WEEKLY_AVAILABILITY:() =>'/add-weeklyAvailability',
 GET_WEEKLY_AVAILABILITY:() =>'/get-weeklyAvailabilityByDoctorId', // query doctorId
 GET_STATES:() =>'/get-states',
 GET_CITIES:() =>'/get-citiesByStateId', //  query stateId
 GET_SLOTS:() =>'/get-slots', //  query date(8/12/2022) and doctorId
+UPDATE_SLOT:() =>'/update-slot', //  query doctorId, date, timeRange, slotId
 ADD_EVENT_TYPE:() =>'/add-eventType',
+GET_DOCTOR_BY_PHONE:() =>'/get-doctorByNumber',
+GET_DOCTOR_APPOINTMENTS:() =>'/get-doctorAppointmentAll', // query doctorId
+ADD_APPOINTMENT:() =>'/add-appointment'
 
 
 }
@@ -27,6 +32,35 @@ get all departments
  */
 export const ListDepartments = async()=>{
     const {data} = await axios.get(URL(END_POINTS.GET_DEPARTMENTS()))
+    return  data
+}
+export const GetDoctorById = async(phone)=>{
+    console.log(phone)
+    const {data} = await axios.get(URL(END_POINTS.GET_DOCTOR_BY_PHONE()),{
+        params: { contactNo: phone } 
+    })
+    return  data
+}
+export const LoginPatient = async(phone)=>{
+    
+    const {data} = await axios.get(URL(END_POINTS.LOGIN_PATIENT()),{
+        params: { contact: phone } 
+    })
+    return  data
+}
+export const DoctorAppointments = async(doctorId)=>{
+   
+    const {data} = await axios.get(URL(END_POINTS.GET_DOCTOR_APPOINTMENTS()),{
+        params: { doctorId } 
+    })
+    return  data
+}
+  
+export const updateTimeSlot = async(query)=>{
+   
+    const {data} = await axios.put(URL(END_POINTS.UPDATE_SLOT()),{
+         ...query 
+    })
     return  data
 }
   
@@ -81,8 +115,14 @@ export const ListDoctors = async() =>{
 "martialStatus": "single"
  */
 export const PatientRegister = async(patientInfo) =>{
-    const {data} = await axios.get(URL(END_POINTS.ADD_PATIENT()),{
+    const {data} = await axios.post(URL(END_POINTS.ADD_PATIENT()),{
         ...patientInfo
+    })
+    return  data
+}
+export const AddDoctorAppointment = async(appointmentInfo) =>{
+    const {data} = await axios.post(URL(END_POINTS.ADD_APPOINTMENT()),{
+        ...appointmentInfo
     })
     return  data
 }
@@ -149,5 +189,7 @@ export const ListStates = async()=>{
     const {data} = await axios.get(URL(END_POINTS.GET_STATES()))
     return  data
 }
+
+
         
 

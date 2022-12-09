@@ -13,7 +13,7 @@ const CardView = () => {
   const [modalSpeciality, setModalSpeciality] = useState("");
   const [modalLocation, setModalLocation] = useState("");
   const [doctorId, setDoctorId] = useState("");
-  const [speciality, setSpeciality] = useState("");
+  const [doctorData, setDoctorData] = useState({});
 console.log(doctorId)
   useEffect(()=>{
     const fetching = async()=>{
@@ -57,7 +57,7 @@ console.log(d,'jj')
               </p>
               <div>
                 <Button
-                  onClick={() => {setOpen(true);setDoctorId(d.id);setModalName(d.name);setModalLocation(d.hospital.name+','+d.hospital.address);setModalSpeciality(d.department.name)}}
+                  onClick={() => {setOpen(true);setDoctorData(d);setDoctorId(d.id);setModalName(d.name);setModalLocation(d.hospital.name+','+d.hospital.address);setModalSpeciality(d.department.name)}}
                   className="w-full rounded-full"
                   gradientDuoTone="cyanToBlue"
                 >
@@ -68,7 +68,7 @@ console.log(d,'jj')
           </div>
         ))}
       </div>
-      <AppointmentRegistar doctorId={doctorId} open={open} setOpen={setOpen} name={modalName} speciality={modalSpeciality} location={modalLocation} />
+      <AppointmentRegistar doctorId={doctorId} doctorData={doctorData} open={open} setOpen={setOpen} name={modalName} speciality={modalSpeciality} location={modalLocation} />
      <div className="w-full flex justify-center mt-6 mb-32">
      <Pagination
       currentPage={page}

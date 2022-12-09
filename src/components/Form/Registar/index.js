@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import { Button, TextInput } from "flowbite-react";
 import { ErrorMessage, Field, Formik } from "formik";
@@ -8,9 +7,9 @@ import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { BaseUrl } from "../../../APi/api";
+import { BaseUrl, PatientRegister } from "../../../APi/api";
 import useFirebaseAuth from "../../../hooks/useFirebaseAuth";
-// import { authActions } from "../../../Store/Auth-Slice";
+import { authActions } from '../../../Store/Auth-Slice';
 import { genderValue, location, martial, title } from "../../../Utils/mockData";
 import OtpVerifyModal from "../../Modal/OtpVerifyModal";
 import { PatientRegisterSchema } from "../Schema";
@@ -33,6 +32,7 @@ const Registar = () => {
   const [openOtp, setOpenOtp] = useState(false);
   const [OTPresult, setOTPResult] = useState('')
   const { setupRecaptcha } = useFirebaseAuth();
+  
   const handleSubmit = async (values) => {
     // console.log(values);
     setApiData({title: values.title,
@@ -51,6 +51,14 @@ const Registar = () => {
         city: "",
         pinCode: values.pincode,
         martialStatus: martialStatus})
+        
+        if (values && number) {
+          const response = await setupRecaptcha(number,'registration');
+          setOTPResult(response);
+          if(response){
+          setOpenOtp(true)
+          }
+          }
   // console.log(apiData);
   };
   useEffect(() => {
@@ -68,30 +76,13 @@ const Registar = () => {
     }
     cityfetching()
   }, [stateId])
-  console.log(apiData);
+
   const handleDispatch=async()=>{
-      // const {data} = await axios.post(`${BaseUrl}/patient-registration`,{
-        
-      //     title: "Mr",
-      //     firstName: "himanshu",
-      //     middleName: "readul",
-      //     lastName: "islam",
-      //     contact: "9876543210",
-      //     dateOfBirth: "13/2/2000",
-      //     address: "3216 ug cyii",
-      //     location: "msmart,jaipur",
-      //     gender: "male",
-      //     country: "india",
-      //     state: "delhi",
-      //     stateId:9,
-      //     cityId:1,
-      //     city: "delhi",
-      //     pinCode: "654987",
-      //     martialStatus: "single"
-      
-      // })
-    // dispatch(authActions.registered())
-    // naviagte('/dashboard', { replace: true });
+      const data = await PatientRegister(apiData)
+      if(data){
+         dispatch(authActions.userRegister({userId:data.id, userInfo:data}))
+         naviagte('/dashboard')
+      }
   }
   const handleOtpSubmit = () => {};
 
@@ -198,7 +189,7 @@ const Registar = () => {
                         />
                       </label>
                       <ErrorMessage name="pincode" />
-                      <div className="my-4" id="recaptcha-container" />
+                      <div className="my-4" id="registration" />
                       
                       <Button className="mt-4 ml-6 px-6" type="reset">
                           Reset

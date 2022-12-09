@@ -1,41 +1,50 @@
-import { async } from '@firebase/util';
-import { Button } from 'flowbite-react'
-import { Field, Formik,ErrorMessage } from 'formik';
-import React, { useState } from 'react'
+import { Button } from 'flowbite-react';
+import { Formik } from 'formik';
+import React, { useEffect, useState } from 'react';
 import PhoneInput from 'react-phone-number-input';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import useFirebaseAuth from '../../../../hooks/useFirebaseAuth';
-import { loginActions } from '../../../../Store/Login-Slice';
-import OtpVerifyModal from '../../../Modal/OtpVerifyModal';
-import { DoctorLogInSchema } from '../../Schema'
-import { data } from './const'
+import { getDoctor } from '../../../../Store/Doctor-Slice';
+import DoctorOtpVerifyModel from '../../../Modal/DoctorOtpVerifyModel';
+import { data } from './const';
 
 const DoctorLogin = () => {
+  const {doctorId, doctorInfo}=useSelector(state=>state.Doctor)
   const [hospitalLocation, setHospitalLocation] = useState("");
-  // const dispatch=useDispatch()
-  // const naviagte=useNavigate()
+  const dispatch=useDispatch()
+  const naviagte=useNavigate()
   const [number, setNumber] = useState("");
   const [openOtp, setOpenOtp] = useState(false);
   const [OTPresult, setOTPResult] = useState('')
   const { setupRecaptcha } = useFirebaseAuth();
   const handleDispatch=()=>{
-    // dispatch(loginActions.doctorLogin())
-    // naviagte('/dashboard', { replace: true });
+   naviagte('/doctorView')
   }
+ console.log(doctorId)
     const handleSubmit=async(values)=>{
-      // console.log(values);
-      // if (values && number) {
-      //   const response = await setupRecaptcha(number);
-      //   setOTPResult(response);
-      //   if(response){
-      //     setOpenOtp(true)
-      //   }
-      // }
-      handleDispatch()
+   
+    const data = await dispatch(getDoctor(number));
+    
+    
+    
     }
     
-    
+    useEffect(()=>{
+      const verify = async()=>{
+        console.log(doctorId)
+        if ( doctorId && number) {
+          const response = await setupRecaptcha(number,'doctorLogin');
+          setOTPResult(response);
+          if(response){
+            setOpenOtp(true)
+          }else{
+            alert('you are not authorized doctor')
+          }
+        }
+      }
+      verify()
+    },[doctorId, number])
     const handleOtpSubmit = () => {};
   return (    
     <React.Fragment>
@@ -62,6 +71,7 @@ const DoctorLogin = () => {
                     value={number}
                     onChange={setNumber}
                   />
+                     <div className="my-4" id="doctorLogin" />
                   <Button
                     className="mt-4"
                     type="submit"
@@ -77,7 +87,7 @@ const DoctorLogin = () => {
         </div>
       )}
     </Formik>
-    <OtpVerifyModal
+    <DoctorOtpVerifyModel
       OTPresult={OTPresult}
       handleDispatch={handleDispatch}
         open={openOtp}
