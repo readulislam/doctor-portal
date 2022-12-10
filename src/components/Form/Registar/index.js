@@ -53,6 +53,7 @@ const Registar = () => {
         martialStatus: martialStatus})
         
         if (values && number) {
+          console.log(number)
           const response = await setupRecaptcha(number,'registration');
           setOTPResult(response);
           console.log(response)
