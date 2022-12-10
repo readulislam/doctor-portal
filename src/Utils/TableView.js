@@ -65,10 +65,14 @@ fetching()
    
        
   </Table>
-      {!appointments.length && <h2 className='text-3xl text-black py-10 font-semibold w-full text-center'>You haven't Appointments</h2>}  </>
+        </>
   
 
   )
 }
 
 export default TableView
+
+/* 
+{!appointments.length | patientAppointment.length  && <h2 className='text-3xl text-black py-10 font-semibold w-full text-center'>You haven't Appointments</h2>}
+*/
