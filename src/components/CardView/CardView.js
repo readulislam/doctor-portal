@@ -37,11 +37,13 @@ console.log(d,'jj')
       <div className="grid grid-cols-4 gap-y-10 gap-4  mt-16 place-items-center">
         {doctors.map((d) => (
           <div key={d.id} className="max-w-sm ">
-            <Card 
-              imgAlt="Meaningful alt text for an image that is not purely decorative"
+            <Card className="p-0 m-0"
               
-              imgSrc={d.img}
+              
+           
             >
+              <img className="w-[334px] border cover rounded-lg h-[201px]" src={d.img} alt='doctor'/>
+
               <h5 className="text-xl font-bold    text-gray-900 dark:text-white">
                 {d.name}
               </h5>
