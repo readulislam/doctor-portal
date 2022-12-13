@@ -1,16 +1,47 @@
+import axios from 'axios';
 import { Button } from 'flowbite-react';
 import { ErrorMessage, Field, Formik } from 'formik';
 import React, { useState } from 'react'
 import PhoneInput from 'react-phone-number-input';
+import { RegisterDoctor } from '../../../APi/api';
 import { DoctorRegistarSchema } from '../../Form/Schema';
 import { data } from './const';
-
+// 79c2ec0f6d6859d731f98a37a94e5c70
 const AddDoctor = () => {
     const [number, setNumber] = useState("");
-    const handleSubmit=(values)=>{
-      console.log(values);
+    const [hospitalId, setHospitalId] = useState();
+    const [departmentId, setDepartmentId] = useState();
+    const [file, setFile] = useState();
+    const [apiData, setApiData] = useState({});
+    const handleChange=(e)=>{
+      setFile(e.target.files[0])
       
     }
+    // "https://api.imgbb.com/1/upload?expiration=600&key=YOUR_CLIENT_API_KEY" --form "image=R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+    const handleSubmit=async(values)=>{
+      console.log(values,number,hospitalId,departmentId);
+      setApiData({name:values.name,
+        education:values.education,
+        departmentId:departmentId,
+        hospitalId:hospitalId,
+        contactNo:number,
+        designation:values.designation,
+        img:''})
+        
+        const data =  RegisterDoctor(apiData)
+
+      // const {data}= await axios.post(`https://api.imgbb.com/1/upload`,{
+      //   params:{
+      //     key:'79c2ec0f6d6859d731f98a37a94e5c70',
+      //     image:file
+      //   }
+      // })
+      
+      // console.log(data);
+      // console.log(values);
+      
+    }
+    console.log(apiData);
   return (
     <React.Fragment>
      <Formik
@@ -50,7 +81,7 @@ const AddDoctor = () => {
                         />
                     </div>
                 </label>
-                <ErrorMessage name="contactNo" />
+              
                 <label>
                     <Field
                         type="text"
@@ -73,7 +104,7 @@ const AddDoctor = () => {
                  id="underline_select"
                  className=" py-2.5 mt-4 w-full  text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
                  onChange={(e) => {
-                    data.hospitalId = e.target.value;
+                  setHospitalId(e.target.value)
                  }}
                 >
                     <option selected>Location</option>
@@ -86,7 +117,7 @@ const AddDoctor = () => {
                  id="underline_select"
                  className=" py-2.5  w-full  text-md  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
                  onChange={(e) => {
-                    data.departmentId = e.target.value;
+                  setDepartmentId(e.target.value)
                  }}
                 >
                     <option selected>Department</option>
@@ -116,10 +147,13 @@ const AddDoctor = () => {
                     <option value="Respiratory Medicine">Respiratory Medicine</option>
                     
                 </select>
+                <div className='mt-5'>
+                  <input type="file" id="file" name="file" accept="image/*" onChange={handleChange} />
+                </div>
+                
                 <Button
                   className="mt-4"
                   type="submit"
-                  disabled={isSubmitting}
                 >
                    Register
                 </Button>

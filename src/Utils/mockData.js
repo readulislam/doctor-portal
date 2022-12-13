@@ -182,7 +182,7 @@ export const slots = [
     },
   ]
   export const patientHeading=["Doctor Name","Date","Time","Prescription"]
-  export const patientUpComingHeading=["Doctor Name","Date","Time",""]
+  export const patientUpComingHeading=["Doctor Name","Date","Time","Prescription"]
   export const patientPastData=[
     {
       name:'DR. SURESH SHARMA',
@@ -229,7 +229,9 @@ export const slots = [
       prescription:''
     },
   ]
-  export const location=['mSmart Hospital,jaipur','mSmart Hospital,Delhi','mSmart Hospital,Ajmer','mSmart Hospital,Gurugram']
+  export const location=[{id:1,
+    value:'mSmart Hospital,jaipur'},
+    'mSmart Hospital,Delhi','mSmart Hospital,Ajmer','mSmart Hospital,Gurugram']
   export const genderValue=['male','female','other']
   export const title=['Baby','Baby Of','Mr','Mrs']
   export const martial=["widowed","single","married","divorced","seperated"]

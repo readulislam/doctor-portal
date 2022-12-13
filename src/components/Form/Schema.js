@@ -2,12 +2,8 @@ const Yup = require('yup');
 
 export const DoctorRegistarSchema = Yup.object({
   name: Yup.string().required(),
-  contactNo: Yup.string().required(),
   education: Yup.string().required(),
   designation: Yup.string().required(),
-  departmentId: Yup.string().required(),
-  hospitalId: Yup.string().required(),
-  
 });
 export const DoctorLogInSchema = Yup.object({
     doctorName: Yup.string().required(),

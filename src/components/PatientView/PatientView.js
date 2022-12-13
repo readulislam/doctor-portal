@@ -7,6 +7,9 @@ import Menu from '../Navbar/Menu'
 
 const PatientView = () => {
   const {isLoggedIn ,isRegister,userInfo} =useSelector(state=>state.Auth)
+  // const data=[patientUpComingData.map(()=>{
+  //   return()
+  // })]
   return (
     <div>
       <Menu/>

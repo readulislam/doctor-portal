@@ -8,6 +8,7 @@ import AvailabilitySelect from './Availability/AvailabilitySelect';
 
 const DoctorView = () => {
   const {doctorId, doctorInfo}=useSelector(state=>state.Doctor)
+  const data =[]
   
   console.log(doctorId, doctorInfo)
   return (

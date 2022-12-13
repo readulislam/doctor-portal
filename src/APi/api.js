@@ -84,7 +84,7 @@ export const ListHospitals = async()=>{
 "designation":"Nephrology",
 "img":"https://api.parashospitals.com/storage/doctors/September2022/0gt3x16BfPMzFkP5UmDT.jpg    " 
 */
-export const AddDoctor = async(doctorInfo) =>{
+export const RegisterDoctor = async(doctorInfo) =>{
     const {data} = await axios.get(URL(END_POINTS.ADD_DOCTOR()),{
         ...doctorInfo
     })
