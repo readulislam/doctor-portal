@@ -144,7 +144,8 @@ const AddDoctor = () => {
                 >
                     <option selected>Location</option>
                     {hospitalList.map(({id,name,address})=>{
-                  <option value={id} >{name} , {address}</option>
+                      return(<option value={id} >{name} , {address}</option>)
+                  
                 })}
                 </select>
                 <select
@@ -156,7 +157,8 @@ const AddDoctor = () => {
                 >
                     <option selected>Department</option>
                     {departmentList.map(({id,name})=>{
-                      <option value={id} >{name}</option>
+                      return(<option value={id} >{name}</option>)
+                      
                     })}
                 </select>
                 <div className='mt-5'>

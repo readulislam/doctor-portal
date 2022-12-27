@@ -252,8 +252,9 @@ const Registar = () => {
                       >
                         <option selected>Location</option>
                         {hospitalList.map(({id,name,address})=>{
-                          <option value={id} >{name} , {address}</option>
-                        })}
+                      return(<option value={id} >{name} , {address}</option>)
+                  
+                      })}
                       </select>
                       <select
                         id="underline_select"
