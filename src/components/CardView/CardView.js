@@ -26,14 +26,18 @@ console.log(doctorId)
 console.log(d,'jj')
     }
     fetching()
-   
-
   },[])
-
+  const handleSearch=async(searchDepartment,searchHospital,name)=>{
+    if (searchDepartment!==null) {
+       const {data} = await axios.get(`${BaseUrl}/get-doctorBySearch?departmentId=${searchDepartment}&hospitalId=${searchHospital}&name=${name}`)
+       console.log("hi",data)
+      console.log("hi",doctors);
+    }
+  }
  
   return (
     <>
-    <Filtering/>
+    <Filtering handleSearch={handleSearch}/>
       <div className="grid grid-cols-4 gap-y-10 gap-4  mt-16 place-items-center">
         {doctors.map((d) => (
           <div key={d.id} className="max-w-sm ">

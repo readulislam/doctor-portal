@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { Button } from 'flowbite-react';
 import { ErrorMessage, Field, Formik } from 'formik';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PhoneInput from 'react-phone-number-input';
-import { RegisterDoctor } from '../../../APi/api';
+import { ListDepartments, ListHospitals, RegisterDoctor } from '../../../APi/api';
 import { DoctorRegistarSchema } from '../../Form/Schema';
 import { data } from './const';
 // 79c2ec0f6d6859d731f98a37a94e5c70
@@ -13,6 +13,26 @@ const AddDoctor = () => {
     const [departmentId, setDepartmentId] = useState();
     const [file, setFile] = useState();
     const [apiData, setApiData] = useState({});
+    const [hospitalList, setHospitalList] = useState([]);
+    const [departmentList, setDepartmentList] = useState([]);
+    useEffect(() => {
+      const fetching=async()=>{
+        const {data}= await ListHospitals()
+        setHospitalList(data)
+     console.log("hospital",data);
+      }
+      fetching()
+     
+    }, [])
+    useEffect(() => {
+      const fetching=async()=>{
+        const data= await ListDepartments()
+        setDepartmentList(data)
+        console.log("sp", data);
+      }
+      fetching()
+      
+    }, [])
     const handleChange=(e)=>{
       setFile(e.target.files[0])
       
@@ -108,10 +128,9 @@ const AddDoctor = () => {
                  }}
                 >
                     <option selected>Location</option>
-                    <option value="JA">mSmart Hospital,jaipur</option>
-                    <option value="DE">mSmart Hospital,Delhi</option>
-                    <option value="GR">mSmart Hospital,Gurugram</option>
-                    <option value="Aj">mSmart Hospital,Ajmer</option>
+                    {hospitalList.map(({id,name,address})=>{
+                  <option value={id} >{name} , {address}</option>
+                })}
                 </select>
                 <select
                  id="underline_select"
@@ -121,31 +140,9 @@ const AddDoctor = () => {
                  }}
                 >
                     <option selected>Department</option>
-                    <option value="Cardiology">Cardiology</option>
-                    <option value="Oncology">Oncology</option>
-                    <option value="Neurology">Neurology</option>
-                    <option value="Nephrology">Nephrology</option>
-                    <option value="Urology">Urology</option>
-                    <option value="Gastroenterology">Gastroenterology</option>
-                    <option value="Radiaton Oncology<">Radiaton Oncology</option>
-                    <option value="CtYS">CTVS</option>
-                    <option value="Neuro Surgery">Neuro Surgery</option>
-                    <option value="Orthopedics">Orthopedics</option>
-                    <option value="Obstetrics  & Gynaecology">Obstetrics & Gynaecology</option>
-                    <option value="Kidney Transplant">Kidney Transplant</option>
-                    <option value="Plastic Surgery">Plastic Surgery</option>
-                    <option value="Internal Medicine">Internal Medicine</option>
-                    <option value="Critical Care">Critical Care</option>
-                    <option value="Endocrinology">Endocrinology</option>
-                    <option value="ENT">ENT</option>
-                    <option value="Emergency Medicine">Emergency Medicine</option>
-                    <option value="Dermatology">Dermatology</option>
-                    <option value="Psychiatry">Psychiatry</option>
-                    <option value="Rheumatology And Clinical Immunology">Rheumatology And Clinical Immunology</option>
-                    <option value="Opthalmollogy">Opthalmollogy</option>
-                    <option value="Pediatrics">Pediatrics</option>
-                    <option value="Respiratory Medicine">Respiratory Medicine</option>
-                    
+                    {departmentList.map(({id,name})=>{
+                      <option value={id} >{name}</option>
+                    })}
                 </select>
                 <div className='mt-5'>
                   <input type="file" id="file" name="file" accept="image/*" onChange={handleChange} />

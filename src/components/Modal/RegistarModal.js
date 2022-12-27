@@ -27,6 +27,7 @@ const RegistarModal = ({setDone, open ,setOpen,number,location}) => {
   const [city, setCity] = useState([]);
   const [cityId, setCityId] = useState("");
   const [pincode, setpincode] = useState("");
+  
   useEffect(() => {
     const fetching=async()=>{
       const {data} = await axios.get(`${BaseUrl}/get-states`)

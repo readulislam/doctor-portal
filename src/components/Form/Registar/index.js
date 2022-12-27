@@ -7,10 +7,10 @@ import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { BaseUrl, PatientRegister } from "../../../APi/api";
+import { BaseUrl, ListHospitals, PatientRegister } from "../../../APi/api";
 import useFirebaseAuth from "../../../hooks/useFirebaseAuth";
 import { authActions } from '../../../Store/Auth-Slice';
-import { genderValue, location, martial, title } from "../../../Utils/mockData";
+import { genderValue,  martial, title } from "../../../Utils/mockData";
 import OtpVerifyModal from "../../Modal/OtpVerifyModal";
 import { PatientRegisterSchema } from "../Schema";
 import { data } from "./const";
@@ -32,6 +32,16 @@ const Registar = () => {
   const [openOtp, setOpenOtp] = useState(false);
   const [OTPresult, setOTPResult] = useState('')
   const { setupRecaptcha } = useFirebaseAuth();
+  const [hospitalList, setHospitalList] = useState([]);
+  useEffect(() => {
+    const fetching=async()=>{
+      const {data}= await ListHospitals()
+      setHospitalList(data)
+   console.log("hospital",data);
+    }
+    fetching()
+   
+  }, [])
   
   const handleSubmit = async (values) => {
     // console.log(values);
@@ -239,7 +249,9 @@ const Registar = () => {
                         }}
                       >
                         <option selected>Location</option>
-                       {location.map((values)=>(<option value={values} >{values}</option>))}
+                        {hospitalList.map(({id,name,address})=>{
+                          <option value={id} >{name} , {address}</option>
+                        })}
                       </select>
                       <select
                         id="underline_select"

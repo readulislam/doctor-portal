@@ -1,7 +1,30 @@
 import { Button, Label, Modal, Textarea } from 'flowbite-react';
-import React from 'react'
+import React, { useState } from 'react';
+import storage from '../../Utils/FireBase';
+
 
 const UploadPrescription = ({open,setOpen}) => {
+  const [image, setImage] = useState('');
+  const [Url, setUrl] = useState('');
+  
+  const upload = () => {
+    if (image === null)
+      return;
+    setUrl("Getting Download Link...")
+    console.log(Url);
+    
+    // Sending File to Firebase Storage
+    storage.ref(`/images/${image.name}`).put(image)
+      .on("state_changed", alert("success"), alert, () => {
+  
+        // Getting Download Link
+        storage.ref("images").child(image.name).getDownloadURL()
+          .then((url) => {
+            setUrl(url);
+          })
+      });
+      console.log(Url);
+  }
   return (
     <React.Fragment>
     <Modal
@@ -14,7 +37,12 @@ const UploadPrescription = ({open,setOpen}) => {
      <Modal.Header className="">Upload Prescription </Modal.Header>
         
         <Modal.Body>
-        <input type="file" id="file" name="file" accept="application/*"  />
+        <input type="file" 
+        onChange={(e) => { setImage(e.target.files[0]) }} />
+        <br/>
+        <button onClick={upload}>Upload</button>
+        <br />
+        <p><a href={Url}>{Url}</a></p>
           <div id="textarea">
             <div className="mb-2 block">
                 <Label

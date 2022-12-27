@@ -231,7 +231,7 @@ export const slots = [
   ]
   export const location=[{id:1,
     value:'mSmart Hospital,jaipur'},
-    'mSmart Hospital,Delhi','mSmart Hospital,Ajmer','mSmart Hospital,Gurugram']
+    'mSmart Hospital,Delhi','mSmart Hospital,Delhi','mSmart Hospital,Gurugram']
   export const genderValue=['male','female','other']
   export const title=['Baby','Baby Of','Mr','Mrs']
   export const martial=["widowed","single","married","divorced","seperated"]
@@ -2560,4 +2560,152 @@ export const slots = [
         "stateId":37,
         "name":"Titagarh"
       },
+    ]
+    export const hospital=[
+      {
+        "name":"mSmart Hospital",
+        "address":"Gurugram"
+      },   
+      {
+        "name":"mSmart Hospital",
+        "address":"Delhi"
+      },
+      {
+        "name":"mSmart Hospital",
+        "address":"Ajmer"
+      },
+      {
+        "name":"mSmart Hospital",
+        "address":"jaipur"
+      }
+    ]
+    export const department=[
+      {
+        "name":"Audiologist",
+        "description":"As the name suggests, an audiologist treats and evaluates anything and everything to do with audio or hearing abilities of a person. Since hearing is a very important sense, it requires an expert to treat the same"
+      },
+      {
+        "name":"Dentist",
+        "description":"According to American Dental Association, a dentist is a doctor of oral health. Oral health includes teeth, tongue and gums. A dentist is known to diagnose and treat issues of these three areas."
+      },
+      {
+        "name":"ENT specialist",
+        "description":"ENT stands for ear, nose and throat. A specialist who treats and diagnoses the issues and troubles of these three areas. Also known as an otolaryngologist, an ENT specialist is a physician to trained to treat the disorders of ENT."
+      },
+      {
+        "name":"Gynaecologist",
+        "description":"A gynaecologist is trained to treat the female reproductive system which includes the vagina, uterus, ovaries and breasts."
+      },
+      {
+        "name":"Orthopaedic surgeon",
+        "description":"An orthopaedic surgeon is known to deal with issues relating to the musculoskeletal system. This means muscles and bones. Any fracture, pain or abnormality of these areas need to be consulted about with an orthopaedic surgeon."
+      },
+      {
+        "name":"Paediatrician",
+        "description":"Paediatricians are doctors who treat children. Since a child’s body functions in a different manner from ours, due to many factors like age and growing stages, their illness and health issues are different from an adult. "
+      },
+      {
+        "name":"Psychiatrists",
+        "description":"Mental health is a vast field which requires our uttermost attention. Therefore, to treat what goes inside a human brain is difficult, due to the uncertainty of it. A psychiatrist helps treat and diagnose issues of mental health. "
+      },
+      {
+        "name":"Veterinarian",
+        "description":"After the uniqueness of mental health, comes the issue of our furr buddies: animals. Treatment and diagnosis of issues in animals is done by a veterinarian. This includes mental and physical both as well."
+      },
+      {
+        "name":"Radiologist",
+        "description":"A radiologist for diagnosing diseases and internal & external injuries with the help of imaging techniques like x-rays, CT scan, MRI and ultrasound etc. They are the first step towards the diagnosis of any sort, which cannot be done without a machine."
+      },
+      {
+        "name":"Nephrology",
+        "description":""
+      },
+      {
+        "name":"Oncology",
+        "description":""
+      },
+      {
+        "name":"Cardiology",
+        "description":""
+      },
+      {
+        "name":"Neurology",
+        "description":""
+      },
+      {
+        "name":"Urology",
+        "description":""
+      },
+      {
+        "name":"Gastroenterology",
+        "description":""
+      },
+      {
+        "name":"Radiaton Oncology",
+        "description":""
+      },
+      {
+        "name":"CTVS",
+        "description":""
+      },
+      {
+        "name":"Neuro Surgery",
+        "description":""
+      },
+      {
+        "name":"Orthopedics",
+        "description":""
+      },
+      {
+        "name":"Obstetrics & Gynaecology",
+        "description":""
+      },
+      {
+        "name":"Kidney Transplant",
+        "description":""
+      },
+      {
+        "name":"Plastic Surgery",
+        "description":""
+      },
+      {
+        "name":"Internal Medicine",
+        "description":""
+      },
+      {
+        "name":"Critical Care",
+        "description":""
+      },
+      {
+        "name":"Endocrinology",
+        "description":""
+      },
+      {
+        "name":"Emergency Medicine",
+        "description":""
+      },
+      {
+        "name":"Dermatology",
+        "description":""
+      },
+      {
+        "name":"Psychiatry",
+        "description":""
+      },
+      {
+        "name":"Rheumatology And Clinical Immunology",
+        "description":""
+      },
+      {
+        "name":"Opthalmollogy",
+        "description":""
+      },
+      {
+        "name":"Pediatrics",
+        "description":""
+      },
+      {
+        "name":"Respiratory Medicine",
+        "description":""
+      }
     ]

@@ -5,7 +5,7 @@ const END_POINTS = {
 ADD_DEPARTMENT: () =>'/add-department',
 GET_DEPARTMENTS: () =>'/get-departments',
 ADD_HOSPITAL:() =>'/add-hospital',
-GET_HOSPITALS:() =>'/add-hospitals',
+GET_HOSPITALS:() =>'/get-hospitals',
 ADD_DOCTOR:() =>'/add-doctor',
 GET_DOCTORS:() =>'/get-doctors',
 ADD_PATIENT:() =>'/patient-registration',
@@ -32,6 +32,7 @@ get all departments
  */
 export const ListDepartments = async()=>{
     const {data} = await axios.get(URL(END_POINTS.GET_DEPARTMENTS()))
+    console.log("api",data);
     return  data
 }
 export const GetDoctorById = async(phone)=>{

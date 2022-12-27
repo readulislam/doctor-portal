@@ -64,8 +64,9 @@ fetching()
                 {d?.time}
             </Table.Cell>
             <Table.Cell>
-                <Button  onClick={()=>setOpenPatientPrescription(true)} >show</Button>
-             {/* <Link to="#" className=' text-cyan-800 border-b-2 border-b-cyan-800 ' >View</Link> */}
+                {/* <Button  onClick={()=>setOpenPatientPrescription(true)} >show</Button> */}
+                {/* <Button  onClick={()=>setOpen(true)} >Upload</Button> */}
+             <Link to="#" className=' text-cyan-800 border-b-2 border-b-cyan-800 ' >View</Link>
             </Table.Cell>
         </Table.Row>))}
     </Table.Body>
