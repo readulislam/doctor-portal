@@ -25,6 +25,7 @@ const DoctorLogin = () => {
     const handleSubmit=async(values)=>{
    
     const data = await dispatch(getDoctor(number));
+    console.log(data)
     
     
     
@@ -44,7 +45,7 @@ const DoctorLogin = () => {
         }
       }
       verify()
-    },[doctorId, number])
+    },[doctorId])
     const handleOtpSubmit = () => {};
   return (    
     <React.Fragment>

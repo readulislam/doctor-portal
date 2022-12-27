@@ -47,11 +47,13 @@ const Menu = () => {
         {userInfo.contact}
         </span>
       </Dropdown.Header>
-      <Dropdown.Item >
+    
         <Link to='/patientView'>
+        <Dropdown.Item >
           Dashboard
+          </Dropdown.Item>
         </Link>
-      </Dropdown.Item>
+    
       <Dropdown.Item>
         Settings
       </Dropdown.Item>

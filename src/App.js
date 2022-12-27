@@ -1,7 +1,5 @@
-import { useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router';
 import AddDoctor from './components/Admin/AddDoctor/AddDoctor';
-import Auth from './components/Auth/Auth';
 import Dashboard from './components/Dashboard/Dashboard';
 import DoctorView from './components/DoctorView/DoctorView';
 import Login from './components/Form/Login';

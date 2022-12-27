@@ -63,8 +63,10 @@ const Registar = () => {
         martialStatus: martialStatus})
         
         if (values && number) {
+          console.log(number)
           const response = await setupRecaptcha(number,'registration');
           setOTPResult(response);
+          console.log(response)
           if(response){
           setOpenOtp(true)
           }
@@ -286,7 +288,7 @@ const Registar = () => {
                       <Button
                           className="mt-4 px-6 flex justify-end"
                           type="submit"
-                          disabled={isSubmitting}
+                         
                         >
                           Submit
                         </Button>
