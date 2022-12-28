@@ -43,6 +43,7 @@ const RegistarModal = ({setDone, open ,setOpen,number,location}) => {
     }
     cityfetching()
   }, [stateId])
+  console.log('hello lc')
   return (
     <React.Fragment>
         <Modal show={open} position="center" onClose={() => {setOpen(false)}}>

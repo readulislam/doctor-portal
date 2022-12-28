@@ -13,7 +13,6 @@ const OtpVerifyModal = ({
 
   const otpHandler = (Otp) => {
     setOtp(Otp);
-    console.log(otp);
   };
   const handleSubmit = async () => {
     if (!otp && otp === undefined) return;
@@ -21,7 +20,6 @@ const OtpVerifyModal = ({
       const verify = await OTPresult.confirm(otp);
 
       // const { idToken, isNewUser } = verify.UserCredentialImpl._tokenResponse;
-      // console.log(idToken, isNewUser);
       // if (!idToken) {
       //   alert("something went wrong");
       //   return;
@@ -30,14 +28,13 @@ const OtpVerifyModal = ({
       //   alert("number already in exits. please login with number");
       //   return;
       // }
+      setOpen(false)
       if (!verify) {
         return;
       }
       handleDispatch();
-      console.log("done");
     } catch (error) {
       alert("OTP Invalid");
-      console.log(error);
     }
   };
 

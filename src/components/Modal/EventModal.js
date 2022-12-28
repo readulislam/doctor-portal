@@ -28,12 +28,10 @@ const AvailabilityModal = ({setOpen,open,startTime,setStartTime,endTime,setEndTi
     setEndDate(end);
   };
   const handleSubmit=()=>{
-    console.log(startTime,endTime);
     setEvent(event=>{return[...event,{title:(startTime+' - '+endTime),date:eventDate}]});
     setOpen(false);
     setInput(input=>{return[{startDate:<input type="time" min="00:00" max="23:59" onChange={handleStartTime}/>,
   endDate:<input type="time" min="00:00" max="23:59" onChange={handleEndTime}/>}]})
-    console.log(event);
   }
   return (
     <React.Fragment>

@@ -21,13 +21,12 @@ const PatientLogin = () => {
   const { setupRecaptcha } = useFirebaseAuth();
   const handleDispatch=()=>{
 
-    
+     
     navigate('/dashboard');
   }
     const handleSubmit=async(values)=>{
-      console.log('fonr')
       await dispatch(patientLoginByPhone(number))
-      // console.log(values);
+     
       // if (values && number) {
       //   
       // }

@@ -14,7 +14,6 @@ const Filtering = ({handleSearch}) => {
     const fetching=async()=>{
       const {data}= await ListHospitals()
       setHospitalList(data)
-   console.log("hospital",data);
     }
     fetching()
    
@@ -23,13 +22,11 @@ const Filtering = ({handleSearch}) => {
     const fetching=async()=>{
       const data= await ListDepartments()
       setDepartmentList(data)
-      console.log("sp", data);
     }
     fetching()
     
   }, [])
   const handleSubmit=()=>{
-    console.log("hi");
     handleSearch(searchDepartment,searchHospital,name)
   }
   return (
