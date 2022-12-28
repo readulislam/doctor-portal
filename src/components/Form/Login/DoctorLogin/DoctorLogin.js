@@ -21,11 +21,9 @@ const DoctorLogin = () => {
   const handleDispatch=()=>{
    naviagte('/doctorView')
   }
- console.log(doctorId)
     const handleSubmit=async(values)=>{
    
     const data = await dispatch(getDoctor(number));
-    console.log(data)
     
     
     
@@ -33,7 +31,6 @@ const DoctorLogin = () => {
     
     useEffect(()=>{
       const verify = async()=>{
-        console.log(doctorId)
         if ( doctorId && number) {
           const response = await setupRecaptcha(number,'doctorLogin');
           setOTPResult(response);
@@ -67,6 +64,7 @@ const DoctorLogin = () => {
                     DOCTOR LOGIN
                   </h1>
                   <PhoneInput
+                  defaultCountry="INDIA"
                     className="border-none"
                     placeholder="Enter phone number"
                     value={number}

@@ -32,11 +32,11 @@ get all departments
  */
 export const ListDepartments = async()=>{
     const {data} = await axios.get(URL(END_POINTS.GET_DEPARTMENTS()))
-    console.log("api",data);
+   
     return  data
 }
 export const GetDoctorById = async(phone)=>{
-    console.log(phone)
+   
     const {data} = await axios.get(URL(END_POINTS.GET_DOCTOR_BY_PHONE()),{
         params: { contactNo: phone } 
     })

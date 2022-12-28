@@ -20,7 +20,7 @@ const AddDoctor = () => {
       const fetching=async()=>{
         const {data}= await ListHospitals()
         setHospitalList(data)
-     console.log("hospital",data);
+    
       }
       fetching()
      
@@ -29,7 +29,6 @@ const AddDoctor = () => {
       const fetching=async()=>{
         const data= await ListDepartments()
         setDepartmentList(data)
-        console.log("sp", data);
       }
       fetching()
       
@@ -41,7 +40,6 @@ const AddDoctor = () => {
    const navigate = useNavigate();
   // "https://api.imgbb.com/1/upload?expiration=600&key=YOUR_CLIENT_API_KEY" --form "image=R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
   const handleSubmit = async (values) => {
-    console.log(values, number, hospitalId, departmentId);
   
 
    
@@ -60,7 +58,6 @@ const AddDoctor = () => {
       .then((res) => res.json())
       .then(async(result) => {
         if (result) {
-       console.log()
           const doctorInfo = {
             name: values.name,
             education: values.education,
@@ -72,11 +69,9 @@ const AddDoctor = () => {
           };
        
         const data = await RegistrationDoctor(doctorInfo)
-    console.log(data)
         }
       });
   };
-  console.log(apiData);
   return (
     <React.Fragment>
       <Formik
@@ -109,6 +104,7 @@ const AddDoctor = () => {
                     <label>
                       <div className="mt-4">
                         <PhoneInput
+                        defaultCountry="INDIA"
                           className="border-none"
                           placeholder="Enter phone number"
                           value={number}

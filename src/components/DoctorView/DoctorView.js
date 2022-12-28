@@ -10,7 +10,6 @@ const DoctorView = () => {
   const {doctorId, doctorInfo}=useSelector(state=>state.Doctor)
   const data =[]
   
-  console.log(doctorId, doctorInfo)
   return (
     <div className='flex '>
       <div className="w-fit ">

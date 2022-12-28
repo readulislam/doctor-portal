@@ -37,14 +37,12 @@ const Registar = () => {
     const fetching=async()=>{
       const {data}= await ListHospitals()
       setHospitalList(data)
-   console.log("hospital",data);
     }
     fetching()
    
   }, [])
   
   const handleSubmit = async (values) => {
-    // console.log(values);
     setApiData({title: values.title,
         firstName: values.firstName,
         middleName: values.middleName,
@@ -63,15 +61,12 @@ const Registar = () => {
         martialStatus: martialStatus})
         
         if (values && number) {
-          console.log(number)
           const response = await setupRecaptcha(number,'registration');
           setOTPResult(response);
-          console.log(response)
           if(response){
           setOpenOtp(true)
           }
           }
-  // console.log(apiData);
   };
   useEffect(() => {
     const fetching=async()=>{
@@ -154,6 +149,7 @@ const Registar = () => {
 
                         <div className="mt-4">
                           <PhoneInput
+                          defaultCountry="INDIA"
                             className="border-none"
                             placeholder="Enter phone number"
                             value={number}

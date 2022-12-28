@@ -1,11 +1,13 @@
 import axios from "axios";
 import { Button, Card, Pagination } from "flowbite-react";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { BaseUrl, ListDepartments, ListStates } from "../../APi/api";
 import Filtering from "../Filtering/Filtering";
 import AppointmentRegistar from "../Form/AppoinmentRegistar/AppointmentRegistar";
 
 const CardView = () => {
+  const {userId} = useSelector(state => state.Auth)
   const [open, setOpen] = useState(false);
   const [doctors, setDoctors] = useState([]);
   const [page, setPage] = useState(1);
@@ -14,24 +16,18 @@ const CardView = () => {
   const [modalLocation, setModalLocation] = useState("");
   const [doctorId, setDoctorId] = useState("");
   const [doctorData, setDoctorData] = useState({});
-console.log(doctorId)
   useEffect(()=>{
     const fetching = async()=>{
       const {data} = await axios.get(`${BaseUrl}/get-doctors`)
-      console.log(data)
       const da =await ListStates()
-      console.log(da)
       setDoctors(data)
       const d =await ListDepartments()
-console.log(d,'jj')
     }
     fetching()
   },[])
   const handleSearch=async(searchDepartment,searchHospital,name)=>{
     if (searchDepartment!==null) {
        const {data} = await axios.get(`${BaseUrl}/get-doctorBySearch?departmentId=${searchDepartment}&hospitalId=${searchHospital}&name=${name}`)
-       console.log("hi",data)
-      console.log("hi",doctors);
     }
   }
  

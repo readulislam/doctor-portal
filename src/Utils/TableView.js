@@ -25,7 +25,6 @@ const fetching = async()=>{
         const {data} = await axios.get(`${BaseUrl}/patientAppointmentList`,{
             params:{patientId:userId}
         })
-        console.log(data)
         setPatientAppointment(data)
      }
 }

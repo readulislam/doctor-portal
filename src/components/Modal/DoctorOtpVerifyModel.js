@@ -13,7 +13,6 @@ const DoctorOtpVerifyModel = ({
 
   const otpHandler = (Otp) => {
     setOtp(Otp);
-    console.log(otp);
   };
   const handleSubmit = async () => {
     if (!otp && otp === undefined) return;
@@ -21,7 +20,6 @@ const DoctorOtpVerifyModel = ({
       const verify = await OTPresult.confirm(otp);
 
       // const { idToken, isNewUser } = verify.UserCredentialImpl._tokenResponse;
-      // console.log(idToken, isNewUser);
       // if (!idToken) {
       //   alert("something went wrong");
       //   return;
@@ -34,10 +32,8 @@ const DoctorOtpVerifyModel = ({
         return;
       }
       handleDispatch()
-      console.log("done");
     } catch (error) {
       alert("OTP Invalid");
-      console.log(error);
     }
   };
 
