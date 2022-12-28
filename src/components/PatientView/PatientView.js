@@ -15,7 +15,7 @@ const PatientView = () => {
       <Menu/>
       <div className='flex '>
     <div className="w-fit ">
-      <Sidebar aria-label="Default sidebar example" className=' mt-20'>
+      <Sidebar aria-label="Default sidebar example" className=' mt-12'>
         <Sidebar.Items>
           <Sidebar.ItemGroup>
             <Sidebar.Item
@@ -31,7 +31,7 @@ const PatientView = () => {
         </Sidebar.Items>
       </Sidebar>
     </div>
-    <div className='w-full ml-7 mt-20'>
+    <div className='w-full ml-7 mt-12'>
       <div className="max-w-xl">
         <Card
           horizontal={true}

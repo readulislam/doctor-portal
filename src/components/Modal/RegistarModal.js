@@ -37,11 +37,11 @@ const RegistarModal = ({setDone, open ,setOpen,number,location}) => {
     
   }, [])
   useEffect(() => {
-    const cityfetching=async()=>{
+    const cityFetching=async()=>{
       const {data} = await axios.get(`${BaseUrl}/get-citiesByStateId?stateId=${stateId}`)
       setCity(data)
     }
-    cityfetching()
+    cityFetching()
   }, [stateId])
   console.log('hello lc')
   return (

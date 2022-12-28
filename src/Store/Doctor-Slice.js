@@ -7,16 +7,19 @@ const initialState = {
   doctorInfo: null,
   status: "idle",
   error: "",
-  appointments: []
+  appointments: [],
+  appointmentCount:''
 };
 
 export const getDoctor = createAsyncThunk("get/doctor", async (phone) => {
   const response = await GetDoctorById(phone);
+  console.log(response)
 
   return response;
 });
-export const getAllAppointment = createAsyncThunk("get/allAppointment", async (doctorId) => {
-  const response = await DoctorAppointments(doctorId);
+export const getAllAppointment = createAsyncThunk("get/allAppointment", async (info) => {
+  const response = await DoctorAppointments(info);
+  console.log(response,'rrr')
 
   return response;
 });
@@ -47,7 +50,8 @@ const DoctorSlice = createSlice({
       })
       .addCase(getAllAppointment.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.appointments = action.payload;
+        state.appointments = action.payload.rows;
+        state.appointmentCount = action.payload.count
         state.error = ""
       })
       .addCase(getAllAppointment.rejected, (state, action) => {

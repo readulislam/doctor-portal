@@ -65,6 +65,7 @@ const PatientLogin = () => {
                   PATIENT LOGIN
                 </h1>
                 <PhoneInput
+                defaultCountry='IN'
                     className="border-none"
                     placeholder="Enter phone number"
                     value={number}

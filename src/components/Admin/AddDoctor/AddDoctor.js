@@ -104,7 +104,7 @@ const AddDoctor = () => {
                     <label>
                       <div className="mt-4">
                         <PhoneInput
-                        defaultCountry="INDIA"
+                        defaultCountry="IN"
                           className="border-none"
                           placeholder="Enter phone number"
                           value={number}
