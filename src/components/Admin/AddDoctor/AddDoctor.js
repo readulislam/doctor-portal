@@ -4,7 +4,7 @@ import { ErrorMessage, Field, Formik } from 'formik';
 import React, { useEffect, useState } from 'react'
 import PhoneInput from 'react-phone-number-input';
 import { useNavigate } from 'react-router';
-import { ListDepartments, ListHospitals, RegisterDoctor, RegistrationDoctor } from '../../../APi/api';
+import { ListDepartments, ListHospitals,  RegistrationDoctor } from '../../../APi/api';
 import { DoctorRegistarSchema } from '../../Form/Schema';
 import { data } from './const';
 // 79c2ec0f6d6859d731f98a37a94e5c70

@@ -1,7 +1,6 @@
 import { Button, Label } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import {  ListDepartments, ListHospitals } from "../../APi/api";
-import { department } from "../../Utils/mockData";
 
 const Filtering = ({handleSearch}) => {
   

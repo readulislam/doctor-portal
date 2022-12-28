@@ -1,10 +1,11 @@
 import axios from 'axios'
 import { Button, Table } from 'flowbite-react'
+import { TableCell } from 'flowbite-react/lib/esm/components/Table/TableCell'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { BaseUrl } from '../APi/api'
-import ShowPrexcription from '../components/Modal/ShowPrexcription'
+import TestReport from '../components/Modal/TestReport'
 import UploadPrescription from '../components/Modal/UploadPrescription'
 import { getAllAppointment } from '../Store/Doctor-Slice'
 
@@ -13,7 +14,7 @@ const TableView = ({heading,data}) => {
     const [open, setOpen] = useState(false);
     const {doctorId, doctorInfo,appointments }=useSelector(state=>state.Doctor)
     const {userId, userInfo }=useSelector(state=>state.Auth)
-    const [openPatientPrescription, setOpenPatientPrescription] = useState(false);
+    const [openReport, setOpenReport] = useState(false);
     const dispatch = useDispatch()
     useEffect(()=>{
 const fetching = async()=>{
@@ -52,6 +53,9 @@ fetching()
                 {/* {d?.prescription} */}
                 <Button  onClick={()=>setOpen(true)} >Upload</Button>
             </Table.Cell>
+            <TableCell>
+                 <Button  onClick={()=>setOpenReport(true)} >Upload</Button>
+            </TableCell>
         </Table.Row>))}
         {(patientAppointment && userId) && patientAppointment.map((d)=>(<Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
             <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
@@ -64,10 +68,12 @@ fetching()
                 {d?.time}
             </Table.Cell>
             <Table.Cell>
-                {/* <Button  onClick={()=>setOpenPatientPrescription(true)} >show</Button> */}
                 {/* <Button  onClick={()=>setOpen(true)} >Upload</Button> */}
              <Link to="#" className=' text-cyan-800 border-b-2 border-b-cyan-800 ' >View</Link>
             </Table.Cell>
+            <TableCell>
+                 <Button  onClick={()=>setOpenReport(true)} >Upload</Button>
+            </TableCell>
         </Table.Row>))}
     </Table.Body>
    
@@ -75,7 +81,7 @@ fetching()
   </Table>
       {!appointments.length && <h2 className='text-3xl text-black py-10 font-semibold w-full text-center'>You haven't Appointments</h2>}  
       <UploadPrescription open={open} setOpen={setOpen} />
-      <ShowPrexcription setOpen={setOpenPatientPrescription} open={openPatientPrescription} />
+      <TestReport setOpen={setOpenReport} open={openReport} />
     </>
 
   
