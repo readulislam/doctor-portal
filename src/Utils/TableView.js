@@ -68,7 +68,7 @@ fetching()
             </Table.Cell>
             <Table.Cell>
                 {/* <Button  onClick={()=>setOpen(true)} >Upload</Button> */}
-             <Link to="#" className=' text-cyan-800 border-b-2 border-b-cyan-800 ' >View</Link>
+             <a href="\#" target="blank" className=' text-cyan-800 border-b-2 border-b-cyan-800 ' >View</a>
             </Table.Cell>
             <TableCell>
                  <Button  onClick={()=>setOpenReport(true)} >Upload</Button>
