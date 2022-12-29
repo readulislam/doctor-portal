@@ -40,11 +40,11 @@ const RegistarModal = ({setDone, open ,setOpen,number}) => {
     
   }, [])
   useEffect(() => {
-    const cityfetching=async()=>{
+    const cityFetching=async()=>{
       const {data} = await axios.get(`${BaseUrl}/get-citiesByStateId?stateId=${stateId}`)
       setCity(data)
     }
-    cityfetching()
+    cityFetching()
   }, [stateId])
   const handleSubmit=(e)=>{
     e.preventDefault()

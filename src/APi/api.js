@@ -49,10 +49,11 @@ export const LoginPatient = async(phone)=>{
     })
     return  data
 }
-export const DoctorAppointments = async(doctorId)=>{
-   
+export const DoctorAppointments = async(info)=>{
+    console.log(info)
     const {data} = await axios.get(URL(END_POINTS.GET_DOCTOR_APPOINTMENTS()),{
-        params: { doctorId } 
+        
+        params: { doctorId:info.doctorId ,offset:info.page, limit:5} 
     })
     return  data
 }

@@ -11,6 +11,7 @@ const CardView = () => {
   const [open, setOpen] = useState(false);
   const [doctors, setDoctors] = useState([]);
   const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
   const [modalName, setModalName] = useState("");
   const [modalSpeciality, setModalSpeciality] = useState("");
   const [modalLocation, setModalLocation] = useState("");
@@ -18,13 +19,23 @@ const CardView = () => {
   const [doctorData, setDoctorData] = useState({});
   useEffect(()=>{
     const fetching = async()=>{
-      const {data} = await axios.get(`${BaseUrl}/get-doctors`)
+      const {data} = await axios.get(`${BaseUrl}/get-doctors`,{
+        
+        params:{
+          limit:8,
+        offset:page
+        }
+      })
+      console.log(data)
       const da =await ListStates()
-      setDoctors(data)
+      setDoctors(data.rows)
+      setTotalPage(Math.ceil(data.count / 8) )
+      console.log(Math.ceil(data.count / 8),'page')
       const d =await ListDepartments()
     }
     fetching()
-  },[])
+  },[page])
+  console.log(page)
   const handleSearch=async(searchDepartment,searchHospital,name)=>{
     if (searchDepartment!==null) {
        const {data} = await axios.get(`${BaseUrl}/get-doctorBySearch?departmentId=${searchDepartment}&hospitalId=${searchHospital}&name=${name}`)
@@ -77,7 +88,7 @@ const CardView = () => {
       
       onPageChange={(e)=> setPage(e)}
       showIcons={true}
-      totalPages={100}
+      totalPages={totalPage}
     />
      </div>
     </>
