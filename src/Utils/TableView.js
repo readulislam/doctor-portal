@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { BaseUrl } from "../APi/api";
-import ShowPrexcription from "../components/Modal/ShowPrexcription";
+import TestReport from "../components/Modal/TestReport";
 import UploadPrescription from "../components/Modal/UploadPrescription";
 import { getAllAppointment } from "../Store/Doctor-Slice";
 
@@ -15,7 +15,7 @@ const TableView = ({ heading, data }) => {
     (state) => state.Doctor
   );
   const { userId, userInfo } = useSelector((state) => state.Auth);
-  const [openPatientPrescription, setOpenPatientPrescription] = useState(false);
+  const [openTestReport, setOpenTestReport] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
   const [doctorPage,setDoctorPage] = useState(1)
@@ -75,7 +75,7 @@ const TableView = ({ heading, data }) => {
                 <Table.Cell>{d?.date}</Table.Cell>
                 <Table.Cell>{d?.time}</Table.Cell>
                 <Table.Cell>
-                  {/* <Button  onClick={()=>setOpenPatientPrescription(true)} >show</Button> */}
+                  {/* <Button  onClick={()=>setOpenTestReport(true)} >show</Button> */}
                   {/* <Button  onClick={()=>setOpen(true)} >Upload</Button> */}
                   <Link
                     to="#"
@@ -108,10 +108,10 @@ const TableView = ({ heading, data }) => {
       }
       {/* {!appointments.length && <h2 className='text-3xl text-black py-10 font-semibold w-full text-center'>You haven't Appointments</h2>}   */}
       <UploadPrescription open={open} setOpen={setOpen} />
-      <ShowPrexcription
-        setOpen={setOpenPatientPrescription}
-        open={openPatientPrescription}
-      />
+      <TestReport
+      setOpen={setOpenTestReport}
+        open={openTestReport}
+        />
     </>
   );
 };

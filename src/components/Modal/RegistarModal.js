@@ -2,32 +2,35 @@ import { Button, Modal, TextInput } from 'flowbite-react'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import React, { useEffect, useState } from 'react'
-import { genderValue, title } from '../../Utils/mockData';
+import { genderValue, martial, title } from '../../Utils/mockData';
 import axios from 'axios';
-import { BaseUrl } from '../../APi/api';
+import { BaseUrl, ListHospitals } from '../../APi/api';
+import { input } from 'formik';
 
-const RegistarModal = ({setDone, open ,setOpen,number,location}) => {
+const RegistarModal = ({setDone, open ,setOpen,number}) => {
   const [personTitle, setPersonTitle] = useState("");
-  const [data, setData] = useState({title:"",firstName:"",middleName:"",lastName:"",contact: "",
-  dateOfBirth: "",
-  address: "",
-  location:"",
-  gender:"",
-  country:"",
-  state:"",
-  stateId:"",
-  cityId:"",
-  city:"",
-  pinCode:"",
-  martialStatus:"",
-});
-  const [gender, setGender] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [middleName, setMiddleName] = useState("");
+  const [address, setAddress] = useState("");
+  const [pincode, setPincode] = useState();
   const [stateId, setStateId] = useState("");
-  const [state, setState] = useState([]);
-  const [city, setCity] = useState([]);
   const [cityId, setCityId] = useState("");
-  const [pincode, setpincode] = useState("");
-  
+  const [state, setState] = useState([]);
+  const [gender, setGender] = useState("");
+  const [city, setCity] = useState([]);
+  const [date, setDate] = useState("");
+  const [hospitalName, setHospitalName] = useState("");
+  const [martialStatus, setMartialStatus] = useState("");
+  const [hospitalList, setHospitalList] = useState([]);
+  useEffect(() => {
+    const fetching=async()=>{
+      const {data}= await ListHospitals()
+      setHospitalList(data)
+    }
+    fetching()
+   
+  }, [])
   useEffect(() => {
     const fetching=async()=>{
       const {data} = await axios.get(`${BaseUrl}/get-states`)
@@ -43,94 +46,136 @@ const RegistarModal = ({setDone, open ,setOpen,number,location}) => {
     }
     cityFetching()
   }, [stateId])
-  console.log('hello lc')
+  const handleSubmit=(e)=>{
+    e.preventDefault()
+    console.log(firstName,middleName,lastName,address,date,gender,hospitalName,stateId,cityId,pincode,martialStatus);
+  }
   return (
     <React.Fragment>
         <Modal show={open} position="center" onClose={() => {setOpen(false)}}>
-        <form>
+        <form  >
           <Modal.Header className=''>Register now</Modal.Header>
           <Modal.Body>
             <div className="space-y-6 p-6">
                 <div className="grid grid-cols-2 gap-4 ">
-                    <select
+                  <select
                     id="underline_select"
-                    className=" py-2.5  w-auto text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
-                    >   
-                        <option selected>Title</option>
-                        {title.map((values)=>(<option value={values} >{values}</option>))}
-                    </select>    
-                <input
-                  id="email1"
-                  className="mt-4 border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
-                  type="text"
-                  placeholder="FirstName"
-                />
-                <input
-                  id="email1"
-                  className="mt-4 border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
-                  type="text"
-                  placeholder="Lastname"
-                />
-                <select
+                    className=" mt-5 w-full text-gray-500 grid-cols-1 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+                    onChange={(e) => {
+                      setPersonTitle(e.target.value);
+                    }}
+                  >
+                    <option selected>Title</option>
+                    {title.map((values)=>(<option value={values} >{values}</option>))}
+                  </select> 
+                  <label>
+                    <input
+                      type="text"
+                      className="mt-4  border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+                      placeholder="ENTER_YOUR_NAME"
+                      name="firstName"
+                      onChange={(e)=>{setFirstName(e.target.value)}}
+                    />
+                  </label>
+                  <label>
+                    <input
+                      type="text"
+                      className="mt-4  border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+                      placeholder="middleName"
+                      name="middleName"
+                      onChange={(e)=>{setMiddleName(e.target.value)}}
+                    />
+                  </label>
+                  <label>
+                    <input
+                      type="text"
+                      className="mt-4  border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+                      placeholder="lastName"
+                      name="lastName"
+                      onChange={(e)=>{setLastName(e.target.value)}}
+                    />
+                  </label>
+                  <TextInput id="email1" className="mt-4 w-full border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer" 
+                      type="date" required={true} onChange={(e)=>{setDate(e.target.value);}} />
+                  <label>
+                    <input
+                      type="text"
+                      className="mt-4 w-full border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+                      placeholder="*address"
+                      name="address"
+                      onChange={(e)=>{setAddress(e.target.value)}}
+                    />
+                  </label>
+                  <select
                     id="underline_select"
-                    className=" py-2.5  w-auto text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
-                    >   
-                        <option selected>Gender</option>
-                        {genderValue.map((values)=>(<option value={values} >{values}</option>))}
-                    </select>    
-                <input
-                  id="email1"
-                  type="text"
-                  className="mt-4 border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
-                  disabled
-                  value={location}
-                />
-                <input
-                id='email2'
-                type="text"
-                className="mt-4 border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
-                placeholder='Address line 1'
-                />
-                <input
-                id='email2'
-                type="text"
-                className="mt-4 border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
-                placeholder='Address line 2'
-                />
-                <DatePicker  className="mt-4 w-full border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer" 
-                 placeholderText='Date of birth' required={true} />
-                <select
-              id="underline_select"
-              className=" py-2.5  w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
-            >
-              <option selected>India</option>
-            </select>
-            <select
-              id="underline_select"
-              className=" py-2.5  w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
-              onChange={(e) => {
-                setStateId(e.target.value);
-              }}
-            >
-              {state.map (({id,name})=>(<option id={id} value={id} >{name}</option>))}
-            </select>
-            <select
-              id="underline_select"
-              className=" py-2.5  w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
-              onChange={(e) => {
-                setCityId(e.target.value)
-              }}
-            >
-              {city.map (({id,name})=>(<option id={id} value={id} >{name}</option>))}
-            </select>
-            <label>
-                <input
-                  type="text"
-                  className="mt-4 border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
-                  placeholder='*pincode'
-                  name="pincode"
-                />
-              </label>
+                    className=" py-2.5 mt-4 w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+                    onChange={(e) => {
+                      setGender(e.target.value);
+                    }}
+                  >
+                    <option selected>Gender</option>
+                    {genderValue.map((values)=>(<option value={values} >{values}</option>))}
+                  </select>
+                  <select
+                    id="underline_select"
+                    className=" py-2.5 mt-4 w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+                    onChange={(e) => {
+                      setHospitalName(e.target.value)
+                    }}
+                  >
+                    <option selected>Location</option>
+                    {hospitalList.map(({id,name,address})=>{
+                      return(<option value={id} >{name} , {address}</option>)
+                    })}
+                  </select>
+                  <select
+                    id="underline_select"
+                    className=" py-2.5 mt-4 w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+                    
+                  >
+                    <option selected>India</option>
+                  </select>
+                  <select
+                      id="underline_select"
+                      className=" py-2.5 mt-4 w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+                      onChange={(e) => {
+                        setStateId(e.target.value);
+                        
+                      }}
+                    >
+                      <option selected> State</option>
+                      {state.map (({id,name})=>(<option id={id} value={id} >{name}</option>))}
+                  </select>
+                  <select
+                    id="underline_select"
+                    className=" py-2.5  mt-4 w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+                    onChange={(e) => {
+                      setCityId(e.target.value)
+                    }}
+                  >
+                    <option selected>City</option>
+                    {city.map (({id,name})=>(<option id={id} value={id} >{name}</option>))}
+                  </select>
+                  <label>
+                    <input
+                      type="text"
+                      className="mt-4 w-full border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+                      placeholder="*pincode"
+                      name="pincode"
+                      onChange={(e)=>{setPincode(e.target.value)}}
+                    />
+                  </label>
+                  <select
+                        id="underline_select"
+                        className=" py-2.5 mt-4 w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+                        onChange={(e) => {
+                          setMartialStatus(e.target.value)
+                        }}
+                      >
+                        <option selected>Select Martial Status</option>
+                        {martial.map((values)=>(<option value={values} >{values}</option>
+                        ))}
+                      </select>
               </div>
             </div>
           </Modal.Body>
@@ -142,7 +187,7 @@ const RegistarModal = ({setDone, open ,setOpen,number,location}) => {
               type="submit"
               className="px-2 "
               gradientDuoTone="cyanToBlue"
-              onClick={()=>{setDone(true);setOpen(false)}}
+              onClick={handleSubmit}
             >
               Submit
             </Button>

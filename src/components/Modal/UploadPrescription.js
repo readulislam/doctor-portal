@@ -25,7 +25,7 @@ const UploadPrescription = ({open,setOpen}) => {
         <br/>
         <button onClick={upload}>Upload</button>
         <br />
-        <p><a href={Url}>{Url}</a></p>
+        
           <div id="textarea">
             <div className="mb-2 block">
                 <Label
