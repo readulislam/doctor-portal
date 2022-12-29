@@ -384,3 +384,37 @@ export const slots = [
         "description":""
       }
     ]
+
+  const doctors=  [
+
+      {
+       
+        "name":"DR. ABHIMANYU YADUV",
+        "contactNo":"+919461096587",
+        "education":"MBBS",
+        "designation":"Director",
+        "departmentId":2,
+        "hospitalId":1,
+        "img": "https://www.practostatic.com/consumer-home/desktop/images/1558283618/sp-dentist@2x.jpg"
+      },
+      {
+      
+        "name":"DR. HIMANSHU YADUV",
+        "contactNo":"+919828044375",
+        "education":"MBBS",
+        "designation":"Director of Gynecology",
+        "departmentId":4,
+        "hospitalId":2,
+        "img": "https://www.practostatic.com/consumer-home/desktop/images/1558283618/sp-gynecologist@2x.jpg"
+      },
+      {
+      
+        "name":"DR. MANU YADUV",
+        "contactNo":"+919828944375",
+        "education":"MBBS",
+        "designation":"Director of ",
+        "departmentId":4,
+        "hospitalId":2,
+        "img": "https://www.practostatic.com/consumer-home/desktop/images/1558283618/sp-gynecologist@2x.jpg"
+      },
+    ]
