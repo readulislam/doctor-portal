@@ -139,6 +139,29 @@ const Registar = () => {
                           <ErrorMessage name="firstName" />
                         </div>
                       </div>
+                      <div className="flex">
+                        <div className="w-1/2 mr-3 ">
+                          <label>
+                            <Field
+                              type="text"
+                              className="mt-4  border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+                              placeholder="middleName"
+                              name="middleName"
+                            />
+                          </label>
+                        </div>
+                        <div className="w-1/2 ">
+                          <label className="w-full" >
+                            <Field
+                              type="text"
+                              className="mt-4  border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+                              placeholder="lastName"
+                              name="lastName"
+                            />
+                          </label>
+                          <ErrorMessage name="lastName" />
+                        </div>
+                      </div>
                       <label>
 
                         <div className="mt-4">
@@ -171,17 +194,7 @@ const Registar = () => {
                         <option selected>Gender</option>
                         {genderValue.map((values)=>(<option value={values} >{values}</option>))}
                       </select>
-                      <select
-                        id="underline_select"
-                        className=" py-2.5 mt-4 w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
-                        onChange={(e) => {
-                          setStateId(e.target.value);
-                          
-                        }}
-                      >
-                        <option selected> State</option>
-                        {state.map (({id,name})=>(<option id={id} value={id} >{name}</option>))}
-                      </select>
+                     
                       <label>
                         <Field
                           type="text"
@@ -200,29 +213,7 @@ const Registar = () => {
                       
                     </div>
                     <div className="w-1/2">
-                      <div className="flex">
-                        <div className="w-2/5 ">
-                          <label>
-                            <Field
-                              type="text"
-                              className="mt-4  border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
-                              placeholder="middleName"
-                              name="middleName"
-                            />
-                          </label>
-                        </div>
-                        <div className="w-2/5 ml-12">
-                          <label>
-                            <Field
-                              type="text"
-                              className="mt-4  border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
-                              placeholder="lastName"
-                              name="lastName"
-                            />
-                          </label>
-                          <ErrorMessage name="lastName" />
-                        </div>
-                      </div>
+                      
                       {/* <DatePicker
                         className="mt-4 w-full border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
                         name="dob"
@@ -254,6 +245,17 @@ const Registar = () => {
                         }}
                       >
                         <option selected>India</option>
+                      </select>
+                      <select
+                        id="underline_select"
+                        className=" py-2.5 mt-4 w-full text-gray-500 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+                        onChange={(e) => {
+                          setStateId(e.target.value);
+                          
+                        }}
+                      >
+                        <option selected> State</option>
+                        {state.map (({id,name})=>(<option id={id} value={id} >{name}</option>))}
                       </select>
                       <select
                         id="underline_select"

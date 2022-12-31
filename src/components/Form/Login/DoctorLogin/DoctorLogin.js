@@ -22,7 +22,8 @@ const DoctorLogin = () => {
    naviagte('/doctorView')
   }
     const handleSubmit=async(values)=>{
-   
+   console.log(values);
+   console.log(number)
     const data = await dispatch(getDoctor(number));
     
     
@@ -32,8 +33,11 @@ const DoctorLogin = () => {
     useEffect(()=>{
       const verify = async()=>{
         if ( doctorId && number) {
+          
+
           const response = await setupRecaptcha(number,'doctorLogin');
           setOTPResult(response);
+          console.log(response);
           if(response){
             setOpenOtp(true)
           }else{

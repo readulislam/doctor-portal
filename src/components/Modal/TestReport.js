@@ -23,7 +23,7 @@ const TestReport = ({open,setOpen}) => {
           //   appointmentId:'',
           //   patientId:'',
           //   doctorId:'',
-          //   img: result.data.url,
+          //   report: result.data.url,
           // };
        
         }

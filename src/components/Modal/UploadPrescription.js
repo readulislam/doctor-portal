@@ -1,12 +1,47 @@
-import { Button, Label, Modal, Textarea } from 'flowbite-react';
+import axios from 'axios';
+import { Button, Label, Modal, Textarea, TextInput } from 'flowbite-react';
 import React, { useState } from 'react';
+import { BaseUrl } from '../../APi/api';
 
 
-const UploadPrescription = ({open,setOpen}) => {
+const UploadPrescription = ({open,setOpen,prescriptionData,setprescriptionData}) => {
   const [image, setImage] = useState('');
-  const [Url, setUrl] = useState('');
+  const [date, setDate] = useState('');
   
-  const upload = () => {
+  const handleSubmit=()=>{
+    console.log(image);
+
+    const key = "79c2ec0f6d6859d731f98a37a94e5c70";
+    const formData = new FormData();
+    formData.append("image", image);
+ 
+    fetch(`https://api.imgbb.com/1/upload?key=${key}`, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then(async(result) => {
+        if (result) {
+       console.log(result.data.url)
+          const PrescriptionInfo = {
+            patientId:prescriptionData.patientId,
+            doctorId:prescriptionData.doctorId,
+            appointmentId:prescriptionData.id,
+            link: result.data.url,
+            followUpDate:date
+          };
+          console.log(PrescriptionInfo);
+          const {data}= await axios.post(`${BaseUrl}/add-prescription`,
+            {PrescriptionInfo}
+          )
+          console.log(data);
+       
+        }
+      });
+      setOpen(false)
+      setImage('');
+      setDate('')
+
   }
   return (
     <React.Fragment>
@@ -15,32 +50,24 @@ const UploadPrescription = ({open,setOpen}) => {
       position="center"
       onClose={() => {
         setOpen(false);
+        setImage('');
+      setDate('');
       }}
     >
      <Modal.Header className="">Upload Prescription </Modal.Header>
         
         <Modal.Body>
         <input type="file" 
+          accept="image/*"
         onChange={(e) => { setImage(e.target.files[0]) }} />
         <br/>
-        <button onClick={upload}>Upload</button>
-        <br />
+        <Label  >
+          Enter the Follow up date
+          <TextInput id="email1" className="mt-4 w-full border-b-2 border-0 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer" 
+                      type="date" required={true} onChange={(e)=>{setDate(e.target.value)}} />
+        </Label>
         
-          <div id="textarea">
-            <div className="mb-2 block">
-                <Label
-                htmlFor="Prescription"
-                value="Upload Prescription"
-                />
-            </div>
-            <Textarea
-                id="Prescription"
-                placeholder="Leave a Prescription..."
-                required={true}
-                onChange={()=>{}}
-                rows={20}
-            />
-            </div>
+          
         </Modal.Body>
         <Modal.Footer className="flex justify-between">
           <Button
@@ -48,6 +75,8 @@ const UploadPrescription = ({open,setOpen}) => {
             color="gray"
             onClick={() => {
               setOpen(false);
+              setImage('');
+              setDate('');
             }}
           >
             Cancel
@@ -56,10 +85,7 @@ const UploadPrescription = ({open,setOpen}) => {
             
             className="px-2 "
             gradientDuoTone="cyanToBlue"
-            onClick={() => {
-              setOpen(false);
-            //   handleOtpSubmit();
-            }}
+            onClick={handleSubmit}
           >
             Submit
           </Button>

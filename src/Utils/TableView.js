@@ -17,6 +17,7 @@ const TableView = ({ heading, data }) => {
   const { userId, userInfo } = useSelector((state) => state.Auth);
   const [openTestReport, setOpenTestReport] = useState(false);
   const [page, setPage] = useState(1);
+  const [prescriptionData, setprescriptionData] = useState({});
   const [totalPage, setTotalPage] = useState(0);
   const [doctorPage,setDoctorPage] = useState(1)
   const dispatch = useDispatch();
@@ -38,7 +39,11 @@ const TableView = ({ heading, data }) => {
     };
     fetching();
   }, [userId, page,doctorId,doctorPage]);
-
+console.log(appointments);
+const prescriptionfetch=async(id,doctorId,patientId)=>{
+const {link}=await axios.get(`${BaseUrl}/get-prescriptionByPatientId?appointmentId=${id}&doctorId=${doctorId}&patientId=${patientId}`)
+return link
+}
   
   return (
     <>
@@ -61,7 +66,7 @@ const TableView = ({ heading, data }) => {
                 <Table.Cell>{d?.time}</Table.Cell>
                 <Table.Cell>
                   {/* {d?.prescription} */}
-                  <Button onClick={() => setOpen(true)}>Upload</Button>
+                  <Button onClick={() => {setOpen(true);setprescriptionData(d) ;console.log(d);}}>Upload</Button>
                 </Table.Cell>
               </Table.Row>
             ))}
@@ -107,7 +112,7 @@ const TableView = ({ heading, data }) => {
     </div>
       }
       {/* {!appointments.length && <h2 className='text-3xl text-black py-10 font-semibold w-full text-center'>You haven't Appointments</h2>}   */}
-      <UploadPrescription open={open} setOpen={setOpen} />
+      <UploadPrescription open={open} setOpen={setOpen} prescriptionData={prescriptionData} setprescriptionData={setprescriptionData} />
       <TestReport
       setOpen={setOpenTestReport}
         open={openTestReport}

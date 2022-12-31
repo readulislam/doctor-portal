@@ -1,6 +1,7 @@
 import { Button, Modal } from "flowbite-react";
 import OTPInput from "otp-input-react";
 import React, { useState } from "react";
+import { object } from "yup";
 const DoctorOtpVerifyModel = ({
   open,
   setOpen,
@@ -14,10 +15,13 @@ const DoctorOtpVerifyModel = ({
   const otpHandler = (Otp) => {
     setOtp(Otp);
   };
+  console.log(OTPresult);
   const handleSubmit = async () => {
     if (!otp && otp === undefined) return;
     try {
+      
       const verify = await OTPresult.confirm(otp);
+      
 
       // const { idToken, isNewUser } = verify.UserCredentialImpl._tokenResponse;
       // if (!idToken) {
