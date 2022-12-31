@@ -2,7 +2,7 @@
 import { Card, Sidebar, Tabs } from 'flowbite-react';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { doctorHeading, doctorPastData, doctorUpComingData } from '../../Utils/mockData';
+import { doctorHeading, doctorPastData, doctorPastHeading, doctorUpComingData } from '../../Utils/mockData';
 import TableView from '../../Utils/TableView';
 import AvailabilitySelect from './Availability/AvailabilitySelect';
 
@@ -62,7 +62,7 @@ const DoctorView = () => {
           <Tabs.Item 
           
           title="Past Appointment">
-           <TableView heading={doctorHeading} data={doctorPastData} />
+           <TableView heading={doctorPastHeading} data={doctorPastData} />
           </Tabs.Item>
           <Tabs.Item title="Availabilty">
             <AvailabilitySelect/>

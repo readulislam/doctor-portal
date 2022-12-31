@@ -1,7 +1,7 @@
-import axios from 'axios';
+
 import { Button, Label, Modal, Textarea, TextInput } from 'flowbite-react';
 import React, { useState } from 'react';
-import { BaseUrl } from '../../APi/api';
+import { BaseUrl, PostPrescription } from '../../APi/api';
 
 
 const UploadPrescription = ({open,setOpen,prescriptionData,setprescriptionData}) => {
@@ -31,9 +31,7 @@ const UploadPrescription = ({open,setOpen,prescriptionData,setprescriptionData})
             followUpDate:date
           };
           console.log(PrescriptionInfo);
-          const {data}= await axios.post(`${BaseUrl}/add-prescription`,
-            {PrescriptionInfo}
-          )
+          const data= await PostPrescription(PrescriptionInfo)
           console.log(data);
        
         }

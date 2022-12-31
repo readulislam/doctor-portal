@@ -251,6 +251,7 @@ export const data = [
     },
   ];
   export const doctorHeading=["Patient Name","Date","Time","Prescription","Test Report"];
+  export const doctorPastHeading=["Patient Name","Date","Time","Prescription","followUp","Test Report"];
   export const doctorPastData=[
     {
       name:'Prachi Bansal',
@@ -297,8 +298,8 @@ export const data = [
       prescription:(<Button>upload</Button>)
     },
   ]
-  export const patientHeading=["Doctor Name","Date","Time","Prescription","Test Report"]
-  export const patientUpComingHeading=["Doctor Name","Date","Time","Prescription","Test Report"]
+  export const patientHeading=["Doctor Name","Date","Time","Prescription","followUp","Test Report"]
+  export const patientUpComingHeading=["Doctor Name","Date","Time"]
   export const patientPastData=[
     {
       name:'DR. SURESH SHARMA',

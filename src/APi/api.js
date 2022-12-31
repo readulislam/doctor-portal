@@ -1,3 +1,4 @@
+import { async } from '@firebase/util';
 import axios from 'axios';
 export const BaseUrl = 'http://ec2-43-205-124-238.ap-south-1.compute.amazonaws.com:4000'
  // take end point 
@@ -20,7 +21,9 @@ UPDATE_SLOT:() =>'/update-slot', //  query doctorId, date, timeRange, slotId
 ADD_EVENT_TYPE:() =>'/add-eventType',
 GET_DOCTOR_BY_PHONE:() =>'/get-doctorByNumber',
 GET_DOCTOR_APPOINTMENTS:() =>'/get-doctorAppointmentAll', // query doctorId
-ADD_APPOINTMENT:() =>'/add-appointment'
+ADD_APPOINTMENT:() =>'/add-appointment',
+ADD_PRESCRIPTION:() =>'/add-prescription',
+GET_PRESCRIPTIOn:() =>'/get-prescription'
 
 
 }
@@ -89,6 +92,12 @@ export const ListHospitals = async()=>{
 export const RegistrationDoctor = async(doctorInfo) =>{
     const {data} = await axios.post(URL(END_POINTS.ADD_DOCTOR()),{
         ...doctorInfo
+    })
+    return  data
+}
+export const PostPrescription=async(PrescriptionInfo)=>{
+    const {data} = await axios.post(URL(END_POINTS.ADD_PRESCRIPTION()),{
+        ...PrescriptionInfo
     })
     return  data
 }

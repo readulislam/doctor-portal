@@ -7,6 +7,7 @@ import { BaseUrl } from "../APi/api";
 import TestReport from "../components/Modal/TestReport";
 import UploadPrescription from "../components/Modal/UploadPrescription";
 import { getAllAppointment } from "../Store/Doctor-Slice";
+import Viewpres from "./Viewpres";
 
 const TableView = ({ heading, data }) => {
   const [patientAppointment, setPatientAppointment] = useState([]);
@@ -22,6 +23,10 @@ const TableView = ({ heading, data }) => {
   const [doctorPage,setDoctorPage] = useState(1)
   const dispatch = useDispatch();
 
+  // const prescriptionfetch=async(id,dId,pId)=>{
+  //   const {data}=await axios.get(`${BaseUrl}/get-prescriptionByPatientId?patientId=${pId}&doctorId=${dId}&appointmentId=${id}`)
+  //   return data.link
+  //   }
  
   useEffect(() => {
     const fetching = async () => {
@@ -30,6 +35,9 @@ const TableView = ({ heading, data }) => {
           params: { patientId: userId, limit: 5, offset: page },
         });
         setPatientAppointment(data.rows);
+        // patientAppointment.map((d)=>{
+        //   setPatientAppointment({d,link:prescriptionfetch(d.patientId,d.doctorId,d.id)})
+        // })
         setTotalPage(Math.ceil(data.count / 5));
       }
 
@@ -39,11 +47,8 @@ const TableView = ({ heading, data }) => {
     };
     fetching();
   }, [userId, page,doctorId,doctorPage]);
-console.log(appointments);
-const prescriptionfetch=async(id,doctorId,patientId)=>{
-const {link}=await axios.get(`${BaseUrl}/get-prescriptionByPatientId?appointmentId=${id}&doctorId=${doctorId}&patientId=${patientId}`)
-return link
-}
+console.log("hi",patientAppointment);
+
   
   return (
     <>
@@ -72,23 +77,21 @@ return link
             ))}
           {patientAppointment &&
             userId &&
-            patientAppointment.map((d) => (
+            patientAppointment.map((d,link) => (
               <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                   {d?.doctor?.name}
                 </Table.Cell>
                 <Table.Cell>{d?.date}</Table.Cell>
                 <Table.Cell>{d?.time}</Table.Cell>
-                <Table.Cell>
-                  {/* <Button  onClick={()=>setOpenTestReport(true)} >show</Button> */}
-                  {/* <Button  onClick={()=>setOpen(true)} >Upload</Button> */}
-                  <Link
-                    to="#"
-                    className=" text-cyan-800 border-b-2 border-b-cyan-800 "
-                  >
-                    View
-                  </Link>
-                </Table.Cell>
+                {/* <Table.Cell>
+                <a href={link} target="_blank">
+                  View
+                  </a>
+                  
+                  
+                </Table.Cell> */}
+                <Viewpres id={d.id} doctorId={d.doctorId} patientId={d.patientId}/>
               </Table.Row>
             ))}
         </Table.Body>
