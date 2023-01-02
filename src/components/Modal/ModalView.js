@@ -60,7 +60,21 @@ const ModalView = ({
     };
     fetching();
   }, [date, doctorId]);
+  const disableDate=()=>{
+    var dtToday = new Date();
+    
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+    
+    return year + '-' + month + '-' + day;
 
+  
+  }
   const handleSubmit = async (event) => {
     event.preventDefault();
     const { date } = slotsInfo;
@@ -203,6 +217,7 @@ const ModalView = ({
                   id="date"
                   type="date"
                   required={true}
+                  min={disableDate()}
                   onChange={(e) => {
                     setDate(e.target.value);
                   }}
