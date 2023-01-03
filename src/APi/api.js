@@ -101,6 +101,12 @@ export const PostPrescription=async(PrescriptionInfo)=>{
     })
     return  data
 }
+export const PostReport=async(ReportInfo)=>{
+    const {data} = await axios.post(URL(END_POINTS.ADD_PRESCRIPTION()),{
+        ...ReportInfo
+    })
+    return  data
+}
 export const ListDoctors = async() =>{
     const {data} = await axios.get(URL(END_POINTS.GET_DOCTORS()))
     return  data

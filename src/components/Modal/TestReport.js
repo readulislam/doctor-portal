@@ -1,12 +1,11 @@
 import { Button, Label, Modal, Textarea } from 'flowbite-react';
 import React, { useState } from 'react'
 
-const TestReport = ({open,setOpen}) => {
+const TestReport = ({open,setOpen,reportData,setReportData}) => {
+  const [data, setdata] = useState();
   const [image, setImage] = useState('');
   
   const handleSubmit=()=>{
-    console.log(image);
-
     const key = "79c2ec0f6d6859d731f98a37a94e5c70";
     const formData = new FormData();
     formData.append("image", image);
@@ -19,16 +18,20 @@ const TestReport = ({open,setOpen}) => {
       .then(async(result) => {
         if (result) {
        console.log(result.data.url)
-          // const ReportInfo = {
-          //   appointmentId:'',
-          //   patientId:'',
-          //   doctorId:'',
-          //   report: result.data.url,
-          // };
+          const PrescriptionInfo = {
+            patientId:reportData.patientId,
+            doctorId:reportData.doctorId,
+            appointmentId:reportData.id,
+            link: result.data.url,
+            name:image.name
+          };
+          console.log(PrescriptionInfo);
+          const data= await PostPrescription(PrescriptionInfo)
+          console.log(data);
        
         }
       });
-      setOpen(false)
+    console.log(image);
 
   }
   return (
@@ -43,11 +46,21 @@ const TestReport = ({open,setOpen}) => {
      <Modal.Header className=""> Test Report </Modal.Header>
         
         <Modal.Body>
-        
           <div>
-          <input type="file" 
-          accept="image/*"
-        onChange={(e) => { setImage(e.target.files[0]) }} />
+            <div>
+              {data.map((value,index)=> 
+                <a href={value.link} target="_blank">
+                  {value.name}
+                </a>
+              )}
+            </div>
+            <div>
+            <input type="file" 
+              accept="image/*"
+              onChange={(e) => { setImage(e.target.files[0]) }} 
+            />
+            <Button onClick={handleSubmit} >ADD</Button>
+            </div>
         <br/>
        
             </div>
@@ -66,7 +79,7 @@ const TestReport = ({open,setOpen}) => {
             
             className="px-2 "
             gradientDuoTone="cyanToBlue"
-            onClick={handleSubmit}
+            onClick={()=>{setOpen(false)}}
           >
             Submit
           </Button>

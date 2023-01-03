@@ -16,6 +16,7 @@ import { patientLoginByPhone } from "../../Store/Auth-Slice";
 import AppointmentBookedModal from "./AppointmentBookedModal";
 import OtpVerifyModal from "./OtpVerifyModal";
 import RegistarModal from "./RegistarModal";
+import moment from "moment";
 
 const ModalView = ({
   open,
@@ -43,6 +44,7 @@ const ModalView = ({
   const [contact, setContact] = useState(false);
   const [appointment, setAppointment] = useState({});
   const [registerModel, setRegisterModel] = useState(false)
+  const [currentTime, setcurrentTime] = useState();
   
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -54,8 +56,18 @@ const ModalView = ({
         const { data } = await axios.post(
           `${BaseUrl}/get-slots?date=${newDate}&doctorId=${doctorId}`
         );
-
+        console.log(data);
         setSlotsInfo(data);
+
+        console.log(moment().hours());
+        if (date===new Date().toJSON().slice(0, 10)) {
+          setcurrentTime(`${moment().hours()} : ${moment().minutes()}`)  
+          console.log(currentTime);
+        }else{
+          setcurrentTime()
+        }
+        
+        
       }
     };
     fetching();
@@ -241,7 +253,7 @@ const ModalView = ({
                       className={`text-base ${
                         selected?.id === data.id && "bg-blue-600 text-white"
                       } ${
-                        !data.isAvailable
+                        !data.isAvailable||(data.time<currentTime)
                           ? "bg-gray-400/10 text-gray-400/50"
                           : "shadow-md hover:bg-sky-500 hover:text-white cursor-pointer  "
                       } border   py-1 px-3 text-center rounded-md`}

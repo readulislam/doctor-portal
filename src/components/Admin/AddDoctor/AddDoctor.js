@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Button } from 'flowbite-react';
+import { Button, Label } from 'flowbite-react';
 import { ErrorMessage, Field, Formik } from 'formik';
 import React, { useEffect, useState } from 'react'
 import PhoneInput from 'react-phone-number-input';
@@ -157,6 +157,11 @@ const AddDoctor = () => {
                       
                     })}
                 </select>
+                <div className='mt-5'>
+                  <Label>
+                    Select Doctor Image
+                  </Label>
+                </div>
                 <div className='mt-5'>
                   <input type="file" id="file" name="file" accept="image/*" onChange={handleChange} />
                 </div>

@@ -2,6 +2,7 @@ import { Card, Sidebar, Tabs } from 'flowbite-react'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { patientHeading, patientPastData, patientUpComingData, patientUpComingHeading } from '../../Utils/mockData'
+import PastTableView from '../../Utils/pastTable'
 import TableView from '../../Utils/TableView'
 import Menu from '../Navbar/Menu'
 
@@ -68,7 +69,7 @@ const PatientView = () => {
             <Tabs.Item 
             
             title="Past Appointment">
-            <TableView heading={patientHeading} data={patientPastData} />
+            <PastTableView heading={patientHeading} data={patientPastData} />
             </Tabs.Item>
           
           </Tabs.Group>

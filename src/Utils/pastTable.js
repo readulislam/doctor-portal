@@ -7,18 +7,21 @@ import { BaseUrl } from "../APi/api";
 import TestReport from "../components/Modal/TestReport";
 import UploadPrescription from "../components/Modal/UploadPrescription";
 import { getAllAppointment } from "../Store/Doctor-Slice";
+import Viewpres from "./Viewpres";
 
-const TableView = ({ heading, data }) => {
+const PastTableView = ({ heading, data }) => {
   const [patientAppointment, setPatientAppointment] = useState([]);
   const [open, setOpen] = useState(false);
   const { doctorId, doctorInfo, appointments ,appointmentCount} = useSelector(
     (state) => state.Doctor
   );
   const { userId, userInfo } = useSelector((state) => state.Auth);
+  const [openTestReport, setOpenTestReport] = useState(false);
   const [page, setPage] = useState(1);
-  const [prescriptionData, setprescriptionData] = useState({});
+  const [reportData, setReportData] = useState({});
   const [totalPage, setTotalPage] = useState(0);
   const [doctorPage,setDoctorPage] = useState(1)
+  
   const dispatch = useDispatch();
 
   // const prescriptionfetch=async(id,dId,pId)=>{
@@ -45,7 +48,7 @@ const TableView = ({ heading, data }) => {
     };
     fetching();
   }, [userId, page,doctorId,doctorPage]);
-console.log("hi",patientAppointment);
+console.log("hi past",patientAppointment);
 
   
   return (
@@ -67,9 +70,11 @@ console.log("hi",patientAppointment);
                 </Table.Cell>
                 <Table.Cell>{d?.date}</Table.Cell>
                 <Table.Cell>{d?.time}</Table.Cell>
+                
+                <Viewpres id={d.id} doctorId={d.doctorId} patientId={d.patientId}/>
+                
                 <Table.Cell>
-                  {/* {d?.prescription} */}
-                  <Button onClick={() => {setOpen(true);setprescriptionData(d) ;console.log(d);}}>Upload</Button>
+                    <Button onClick={()=>{setOpenTestReport(true);setReportData(d)}} >Upload Report</Button>
                 </Table.Cell>
               </Table.Row>
             ))}
@@ -82,6 +87,17 @@ console.log("hi",patientAppointment);
                 </Table.Cell>
                 <Table.Cell>{d?.date}</Table.Cell>
                 <Table.Cell>{d?.time}</Table.Cell>
+                {/* <Table.Cell>
+                <a href={link} target="_blank">
+                  View
+                  </a>
+                  
+                  
+                </Table.Cell> */}
+                <Viewpres id={d.id} doctorId={d.doctorId} patientId={d.patientId}/>
+                <Table.Cell>
+                    <Button onClick={()=>{setOpenTestReport(true);setReportData(d)}} >Upload Report</Button>
+                </Table.Cell>
               </Table.Row>
             ))}
         </Table.Body>
@@ -105,12 +121,16 @@ console.log("hi",patientAppointment);
     </div>
       }
       {/* {!appointments.length && <h2 className='text-3xl text-black py-10 font-semibold w-full text-center'>You haven't Appointments</h2>}   */}
-      <UploadPrescription open={open} setOpen={setOpen} prescriptionData={prescriptionData} setprescriptionData={setprescriptionData} />
+      <TestReport
+      setOpen={setOpenTestReport}
+        open={openTestReport}
+        reportData={reportData} setReportData={setReportData}
+        />
     </>
   );
 };
 
-export default TableView;
+export default PastTableView;
 
 /* 
 {!appointments.length | patientAppointment.length  && <h2 className='text-3xl text-black py-10 font-semibold w-full text-center'>You haven't Appointments</h2>}
