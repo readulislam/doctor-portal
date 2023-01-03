@@ -5,7 +5,7 @@ import ModalView from '../../Modal/ModalView';
 import RegistarModal from '../../Modal/RegistarModal';
 
 
-const AppointmentRegistar = ({ open, setOpen ,name,location,speciality,doctorId,}) => {
+const AppointmentRegistar = ({ open, setOpen ,location,speciality,doctorId,doctorData}) => {
   const {isLoggedIn ,isRegister,userInfo,userId} =useSelector(state=>state.Auth)
     const [existingUser, setExistingUser] = useState(false);
     const [time, setTime] = useState("");
@@ -16,7 +16,7 @@ const AppointmentRegistar = ({ open, setOpen ,name,location,speciality,doctorId,
    
   return (
     <div> 
-        <ModalView open={open} setDate={setDate} doctorId={doctorId} setTime={setTime} setOpen={setOpen} name={name} speciality={speciality} setRegistarOpen={setRegistarOpen}  existingUser={existingUser} location={location} />
+        <ModalView open={open} setDate={setDate} doctorId={doctorId} setTime={setTime} setOpen={setOpen} doctorData={doctorData} speciality={speciality} setRegistarOpen={setRegistarOpen}  existingUser={existingUser} location={location} />
         
       
 

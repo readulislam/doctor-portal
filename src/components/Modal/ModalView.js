@@ -17,11 +17,12 @@ import AppointmentBookedModal from "./AppointmentBookedModal";
 import OtpVerifyModal from "./OtpVerifyModal";
 import RegistarModal from "./RegistarModal";
 import moment from "moment";
+import jsPDF from "jspdf";
 
 const ModalView = ({
   open,
   setOpen,
-  name,
+  doctorData,
   location,
   speciality,
   existingUser,
@@ -115,6 +116,13 @@ const ModalView = ({
           date,
           weekday: slotsInfo.weekday,
         });
+        
+        const doc=new jsPDF('landscape','px','a4','false')
+        doc.text(`Doctor's name : ${doctorData.name}`,10,10)
+        doc.text(`patient's name : ${userInfo.firstName}  ${userInfo.middleName}`,20,20)
+        doc.text(`charges : 800`,30,30)
+        doc.text(`date and time of appointment : ${date}  ${selected.time}`,40,40)
+        doc.save('bil.pdf')
         setSelected(null);
         setDate("");
         toast.success( `Appointment Booking Successfully `,{id:1})
@@ -155,6 +163,12 @@ const ModalView = ({
             weekday: slotsInfo.weekday,
           };
           const update = await updateTimeSlot(query);
+          const doc=new jsPDF('landscape','px','a4','false')
+          doc.text(`Doctor's name : ${doctorData.name}`,10,10)
+          doc.text(`patient's name : ${userInfo.firstName}  ${userInfo.middleName}`,10,20)
+          doc.text(`charges : 800`,10,30)
+          doc.text(`date and time of appointment : ${date}  ${selected}`,10,40)
+          doc.save('bil.pdf')
           setSelected(null);
           setDate("");
           toast.success( `Appointment Booking Successfully `,{id:1})
@@ -222,7 +236,7 @@ const ModalView = ({
                   type="text"
                   placeholder="name@flowbite.com"
                   disabled
-                  value={name}
+                  value={doctorData.name}
                 />
 
                 <TextInput

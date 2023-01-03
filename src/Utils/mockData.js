@@ -250,7 +250,7 @@ export const data = [
         "https://api.parashospitals.com/storage/doctors/September2022/0gt3x16BfPMzFkP5UmDT.jpg",
     },
   ];
-  export const doctorHeading=["Patient Name","Date","Time","Prescription","Test Report"];
+  export const doctorHeading=["Patient Name","Date","Time","Prescription"];
   export const doctorPastHeading=["Patient Name","Date","Time","Prescription","followUp","Test Report"];
   export const doctorPastData=[
     {

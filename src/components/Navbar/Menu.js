@@ -2,6 +2,7 @@ import { Avatar, Button, Dropdown, Navbar } from 'flowbite-react'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { authActions } from '../../Store/Auth-Slice'
 
 const Menu = () => {
   const {isLoggedIn ,isRegister,userInfo} =useSelector(state=>state.Auth)
@@ -62,7 +63,7 @@ const Menu = () => {
       </Dropdown.Item>
       <Dropdown.Divider />
       <Dropdown.Item
-      //  onClick={()=>{ dispatch(authActions.logout())}}
+       onClick={()=>{ dispatch(authActions.logout())}}
        >
         Sign out
       </Dropdown.Item>

@@ -23,7 +23,8 @@ GET_DOCTOR_BY_PHONE:() =>'/get-doctorByNumber',
 GET_DOCTOR_APPOINTMENTS:() =>'/get-doctorAppointmentAll', // query doctorId
 ADD_APPOINTMENT:() =>'/add-appointment',
 ADD_PRESCRIPTION:() =>'/add-prescription',
-GET_PRESCRIPTIOn:() =>'/get-prescription'
+GET_PRESCRIPTION:() =>'/get-prescription',
+ADD_REPORT:() =>'/add-testReports',
 
 
 }
@@ -101,10 +102,10 @@ export const PostPrescription=async(PrescriptionInfo)=>{
     })
     return  data
 }
-export const PostReport=async(ReportInfo)=>{
-    const {data} = await axios.post(URL(END_POINTS.ADD_PRESCRIPTION()),{
-        ...ReportInfo
-    })
+export const PostReport=async(reportInfo)=>{
+    const {data} = await axios.post(URL(END_POINTS.ADD_REPORT()),
+        {...reportInfo}
+    )
     return  data
 }
 export const ListDoctors = async() =>{

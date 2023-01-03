@@ -21,10 +21,6 @@ const TableView = ({ heading, data }) => {
   const [doctorPage,setDoctorPage] = useState(1)
   const dispatch = useDispatch();
 
-  // const prescriptionfetch=async(id,dId,pId)=>{
-  //   const {data}=await axios.get(`${BaseUrl}/get-prescriptionByPatientId?patientId=${pId}&doctorId=${dId}&appointmentId=${id}`)
-  //   return data.link
-  //   }
  
   useEffect(() => {
     const fetching = async () => {
@@ -33,9 +29,6 @@ const TableView = ({ heading, data }) => {
           params: { patientId: userId, limit: 5, offset: page },
         });
         setPatientAppointment(data.rows);
-        // patientAppointment.map((d)=>{
-        //   setPatientAppointment({d,link:prescriptionfetch(d.patientId,d.doctorId,d.id)})
-        // })
         setTotalPage(Math.ceil(data.count / 5));
       }
 
@@ -83,7 +76,8 @@ console.log("hi",patientAppointment);
                 <Table.Cell>{d?.date}</Table.Cell>
                 <Table.Cell>{d?.time}</Table.Cell>
               </Table.Row>
-            ))}
+                )
+              )}
         </Table.Body>
       </Table>
       {userId&& <div className="flex justify-end">

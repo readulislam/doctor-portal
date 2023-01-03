@@ -1,11 +1,32 @@
+import axios from 'axios';
 import { Button, Label, Modal, Textarea } from 'flowbite-react';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { BaseUrl, PostReport } from '../../APi/api';
 
-const TestReport = ({open,setOpen,reportData,setReportData}) => {
-  const [data, setdata] = useState();
+const TestReport = ({open,setOpen,reportData,reload,setReload,setReportData}) => {
+  const [data, setData] = useState([]);
   const [image, setImage] = useState('');
   
-  const handleSubmit=()=>{
+  
+  useEffect(() => {
+    const reportfetch=async()=>{
+          const {data}=await axios.get(`${BaseUrl}/get-testReports?patientId=${reportData.patientId}&doctorId=${reportData.doctorId}&appointmentId=${reportData.id}`)
+          setData(data)
+          
+      
+          }
+    reportfetch()
+}, [reload,reportData.id])
+
+
+
+  const handleSubmit=async()=>{
+    // const formData = new FormData();
+    // formData.append("image", image);
+    // formData.append("patientId", reportData.patientId);
+    // formData.append("doctorId", reportData.doctorId);
+    // formData.append("appointmentId", reportData.id);
+    // formData.append("name", image.name);
     const key = "79c2ec0f6d6859d731f98a37a94e5c70";
     const formData = new FormData();
     formData.append("image", image);
@@ -17,21 +38,25 @@ const TestReport = ({open,setOpen,reportData,setReportData}) => {
       .then((res) => res.json())
       .then(async(result) => {
         if (result) {
-       console.log(result.data.url)
-          const PrescriptionInfo = {
+       
+          const reportInfo = {
             patientId:reportData.patientId,
             doctorId:reportData.doctorId,
             appointmentId:reportData.id,
             link: result.data.url,
             name:image.name
           };
-          console.log(PrescriptionInfo);
-          const data= await PostPrescription(PrescriptionInfo)
-          console.log(data);
+          
+          const data= await PostReport(reportInfo)
+          
        
         }
       });
-    console.log(image);
+    
+    
+    
+    setReload(!reload)
+    setImage('');
 
   }
   return (
@@ -41,6 +66,7 @@ const TestReport = ({open,setOpen,reportData,setReportData}) => {
       position="center"
       onClose={() => {
         setOpen(false);
+        setImage('');
       }}
     >
      <Modal.Header className=""> Test Report </Modal.Header>
@@ -49,14 +75,18 @@ const TestReport = ({open,setOpen,reportData,setReportData}) => {
           <div>
             <div>
               {data.map((value,index)=> 
-                <a href={value.link} target="_blank">
+                <div className="pt-5">
+                  <a href={value.link}  target="_blank">
                   {value.name}
                 </a>
+                </div>
+
               )}
             </div>
-            <div>
+            <div className='mt-5' >
             <input type="file" 
               accept="image/*"
+              placeholder='image'
               onChange={(e) => { setImage(e.target.files[0]) }} 
             />
             <Button onClick={handleSubmit} >ADD</Button>
@@ -71,6 +101,7 @@ const TestReport = ({open,setOpen,reportData,setReportData}) => {
             color="gray"
             onClick={() => {
               setOpen(false);
+              setImage('');
             }}
           >
             Cancel
@@ -79,7 +110,7 @@ const TestReport = ({open,setOpen,reportData,setReportData}) => {
             
             className="px-2 "
             gradientDuoTone="cyanToBlue"
-            onClick={()=>{setOpen(false)}}
+            onClick={()=>{setOpen(false);setImage('');}}
           >
             Submit
           </Button>

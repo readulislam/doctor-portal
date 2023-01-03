@@ -33,6 +33,12 @@ const authSlice = createSlice({
       state.userId = action.payload.userId;
       state.userInfo = action.payload.userInfo;
     },
+    logout(state,action){
+      state.userId= null;
+      state.userInfo= null;
+      state.isRegister= false;
+      state.isLoggedIn= false;
+    },
   },
   extraReducers(builder) {
     builder

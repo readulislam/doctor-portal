@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { BaseUrl } from "../APi/api";
 import TestReport from "../components/Modal/TestReport";
-import UploadPrescription from "../components/Modal/UploadPrescription";
 import { getAllAppointment } from "../Store/Doctor-Slice";
 import Viewpres from "./Viewpres";
 
@@ -21,7 +20,8 @@ const PastTableView = ({ heading, data }) => {
   const [reportData, setReportData] = useState({});
   const [totalPage, setTotalPage] = useState(0);
   const [doctorPage,setDoctorPage] = useState(1)
-  
+  const [reload, setReload] = useState(false);
+  const [doctorData, setDoctorData] = useState([]);
   const dispatch = useDispatch();
 
   // const prescriptionfetch=async(id,dId,pId)=>{
@@ -36,14 +36,12 @@ const PastTableView = ({ heading, data }) => {
           params: { patientId: userId, limit: 5, offset: page },
         });
         setPatientAppointment(data.rows);
-        // patientAppointment.map((d)=>{
-        //   setPatientAppointment({d,link:prescriptionfetch(d.patientId,d.doctorId,d.id)})
-        // })
         setTotalPage(Math.ceil(data.count / 5));
       }
 
       if (doctorId) {
         await dispatch(getAllAppointment({doctorId:parseInt(doctorId), page:doctorPage}));
+          setDoctorData([])
       }
     };
     fetching();
@@ -61,10 +59,10 @@ console.log("hi past",patientAppointment);
           ))}
         </Table.Head>
         <Table.Body className="divide-y w-full">
-          {appointments &&
+          {doctorData &&
             doctorId &&
-            appointments?.map((d) => (
-              <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+            doctorData?.map((d) => (
+                  <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                   {d?.patient?.firstName}
                 </Table.Cell>
@@ -74,14 +72,15 @@ console.log("hi past",patientAppointment);
                 <Viewpres id={d.id} doctorId={d.doctorId} patientId={d.patientId}/>
                 
                 <Table.Cell>
-                    <Button onClick={()=>{setOpenTestReport(true);setReportData(d)}} >Upload Report</Button>
+                    <Button onClick={()=>{setOpenTestReport(true);setReportData(d)}} >Report</Button>
                 </Table.Cell>
               </Table.Row>
-            ))}
+                ))}
           {patientAppointment &&
             userId &&
-            patientAppointment.map((d,link) => (
-              <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+            patientAppointment.map((d,link) => 
+              (
+                  <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                   {d?.doctor?.name}
                 </Table.Cell>
@@ -96,10 +95,11 @@ console.log("hi past",patientAppointment);
                 </Table.Cell> */}
                 <Viewpres id={d.id} doctorId={d.doctorId} patientId={d.patientId}/>
                 <Table.Cell>
-                    <Button onClick={()=>{setOpenTestReport(true);setReportData(d)}} >Upload Report</Button>
+                    <Button onClick={()=>{setOpenTestReport(true);setReportData(d)}} >Report</Button>
                 </Table.Cell>
               </Table.Row>
-            ))}
+                )
+              )}
         </Table.Body>
       </Table>
       {userId&& <div className="flex justify-end">
@@ -124,6 +124,8 @@ console.log("hi past",patientAppointment);
       <TestReport
       setOpen={setOpenTestReport}
         open={openTestReport}
+        reload={reload}
+        setReload={setReload}
         reportData={reportData} setReportData={setReportData}
         />
     </>
