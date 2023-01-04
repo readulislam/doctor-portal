@@ -125,7 +125,7 @@ const ModalView = ({
         doc.save('bil.pdf')
         setSelected(null);
         setDate("");
-        toast.success( `Appointment Booking Successfully `,{id:1})
+        toast.success( `Appointment Booked `,{id:1})
       }
    
   } else {

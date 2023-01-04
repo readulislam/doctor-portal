@@ -12,49 +12,21 @@ const TestReport = ({open,setOpen,reportData,reload,setReload,setReportData}) =>
     const reportfetch=async()=>{
           const {data}=await axios.get(`${BaseUrl}/get-testReports?patientId=${reportData.patientId}&doctorId=${reportData.doctorId}&appointmentId=${reportData.id}`)
           setData(data)
-          
-      
           }
     reportfetch()
 }, [reload,reportData.id])
 
 
 
-  const handleSubmit=async()=>{
-    // const formData = new FormData();
-    // formData.append("image", image);
-    // formData.append("patientId", reportData.patientId);
-    // formData.append("doctorId", reportData.doctorId);
-    // formData.append("appointmentId", reportData.id);
-    // formData.append("name", image.name);
-    const key = "79c2ec0f6d6859d731f98a37a94e5c70";
-    const formData = new FormData();
-    formData.append("image", image);
- 
-    fetch(`https://api.imgbb.com/1/upload?key=${key}`, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then(async(result) => {
-        if (result) {
-       
-          const reportInfo = {
-            patientId:reportData.patientId,
-            doctorId:reportData.doctorId,
-            appointmentId:reportData.id,
-            link: result.data.url,
-            name:image.name
-          };
-          
-          const data= await PostReport(reportInfo)
-          
-       
-        }
-      });
-    
-    
-    
+  const handleSubmit=async(e)=>{
+    e.preventDefault()
+    const reportInfo = new FormData();
+    reportInfo.append("image", image);
+    reportInfo.append("patientId", reportData.patientId);
+    reportInfo.append("doctorId", reportData.doctorId);
+    reportInfo.append("appointmentId", reportData.id);
+    reportInfo.append("name", e.target.name.value);
+    const data= await PostReport(reportInfo)
     setReload(!reload)
     setImage('');
 
@@ -83,14 +55,25 @@ const TestReport = ({open,setOpen,reportData,reload,setReload,setReportData}) =>
 
               )}
             </div>
-            <div className='mt-5' >
+            <form onSubmit={handleSubmit} className='mt-5' >
+            <div>
+            <Label>
+              Enter name of Report : 
+            <input
+              type='text'
+              name="name"
+              />
+            </Label>
+            </div>
+            <div className='mt-5'>
             <input type="file" 
               accept="image/*"
               placeholder='image'
               onChange={(e) => { setImage(e.target.files[0]) }} 
             />
-            <Button onClick={handleSubmit} >ADD</Button>
             </div>
+            <Button className='mt-5' type='submit' >ADD</Button>
+            </form>
         <br/>
        
             </div>
