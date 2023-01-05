@@ -5,7 +5,7 @@ import { BaseUrl, PostReport } from '../../APi/api';
 
 const TestReport = ({open,setOpen,reportData,reload,setReload,setReportData}) => {
   const [data, setData] = useState([]);
-  const [image, setImage] = useState('');
+  const [file, setFile] = useState();
   
   
   useEffect(() => {
@@ -20,15 +20,17 @@ const TestReport = ({open,setOpen,reportData,reload,setReload,setReportData}) =>
 
   const handleSubmit=async(e)=>{
     e.preventDefault()
-    const reportInfo = new FormData();
-    reportInfo.append("image", image);
-    reportInfo.append("patientId", reportData.patientId);
-    reportInfo.append("doctorId", reportData.doctorId);
-    reportInfo.append("appointmentId", reportData.id);
-    reportInfo.append("name", e.target.name.value);
-    const data= await PostReport(reportInfo)
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("name", e.target.name.value);
+    formData.append("patientId", reportData.patientId);
+    formData.append("doctorId", reportData.doctorId);
+    formData.append("appointmentId", reportData.id);
+    
+    console.log(formData,reportData);
+    const data= await PostReport(formData)
     setReload(!reload)
-    setImage('');
+    setFile('');
 
   }
   return (
@@ -38,7 +40,7 @@ const TestReport = ({open,setOpen,reportData,reload,setReload,setReportData}) =>
       position="center"
       onClose={() => {
         setOpen(false);
-        setImage('');
+        setFile('');
       }}
     >
      <Modal.Header className=""> Test Report </Modal.Header>
@@ -66,10 +68,8 @@ const TestReport = ({open,setOpen,reportData,reload,setReload,setReportData}) =>
             </Label>
             </div>
             <div className='mt-5'>
-            <input type="file" 
-              accept="image/*"
-              placeholder='image'
-              onChange={(e) => { setImage(e.target.files[0]) }} 
+            <input type="file" id="file" name="file" accept="application/*"
+              onChange={(e) => { setFile(e.target.files[0]) }} 
             />
             </div>
             <Button className='mt-5' type='submit' >ADD</Button>
@@ -84,7 +84,7 @@ const TestReport = ({open,setOpen,reportData,reload,setReload,setReportData}) =>
             color="gray"
             onClick={() => {
               setOpen(false);
-              setImage('');
+              setFile('');
             }}
           >
             Cancel
@@ -93,7 +93,7 @@ const TestReport = ({open,setOpen,reportData,reload,setReload,setReportData}) =>
             
             className="px-2 "
             gradientDuoTone="cyanToBlue"
-            onClick={()=>{setOpen(false);setImage('');}}
+            onClick={()=>{setOpen(false);setFile('');}}
           >
             Submit
           </Button>
