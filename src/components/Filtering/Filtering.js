@@ -25,14 +25,15 @@ const Filtering = ({handleSearch}) => {
     fetching()
     
   }, [])
-  const handleSubmit=()=>{
-    handleSearch(searchDepartment,searchHospital,name)
-  }
+  // const handleSubmit=()=>{
+    // handleSearch(locationInput,departmentInput,name)
+  // }
   return (
-    <div >
+    <form onSubmit={handleSearch} >
       <div className=" grid grid-cols-4 gap-4 place-items-center mt-10">
         <input
           placeholder="Search"
+          name='name'
           color="white"
           type="text"
           className=" border-t-0 w-52 px-2 border-r-0 border-l-0
@@ -43,12 +44,13 @@ const Filtering = ({handleSearch}) => {
             <span className="text-sm whitespace-nowrap">Filter by :</span>
 
               <select
+              name='hospital'
                 id="underline_select"
                 className=" py-2.5  w-full  text-md  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
-                onChange={(e)=>{setsearchHospital(e.target.value)}}
+                
               >
                 <option selected>Location</option>
-                {hospitalList?.map(h=><option>{h.name},{h.address}</option>)}
+                {hospitalList?.map(h=><option value={h.id}>{h.name},{h.address}</option>)}
               </select>
           </Label>
         </div>
@@ -56,22 +58,22 @@ const Filtering = ({handleSearch}) => {
           <select
             id="underline_select"
             className=" py-2.5  w-full  text-md  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
-            onChange={(e)=>{setsearchDepartment(e.target.value)}}
+            name='department'
           >
             <option selected>Speciality</option>
-           {departmentList?.map(d=><option>{d.name}</option>)}
+           {departmentList?.map(d=><option value={d.id}>{d.name}</option>)}
               
           </select>
         </div>
 
         <div className="flex items-center gap-4">
-          <Button onClick={handleSubmit} className="px-2 " gradientDuoTone="cyanToBlue">
+          <Button type="submit" className="px-2 " gradientDuoTone="cyanToBlue">
             Search
           </Button>
           <Button color="gray">Reset</Button>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 

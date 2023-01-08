@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Button, Card, Pagination } from "flowbite-react";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { BaseUrl, ListDepartments, ListStates } from "../../APi/api";
 import Filtering from "../Filtering/Filtering";
@@ -36,15 +37,28 @@ const CardView = () => {
     fetching()
   },[page])
   console.log(page)
-  const handleSearch=async(searchDepartment,searchHospital,name)=>{
-    // if (searchDepartment!==null) {
-    //    const {data} = await axios.get(`${BaseUrl}/get-doctorBySearch?departmentId=${searchDepartment}&hospitalId=${searchHospital}&name=${name}`)
-    // }
-
+  const handleSearch=async(event)=>{
+   
+event.preventDefault();
+let locationInput= event.target.hospital.value;
+let departmentInput = (event.target.department.value).toUpperCase();;
+const name = event.target.name.value;
+    if(locationInput === 'Location' || departmentInput=== 'Speciality'){
+      locationInput = '';
+      departmentInput = ''; 
+    }
     const {data} = await axios.get(`${BaseUrl}/get-doctorFiltering`,{
-params:{limit:5, offset:1, textInput:'DR. INDARJEET GUPTA',locationInput:3}
+params:{limit:5, offset:1, name, locationInput,departmentInput}
     })
-    console.log(data,'data')
+    if(!data.massage && data){
+      setDoctors(data.rows)
+      
+    }
+    if(data.massage){
+      toast.error(data.massage,{id:1})
+    }
+    console.log(locationInput,departmentInput,name,data)
+    event.target.reset()
    }
 
  
