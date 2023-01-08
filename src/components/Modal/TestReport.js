@@ -31,8 +31,22 @@ const TestReport = ({open,setOpen,reportData,reload,setReload,setReportData}) =>
     const data= await PostReport(formData)
     setReload(!reload)
     setFile('');
-
+    
   }
+  // const onButtonClick = (file,name) => {
+  //   // using Java Script method to get PDF file
+  //   fetch(`${BaseUrl}/${file}`).then(response => {
+  //       response.blob().then(blob => {
+  //           // Creating new object of PDF file
+  //           const fileURL = window.URL.createObjectURL(blob);
+  //           // Setting various property values
+  //           let alink = document.createElement('a');
+  //           alink.href = fileURL;
+  //           alink.download = `${file}`;
+  //           alink.click();
+  //       })
+  //   })
+  // }
   return (
     <React.Fragment>
     <Modal
@@ -50,9 +64,10 @@ const TestReport = ({open,setOpen,reportData,reload,setReload,setReportData}) =>
             <div>
               {data.map((value,index)=> 
                 <div className="pt-5">
-                  <a href={value.link}  target="_blank">
+                  <a href={`${BaseUrl}/${value.link}`}  target="_blank">
                   {value.name}
                 </a>
+                {/* <Button onClick={onButtonClick(value.link,value.name)} >download</Button> */}
                 </div>
 
               )}
