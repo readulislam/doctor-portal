@@ -27,6 +27,7 @@ GET_PRESCRIPTION:() =>'/get-prescription',
 ADD_REPORT:() =>'/add-testReports',
 
 
+
 }
 const URL =(End_Point) => `${BaseUrl}${End_Point}`
 

@@ -37,10 +37,16 @@ const CardView = () => {
   },[page])
   console.log(page)
   const handleSearch=async(searchDepartment,searchHospital,name)=>{
-    if (searchDepartment!==null) {
-       const {data} = await axios.get(`${BaseUrl}/get-doctorBySearch?departmentId=${searchDepartment}&hospitalId=${searchHospital}&name=${name}`)
-    }
-  }
+    // if (searchDepartment!==null) {
+    //    const {data} = await axios.get(`${BaseUrl}/get-doctorBySearch?departmentId=${searchDepartment}&hospitalId=${searchHospital}&name=${name}`)
+    // }
+
+    const {data} = await axios.get(`${BaseUrl}/get-doctorFiltering`,{
+params:{limit:5, offset:1, textInput:'DR. INDARJEET GUPTA',locationInput:3}
+    })
+    console.log(data,'data')
+   }
+
  
   return (
     <>
