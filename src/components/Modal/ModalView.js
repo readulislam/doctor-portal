@@ -17,7 +17,6 @@ import AppointmentBookedModal from "./AppointmentBookedModal";
 import OtpVerifyModal from "./OtpVerifyModal";
 import RegistarModal from "./RegistarModal";
 import moment from "moment";
-import jsPDF from "jspdf";
 import BillReceipt from "./BillReceipt";
 
 const ModalView = ({

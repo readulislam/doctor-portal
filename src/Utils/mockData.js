@@ -346,6 +346,52 @@ export const data = [
       prescription:''
     },
   ]
+  export const doctorExperience=[
+    {
+      name:'1 Years',
+      value:1
+    },
+    {
+      name:'2 Years',
+      value:2
+    },
+    {
+      name:'3 Years',
+      value:3
+    },
+    {
+      name:'4 Years',
+      value:4
+    },
+    {
+      name:'5 Years',
+      value:5
+    },
+    {
+      name:'6 Years',
+      value:6
+    },
+    {
+      name:'7 Years',
+      value:7
+    },
+    {
+      name:'8 Years',
+      value:8
+    },
+    {
+      name:'9 Years',
+      value:9
+    },
+    {
+      name:'10 Years',
+      value:10
+    },
+    {
+      name:'more than 10 Years',
+      value:11
+    },
+  ]
   export const location=[{id:1,
     value:'mSmart Hospital,jaipur'},
     'mSmart Hospital,Delhi','mSmart Hospital,Delhi','mSmart Hospital,Gurugram']
