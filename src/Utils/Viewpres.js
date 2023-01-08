@@ -21,17 +21,13 @@ const Viewpres = ({id,doctorId,patientId}) => {
   return (
     <>
     <Table.Cell>
-                  {/* <Button  onClick={()=>setOpenTestReport(true)} >show</Button> */}
-                  {/* <Button  onClick={()=>setOpen(true)} >Upload</Button> */}
-                  <a href={link} target="_blank">
-                  View
-                  </a>
-                  
-                  
-                </Table.Cell>
-                <TableCell>
-                    {followUpDate}
-                </TableCell>
+      <a href={link} target="_blank">
+        View
+      </a>
+    </Table.Cell>
+    <TableCell>
+        {followUpDate}
+    </TableCell>
     </>
   )
 }

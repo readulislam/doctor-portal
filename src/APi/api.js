@@ -98,14 +98,14 @@ export const RegistrationDoctor = async(doctorInfo) =>{
     return  data
 }
 export const PostPrescription=async(PrescriptionInfo)=>{
-    const {data} = await axios.post(URL(END_POINTS.ADD_PRESCRIPTION()),{
-        ...PrescriptionInfo
-    })
+    const {data} = await axios.post(URL(END_POINTS.ADD_PRESCRIPTION()),
+        PrescriptionInfo
+    )
     return  data
 }
-export const PostReport=async(reportInfo)=>{
+export const PostReport=async(formData)=>{
     const {data} = await axios.post(URL(END_POINTS.ADD_REPORT()),
-        {...reportInfo}
+        formData
     )
     return  data
 }

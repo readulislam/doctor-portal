@@ -17,7 +17,7 @@ import AppointmentBookedModal from "./AppointmentBookedModal";
 import OtpVerifyModal from "./OtpVerifyModal";
 import RegistarModal from "./RegistarModal";
 import moment from "moment";
-import jsPDF from "jspdf";
+import BillReceipt from "./BillReceipt";
 
 const ModalView = ({
   open,
@@ -46,6 +46,7 @@ const ModalView = ({
   const [appointment, setAppointment] = useState({});
   const [registerModel, setRegisterModel] = useState(false)
   const [currentTime, setcurrentTime] = useState();
+  const [openBillReceipt, setOpenBillReceipt] = useState(false);
   
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -95,38 +96,32 @@ const ModalView = ({
   try {
     if (doctorId && userId) {
     
-      const data = await AddDoctorAppointment({
-        doctorId,
-        patientId: userId,
-        time: selected.time,
-        timeSlotId: selected.id,
-        requestedByEmail: "",
-        requestedByPhone: "",
-        date,
-        status: false,
-      });
-      setAppointment(data)
-      if (data) {
-        // doctorId, date, timeRange, slotId
+      // const data = await AddDoctorAppointment({
+      //   doctorId,
+      //   patientId: userId,
+      //   time: selected.time,
+      //   timeSlotId: selected.id,
+      //   requestedByEmail: "",
+      //   requestedByPhone: "",
+      //   date,
+      //   status: false,
+      // });
+      // setAppointment(data)
+      // if (data) {
+      //   // doctorId, date, timeRange, slotId
    
-        const update = await updateTimeSlot({
-          doctorId,
-          timeRange: slotsInfo.timeRange,
-          slotId: selected.id,
-          date,
-          weekday: slotsInfo.weekday,
-        });
+      //   const update = await updateTimeSlot({
+      //     doctorId,
+      //     timeRange: slotsInfo.timeRange,
+      //     slotId: selected.id,
+      //     date,
+      //     weekday: slotsInfo.weekday,
+      //   });
         
-        const doc=new jsPDF('landscape','px','a4','false')
-        doc.text(`Doctor's name : ${doctorData.name}`,10,10)
-        doc.text(`patient's name : ${userInfo.firstName}  ${userInfo.middleName}`,20,20)
-        doc.text(`charges : 800`,30,30)
-        doc.text(`date and time of appointment : ${date}  ${selected.time}`,40,40)
-        doc.save('bil.pdf')
-        setSelected(null);
-        setDate("");
-        toast.success( `Appointment Booking Successfully `,{id:1})
-      }
+      // }
+       console.log(doctorData);
+      setOpenBillReceipt(true)
+     
    
   } else {
     if (selected && number) {
@@ -141,38 +136,33 @@ const ModalView = ({
       }
 
       if (userId && isLoggedIn) {
-        const data = await AddDoctorAppointment({
-          doctorId,
-          patientId: userId,
-          time: selected.time,
-          timeSlotId: selected.id,
-          requestedByEmail: "",
-          requestedByPhone: "",
-          date,
-          status: false,
-        });
+        // const data = await AddDoctorAppointment({
+        //   doctorId,
+        //   patientId: userId,
+        //   time: selected.time,
+        //   timeSlotId: selected.id,
+        //   requestedByEmail: "",
+        //   requestedByPhone: "",
+        //   date,
+        //   status: false,
+        // });
 
-        setAppointment(data)
-        if (data) {
-          // doctorId, date, timeRange, slotId
-          const query = {
-            doctorId,
-            timeRange: slotsInfo.timeRange,
-            slotId: selected.id,
-            date,
-            weekday: slotsInfo.weekday,
-          };
-          const update = await updateTimeSlot(query);
-          const doc=new jsPDF('landscape','px','a4','false')
-          doc.text(`Doctor's name : ${doctorData.name}`,10,10)
-          doc.text(`patient's name : ${userInfo.firstName}  ${userInfo.middleName}`,10,20)
-          doc.text(`charges : 800`,10,30)
-          doc.text(`date and time of appointment : ${date}  ${selected}`,10,40)
-          doc.save('bil.pdf')
-          setSelected(null);
-          setDate("");
-          toast.success( `Appointment Booking Successfully `,{id:1})
-        }
+        // setAppointment(data)
+        // if (data) {
+        //   // doctorId, date, timeRange, slotId
+        //   const query = {
+        //     doctorId,
+        //     timeRange: slotsInfo.timeRange,
+        //     slotId: selected.id,
+        //     date,
+        //     weekday: slotsInfo.weekday,
+        //   };
+        //   const update = await updateTimeSlot(query);
+        
+          
+        //   setOpenBillReceipt(true)
+        // }
+        setOpenBillReceipt(true)
       }
     }
   }
@@ -322,7 +312,7 @@ const ModalView = ({
       />
 
 <RegistarModal open={registerModel} setOpen={setRegisterModel}/>
-        
+{openBillReceipt && <BillReceipt open={openBillReceipt} setOpen={setOpenBillReceipt} doctorData={doctorData} date={date} selected={selected} />        }
 
 {/* {done && <AppointmentBookedModal time={appointment.time} date={appointment.date} done={done} setDone={setDone}  />} */}
     </>

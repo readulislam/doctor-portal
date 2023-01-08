@@ -40,7 +40,7 @@ const PatientView = () => {
               imgSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHgD-7kP3hbPiQYBy6N3-pWaFqUNgsUwKE9XVydJQ&s"
             >
               <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            {userInfo.firstName+' '+userInfo.middleName}
+            {userInfo.firstName+' '+userInfo.lastName}
               </h5>
               <p className="font-normal text-gray-700 dark:text-gray-400">
               {userInfo.contact}
@@ -49,7 +49,7 @@ const PatientView = () => {
               {userInfo.gender}
               </p>
               <p className="font-normal text-gray-700 dark:text-gray-400">
-                address - 41 Vaishali, Jaipur
+                {userInfo.address}
               </p>
               
             </Card>

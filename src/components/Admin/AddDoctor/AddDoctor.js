@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import PhoneInput from 'react-phone-number-input';
 import { useNavigate } from 'react-router';
 import { ListDepartments, ListHospitals,  RegistrationDoctor } from '../../../APi/api';
+import { doctorExperience } from '../../../Utils/mockData';
 import { DoctorRegistarSchema } from '../../Form/Schema';
 import { data } from './const';
 // 79c2ec0f6d6859d731f98a37a94e5c70
@@ -131,6 +132,16 @@ const AddDoctor = () => {
                     />
                 </label>
                 <ErrorMessage name="designation" />
+                <select
+                 id="underline_select"
+                 className=" py-2.5 mt-4 w-full  text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+                 name='experience'
+                >
+                    <option selected>Experience</option>
+                    {doctorExperience.map(({name,value})=>{
+                      return(<option value={value} >{name}</option>)
+                    })}
+                </select>
                 <select
                  id="underline_select"
                  className=" py-2.5 mt-4 w-full  text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"

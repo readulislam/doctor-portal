@@ -5,60 +5,48 @@ import { BaseUrl, PostReport } from '../../APi/api';
 
 const TestReport = ({open,setOpen,reportData,reload,setReload,setReportData}) => {
   const [data, setData] = useState([]);
-  const [image, setImage] = useState('');
+  const [file, setFile] = useState();
   
   
   useEffect(() => {
     const reportfetch=async()=>{
           const {data}=await axios.get(`${BaseUrl}/get-testReports?patientId=${reportData.patientId}&doctorId=${reportData.doctorId}&appointmentId=${reportData.id}`)
           setData(data)
-          
-      
           }
     reportfetch()
 }, [reload,reportData.id])
 
 
 
-  const handleSubmit=async()=>{
-    // const formData = new FormData();
-    // formData.append("image", image);
-    // formData.append("patientId", reportData.patientId);
-    // formData.append("doctorId", reportData.doctorId);
-    // formData.append("appointmentId", reportData.id);
-    // formData.append("name", image.name);
-    const key = "79c2ec0f6d6859d731f98a37a94e5c70";
+  const handleSubmit=async(e)=>{
+    e.preventDefault()
     const formData = new FormData();
-    formData.append("image", image);
- 
-    fetch(`https://api.imgbb.com/1/upload?key=${key}`, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then(async(result) => {
-        if (result) {
-       
-          const reportInfo = {
-            patientId:reportData.patientId,
-            doctorId:reportData.doctorId,
-            appointmentId:reportData.id,
-            link: result.data.url,
-            name:image.name
-          };
-          
-          const data= await PostReport(reportInfo)
-          
-       
-        }
-      });
+    formData.append("file", file);
+    formData.append("name", e.target.name.value);
+    formData.append("patientId", reportData.patientId);
+    formData.append("doctorId", reportData.doctorId);
+    formData.append("appointmentId", reportData.id);
     
-    
-    
+    console.log(formData,reportData);
+    const data= await PostReport(formData)
     setReload(!reload)
-    setImage('');
-
+    setFile('');
+    
   }
+  // const onButtonClick = (file,name) => {
+  //   // using Java Script method to get PDF file
+  //   fetch(`${BaseUrl}/${file}`).then(response => {
+  //       response.blob().then(blob => {
+  //           // Creating new object of PDF file
+  //           const fileURL = window.URL.createObjectURL(blob);
+  //           // Setting various property values
+  //           let alink = document.createElement('a');
+  //           alink.href = fileURL;
+  //           alink.download = `${file}`;
+  //           alink.click();
+  //       })
+  //   })
+  // }
   return (
     <React.Fragment>
     <Modal
@@ -66,7 +54,7 @@ const TestReport = ({open,setOpen,reportData,reload,setReload,setReportData}) =>
       position="center"
       onClose={() => {
         setOpen(false);
-        setImage('');
+        setFile('');
       }}
     >
      <Modal.Header className=""> Test Report </Modal.Header>
@@ -76,21 +64,31 @@ const TestReport = ({open,setOpen,reportData,reload,setReload,setReportData}) =>
             <div>
               {data.map((value,index)=> 
                 <div className="pt-5">
-                  <a href={value.link}  target="_blank">
+                  <a href={`${BaseUrl}/${value.link}`}  target="_blank">
                   {value.name}
                 </a>
+                {/* <Button onClick={onButtonClick(value.link,value.name)} >download</Button> */}
                 </div>
 
               )}
             </div>
-            <div className='mt-5' >
-            <input type="file" 
-              accept="image/*"
-              placeholder='image'
-              onChange={(e) => { setImage(e.target.files[0]) }} 
-            />
-            <Button onClick={handleSubmit} >ADD</Button>
+            <form onSubmit={handleSubmit} className='mt-5' >
+            <div>
+            <Label>
+              Enter name of Report : 
+            <input
+              type='text'
+              name="name"
+              />
+            </Label>
             </div>
+            <div className='mt-5'>
+            <input type="file" id="file" name="file" accept="application/*"
+              onChange={(e) => { setFile(e.target.files[0]) }} 
+            />
+            </div>
+            <Button className='mt-5' type='submit' >ADD</Button>
+            </form>
         <br/>
        
             </div>
@@ -101,7 +99,7 @@ const TestReport = ({open,setOpen,reportData,reload,setReload,setReportData}) =>
             color="gray"
             onClick={() => {
               setOpen(false);
-              setImage('');
+              setFile('');
             }}
           >
             Cancel
@@ -110,7 +108,7 @@ const TestReport = ({open,setOpen,reportData,reload,setReload,setReportData}) =>
             
             className="px-2 "
             gradientDuoTone="cyanToBlue"
-            onClick={()=>{setOpen(false);setImage('');}}
+            onClick={()=>{setOpen(false);setFile('');}}
           >
             Submit
           </Button>
