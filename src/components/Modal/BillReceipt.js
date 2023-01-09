@@ -65,7 +65,7 @@ const BillReceipt = ({doctorData,date,selected,open,setOpen}) => {
                 </div>
                 <div className='pb-3'>
                   <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                  Patient name : <span className="text-black">{userInfo.firstName+' '+userInfo.middleName}</span>
+                  Patient name : <span className="text-black">{userInfo?.firstName+' '+userInfo?.middleName}</span>
                 </p>
                 </div>
                 <div className='pb-3'>

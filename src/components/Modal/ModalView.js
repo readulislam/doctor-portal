@@ -9,10 +9,11 @@ import {
   AddDoctorAppointment,
   BaseUrl,
   LoginPatient,
+  PatientRegister,
   updateTimeSlot
 } from "../../APi/api";
 import useFirebaseAuth from "../../hooks/useFirebaseAuth";
-import { patientLoginByPhone } from "../../Store/Auth-Slice";
+import { authActions, patientLoginByPhone } from "../../Store/Auth-Slice";
 import AppointmentBookedModal from "./AppointmentBookedModal";
 import OtpVerifyModal from "./OtpVerifyModal";
 import RegistarModal from "./RegistarModal";
@@ -47,6 +48,7 @@ const ModalView = ({
   const [registerModel, setRegisterModel] = useState(false)
   const [currentTime, setcurrentTime] = useState();
   const [openBillReceipt, setOpenBillReceipt] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false)
   
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -182,6 +184,7 @@ const ModalView = ({
   useEffect(() => {
     const verify = async () => {
       if (number && contact) {
+        console.log(number);
         const response = await setupRecaptcha(number, "patientBooking");
         setOTPResult(response);
         if (response) {
@@ -190,14 +193,32 @@ const ModalView = ({
       }
     };
     verify();
-  }, [contact, number]);
+  }, [contact, number,isRegistered,setupRecaptcha]);
   const handleDispatch = async () => {
-    await dispatch(patientLoginByPhone(number));
+    dispatch(patientLoginByPhone(number));
     setOpen(false);
+    setOpenBillReceipt(true)
   };
   const handleOtpSubmit = () => {
     // setOpenOtp(false)
   };
+  const handleRegisterModel = async(apiData)=>{
+    setRegisterModel(false)
+    const data = await PatientRegister(apiData)
+    if(data){
+      //  dispatch(authActions.userRegister({userId:data.id, userInfo:data}))
+
+      console.log(data);
+       const response = await setupRecaptcha(number, "patientBooking");
+       setOTPResult(response);
+       if (response) {
+         setOpenOtp(true);
+       }
+      
+    }
+  
+  
+  }
   return (
     <>
       {" "}
@@ -311,7 +332,7 @@ const ModalView = ({
         handleOtpSubmit={handleOtpSubmit}
       />
 
-<RegistarModal open={registerModel} setOpen={setRegisterModel}/>
+<RegistarModal handleRegisterModel={handleRegisterModel} open={registerModel} setOpen={setRegisterModel}/>
 {openBillReceipt && <BillReceipt open={openBillReceipt} setOpen={setOpenBillReceipt} doctorData={doctorData} date={date} selected={selected} />        }
 
 {/* {done && <AppointmentBookedModal time={appointment.time} date={appointment.date} done={done} setDone={setDone}  />} */}
