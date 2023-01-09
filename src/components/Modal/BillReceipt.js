@@ -8,6 +8,8 @@ const BillReceipt = ({doctorData,date,selected,open,setOpen}) => {
     const { userInfo, userId } = useSelector(
         (state) => state.Auth
       );
+      console.log(date,selected);
+      console.log(userInfo,'info');
       console.log("hi",doctorData,date,selected);
       const downloadBill=()=>{
         const doc=new jsPDF('landscape','px','a4','false')
@@ -39,7 +41,7 @@ const BillReceipt = ({doctorData,date,selected,open,setOpen}) => {
         doc.save('bil.pdf')
       }
      
-
+const r = (Math.random() * 100000)
   return (
     <React.Fragment>
       <Modal show={open} position="center" onClose={() => setOpen(false)}>
@@ -50,17 +52,21 @@ const BillReceipt = ({doctorData,date,selected,open,setOpen}) => {
               <div className='w-1/2' >
                 <div className='pb-3'>
                   <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                  Receipt Number: <span className="text-black"></span>
+                  Receipt Number: <span className="text-black">{r}</span>
                 </p>
                 </div>
                 <div className='pb-3'>
                   <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                  Hospital name : <span className="text-black">{doctorData.hospital.name}</span>
+                  Hospital name : <span className="text-black">
+                  {doctorData?.hospital?.name}
+                  </span>
                 </p>
                 </div>
                 <div className='pb-3'>
                   <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                  Doctor Name : <span className="text-black">{doctorData.name}</span>
+                  Doctor Name : <span className="text-black">
+                  {doctorData?.name}
+                  </span>
                 </p>
                 </div>
                 <div className='pb-3'>
@@ -70,14 +76,18 @@ const BillReceipt = ({doctorData,date,selected,open,setOpen}) => {
                 </div>
                 <div className='pb-3'>
                   <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                  Hospital location : <span className="text-black">{doctorData.hospital.address}</span>
+                  Hospital location : <span className="text-black">
+                  {doctorData?.hospital?.address}
+                  </span>
                 </p>
                 </div>
               </div>
               <div className='w-1/2' >
                 <div className='pb-3'>
                   <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                  Date & Time  : <span className="text-black">{date} & {selected.time}</span>
+                  Date & Time : <span className="text-black">
+                    {date} & {selected?.time}
+                  </span>
                 </p>
                 </div>
                 <div className='pb-3'>
@@ -87,22 +97,31 @@ const BillReceipt = ({doctorData,date,selected,open,setOpen}) => {
                 </div>
                 <div className='pb-3'>
                   <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                  Patient name : <span className="text-black">{userInfo?.firstName+' '+userInfo?.middleName}</span>
+                  Patient name : <span className="text-black">
+                  {userInfo?.firstName+' '+userInfo?.middleName}
+                  </span>
                 </p>
                 </div>
                 <div className='pb-3'>
                   <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                  Address: <span className="text-black">{userInfo?.address}</span>
+                  Address: <span className="text-black">
+                      {userInfo?.address}
+                  </span>
                 </p>
                 </div>
                 <div className='pb-3'>
                   <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                  Phone Number : <span className="text-black">{userInfo?.contact}</span>
+                  Phone Number : <span className="text-black">
+                  {userInfo?.contact}
+                  </span>
                 </p>
                 </div>
                 <div className='pb-3'>
                   <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                  State/City : <span className="text-black">{userInfo?.state+" / "+userInfo?.city}</span>
+                  State/City : <span className="text-black">
+
+                  {/* {userInfo.state+" / "+userInfo.city} */}
+                  </span>
                 </p>
                 </div>
               </div>

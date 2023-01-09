@@ -24,7 +24,7 @@ const RegistarModal = ({setDone, open ,setOpen,number,handleRegisterModel}) => {
   const [martialStatus, setMartialStatus] = useState("");
   const [hospitalList, setHospitalList] = useState([]);
   const splitting = date.split("-");
-  const newDate = splitting[2] + "/" + splitting[1] + "/" + splitting[0];
+  const userDate = splitting[2] + "/" + splitting[1] + "/" + splitting[0];
   useEffect(() => {
     const fetching=async()=>{
       const {data}= await ListHospitals()
@@ -55,7 +55,7 @@ const RegistarModal = ({setDone, open ,setOpen,number,handleRegisterModel}) => {
       middleName: middleName,
       lastName: lastName,
       contact: number,
-      dateOfBirth: newDate,
+      dateOfBirth: userDate,
       address: address,
       location: hospitalName,
       gender: gender,
