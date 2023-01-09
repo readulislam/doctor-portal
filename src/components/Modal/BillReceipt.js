@@ -1,5 +1,6 @@
 import { Button, Modal, Table } from 'flowbite-react';
 import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable'
 import React from 'react'
 import { useSelector } from 'react-redux';
 
@@ -21,13 +22,19 @@ const BillReceipt = ({doctorData,date,selected,open,setOpen}) => {
         doc.text(`date and time of appointment : ${date}  ${selected.time}`,350,50)
 
         doc.text('patient Information',350,80)
-        doc.text(`patient's name : ${userInfo.firstName}  ${userInfo.middleName}`,350,100)
-        doc.text(`Address : ${userInfo.address}`,350,120)
-        doc.text(`Phone Number : ${userInfo.contact}`,350,140)
-        doc.text(`State/City : ${userInfo.state} / ${userInfo.city}`,350,160)
-        
-        doc.text(`Consultation Charge`,10,210)
-        doc.text(`800`,350,210)
+        doc.text(`patient's name : ${userInfo?.firstName}  ${userInfo?.middleName}`,350,100)
+        doc.text(`Address : ${userInfo?.address}`,350,120)
+        doc.text(`Phone Number : ${userInfo?.contact}`,350,140)
+        doc.text(`State/City : ${userInfo?.state} / ${userInfo?.city}`,350,160)
+        autoTable(doc, {
+          startY:210,
+          head: [['Descrition of Service', 'Charges']],
+          body: [
+            ['Consultation Charge', '800'],
+            // ...
+          ],
+        })
+        doc.text('total = 800',450,410)
         
         doc.save('bil.pdf')
       }
@@ -36,7 +43,7 @@ const BillReceipt = ({doctorData,date,selected,open,setOpen}) => {
   return (
     <React.Fragment>
       <Modal show={open} position="center" onClose={() => setOpen(false)}>
-        <Modal.Header className='justify-between' >Bill Receipt</Modal.Header>
+        <Modal.Header className='justify-between' >Bill </Modal.Header>
         <Modal.Body>
          <div>
           <div className='flex' >
@@ -70,7 +77,7 @@ const BillReceipt = ({doctorData,date,selected,open,setOpen}) => {
               <div className='w-1/2' >
                 <div className='pb-3'>
                   <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                  Date & Time appointment : <span className="text-black">{date} & {selected.time}</span>
+                  Date & Time  : <span className="text-black">{date} & {selected.time}</span>
                 </p>
                 </div>
                 <div className='pb-3'>
@@ -85,17 +92,17 @@ const BillReceipt = ({doctorData,date,selected,open,setOpen}) => {
                 </div>
                 <div className='pb-3'>
                   <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                  Address: <span className="text-black">{userInfo.address}</span>
+                  Address: <span className="text-black">{userInfo?.address}</span>
                 </p>
                 </div>
                 <div className='pb-3'>
                   <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                  Phone Number : <span className="text-black">{userInfo.contact}</span>
+                  Phone Number : <span className="text-black">{userInfo?.contact}</span>
                 </p>
                 </div>
                 <div className='pb-3'>
                   <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                  State/City : <span className="text-black">{userInfo.state+" / "+userInfo.city}</span>
+                  State/City : <span className="text-black">{userInfo?.state+" / "+userInfo?.city}</span>
                 </p>
                 </div>
               </div>

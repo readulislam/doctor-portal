@@ -67,7 +67,11 @@ const PatientView = () => {
               <TableView heading={patientUpComingHeading} data={patientUpComingData} />
             </Tabs.Item>
             <Tabs.Item 
-            
+            title
+            >
+
+            </Tabs.Item>
+            <Tabs.Item 
             title="Past Appointment">
             <PastTableView heading={patientHeading} data={patientPastData} />
             </Tabs.Item>

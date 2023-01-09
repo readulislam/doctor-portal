@@ -332,7 +332,7 @@ const ModalView = ({
         handleOtpSubmit={handleOtpSubmit}
       />
 
-<RegistarModal handleRegisterModel={handleRegisterModel} open={registerModel} setOpen={setRegisterModel}/>
+{registerModel &&<RegistarModal handleRegisterModel={handleRegisterModel} number={number} open={registerModel} setOpen={setRegisterModel}/>}
 {openBillReceipt && <BillReceipt open={openBillReceipt} setOpen={setOpenBillReceipt} doctorData={doctorData} date={date} selected={selected} />        }
 
 {/* {done && <AppointmentBookedModal time={appointment.time} date={appointment.date} done={done} setDone={setDone}  />} */}
