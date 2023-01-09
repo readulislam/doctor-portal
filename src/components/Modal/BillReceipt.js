@@ -8,12 +8,27 @@ const BillReceipt = ({doctorData,date,selected,open,setOpen}) => {
         (state) => state.Auth
       );
       console.log("hi",doctorData,date,selected);
-      const download=()=>{
+      const downloadBill=()=>{
         const doc=new jsPDF('landscape','px','a4','false')
-        doc.text(`Doctor's name : ${doctorData.name}`,10,10)
-        doc.text(`patient's name : ${userInfo.firstName}  ${userInfo.middleName}`,20,20)
-        doc.text(`charges : 800`,30,30)
-        doc.text(`date and time of appointment : ${date}  ${selected.time}`,40,40)
+        doc.text('Bill Receipt',270,10)
+        doc.text(`Receipt's Number : `,10,50)
+
+        doc.text(`Hospital name : ${doctorData.hospital.name}`,10,80)
+        doc.text(`Doctor's name : ${doctorData.name}`,10,100)
+        doc.text(`Appointment number : `,10,120)
+        doc.text(`Hospital location : ${doctorData.hospital.address}`,10,140)
+
+        doc.text(`date and time of appointment : ${date}  ${selected.time}`,350,50)
+
+        doc.text('patient Information',350,80)
+        doc.text(`patient's name : ${userInfo.firstName}  ${userInfo.middleName}`,350,100)
+        doc.text(`Address : ${userInfo.address}`,350,120)
+        doc.text(`Phone Number : ${userInfo.contact}`,350,140)
+        doc.text(`State/City : ${userInfo.state} / ${userInfo.city}`,350,160)
+        
+        doc.text(`Consultation Charge`,10,210)
+        doc.text(`800`,350,210)
+        
         doc.save('bil.pdf')
       }
      
@@ -21,7 +36,7 @@ const BillReceipt = ({doctorData,date,selected,open,setOpen}) => {
   return (
     <React.Fragment>
       <Modal show={open} position="center" onClose={() => setOpen(false)}>
-        <Modal.Header>Bill Receipt</Modal.Header>
+        <Modal.Header className='justify-between' >Bill Receipt</Modal.Header>
         <Modal.Body>
          <div>
           <div className='flex' >
@@ -55,7 +70,7 @@ const BillReceipt = ({doctorData,date,selected,open,setOpen}) => {
               <div className='w-1/2' >
                 <div className='pb-3'>
                   <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                  Date & Time Charge : <span className="text-black">{date} & {selected.time}</span>
+                  Date & Time appointment : <span className="text-black">{date} & {selected.time}</span>
                 </p>
                 </div>
                 <div className='pb-3'>
@@ -101,6 +116,7 @@ const BillReceipt = ({doctorData,date,selected,open,setOpen}) => {
           <div className="flex justify-end"><p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
                 Total: <span className="text-black">800 Rs</span>
               </p></div>
+              <div className="flex justify-end"><Button onClick={downloadBill} >download</Button></div>
          </div>
         </Modal.Body>
         <Modal.Footer>

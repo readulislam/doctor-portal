@@ -67,6 +67,7 @@ const AddDoctor = () => {
             contactNo: number,
             designation: values.designation,
             img: result.data.url,
+            experience: values.experience
           };
        
         const data = await RegistrationDoctor(doctorInfo)
