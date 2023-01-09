@@ -3,18 +3,12 @@ import { Button, Modal, TextInput } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import PhoneInput from "react-phone-number-input";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
-import toast from 'react-hot-toast';
-import {
-  AddDoctorAppointment,
-  BaseUrl,
-  LoginPatient,
-  PatientRegister,
-  updateTimeSlot
-} from "../../APi/api";
+
+import toast from "react-hot-toast";
+import { BaseUrl, LoginPatient, PatientRegister } from "../../APi/api";
 import useFirebaseAuth from "../../hooks/useFirebaseAuth";
 import { authActions, patientLoginByPhone } from "../../Store/Auth-Slice";
-import AppointmentBookedModal from "./AppointmentBookedModal";
+
 import OtpVerifyModal from "./OtpVerifyModal";
 import RegistarModal from "./RegistarModal";
 import moment from "moment";
@@ -27,7 +21,7 @@ const ModalView = ({
   location,
   speciality,
   existingUser,
-  
+
   doctorId,
   setRegistarOpen,
   setTime,
@@ -45,18 +39,19 @@ const ModalView = ({
   const [number, setNumber] = useState("");
   const [contact, setContact] = useState(false);
   const [appointment, setAppointment] = useState({});
-  const [registerModel, setRegisterModel] = useState(false)
+  const [registerModel, setRegisterModel] = useState(false);
   const [currentTime, setcurrentTime] = useState();
   const [openBillReceipt, setOpenBillReceipt] = useState(false);
-  const [isRegistered, setIsRegistered] = useState(false)
-  
+  const [isRegistered, setIsRegistered] = useState(false);
+
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
+  const splitting = date.split("-");
+  const newDate = splitting[2] + "/" + splitting[1] + "/" + splitting[0];
+  // const navigate = useNavigate();
   useEffect(() => {
     const fetching = async () => {
       if (date && doctorId) {
-        const splitting = date.split("-");
-        const newDate = splitting[2] + "/" + splitting[1] + "/" + splitting[0];
         const { data } = await axios.post(
           `${BaseUrl}/get-slots?date=${newDate}&doctorId=${doctorId}`
         );
@@ -64,80 +59,33 @@ const ModalView = ({
         setSlotsInfo(data);
 
         console.log(moment().hours());
-        if (date===new Date().toJSON().slice(0, 10)) {
-          setcurrentTime(`${moment().hours()} : ${moment().minutes()}`)  
+        if (date === new Date().toJSON().slice(0, 10)) {
+          setcurrentTime(`${moment().hours()} : ${moment().minutes()}`);
           console.log(currentTime);
-        }else{
-          setcurrentTime()
+        } else {
+          setcurrentTime();
         }
-        
-        
       }
     };
     fetching();
   }, [date, doctorId]);
-  const disableDate=()=>{
+  const disableDate = () => {
     var dtToday = new Date();
-    
+
     var month = dtToday.getMonth() + 1;
     var day = dtToday.getDate();
     var year = dtToday.getFullYear();
-    if(month < 10)
-        month = '0' + month.toString();
-    if(day < 10)
-        day = '0' + day.toString();
-    
-    return year + '-' + month + '-' + day;
+    if (month < 10) month = "0" + month.toString();
+    if (day < 10) day = "0" + day.toString();
 
-  
-  }
+    return year + "-" + month + "-" + day;
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
     const { date } = slotsInfo;
 
-  try {
-    if (doctorId && userId) {
-    
-      // const data = await AddDoctorAppointment({
-      //   doctorId,
-      //   patientId: userId,
-      //   time: selected.time,
-      //   timeSlotId: selected.id,
-      //   requestedByEmail: "",
-      //   requestedByPhone: "",
-      //   date,
-      //   status: false,
-      // });
-      // setAppointment(data)
-      // if (data) {
-      //   // doctorId, date, timeRange, slotId
-   
-      //   const update = await updateTimeSlot({
-      //     doctorId,
-      //     timeRange: slotsInfo.timeRange,
-      //     slotId: selected.id,
-      //     date,
-      //     weekday: slotsInfo.weekday,
-      //   });
-        
-      // }
-       console.log(doctorData);
-      setOpenBillReceipt(true)
-     
-   
-  } else {
-    if (selected && number) {
-      const response = await LoginPatient(number);
-
-      if (response.contact) {
-        setContact(true);
-      } else {
-        
-        toast.error( `${response.massage}`,{id:1})
-        setRegisterModel(true)
-      }
-
-      if (userId && isLoggedIn) {
+    try {
+      if (doctorId && userId) {
         // const data = await AddDoctorAppointment({
         //   doctorId,
         //   patientId: userId,
@@ -148,34 +96,66 @@ const ModalView = ({
         //   date,
         //   status: false,
         // });
-
         // setAppointment(data)
         // if (data) {
         //   // doctorId, date, timeRange, slotId
-        //   const query = {
+
+        //   const update = await updateTimeSlot({
         //     doctorId,
         //     timeRange: slotsInfo.timeRange,
         //     slotId: selected.id,
         //     date,
         //     weekday: slotsInfo.weekday,
-        //   };
-        //   const update = await updateTimeSlot(query);
-        
-          
-        //   setOpenBillReceipt(true)
+        //   });
+
         // }
-        setOpenBillReceipt(true)
+        console.log(doctorData);
+        setOpenBillReceipt(true);
+      } else {
+        if (selected && number) {
+          const response = await LoginPatient(number);
+
+          if (response.contact) {
+            setContact(true);
+          } else {
+            toast.error(`${response.massage}`, { id: 1 });
+            setRegisterModel(true);
+          }
+
+          if (userId && isLoggedIn) {
+            // const data = await AddDoctorAppointment({
+            //   doctorId,
+            //   patientId: userId,
+            //   time: selected.time,
+            //   timeSlotId: selected.id,
+            //   requestedByEmail: "",
+            //   requestedByPhone: "",
+            //   date,
+            //   status: false,
+            // });
+
+            // setAppointment(data)
+            // if (data) {
+            //   // doctorId, date, timeRange, slotId
+            //   const query = {
+            //     doctorId,
+            //     timeRange: slotsInfo.timeRange,
+            //     slotId: selected.id,
+            //     date,
+            //     weekday: slotsInfo.weekday,
+            //   };
+            //   const update = await updateTimeSlot(query);
+
+            //   setOpenBillReceipt(true)
+            // }
+            setOpenBillReceipt(true);
+          }
+        }
       }
-    }
-  }
-  } catch (error) {
-    
-  }
-  
+    } catch (error) {}
+
     if (isLoggedIn) {
       setOpen(false);
-     
-     
     } else {
       setRegistarOpen(true);
     }
@@ -193,32 +173,30 @@ const ModalView = ({
       }
     };
     verify();
-  }, [contact, number,isRegistered,setupRecaptcha]);
+  }, [contact, number, isRegistered, setupRecaptcha]);
   const handleDispatch = async () => {
     dispatch(patientLoginByPhone(number));
     setOpen(false);
-    setOpenBillReceipt(true)
+    setOpenBillReceipt(true);
   };
   const handleOtpSubmit = () => {
     // setOpenOtp(false)
   };
-  const handleRegisterModel = async(apiData)=>{
-    setRegisterModel(false)
-    const data = await PatientRegister(apiData)
-    if(data){
+  const handleRegisterModel = async (apiData) => {
+    console.log(apiData);
+    setRegisterModel(false);
+    const data = await PatientRegister(apiData);
+    if (data) {
       //  dispatch(authActions.userRegister({userId:data.id, userInfo:data}))
 
       console.log(data);
-       const response = await setupRecaptcha(number, "patientBooking");
-       setOTPResult(response);
-       if (response) {
-         setOpenOtp(true);
-       }
-      
+      const response = await setupRecaptcha(number, "patientBooking");
+      setOTPResult(response);
+      if (response) {
+        setOpenOtp(true);
+      }
     }
-  
-  
-  }
+  };
   return (
     <>
       {" "}
@@ -278,7 +256,7 @@ const ModalView = ({
                       className={`text-base ${
                         selected?.id === data.id && "bg-blue-600 text-white"
                       } ${
-                        !data.isAvailable||(data.time<currentTime)
+                        !data.isAvailable || data.time < currentTime
                           ? "bg-gray-400/10 text-gray-400/50"
                           : "shadow-md hover:bg-sky-500 hover:text-white cursor-pointer  "
                       } border   py-1 px-3 text-center rounded-md`}
@@ -305,7 +283,6 @@ const ModalView = ({
                   </>
                 )}
               </div>
-              
             </div>
           </Modal.Body>
           <Modal.Footer className="flex justify-between">
@@ -331,11 +308,24 @@ const ModalView = ({
         setOpen={setOpenOtp}
         handleOtpSubmit={handleOtpSubmit}
       />
-
-<RegistarModal handleRegisterModel={handleRegisterModel} open={registerModel} setOpen={setRegisterModel}/>
-{openBillReceipt && <BillReceipt open={openBillReceipt} setOpen={setOpenBillReceipt} doctorData={doctorData} date={date} selected={selected} />        }
-
-{/* {done && <AppointmentBookedModal time={appointment.time} date={appointment.date} done={done} setDone={setDone}  />} */}
+      {registerModel&&<RegistarModal
+        number={number}
+        newDate={newDate}
+        selected={selected}
+        handleRegisterModel={handleRegisterModel}
+        open={registerModel}
+        setOpen={setRegisterModel}
+      />}
+      {openBillReceipt && (
+        <BillReceipt
+          open={openBillReceipt}
+          setOpen={setOpenBillReceipt}
+          doctorData={doctorData}
+          date={newDate}
+          selected={selected}
+        />
+      )}
+      {/* {done && <AppointmentBookedModal time={appointment.time} date={appointment.date} done={done} setDone={setDone}  />} */}
     </>
   );
 };
