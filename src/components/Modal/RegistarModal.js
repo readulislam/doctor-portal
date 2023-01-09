@@ -7,7 +7,7 @@ import axios from 'axios';
 import { BaseUrl, ListHospitals } from '../../APi/api';
 import { input } from 'formik';
 
-const RegistarModal = ({setDone, open ,setOpen,number}) => {
+const RegistarModal = ({setDone, open ,setOpen,number,handleRegisterModel}) => {
   const [personTitle, setPersonTitle] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -23,6 +23,8 @@ const RegistarModal = ({setDone, open ,setOpen,number}) => {
   const [hospitalName, setHospitalName] = useState("");
   const [martialStatus, setMartialStatus] = useState("");
   const [hospitalList, setHospitalList] = useState([]);
+  const splitting = date.split("-");
+  const newDate = splitting[2] + "/" + splitting[1] + "/" + splitting[0];
   useEffect(() => {
     const fetching=async()=>{
       const {data}= await ListHospitals()
@@ -48,7 +50,23 @@ const RegistarModal = ({setDone, open ,setOpen,number}) => {
   }, [stateId])
   const handleSubmit=(e)=>{
     e.preventDefault()
-    console.log(firstName,middleName,lastName,address,date,gender,hospitalName,stateId,cityId,pincode,martialStatus);
+   const apiData= {title: personTitle,
+      firstName:firstName,
+      middleName: middleName,
+      lastName: lastName,
+      contact: number,
+      dateOfBirth: newDate,
+      address: address,
+      location: hospitalName,
+      gender: gender,
+      country: "india",
+      state: "",
+      stateId:stateId,
+      cityId:cityId,
+      city: "",
+      pinCode: pincode,
+      martialStatus: martialStatus}
+    handleRegisterModel(apiData);
   }
   return (
     <React.Fragment>
