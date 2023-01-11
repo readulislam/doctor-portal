@@ -26,7 +26,7 @@ const TableView = ({ heading, data }) => {
     const fetching = async () => {
       if (userId) {
         const { data } = await axios.get(`${BaseUrl}/patientAppointmentList`, {
-          params: { patientId: userId, limit: 5, offset: page },
+          params: { patientId: userId, limit: 5, offset: page,status:false },
         });
         setPatientAppointment(data.rows);
         setTotalPage(Math.ceil(data.count / 5));

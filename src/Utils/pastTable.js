@@ -33,7 +33,7 @@ const PastTableView = ({ heading, data }) => {
     const fetching = async () => {
       if (userId) {
         const { data } = await axios.get(`${BaseUrl}/patientAppointmentList`, {
-          params: { patientId: userId, limit: 5, offset: page },
+          params: { patientId: userId, limit: 5, offset: page ,status:true},
         });
         setPatientAppointment(data.rows);
         setTotalPage(Math.ceil(data.count / 5));
@@ -121,13 +121,13 @@ console.log("hi past",patientAppointment);
     </div>
       }
       {/* {!appointments.length && <h2 className='text-3xl text-black py-10 font-semibold w-full text-center'>You haven't Appointments</h2>}   */}
-      <TestReport
+      {openTestReport &&<TestReport
       setOpen={setOpenTestReport}
         open={openTestReport}
         reload={reload}
         setReload={setReload}
         reportData={reportData} setReportData={setReportData}
-        />
+        />}
     </>
   );
 };
