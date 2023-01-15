@@ -13,30 +13,83 @@ const BillReceipt = ({doctorData,date,selected,open,setOpen}) => {
       console.log("hi",doctorData,date,selected);
       const downloadBill=()=>{
         const doc=new jsPDF('landscape','px','a4','false')
-        doc.text('Bill Receipt',270,10)
-        doc.text(`Receipt's Number : `,10,50)
+        doc.setFillColor(240, 253,244)
+        doc.rect(0,0,650,600,"F")
+        doc.setFontSize(16)
+        doc.setFont("","","bold")
+        doc.text((doctorData.hospital.name).toUpperCase(),250,30)
 
-        doc.text(`Hospital name : ${doctorData.hospital.name}`,10,80)
-        doc.text(`Doctor's name : ${doctorData.name}`,10,100)
-        doc.text(`Appointment number : `,10,120)
-        doc.text(`Hospital location : ${doctorData.hospital.address}`,10,140)
+        doc.setFontSize(12)
+        doc.setFont("","","normal")
+        doc.text(`ReceiptNumber :`,400,50)
+        doc.setDrawColor("#457cb1")
+        doc.setLineWidth(5)
+        doc.line(20,10,610,10)
+        doc.setLineWidth(2)
+        doc.line(35,70,35,145)
+        doc.setLineWidth(2)
+        doc.line(390,70,390,145)
+        doc.setTextColor("#457cb1")
+        doc.setFont("","","bold")
+        doc.setFontSize(16)
+        doc.text('PATIENT INFORMATION',40,80)
+        doc.text('DOCTOR INFO',400,80)
+        doc.setTextColor("#1e1e1e")
 
-        doc.text(`date and time of appointment : ${date}  ${selected.time}`,350,50)
+        doc.text(`Name :  ${doctorData.name}`,400,95)
+        
+        doc.text(`Name : ${(userInfo?.firstName).toUpperCase()}  ${(userInfo?.middleName).toUpperCase()}`,40,95)
 
-        doc.text('patient Information',350,80)
-        doc.text(`patient's name : ${userInfo?.firstName}  ${userInfo?.middleName}`,350,100)
-        doc.text(`Address : ${userInfo?.address}`,350,120)
-        doc.text(`Phone Number : ${userInfo?.contact}`,350,140)
-        doc.text(`State/City : ${userInfo?.state} / ${userInfo?.city}`,350,160)
+        doc.setFontSize(12)
+        doc.setFont("","","normal")
+        doc.text(`Contact : ${doctorData.contactNo}`,400,110)
+        doc.text(`Speciality : ${doctorData.department.name}`,400,125)
+        doc.text(`Hospital location : ${doctorData.hospital.address}`,400,140)
+        doc.text(`Contact : ${userInfo?.contact}`,40,110)
+        doc.text(`address : ${userInfo?.address}`,40,125)
+        doc.text(`city,state : ${userInfo?.city} , ${userInfo?.state}`,40,140)
+        //Appointment Detail
+        
+        doc.setLineWidth(1)
+        
+        doc.line(35,170,580,170)
+
+       
+        doc.text('Appointment number',40,180)
+        //doc.text(appintment value,40,195)
+
+        
+
+        doc.text('date',300,180)
+        doc.text("date",300,195)
+
+        
+
+        doc.text('time',490,180)
+        doc.text("selected?.time",490,195)
+
+        doc.line(35,200,580,200)
+        
+        
         autoTable(doc, {
-          startY:210,
-          head: [['Descrition of Service', 'Charges']],
+          startY:230,
+          head: [['Code','Descrition of Service', 'Rate','total']],
           body: [
-            ['Consultation Charge', '800'],
+            ['101','Consultation Charge', '800','800'],
+            [],
+            [],
+            [],
+            [],
+            ['','','','total = 800']
             // ...
-          ],
+          ], 
+          margin: { horizontal: 20 },
+          styles: { overflow: 'linebreak',cellPadding:5 ,fontSize:14},
+          bodyStyles: { valign: 'top' },
+          columnStyles: { total: { columnWidth: 'wrap' } },
+          theme: "striped"
         })
-        doc.text('total = 800',450,410)
+        // doc.text('total = 800',530,410)
         
         doc.save('bil.pdf')
       }
@@ -45,10 +98,10 @@ const r = (Math.random() * 100000)
   return (
     <React.Fragment>
       <Modal show={open} position="center" onClose={() => setOpen(false)}>
-        <Modal.Header className='justify-between' >Bill </Modal.Header>
+        <Modal.Header className='justify-between' >Appoinment is Confirm </Modal.Header>
         <Modal.Body>
          <div>
-          <div className='flex' >
+          <div id='bill' className='flex' >
               <div className='w-1/2' >
                 <div className='pb-3'>
                   <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
@@ -142,7 +195,7 @@ const r = (Math.random() * 100000)
           <div className="flex justify-end"><p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
                 Total: <span className="text-black">800 Rs</span>
               </p></div>
-              <div className="flex justify-end"><Button onClick={downloadBill} >download</Button></div>
+              <div className="flex justify-end"><Button onClick={downloadBill} >download Receipt</Button></div>
          </div>
         </Modal.Body>
         <Modal.Footer>
@@ -159,6 +212,7 @@ const r = (Math.random() * 100000)
           </Button>
         </Modal.Footer>
       </Modal>
+      
     </React.Fragment>
   )
 }

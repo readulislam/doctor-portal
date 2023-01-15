@@ -12,19 +12,13 @@ import { authActions, patientLoginByPhone } from "../../Store/Auth-Slice";
 import OtpVerifyModal from "./OtpVerifyModal";
 import RegistarModal from "./RegistarModal";
 import moment from "moment";
-import BillReceipt from "./BillReceipt";
+import AppointmentBookedModal from "./AppointmentBookedModal";
 
 const ModalView = ({
   open,
   setOpen,
   doctorData,
-  location,
-  speciality,
-  existingUser,
-
   doctorId,
-  setRegistarOpen,
-  setTime,
 }) => {
   const { isLoggedIn, isRegister, userInfo, userId } = useSelector(
     (state) => state.Auth
@@ -41,8 +35,9 @@ const ModalView = ({
   const [appointment, setAppointment] = useState({});
   const [registerModel, setRegisterModel] = useState(false);
   const [currentTime, setcurrentTime] = useState();
-  const [openBillReceipt, setOpenBillReceipt] = useState(false);
+  
   const [isRegistered, setIsRegistered] = useState(false);
+  const [confirmModal, setConfirmModal] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -110,7 +105,9 @@ const ModalView = ({
 
         // }
         console.log(doctorData);
-        setOpenBillReceipt(true);
+        console.log("rrrrrr");
+        setConfirmModal(true);
+        console.log(confirmModal,"jdfdi");
       } else {
         if (selected && number) {
           const response = await LoginPatient(number);
@@ -145,10 +142,8 @@ const ModalView = ({
             //     weekday: slotsInfo.weekday,
             //   };
             //   const update = await updateTimeSlot(query);
-
-            //   setOpenBillReceipt(true)
             // }
-            setOpenBillReceipt(true);
+            setConfirmModal(true);
           }
         }
       }
@@ -157,7 +152,6 @@ const ModalView = ({
     if (isLoggedIn) {
       setOpen(false);
     } else {
-      setRegistarOpen(true);
     }
   };
 
@@ -177,7 +171,7 @@ const ModalView = ({
   const handleDispatch = async () => {
     dispatch(patientLoginByPhone(number));
     setOpen(false);
-    setOpenBillReceipt(true);
+    setConfirmModal(true);
   };
   const handleOtpSubmit = () => {
     // setOpenOtp(false)
@@ -211,21 +205,21 @@ const ModalView = ({
                   type="text"
                   placeholder="name@flowbite.com"
                   disabled
-                  value={location}
+                  value={doctorData?.hospital.name+','+doctorData?.hospital.address}
                 />
                 <TextInput
                   id="email1"
                   type="text"
                   placeholder="name@flowbite.com"
                   disabled
-                  value={speciality}
+                  value={doctorData?.department.name}
                 />
                 <TextInput
                   id="email1"
                   type="text"
                   placeholder="name@flowbite.com"
                   disabled
-                  value={doctorData.name}
+                  value={doctorData?.name}
                 />
 
                 <TextInput
@@ -317,15 +311,15 @@ const ModalView = ({
         open={registerModel}
         setOpen={setRegisterModel}
       />}
-      {openBillReceipt && (
-        <BillReceipt
-          open={openBillReceipt}
-          setOpen={setOpenBillReceipt}
-          doctorData={doctorData}
-          date={newDate}
-          selected={selected}
-        />
-      )}
+      {confirmModal && 
+      <AppointmentBookedModal
+        open={confirmModal}
+        setOpen={setConfirmModal}
+        doctorData={doctorData}
+        date={newDate}
+        selected={selected}
+      />}
+      
       {/* {done && <AppointmentBookedModal time={appointment.time} date={appointment.date} done={done} setDone={setDone}  />} */}
 
     </>

@@ -40,7 +40,7 @@ const PastTableView = ({ heading, data }) => {
       }
 
       if (doctorId) {
-        await dispatch(getAllAppointment({doctorId:parseInt(doctorId), page:doctorPage}));
+        await dispatch(getAllAppointment({doctorId:parseInt(doctorId), page:doctorPage,status:true}));
           setDoctorData([])
       }
     };

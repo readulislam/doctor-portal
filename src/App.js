@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { Navigate, Route, Routes } from 'react-router';
 import AddDoctor from './components/Admin/AddDoctor/AddDoctor';
 import Dashboard from './components/Dashboard/Dashboard';
@@ -10,9 +11,11 @@ import ToasterContainer from './Utils/ToasterContainer';
 
 
 const  App=()=> {
+  const queryClient= new QueryClient()
   // const isLoggedIn=useSelector(state=>state.auth.isLoggedIn)
   return (
     <>
+    <QueryClientProvider client={queryClient}>
     <Routes>
       <Route path="/" element={<Navigate replace to="/dashboard" />} />
       <Route path="/login" element={<Login />} />
@@ -22,6 +25,8 @@ const  App=()=> {
       <Route path='/patientView' element={<PatientView/>}/>
       <Route path="/dashboard" element={<Dashboard />} />
     </Routes>
+    </QueryClientProvider>
+    
 <ToasterContainer/>
     </>
   );
