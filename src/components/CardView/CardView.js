@@ -2,10 +2,12 @@ import axios from "axios";
 import { Button, Card, Pagination } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useQuery } from "react-query";
 import { useSelector } from "react-redux";
 import { BaseUrl, ListDepartments, ListStates } from "../../APi/api";
 import Filtering from "../Filtering/Filtering";
 import AppointmentRegistar from "../Form/AppoinmentRegistar/AppointmentRegistar";
+import DoctorDetail from "../Modal/DoctorDetail";
 
 const CardView = () => {
   const {userId} = useSelector(state => state.Auth)
@@ -13,12 +15,16 @@ const CardView = () => {
   const [doctors, setDoctors] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
-  const [modalName, setModalName] = useState("");
-  const [modalSpeciality, setModalSpeciality] = useState("");
-  const [modalLocation, setModalLocation] = useState("");
   const [doctorId, setDoctorId] = useState("");
   const [doctorData, setDoctorData] = useState({});
-  
+
+  const [doctorDetailModal, setDoctorDetailModal] = useState(false);
+  const [name, setName] = useState("");
+  const [locationInput, setLocationInput] = useState("");
+  const [departmentInput, setDepartmentInput] = useState("");
+
+ 
+
   useEffect(()=>{
     const fetching = async()=>{
       const {data} = await axios.get(`${BaseUrl}/get-doctors`,{
@@ -35,38 +41,88 @@ const CardView = () => {
       console.log(Math.ceil(data.count / 8),'page')
       const d =await ListDepartments()
     }
-    fetching()
+    const fetchFilterData=async()=>{
+      if(locationInput === 'Location' || departmentInput=== 'Speciality'){
+        setLocationInput('');
+        setDepartmentInput(''); 
+      }
+          const {data} = await axios.get(`${BaseUrl}/get-doctorFiltering`,{
+      params:{limit:5, offset:page, name, locationInput,departmentInput}
+          })
+      if(!data.massage && data){
+        setDoctors(data.rows)
+        setTotalPage(Math.ceil(data.count / 8))
+      }
+      if(data.massage){
+        toast.error(data.massage,{id:1})
+      }
+      console.log(locationInput,departmentInput,name,data)
+    }
+    if(name || locationInput || departmentInput){
+      fetchFilterData()
+    }
+    else{
+      fetching()
+    }
   },[page])
-  console.log(page)
+
+ 
+  // const {
+  //   isIdle,
+  //   isLoading,
+  //   isError,
+  //   data,
+  //   error,
+  //   refetch,
+  //   isFetching,
+  // } = useQuery('filter', ()=>{
+  //   console.log(page,"dsds");
+  //   if(name || locationInput || departmentInput){
+  //     fetchFilterData()
+  //   }
+  //   else{
+  //     fetching()
+  //   }
+  // }, {
+   
+  // })
+  
   const handleSearch=async(event)=>{
    
-event.preventDefault();
-let locationInput= event.target.hospital.value;
-let departmentInput = (event.target.department.value).toUpperCase();;
-const name = event.target.name.value;
+    event.preventDefault();
+    let locationvalue=event.target.hospital.value;
+    let departmentValue=(event.target.department.value).toUpperCase();
+    var nameValue=event.target.name.value;
+    setLocationInput(event.target.hospital.value);
+    setDepartmentInput((event.target.department.value).toUpperCase());
+    setName(event.target.name.value);
+    // refetch()
+    // fetchFilterData()
+    console.log(locationInput,departmentInput,name)
     if(locationInput === 'Location' || departmentInput=== 'Speciality'){
-      locationInput = '';
-      departmentInput = ''; 
+      setLocationInput('');
+      setDepartmentInput(''); 
     }
-    const {data} = await axios.get(`${BaseUrl}/get-doctorFiltering`,{
-params:{limit:5, offset:1, name, locationInput,departmentInput}
-    })
+        const {data} = await axios.get(`${BaseUrl}/get-doctorFiltering`,{
+    params:{limit:5, offset:1, name:nameValue, locationInput:locationvalue,departmentInput:departmentValue}
+        })
     if(!data.massage && data){
       setDoctors(data.rows)
-      
+      setTotalPage(Math.ceil(data.count / 8))
     }
     if(data.massage){
       toast.error(data.massage,{id:1})
     }
     console.log(locationInput,departmentInput,name,data)
-    event.target.reset()
-   }
+        // event.target.reset()
+      }
 
  
   return (
     <>
     <Filtering handleSearch={handleSearch}/>
-      <div className="grid grid-cols-4 gap-y-10 gap-4  mt-16 place-items-center">
+        <div className="grid grid-cols-4 gap-y-10 gap-4  mt-16 place-items-center">
+      
         {doctors.map((d) => (
           <div key={d.id} className="max-w-sm ">
             <Card className="p-0 m-0"
@@ -74,7 +130,7 @@ params:{limit:5, offset:1, name, locationInput,departmentInput}
               
            
             >
-              <img className="w-[334px] border cover rounded-lg h-[201px]" src={d.img} alt='doctor'/>
+              <img className="w-[334px] border cover rounded-lg h-[201px]" src={d.img} onClick={()=>{setDoctorDetailModal(true);setDoctorData(d);setDoctorId(d.id)}} alt='doctor'/>
 
               <h5 className="text-xl font-bold    text-gray-900 dark:text-white">
                 {d.name}
@@ -91,7 +147,7 @@ params:{limit:5, offset:1, name, locationInput,departmentInput}
               </p>
               <div>
                 <Button
-                  onClick={() => {setOpen(true);setDoctorData(d);setDoctorId(d.id);setModalName(d.name);setModalLocation(d.hospital.name+','+d.hospital.address);setModalSpeciality(d.department.name)}}
+                  onClick={() => {setOpen(true);setDoctorData(d);setDoctorId(d.id)}}
                   className="w-full rounded-full"
                   gradientDuoTone="cyanToBlue"
                 >
@@ -102,11 +158,16 @@ params:{limit:5, offset:1, name, locationInput,departmentInput}
           </div>
         ))}
       </div>
-      <AppointmentRegistar doctorId={doctorId} doctorData={doctorData} open={open} setOpen={setOpen} name={modalName} speciality={modalSpeciality} location={modalLocation} />
+      
+     {open && <AppointmentRegistar doctorId={doctorId} doctorData={doctorData} open={open} setOpen={setOpen}  />}
+      {doctorDetailModal && <DoctorDetail
+      doctorData={doctorData}
+      open={doctorDetailModal}
+      setOpen={setDoctorDetailModal}
+      />}
      <div className="w-full flex justify-center mt-6 mb-32">
      <Pagination
       currentPage={page}
-      
       onPageChange={(e)=> setPage(e)}
       showIcons={true}
       totalPages={totalPage}

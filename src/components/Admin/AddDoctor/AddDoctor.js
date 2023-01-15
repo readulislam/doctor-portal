@@ -68,7 +68,9 @@ const AddDoctor = () => {
             contactNo: number,
             designation: values.designation,
             img: result.data.url,
+
            experience: experience
+
 
           };
        

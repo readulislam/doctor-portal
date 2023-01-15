@@ -22,6 +22,7 @@ ADD_EVENT_TYPE:() =>'/add-eventType',
 GET_DOCTOR_BY_PHONE:() =>'/get-doctorByNumber',
 GET_DOCTOR_APPOINTMENTS:() =>'/get-doctorAppointmentAll', // query doctorId
 ADD_APPOINTMENT:() =>'/add-appointment',
+UPDATE_APPOINTMENT:()=>'/patientAppointmentComplete',
 ADD_PRESCRIPTION:() =>'/add-prescription',
 GET_PRESCRIPTION:() =>'/get-prescription',
 ADD_REPORT:() =>'/add-testReports',
@@ -58,7 +59,9 @@ export const DoctorAppointments = async(info)=>{
     console.log(info)
     const {data} = await axios.get(URL(END_POINTS.GET_DOCTOR_APPOINTMENTS()),{
         
+
         params: { doctorId:info.doctorId ,offset:info.page, limit:8,status:info.status} 
+
     })
     return  data
 }
@@ -67,6 +70,13 @@ export const updateTimeSlot = async(query)=>{
    
     const {data} = await axios.put(URL(END_POINTS.UPDATE_SLOT()),{
          ...query 
+    })
+    return  data
+}
+export const updateAppointment = async(id)=>{
+   
+    const data = await axios.put(URL(END_POINTS.UPDATE_APPOINTMENT()),{
+        id 
     })
     return  data
 }

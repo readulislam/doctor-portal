@@ -23,7 +23,7 @@ const authSlice = createSlice({
     userRegister(state, action) {
       state.isRegister = true;
       state.isLoggedIn = true;
-
+      
       state.userId = action.payload.userId;
       state.userInfo = action.payload.userInfo;
     },

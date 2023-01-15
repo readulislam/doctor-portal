@@ -1,7 +1,8 @@
 
+import axios from 'axios';
 import { Button, Label, Modal, Textarea, TextInput } from 'flowbite-react';
 import React, { useState } from 'react';
-import { BaseUrl, PostPrescription } from '../../APi/api';
+import { BaseUrl, PostPrescription, updateAppointment } from '../../APi/api';
 
 
 const UploadPrescription = ({open,setOpen,prescriptionData,setprescriptionData}) => {
@@ -32,7 +33,12 @@ const UploadPrescription = ({open,setOpen,prescriptionData,setprescriptionData})
           };
           console.log(PrescriptionInfo);
           const data= await PostPrescription(PrescriptionInfo)
-          console.log(data);
+          if (data) {
+            console.log("hi update");
+            const res = axios.put(`${BaseUrl}/patientAppointmentComplete?id=${prescriptionData.id}`)
+          //  const res = await updateAppointment(prescriptionData.id)
+           console.log(res);
+          }
        
         }
       });
