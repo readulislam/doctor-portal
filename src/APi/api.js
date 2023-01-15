@@ -58,7 +58,7 @@ export const DoctorAppointments = async(info)=>{
     console.log(info)
     const {data} = await axios.get(URL(END_POINTS.GET_DOCTOR_APPOINTMENTS()),{
         
-        params: { doctorId:info.doctorId ,offset:info.page, limit:5} 
+        params: { doctorId:info.doctorId ,offset:info.page, limit:8,status:info.status} 
     })
     return  data
 }
@@ -206,6 +206,12 @@ get all states
  */ 
 export const ListStates = async()=>{
     const {data} = await axios.get(URL(END_POINTS.GET_STATES()))
+    return  data
+}
+export const ListCities = async(stateId)=>{
+    const {data} = await axios.get(URL(END_POINTS.GET_CITIES()),{
+        params:{stateId}
+    })
     return  data
 }
 

@@ -17,6 +17,7 @@ const AddDoctor = () => {
     const [apiData, setApiData] = useState({});
     const [hospitalList, setHospitalList] = useState([]);
     const [departmentList, setDepartmentList] = useState([]);
+    const [experience,setExprience] = useState('');
     useEffect(() => {
       const fetching=async()=>{
         const {data}= await ListHospitals()
@@ -67,9 +68,12 @@ const AddDoctor = () => {
             contactNo: number,
             designation: values.designation,
             img: result.data.url,
+           experience: experience
+
           };
        
-        const data = await RegistrationDoctor(doctorInfo)
+        const data = await RegistrationDoctor(doctorInfo);
+        console.log(data);
         }
       });
   };
@@ -133,13 +137,14 @@ const AddDoctor = () => {
                 </label>
                 <ErrorMessage name="designation" />
                 <select
+                  onChange={(e)=>setExprience(e.target.value)}
                  id="underline_select"
                  className=" py-2.5 mt-4 w-full  text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
                  name='experience'
                 >
                     <option selected>Experience</option>
                     {doctorExperience.map(({name,value})=>{
-                      return(<option value={value} >{name}</option>)
+                      return(<option value={name} >{name}</option>)
                     })}
                 </select>
                 <select

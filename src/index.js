@@ -8,6 +8,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import App from "./App";
 import "./index.css";
 import store from "./Store";
+import 'react-phone-number-input/style.css'
 const root = ReactDOM.createRoot(document.getElementById("root"));
 //  const persistor =
 let persistor = persistStore(store);

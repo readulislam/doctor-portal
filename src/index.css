@@ -1,3 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+*{font-family: 'Poppins', sans-serif;
+    letter-spacing: 1px;
+   
+   
+}
+html{
+  background-color: rgb(240 253 244)!important;
+}
+
+input:focus,
+input:active {
+  outline: none;
+}
+
+.PhoneInputInput{
+    border: none !important; 
+border-width: 0; 
+box-shadow: none;
+padding:10px 0;}
+.PhoneInputInput:focus, .PhoneInputInput:active{
+    border: none; 
+    border-width: 0; 
+    box-shadow: none
+}
+
+.PhoneInputInput::placeholder {
+   font-size: 14px;
+  }
+  
+  .PhoneInputInput:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    font-size: 14px;
+  }
+  
+  .PhoneInputInput::-ms-input-placeholder { /* Microsoft Edge */
+    font-size: 14px;
+  }
+
+
+ 
+
+
+  @media screen and (max-width: 480px) {
+    .otpInput {
+      gap: 0 !important;
+      padding: 0!important;
+      margin: 0!important;
+    }
+    .otpInput input{
+      width: 30px!important;
+      height: 30px!important;
+      margin-right: 8px!important;  
+     
+    }
+  }
+  @media screen and (min-width: 480px) {
+
+    .otpInput input{
+      width: 40px!important;
+      height: 40px!important;
+      
+     
+    }
+  }

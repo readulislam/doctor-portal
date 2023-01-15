@@ -18,6 +18,7 @@ const CardView = () => {
   const [modalLocation, setModalLocation] = useState("");
   const [doctorId, setDoctorId] = useState("");
   const [doctorData, setDoctorData] = useState({});
+  
   useEffect(()=>{
     const fetching = async()=>{
       const {data} = await axios.get(`${BaseUrl}/get-doctors`,{

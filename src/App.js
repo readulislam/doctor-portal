@@ -1,30 +1,44 @@
-import { Navigate, Route, Routes } from 'react-router';
-import AddDoctor from './components/Admin/AddDoctor/AddDoctor';
-import Dashboard from './components/Dashboard/Dashboard';
-import DoctorView from './components/DoctorView/DoctorView';
-import Login from './components/Form/Login';
-import Registar from './components/Form/Registar';
-import PatientView from './components/PatientView/PatientView';
-import ToasterContainer from './Utils/ToasterContainer';
+import { Route, Routes } from "react-router";
+import Home from "./components/Home/Home";
+import Dashboard from "./pages/Dashboard";
+import Login from "./components/Form/Login/";
+import Register from "./pages/Resgister";
+import ToasterContainer from "./Utils/ToasterContainer";
+import UpcomingAppointment from "./components/UpcomingAppointment";
+import PreviousAppointment from "./components/PreviousAppointment";
+import DoctorView from "./components/DoctorView/DoctorView";
+import Navbar from "./Navbar";
+import Header from "./components/Header/Header";
+import Filtering from "./components/Filtering/Filtering";
 
 
-
-const  App=()=> {
-  // const isLoggedIn=useSelector(state=>state.auth.isLoggedIn)
+const App = () => {
   return (
     <>
-    <Routes>
-      <Route path="/" element={<Navigate replace to="/dashboard" />} />
-      <Route path="/login" element={<Login />} />
-      <Route path='/admin' element={<AddDoctor/>}/>
-      <Route path="/register" element={<Registar />} />
-      <Route path="/doctorView" element={<DoctorView />} />
-      <Route path='/patientView' element={<PatientView/>}/>
-      <Route path="/dashboard" element={<Dashboard />} />
-    </Routes>
-<ToasterContainer/>
+    <Navbar/>
+    <Header/>
+    <Filtering/>
+    
+      {/* <Register/> */}
+
+      {/* <Routes> */}
+        {/* <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} /> */}
+        {/* <Route path="/admin" element={<AddDoctor />} /> */}
+        {/* 
+        
+        <Route path="/patientView" element={<PatientView />} /> */}
+{/* <Route path="/doctorView" element={<DoctorView/>} />
+        <Route path="/dashboard" element={<Dashboard />}>
+          <Route index element={<UpcomingAppointment />} />
+          <Route path="upcoming" element={<UpcomingAppointment />} />
+          <Route path="previous" element={<PreviousAppointment />} />
+        </Route>
+      </Routes> */}
+      {/* <ToasterContainer /> */}
     </>
   );
-}
+};
 
 export default App;

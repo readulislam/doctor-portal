@@ -15,7 +15,7 @@ const ToasterContainer = () => {
   toastOptions={{
     // Define default options
     className: '',
-    duration: 3000,
+    duration: 4000,
     style: {
       background: '#363636',
       color: '#fff',

@@ -4,7 +4,7 @@ import Header from '../Header/Header';
 import Menu from '../Navbar/Menu';
 
 
-const Dashboard = () => {
+const Home = () => {
   return (
     <>
     <Menu/>
@@ -14,4 +14,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default Home;

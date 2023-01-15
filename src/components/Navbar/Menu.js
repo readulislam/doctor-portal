@@ -11,7 +11,7 @@ const Menu = () => {
   const dispatch=useDispatch()
   return (
    <div className='sticky z-10 top-0 '>
-    <Navbar  className='mx-5 my-4'
+    <Navbar  className='mx-5 '
   fluid={true}
   rounded={true}
 >
@@ -27,10 +27,10 @@ const Menu = () => {
   </Navbar.Brand>
   <div className="flex md:order-2">
  {!isLoggedIn &&  <Link to='/login'>
-    <Button className='mr-4'>Login</Button>
+    <Button className='mr-4 bg-[#499AFA]'>Login</Button>
   </Link> }
   {(!isLoggedIn && !isRegister) && <Link to='/register'>
-    <Button className='mr-4' >Register</Button>
+    <Button className='mr-4 bg-[#499AFA]' >Register</Button>
   </Link>}
   
 
@@ -72,7 +72,7 @@ const Menu = () => {
   </div>
   <Navbar.Collapse>
     <Navbar.Link
-    href='/dashboard'
+    href='/'
     >
       Home
     </Navbar.Link>

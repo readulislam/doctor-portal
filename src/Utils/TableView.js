@@ -33,7 +33,7 @@ const TableView = ({ heading, data }) => {
       }
 
       if (doctorId) {
-        await dispatch(getAllAppointment({doctorId:parseInt(doctorId), page:doctorPage}));
+         dispatch(getAllAppointment({doctorId:parseInt(doctorId), page:doctorPage, status:false}));
       }
     };
     fetching();
