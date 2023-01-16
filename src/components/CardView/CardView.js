@@ -20,8 +20,8 @@ const CardView = () => {
 
   const [doctorDetailModal, setDoctorDetailModal] = useState(false);
   const [name, setName] = useState("");
-  const [locationInput, setLocationInput] = useState("");
-  const [departmentInput, setDepartmentInput] = useState("");
+  const [locationInput, setLocationInput] = useState(null);
+  const [departmentInput, setDepartmentInput] = useState(null);
 
  
 
@@ -87,22 +87,31 @@ const CardView = () => {
    
   // })
   
-  const handleSearch=async(event)=>{
+  const handleSearch=async(values)=>{
    
-    event.preventDefault();
-    let locationvalue=event.target.hospital.value;
-    let departmentValue=(event.target.department.value).toUpperCase();
-    var nameValue=event.target.name.value;
-    setLocationInput(event.target.hospital.value);
-    setDepartmentInput((event.target.department.value).toUpperCase());
-    setName(event.target.name.value);
-    // refetch()
-    // fetchFilterData()
-    console.log(locationInput,departmentInput,name)
-    if(locationInput === 'Location' || departmentInput=== 'Speciality'){
-      setLocationInput('');
-      setDepartmentInput(''); 
-    }
+    console.log(values.hospital,values.department);
+
+    let locationvalue= values.hospital;
+    let departmentValue=values.department;
+    let nameValue=values.name;
+    console.log(typeof locationvalue,typeof departmentValue,nameValue);
+    // if (departmentValue) {
+    //   departmentValue=parseInt(departmentValue);
+    // }
+    // if (locationvalue) {
+    //   locationvalue =parseInt(locationvalue);
+    // }
+    
+   
+    setName(nameValue);
+    // console.log(locationInput,departmentInput,name)
+    // if(locationInput === 'Location' || departmentInput=== 'Speciality'){
+    //   setLocationInput('');
+    //   setDepartmentInput(''); 
+    // }
+   
+    
+    
         const {data} = await axios.get(`${BaseUrl}/get-doctorFiltering`,{
     params:{limit:5, offset:1, name:nameValue, locationInput:locationvalue,departmentInput:departmentValue}
         })

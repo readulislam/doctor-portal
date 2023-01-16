@@ -12,12 +12,16 @@ import Navbar from "./components/Navbar/Navbar";
 import Header from "./components/Header/Header";
 import Filtering from "./components/Filtering/Filtering";
 import CardView from "./components/CardView/CardView";
+
 import HomePage from "./pages/Home/HomePage";
+
+
 
 
 const App = () => {
   return (
     <>
+
     
 
 
