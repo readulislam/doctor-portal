@@ -9,17 +9,24 @@ import App from "./App";
 import "./index.css";
 import store from "./Store";
 import 'react-phone-number-input/style.css'
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
+ 
+const queryClient = new QueryClient()
 const root = ReactDOM.createRoot(document.getElementById("root"));
 //  const persistor =
 let persistor = persistStore(store);
 root.render(
   <React.StrictMode>
+      <QueryClientProvider client={queryClient}>
     <Provider store={store}>
       <BrowserRouter>
         <PersistGate persistor={persistor}>
+      
           <App />
+       
         </PersistGate>
       </BrowserRouter>
     </Provider>
+    </QueryClientProvider>
   </React.StrictMode>
 );

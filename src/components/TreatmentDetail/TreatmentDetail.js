@@ -1,11 +1,12 @@
 import React from 'react'
 import TreatmentDetailModal from './TreatmentDetailModal'
 
-const TreatmentDetail = ({selectedPatient,open,setOpen}) => {
+const TreatmentDetail = ({selectedPatient,open,setOpen, setReReload,
+  reReload,}) => {
   return (
     <div>
 
-        <TreatmentDetailModal open={open}  setOpen={setOpen} selectedPatient={selectedPatient}/>
+        <TreatmentDetailModal reReload={reReload}  setReReload={setReReload} open={open}  setOpen={setOpen} selectedPatient={selectedPatient}/>
     </div>
   )
 }

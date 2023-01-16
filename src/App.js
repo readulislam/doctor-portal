@@ -1,4 +1,3 @@
-
 import { Route, Routes } from "react-router";
 
 import Dashboard from "./pages/Dashboard";
@@ -15,23 +14,16 @@ import CardView from "./components/CardView/CardView";
 
 import HomePage from "./pages/Home/HomePage";
 
-
-
-
 const App = () => {
   return (
     <>
-
-    
-
-
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         {/* <Route path="/admin" element={<AddDoctor />} />
          */}
-        
+
         {/* <Route path="/patientView" element={<PatientView />} />
 <Route path="/doctorView" element={<DoctorView/>} /> */}
         <Route path="/dashboard" element={<Dashboard />}>
@@ -41,7 +33,6 @@ const App = () => {
         </Route>
       </Routes>
       <ToasterContainer />
-
     </>
   );
 };

@@ -74,9 +74,10 @@ export const updateTimeSlot = async(query)=>{
     return  data
 }
 export const updateAppointment = async(id)=>{
+    console.log(id,'ddddddd')
    
     const data = await axios.put(URL(END_POINTS.UPDATE_APPOINTMENT()),{
-        id 
+       id
     })
     return  data
 }
@@ -113,6 +114,22 @@ export const PostPrescription=async(PrescriptionInfo)=>{
     )
     return  data
 }
+
+
+
+export const ListPrescription=async(PrescriptionInfo)=>{
+    const {data} = await axios.get(URL(END_POINTS.GET_PRESCRIPTION()),
+       {
+        params:{...PrescriptionInfo}
+       }
+    )
+    return  data
+}
+
+
+
+
+
 export const PostReport=async(formData)=>{
     const {data} = await axios.post(URL(END_POINTS.ADD_REPORT()),
         formData

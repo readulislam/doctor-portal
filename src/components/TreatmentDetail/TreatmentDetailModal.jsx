@@ -1,11 +1,15 @@
 import { Button, Modal } from "flowbite-react";
 import React from "react";
+import { useSelector } from "react-redux";
 import PrimaryButton from "../../Common/PrimaryButton";
 import LabTest from "../LabTest";
 import Prescription from "../Prescription";
 
-const TreatmentDetailModal = ({ open, setOpen, selectedPatient }) => {
+const TreatmentDetailModal = ({ open, setOpen, selectedPatient , setReReload,
+    reReload,}) => {
+      const {Auth:{userId}, Doctor:{doctorId}} = useSelector(state => state)
   const {date,time,doctor,patient} = selectedPatient ||{};
+  console.log(doctor);
   return (
     <>
       <React.Fragment>
@@ -43,27 +47,50 @@ const TreatmentDetailModal = ({ open, setOpen, selectedPatient }) => {
                             <p>Reason for your visit Menopause</p>
                           </div>
                         </div> */}
-                <div className="flex items-center gap-4">
+
+                        {doctorId && 
+                        
+                        <div className="flex items-center gap-4">
+                        <img
+                          src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                          class="rounded-full w-24"
+                          alt="Avatar"
+                        />
+                        <div className="font-[500]">
+                          <h3 className="text-xl font-semibold">{patient?.firstName + ' ' + patient?.lastName}</h3>
+                          <p className="">
+                            <span>{patient?.gender}</span> | <span>{patient?.martialStatus}</span>
+                          </p>
+                          <p>
+                            <span>{date}</span> | <span>{time}</span>
+                          </p>
+                          <p>Reason for your visit Menopause</p>
+                        </div>
+                      </div>
+                      }
+                        {userId &&   <div className="flex items-center gap-4">
                   <img
-                    src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                    src={doctor?.img}
                     class="rounded-full w-24"
                     alt="Avatar"
                   />
                   <div className="font-[500]">
-                    <h3 className="text-xl font-semibold">{patient?.firstName + ' ' + patient?.lastName}</h3>
+                    <h3 className="text-xl font-semibold">{doctor?.name}</h3>
                     <p className="">
-                      <span>{patient?.gender}</span> | <span>{patient?.martialStatus}</span>
+                      <span>{doctor?.designation}</span> 
                     </p>
                     <p>
                       <span>{date}</span> | <span>{time}</span>
                     </p>
                     <p>Reason for your visit Menopause</p>
                   </div>
-                </div>
+                </div>}
+                        
+              
               </div>
               {/* 2 */}
 
-              <Prescription selectedPatient={selectedPatient} />
+              <Prescription reReload={reReload} setReReload={setReReload} selectedPatient={selectedPatient} />
 
               <LabTest selectedPatient={selectedPatient} />
             </Modal.Body>

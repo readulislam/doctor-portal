@@ -12,7 +12,8 @@ import LoginView from "./LoginView";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { userId, doctorId } = useSelector((state) => state.Auth);
+  const {Auth:{userId}, Doctor:{doctorId}  } = useSelector((state) => state);
+  console.log(doctorId)
   const [doctorNumber, setDoctorNumber] = useState(null);
   const [patientNumber, setPatientNumber] = useState(null);
   const [isPatient, setIsPatient] = useState(true);
@@ -36,6 +37,7 @@ const Login = () => {
   const doctorFormSubmitHandler = (values,{resetForm}) => {
     // console.log({...values,doctorNumber});
     // resetForm();
+    console.log(values)
     if(doctorNumber) {
       dispatch(getDoctor(doctorNumber));
     }else {
@@ -52,7 +54,17 @@ const Login = () => {
         if (response) {
           setOpenOtp(true);
         }
-      } else if (doctorNumber && doctorId) {
+      } 
+    };
+    verify();
+  }, [userId, patientNumber, setupRecaptcha]);
+
+
+
+  useEffect(()=>{
+    const verify = async () => {
+       if (doctorNumber && doctorId) {
+        console.log(doctorNumber, doctorId)
         const response = await setupRecaptcha(doctorNumber, "doctorLogin");
         setOTPResult(response);
         if (response) {
@@ -61,7 +73,7 @@ const Login = () => {
       } 
     };
     verify();
-  }, [userId, patientNumber, setupRecaptcha, doctorId, doctorNumber]);
+  },[doctorNumber,doctorId,setupRecaptcha])
   const props = {
     setDoctorNumber,
     setPatientNumber,
