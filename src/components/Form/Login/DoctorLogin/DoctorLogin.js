@@ -24,7 +24,7 @@ const DoctorLogin = () => {
     const handleSubmit=async(values)=>{
    console.log(values);
    console.log(number)
-    const data = await dispatch(getDoctor(number));
+    const data = await 
     
     
     

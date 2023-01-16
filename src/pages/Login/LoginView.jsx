@@ -3,23 +3,23 @@ import React, { useState } from "react";
 import { GiMedicines } from "react-icons/gi";
 import LoginForm from "../../Common/LoginForm";
 
-const LoginView = () => {
-  const [doctorNumber, setDoctorNumber] = useState(null);
-  const [patientNumber, setPatientNumber] = useState(null);
-  const [isPatient, setIsPatient] = useState(true);
-  const [isDoctor, setIsDoctor] = useState(false);
+const LoginView = ({props}) => {
+  const{
+    setDoctorNumber,
+    setPatientNumber,
+    isPatient,
+    setIsPatient,
+    isDoctor,
+    setIsDoctor,
+    patientNumber,
+    doctorNumber,
+    patientFormSubmitHandler,
+    doctorFormSubmitHandler
+  } = props;
  
-  const doctorFormSubmitHandler = (values,{resetForm}) => {
-    console.log({...values,doctorNumber});
-    resetForm();
-    
-    
-  };
-  const patientFormSubmitHandler = (values,{resetForm}) => {
-    console.log({...values,patientNumber});
-    resetForm();
-   
-  };
+ 
+
+
   return (
     <>
       <div class="items-center md:flex bg-green-100/50 md:justify-between w-full ">
@@ -67,17 +67,19 @@ const LoginView = () => {
           </ul>
           {isPatient && !isDoctor ? (
             <LoginForm
+            uniqueKey='patientLogin'
               heading={"Login AS Patient"}
               initialValues={{ name: "" }}
-              handleFormSubmit={doctorFormSubmitHandler}
+              handleFormSubmit={patientFormSubmitHandler}
               number={patientNumber}
-              setNumber={setDoctorNumber}
+              setNumber={setPatientNumber}
             />
           ) : (
             <LoginForm
+            uniqueKey='doctorLogin'
               heading={"Login AS Doctor"}
               initialValues={{ name: "" }}
-              handleFormSubmit={patientFormSubmitHandler}
+              handleFormSubmit={doctorFormSubmitHandler}
               number={doctorNumber}
               setNumber={setDoctorNumber}
             />

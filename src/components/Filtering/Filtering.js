@@ -31,7 +31,7 @@ const Filtering = ({handleSearch}) => {
   // }
   return (
     <form onSubmit={handleSearch} >
-      <div className=" items-center content-center container mx-auto flex justify-between my-5  ">
+      <div className=" items-center flex md:grid grid-cols-2 justify-items-center gap-y-3 xl:gap-y-0  justify-center content-center container mx-auto xl:flex flex-col lg:flex-row lg:justify-between my-5  ">
       <label for="table-search" className="sr-only">Search</label>
         <div className="relative ">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -49,8 +49,8 @@ const Filtering = ({handleSearch}) => {
           className="w-[190px] border-1 focus:border-gray-300 outline-none  focus:ring-0 rounded-md mr-2"
          
           /> */}
-        <div className="w-80 ">
-          <Label className="flex items-center gap-1">
+        <div className=" ">
+        
          
 
               <select
@@ -62,9 +62,9 @@ const Filtering = ({handleSearch}) => {
                 <option selected>Location</option>
                 {hospitalList?.map(h=><option value={h.id}>{h.name},{h.address}</option>)}
               </select>
-          </Label>
+         
         </div>
-        <div className="w-52">
+        <div className="">
           <select
             id="underline_select"
             className=" block  p-2 pl-10 text-sm text-gray-900 border focus:outline-none border-gray-300 rounded-lg w-[280px]  bg-gray-50 focus:border-green-300/70 focus:ring-0 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"

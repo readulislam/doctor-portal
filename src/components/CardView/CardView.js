@@ -121,10 +121,10 @@ const CardView = () => {
   return (
     <>
     <Filtering handleSearch={handleSearch}/>
-        <div className="grid grid-cols-4 gap-y-10 gap-4  mt-16 place-items-center">
+        <div className="grid container mx-auto md:grid-cols-2   xl:grid-cols-4 xl:gap-x-20   gap-y-10   mt-16 place-items-center">
       
         {doctors.map((d) => (
-          <div key={d.id} className="max-w-sm ">
+          <div key={d.id} className="max-w-xs  ">
             <Card className="p-0 m-0"
               
               
@@ -148,7 +148,7 @@ const CardView = () => {
               <div>
                 <Button
                   onClick={() => {setOpen(true);setDoctorData(d);setDoctorId(d.id)}}
-                  className="w-full rounded-full"
+                  className="w-full rounded-xl !p-0 "
                   gradientDuoTone="cyanToBlue"
                 >
                   Book an Appointment

@@ -5,9 +5,15 @@ import {
 import { CiSettings } from "react-icons/ci";
 import { RxDashboard } from "react-icons/rx";
 import { IoIosLogOut } from "react-icons/io";
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { Button } from 'flowbite-react';
 
 
 const Navbar = () => {
+
+  const {isLoggedIn ,isRegister,userInfo} =useSelector(state=>state.Auth)
+  const dispatch=useDispatch()
     const [isDarkMode, setIsDarkMode] = useState(false);
     let theme = localStorage.getItem("medical") || "light";
     theme === "light" ? setLightTheme() : setDarkTheme();
@@ -59,10 +65,20 @@ const Navbar = () => {
             </svg>
           </div>
   <div class="flex items-center md:order-2">
-      <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+  {isLoggedIn && isRegister ? <>
+    <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
         <span class="sr-only">Open user menu</span>
         <img class="w-8 h-8 rounded-full" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYmkp9a2rrD1Sskb9HLt5mDaTt4QaIs8CcBg&usqp=CAU" alt="user photo" />
       </button>
+  </>:<>
+  
+   {/* {!isLoggedIn &&  <Link to='/login'>
+    <Button className='mr-4 !p-0 bg-[#499AFA]'>Login</Button>
+  </Link> } */}
+  {/* {(!isLoggedIn && !isRegister) && <Link to='/register'>
+    <Button className='mr-4 !p-0 bg-[#499AFA]' >Register</Button>
+  </Link>} */}
+  </>}
       {/* <!-- Dropdown menu --> */}
       <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
         <div class="px-4 py-3">
@@ -89,7 +105,7 @@ const Navbar = () => {
         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
     </button>
 
-   <div  onClick={() => {setIsDarkMode(!isDarkMode);handleMode()}} className='ml-3 w-8 p-1 flex text-gray-500 flex-col focus:border-gray-200 cursor-pointer items-center justify-center border-2 border-gray-400 h-8 rounded-full'>
+          <div  onClick={() => {setIsDarkMode(!isDarkMode);handleMode()}} className='ml-3 w-8 p-1 flex text-gray-500 flex-col focus:border-gray-200 cursor-pointer items-center justify-center border-2 border-gray-400 h-8 rounded-full'>
    {/**/}
    {isDarkMode? <MdOutlineLightMode className={`${isDarkMode&& 'text-yellow-300 transition duration-75  animate-spin'}`} size={23} />: <MdOutlineDarkMode className='transition animate-bounce' size={23} /> }  
    </div>
