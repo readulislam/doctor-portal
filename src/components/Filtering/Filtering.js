@@ -1,15 +1,19 @@
 import { Button, Label } from "flowbite-react";
+import { Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import {  ListDepartments, ListHospitals } from "../../APi/api";
 import PrimaryButton from "../../Common/PrimaryButton";
 
 const Filtering = ({handleSearch}) => {
   
-  const [searchDepartment, setsearchDepartment] = useState(null);
-  const [searchHospital, setsearchHospital] = useState(null);
+  const initialValues={
+    name:'',
+    hospital:'',
+    department:'',
+  }
   const [hospitalList, setHospitalList] = useState([]);
   const [departmentList, setDepartmentList] = useState([]);
-  const [name, setname] = useState();
+  
   useEffect(() => {
     const fetching=async()=>{
       const {data}= await ListHospitals()
@@ -26,11 +30,17 @@ const Filtering = ({handleSearch}) => {
     fetching()
     
   }, [])
-  // const handleSubmit=()=>{
-    // handleSearch(locationInput,departmentInput,name)
-  // }
+
   return (
-    <form onSubmit={handleSearch} >
+    <Formik
+    initialValues={initialValues}
+    onSubmit={handleSearch}
+    // enableReinitialize={isDataEmpty}
+    // validationSchema={EditLocationError}
+    >
+      {({ handleSubmit, isSubmitting, setFieldValue }) => (
+      <>  
+    <form autoComplete="off" onSubmit={handleSubmit} >
       <div className=" items-center content-center container mx-auto flex justify-between my-5  ">
       <label for="table-search" className="sr-only">Search</label>
         <div className="relative ">
@@ -57,7 +67,7 @@ const Filtering = ({handleSearch}) => {
               name='hospital'
                 id="underline_select"
                 className=" block  p-2 pl-10 text-sm text-gray-900 border focus:outline-none border-gray-300 rounded-lg w-[280px]  bg-gray-50 focus:border-green-300/70 focus:ring-0 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                
+                onChange={(e)=>{setFieldValue("hospital",e.target.value)}}
               >
                 <option selected>Location</option>
                 {hospitalList?.map(h=><option value={h.id}>{h.name},{h.address}</option>)}
@@ -69,6 +79,7 @@ const Filtering = ({handleSearch}) => {
             id="underline_select"
             className=" block  p-2 pl-10 text-sm text-gray-900 border focus:outline-none border-gray-300 rounded-lg w-[280px]  bg-gray-50 focus:border-green-300/70 focus:ring-0 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             name='department'
+            onChange={(e)=>{setFieldValue("department",e.target.value)}}
           >
             <option selected>Speciality</option>
            {departmentList?.map(d=><option value={d.id}>{d.name}</option>)}
@@ -77,13 +88,16 @@ const Filtering = ({handleSearch}) => {
         </div>
 
         <div className="flex items-center gap-4">
-         <PrimaryButton>
+         <PrimaryButton type='submit' >
           Search
          </PrimaryButton>
         
         </div>
       </div>
     </form>
+    </>
+        )}
+      </Formik>
   );
 };
 

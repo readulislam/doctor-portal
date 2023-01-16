@@ -11,6 +11,7 @@ import DoctorView from "./components/DoctorView/DoctorView";
 import Navbar from "./Navbar";
 import Header from "./components/Header/Header";
 import Filtering from "./components/Filtering/Filtering";
+import CardView from "./components/CardView/CardView";
 
 
 const App = () => {
@@ -18,7 +19,8 @@ const App = () => {
     <>
     <Navbar/>
     <Header/>
-    <Filtering/>
+    {/* <Filtering/> */}
+    <CardView/>
     
       {/* <Register/> */}
 
