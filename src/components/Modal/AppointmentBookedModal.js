@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import BillReceipt from './BillReceipt';
 
-const AppointmentBookedModal = ({setOpen,open,doctorData,date,selected}) => {
+const AppointmentBookedModal = ({setOpenConfirmModal,openConfirmModal,doctorData,date,selected}) => {
   const { userInfo, userId } = useSelector(
     (state) => state.Auth
   );
@@ -38,7 +38,7 @@ const AppointmentBookedModal = ({setOpen,open,doctorData,date,selected}) => {
   }
   return (
     <React.Fragment>
-        <Modal show={open} position="center" onClose={() => setOpen(false)}>
+        <Modal show={openConfirmModal} position="center" onClose={() => setOpenConfirmModal(false)}>
         <form>
           <Modal.Header>Confirm the  Appointment </Modal.Header>
           <Modal.Body>
@@ -103,7 +103,7 @@ const AppointmentBookedModal = ({setOpen,open,doctorData,date,selected}) => {
            </div>
           </Modal.Body>
           <Modal.Footer className="flex justify-between">
-            <Button color="gray" onClick={() => setOpen(false)}>
+            <Button color="gray" onClick={() => setOpenConfirmModal(false)}>
               Cancel
             </Button>
             <Button

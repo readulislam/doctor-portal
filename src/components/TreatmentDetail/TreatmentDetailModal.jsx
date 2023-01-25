@@ -64,7 +64,7 @@ const TreatmentDetailModal = ({ open, setOpen, selectedPatient , setReReload,
                           <p>
                             <span>{date}</span> | <span>{time}</span>
                           </p>
-                          <p>Reason for your visit Menopause</p>
+                          <p>Reason for visit Menopause</p>
                         </div>
                       </div>
                       }

@@ -35,8 +35,8 @@ const PrescriptionView = ({
 
   const TableRowData = () => {
     return (
-      !isEmpty(prescriptionData) &&
-      prescriptionData.map((data,index) => (
+      // !isEmpty(prescriptionData) &&
+      // prescriptionData.map((data,index) => (
         <>
           <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
             <td className="w-4 p-4">
@@ -55,14 +55,14 @@ const PrescriptionView = ({
               scope="row"
               className="px-10 py-4 uppercase font-medium text-gray-900 whitespace-nowrap dark:text-white"
             >
-              {index+1}
+              {1}
             </th>
-            <td className="px-10 py-4">{data.Date}</td>
-            <td className="px-10 py-4">{data.time}</td>
+            <td className="px-10 py-4">{prescriptionData?.Date}</td>
+            <td className="px-10 py-4">{prescriptionData?.time}</td>
 
             <td className=" py-4">
               <p className=" text-[#499AFA] flex items-center  dark:text-blue-500 hover:underline">
-                <a href={`${BaseUrl}/${data.link}`} target="_blank">
+                <a href={`${BaseUrl}/${prescriptionData?.link}`} target="_blank">
                   <AiFillEye
                     className="hover:text-red-400 cursor-pointer"
                     size={23}
@@ -76,7 +76,7 @@ const PrescriptionView = ({
             </td>
           </tr>
         </>
-      ))
+      // ))
     );
   };
 

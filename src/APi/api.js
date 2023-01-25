@@ -1,6 +1,7 @@
 import { async } from '@firebase/util';
 import axios from 'axios';
-export const BaseUrl = 'http://ec2-43-205-124-238.ap-south-1.compute.amazonaws.com:4000'
+// export const BaseUrl = 'http://ec2-65-2-177-179.ap-south-1.compute.amazonaws.com:4000'
+export const BaseUrl = 'http://localhost:4000'
  // take end point 
 const END_POINTS = {
 ADD_DEPARTMENT: () =>'/add-department',
@@ -26,6 +27,7 @@ UPDATE_APPOINTMENT:()=>'/patientAppointmentComplete',
 ADD_PRESCRIPTION:() =>'/add-prescription',
 GET_PRESCRIPTION:() =>'/get-prescription',
 ADD_REPORT:() =>'/add-testReports',
+GET_DISEASE:()=>'/get-diseases'
 
 
 
@@ -33,6 +35,14 @@ ADD_REPORT:() =>'/add-testReports',
 const URL =(End_Point) => `${BaseUrl}${End_Point}`
 
 
+// get disease
+export const ListDiseases = async(departmentId)=>{
+    const data = await axios.get(URL(END_POINTS.GET_DISEASE()),{
+        params:{departmentId}
+    })
+   
+    return  data
+}
 /*------------------------
 get all departments 
  */

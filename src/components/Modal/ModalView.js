@@ -5,7 +5,7 @@ import PhoneInput from "react-phone-number-input";
 import { useDispatch, useSelector } from "react-redux";
 
 import toast from "react-hot-toast";
-import { BaseUrl, LoginPatient, PatientRegister } from "../../APi/api";
+import { AddDoctorAppointment, BaseUrl, ListDiseases, LoginPatient, PatientRegister, updateTimeSlot } from "../../APi/api";
 import useFirebaseAuth from "../../hooks/useFirebaseAuth";
 import { authActions, patientLoginByPhone } from "../../Store/Auth-Slice";
 
@@ -13,6 +13,8 @@ import OtpVerifyModal from "./OtpVerifyModal";
 import RegistarModal from "./RegistarModal";
 import moment from "moment";
 import AppointmentBookedModal from "./AppointmentBookedModal";
+
+import { isEmpty } from "lodash";
 
 const ModalView = ({
   open,
@@ -35,9 +37,11 @@ const ModalView = ({
   const [appointment, setAppointment] = useState({});
   const [registerModel, setRegisterModel] = useState(false);
   const [currentTime, setcurrentTime] = useState();
-  
+  const [disease, setDisease] = useState([]);
+  const [selectedDisease, setSelectedDisease] = useState(null);
+  const [openDiseaseInput, setOpenDiseaseInput] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
-  const [confirmModal, setConfirmModal] = useState(false);
+  const [openConfirmModal, setOpenConfirmModal] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -52,6 +56,7 @@ const ModalView = ({
         );
         console.log(data);
         setSlotsInfo(data);
+        
 
         console.log(moment().hours());
         if (date === new Date().toJSON().slice(0, 10)) {
@@ -64,6 +69,14 @@ const ModalView = ({
     };
     fetching();
   }, [date, doctorId]);
+  useEffect(() => {
+    const fetch=async()=>{
+      const {data}=await ListDiseases(doctorData.departmentId)
+      setDisease(data)
+        
+    }
+   fetch()
+  }, [doctorId])
   const disableDate = () => {
     var dtToday = new Date();
 
@@ -81,33 +94,35 @@ const ModalView = ({
 
     try {
       if (doctorId && userId) {
-        // const data = await AddDoctorAppointment({
-        //   doctorId,
-        //   patientId: userId,
-        //   time: selected.time,
-        //   timeSlotId: selected.id,
-        //   requestedByEmail: "",
-        //   requestedByPhone: "",
-        //   date,
-        //   status: false,
-        // });
-        // setAppointment(data)
-        // if (data) {
-        //   // doctorId, date, timeRange, slotId
-
-        //   const update = await updateTimeSlot({
-        //     doctorId,
-        //     timeRange: slotsInfo.timeRange,
-        //     slotId: selected.id,
-        //     date,
-        //     weekday: slotsInfo.weekday,
-        //   });
-
-        // }
+        const data = await AddDoctorAppointment({
+            doctorId,
+            patientId: userId,
+            time: selected.time,
+            timeSlotId: selected.id,
+            diseaseId:parseInt(selectedDisease),
+            diseaseName:"",
+            requestedByEmail: "",
+            requestedByPhone: "",
+            date,
+            status: false,
+          });
+    
+          setAppointment(data)
+          if (data) {
+            // doctorId, date, timeRange, slotId
+            const query = {
+              doctorId,
+              timeRange: slotsInfo.timeRange,
+              slotId: selected.id,
+              date,
+              weekday: slotsInfo.weekday,
+            };
+            const update = await updateTimeSlot(query);
+          }
         console.log(doctorData);
         console.log("rrrrrr");
-        setConfirmModal(true);
-        console.log(confirmModal,"jdfdi");
+        setOpenConfirmModal(!openConfirmModal);
+        console.log(openConfirmModal,"jdfdi");
       } else {
         if (selected && number) {
           const response = await LoginPatient(number);
@@ -120,38 +135,18 @@ const ModalView = ({
           }
 
           if (userId && isLoggedIn) {
-            // const data = await AddDoctorAppointment({
-            //   doctorId,
-            //   patientId: userId,
-            //   time: selected.time,
-            //   timeSlotId: selected.id,
-            //   requestedByEmail: "",
-            //   requestedByPhone: "",
-            //   date,
-            //   status: false,
-            // });
-
-            // setAppointment(data)
-            // if (data) {
-            //   // doctorId, date, timeRange, slotId
-            //   const query = {
-            //     doctorId,
-            //     timeRange: slotsInfo.timeRange,
-            //     slotId: selected.id,
-            //     date,
-            //     weekday: slotsInfo.weekday,
-            //   };
-            //   const update = await updateTimeSlot(query);
-            // }
-            setConfirmModal(true);
+            setOpenConfirmModal(!openConfirmModal);
           }
         }
       }
     } catch (error) {}
 
     if (isLoggedIn) {
+      setOpenConfirmModal(!openConfirmModal)
       setOpen(false);
+      
     } else {
+      setOpenConfirmModal(!openConfirmModal);
     }
   };
 
@@ -171,7 +166,7 @@ const ModalView = ({
   const handleDispatch = async () => {
     dispatch(patientLoginByPhone(number));
     setOpen(false);
-    setConfirmModal(true);
+    setOpenConfirmModal(!openConfirmModal);
   };
   const handleOtpSubmit = () => {
     // setOpenOtp(false)
@@ -191,6 +186,8 @@ const ModalView = ({
       }
     }
   };
+  
+  console.log(openConfirmModal,"jdfdixs");
   return (
     <>
       {" "}
@@ -232,9 +229,46 @@ const ModalView = ({
                   }}
                 />
               </div>
+              <div>
+                <div className="flex items-center">
+                <select
+                required={true}
+                onChange={(e)=>{
+                  if(e.target.value==="others"){
+                    setOpenDiseaseInput(true)
+                  }else{
+                    setSelectedDisease( e.target.value)
+                  }
+                }}
+                  id="underline_select"
+                  className=" py-2.5 mt-4 w-auto  text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
+                  name='experience'
+                 >
+                     <option selected>Disease</option>
+                     {!isEmpty(disease)&&disease.map((data)=>{
+                       return(<option value={data.id} >{data.name}</option>)
+                     })}
+                     <option value="others" >others</option>
+                 </select>
+                 {openDiseaseInput && <input required={true} onChange={(e)=>{}} className="mt-5 ml-5 border-b-2" name="disease" placeholder="disease name" />}
+                </div>
+              <div className="flex mt-5 items-center">
+                <input
+                  id="checkbox-table-search-2"
+                  type="checkbox"
+                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
+                
+                <label for="checkbox-table-search-2" className="sr-only">
+                  checkbox
+                </label>
+                <p className="text-base leading-relaxed pl-3 text-gray-500 dark:text-gray-400">Follow Up Appoinment </p>
+              </div>
+
+              </div>
 
               <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                Consultation Charge : <span className="text-black">800 Rs</span>
+                Consultation Charge : <span className="text-black">{doctorData.basicCharges} Rs</span>
               </p>
               {slotsInfo?.data && (
                 <h3 className="font-semibold w-full  text-center text-xl">
@@ -311,16 +345,15 @@ const ModalView = ({
         open={registerModel}
         setOpen={setRegisterModel}
       />}
-      {confirmModal && 
+      {openConfirmModal && 
       <AppointmentBookedModal
-        open={confirmModal}
-        setOpen={setConfirmModal}
+      openConfirmModal={openConfirmModal}
+      setOpenConfirmModal={setOpenConfirmModal}
         doctorData={doctorData}
         date={newDate}
         selected={selected}
       />}
       
-      {/* {done && <AppointmentBookedModal time={appointment.time} date={appointment.date} done={done} setDone={setDone}  />} */}
 
     </>
   );

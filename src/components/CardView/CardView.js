@@ -56,6 +56,7 @@ const CardView = () => {
       });
       if (!data.massage && data) {
         setDoctors(data.rows);
+      
         setTotalPage(Math.ceil(data.count / 8));
       }
       if (data.massage) {
@@ -70,6 +71,7 @@ const CardView = () => {
     }
   }, [page]);
 
+  console.log(doctors);
   // const {
   //   isIdle,
   //   isLoading,
@@ -141,7 +143,7 @@ const CardView = () => {
             <Card className="p-0 m-0">
               <img
                 className="w-[334px] border cover rounded-lg h-[201px]"
-                src={d.img}
+                src={`${BaseUrl}/${d.img}`}
                 onClick={() => {
                   setDoctorDetailModal(true);
                   setDoctorData(d);

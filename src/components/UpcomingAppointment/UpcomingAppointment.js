@@ -63,6 +63,7 @@ const UpcomingAppointment = () => {
   const TableRowData = () => {
     if (doctorId) {
       return (
+
         !isEmpty(appointments) &&
         appointments.map((data) => (
           <>
@@ -152,7 +153,7 @@ const UpcomingAppointment = () => {
     TableRowData,
     TableHeader,
     totalPage,
-
+    
     appointments,
   };
 

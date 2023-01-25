@@ -32,123 +32,136 @@ export const slots = [
 
 const doctors = [
   {
-    name: "DR. ABHIMANYU YADAV",
-    contactNo: "+919461096587",
-    education: "MBBS",
-    designation: "Director",
-    departmentId: 2,
-    hospitalId: 1,
-    img: "https://www.practostatic.com/consumer-home/desktop/images/1558283618/sp-dentist@2x.jpg",
+    "name": "DR. ABHIMANYU YADAV",
+    "contactNo": "+919461096587",
+    "education": "MBBS",
+    "designation": "Director",
+    "departmentId": 2,
+    "hospitalId": 1,
+    "img":"Images/sp-dentist@2x.jpg"
   },
   {
-    name: "DR. HIMANSHU YADAV",
-    contactNo: "+919828044375",
-    education: "MBBS",
-    designation: "Director of Gynecology",
-    departmentId: 4,
-    hospitalId: 2,
-    img: "https://www.practostatic.com/consumer-home/desktop/images/1558283618/sp-gynecologist@2x.jpg",
+    "name": "DR. HIMANSHU YADAV",
+    "contactNo": "+919828044375",
+    "education": "MBBS",
+    "designation": "Director of Oncology ",
+    "departmentId": 4,
+    "hospitalId": 2,
+    "img":"Images/zefRYl6WURSP1FWJEEEY.jpg"
   },
   {
-    name: "DR. RUDRA PRATAP",
-    contactNo: "",
-    education: "MBBS",
-    designation: "Director of Oncology ",
-    departmentId: 11,
-    hospitalId: 4,
-    img: "https://api.parashospitals.com/storage/doctors/October2022/zefRYl6WURSP1FWJEEEY.jpg",
+    "name": "DR. RUDRA PRATAP",
+    "contactNo": "",
+    "education": "MBBS",
+    "designation": "Director of Gynecology",
+    "departmentId": 11,
+    "hospitalId": 4,
+    "img":"Images/sp-gynecologist@2x.jpg"
   },
   {
-    name: "DR. SURESH SHARMA",
-    contactNo: "",
-    education: "MBBS",
-    designation: "ENT Specialist",
-    departmentId: 3,
-    hospitalId: 1,
-    img: "https://api.parashospitals.com/storage/doctors/October2022/bUQvygFvIjHfVhrus394.jpg",
+    "name": "DR. SURESH SHARMA",
+    "contactNo": "",
+    "education": "MBBS",
+    "designation": "ENT Specialist",
+    "departmentId": 3,
+    "hospitalId": 1,
+    "img":"Images/bUQvygFvIjHfVhrus394.jpg"
   },
   {
-    name: "DR. PRADEEP SINGH",
-    contactNo: "",
-    education: "MBBS",
-    designation: "Chief of Orthopaedic surgeon",
-    departmentId: 5,
-    hospitalId: 3,
-    img: "https://api.parashospitals.com/storage/doctors/October2022/Pax3Hi843qgWaeZ4sMnF.jpg",
+    "name": "DR. PRADEEP SINGH",
+    "contactNo": "",
+    "education": "MBBS",
+    "designation": "Chief of Orthopaedic surgeon",
+    "departmentId": 5,
+    "hospitalId": 3,
+    "img":"Images/Pax3Hi843qgWaeZ4sMnF.jpg"
   },
   {
-    name: "DR. MUHAMMAD SHAHEEN",
-    contactNo: "",
-    education: "MBBS",
-    designation: "Paediatrician",
-    departmentId: 6,
-    hospitalId: 2,
-    img: "https://api.parashospitals.com/storage/doctors/October2022/xxBk2CUdtatkvf4ub26x.jpg",
+    "name": "DR. MUHAMMAD SHAHEEN",
+    "contactNo": "",
+    "education": "MBBS",
+    "designation": "Paediatrician",
+    "departmentId": 6,
+    "hospitalId": 2,
+    "img":"Images/xxBk2CUdtatkvf4ub26x.jpg"
   },
   {
-    name: "DR RUDRA ",
-    contactNo: "",
-    education: "MBBS",
-    designation: "Chairman of Psychiatrists",
-    departmentId: 7,
-    hospitalId: 4,
-    img: "https://api.parashospitals.com/storage/doctors/October2022/2BpjtH2fPMVEboCTnMHc.jpg",
+    "name": "DR RUDRA ",
+    "contactNo": "",
+    "education": "MBBS",
+    "designation": "Chairman of Psychiatrists",
+    "departmentId": 7,
+    "hospitalId": 4,
+    "img":"Images/2BpjtH2fPMVEboCTnMHc.jpg"
   },
   {
-    name: "DR. SURUJ WADHWA",
-    contactNo: "",
-    education: "MBBS",
-    designation: "Director of Veterinarian",
-    departmentId: 8,
-    hospitalId: 2,
-    img: "https://api.parashospitals.com/storage/doctors/October2022/KOcv5cW2KImmOPtXQjJy.jpg",
+    "name": "DR. SURUJ WADHWA",
+    "contactNo": "",
+    "education": "MBBS",
+    "designation": "Director of Veterinarian",
+    "departmentId": 8,
+    "hospitalId": 2,
+    "img":"Images/KOcv5cW2KImmOPtXQjJy.jpg"
   },
   {
-    name: "DR S R Rao",
-    contactNo: "",
-    education: "MBBS",
-    designation: "Radiologist",
-    departmentId: 9,
-    hospitalId: 4,
-    img: "https://api.parashospitals.com/storage/doctors/October2022/BicYlWjUe8sH7WnlfFD6.jpg",
+    "name": "DR S R Rao",
+    "contactNo": "",
+    "education": "MBBS",
+    "designation": "Radiologist",
+    "departmentId": 9,
+    "hospitalId": 4,
+    "img":"Images/BicYlWjUe8sH7WnlfFD6.jpg"
   },
   {
-    name: "DR. V S SHARMA",
-    contactNo: "",
-    education: "MBBS",
-    designation: "Chairman of Neuro Surgery",
-    departmentId: 18,
-    hospitalId: 1,
-    img: "https://api.parashospitals.com/storage/doctors/September2022/7IKigx0IUWwlBe2DOx86.jpg",
+    "name": "DR. V S SHARMA",
+    "contactNo": "",
+    "education": "MBBS",
+    "designation": "Chairman of Neuro Surgery",
+    "departmentId": 18,
+    "hospitalId": 1,
+    "img":"Images/7IKigx0IUWwlBe2DOx86.jpg"
   },
   {
-    name: "DR. HARSHIT KHANDELWAL",
-    contactNo: "",
-    education: "MBBS",
-    designation: "Director & HOD",
-    departmentId: 12,
-    hospitalId: 3,
-    img: "https://api.parashospitals.com/storage/doctors/September2022/nKvtlYvqtEUyIZg7M0cK.jpg",
+    "name": "DR. HARSHIT KHANDELWAL",
+    "contactNo": "",
+    "education": "MBBS",
+    "designation": "Director & HOD",
+    "departmentId": 12,
+    "hospitalId": 3,
+    "img":"Images/nKvtlYvqtEUyIZg7M0cK.jpg"
   },
   {
-    name: "DR. R K SHARMA",
-    contactNo: "",
-    education: "MBBS",
-    designation: "Director & HOD - Gastroenterology ",
-    departmentId: 15,
-    hospitalId: 1,
-    img: "https://api.parashospitals.com/storage/doctors/September2022/0gt3x16BfPMzFkP5UmDT.jpg",
+    "name": "DR. R K SHARMA",
+    "contactNo": "",
+    "education": "MBBS",
+    "designation": "Director & HOD - Gastroenterology ",
+    "departmentId": 15,
+    "hospitalId": 1,
+    "img":"Images/0gt3x16BfPMzFkP5UmDT.jpg"
   },
   {
-    name: "DR. INDARJEET GUPTA",
-    contactNo: "",
-    education: "MBBS",
-    designation: "Urology",
-    departmentId: 14,
-    hospitalId: 4,
-    img: "https://api.parashospitals.com/storage/doctors/October2022/UqFjvxa0ipeGKjGKT3Im.jpg",
-  },
+    "name": "DR. INDARJEET GUPTA",
+    "contactNo": "",
+    "education": "MBBS",
+    "designation": "Urology",
+    "departmentId": 14,
+    "hospitalId": 4,
+    "img":"Images/UqFjvxa0ipeGKjGKT3Im.jpg"
+  }
 ];
+// imgsrc: "https://www.practostatic.com/consumer-home/desktop/images/1558283618/sp-dentist@2x.jpg",
+// imgsrc: "https://www.practostatic.com/consumer-home/desktop/images/1558283618/sp-gynecologist@2x.jpg",
+// imgsrc: "https://api.parashospitals.com/storage/doctors/October2022/zefRYl6WURSP1FWJEEEY.jpg",
+// imgsrc: "https://api.parashospitals.com/storage/doctors/October2022/bUQvygFvIjHfVhrus394.jpg",
+// imgsrc: "https://api.parashospitals.com/storage/doctors/October2022/Pax3Hi843qgWaeZ4sMnF.jpg",
+// imgsrc: "https://api.parashospitals.com/storage/doctors/October2022/xxBk2CUdtatkvf4ub26x.jpg",
+// imgsrc: "https://api.parashospitals.com/storage/doctors/October2022/2BpjtH2fPMVEboCTnMHc.jpg",
+// imgsrc: "https://api.parashospitals.com/storage/doctors/October2022/KOcv5cW2KImmOPtXQjJy.jpg",
+// imgsrc: "https://api.parashospitals.com/storage/doctors/October2022/BicYlWjUe8sH7WnlfFD6.jpg",
+// imgsrc: "https://api.parashospitals.com/storage/doctors/September2022/7IKigx0IUWwlBe2DOx86.jpg",
+// imgsrc: "https://api.parashospitals.com/storage/doctors/September2022/nKvtlYvqtEUyIZg7M0cK.jpg",
+// imgsrc: "https://api.parashospitals.com/storage/doctors/September2022/0gt3x16BfPMzFkP5UmDT.jpg",
+// imgsrc: "https://api.parashospitals.com/storage/doctors/October2022/UqFjvxa0ipeGKjGKT3Im.jpg",
 export const data = [
   {
     id: 2,
@@ -156,6 +169,7 @@ export const data = [
     designation: "Director Surgical Oncology",
     location: "mSmart Hospital, Delhi",
     speciality: "Oncology",
+    
     image:
       "https://api.parashospitals.com/storage/doctors/October2022/UqFjvxa0ipeGKjGKT3Im.jpg",
   },
@@ -165,6 +179,7 @@ export const data = [
     designation: "DIRECTOR-PLASTIC SURGEON",
     location: "mSmart Hospital, jaipur",
     speciality: "Plastic And Reconstructive Surgeries",
+    
     image:
       "https://api.parashospitals.com/storage/doctors/October2022/zefRYl6WURSP1FWJEEEY.jpg",
   },
@@ -174,6 +189,7 @@ export const data = [
     designation: "Chairman",
     location: "mSmart Hospital, Gurugram",
     speciality: "Orthopedics & Joint Replacement",
+    
     image:
       "https://api.parashospitals.com/storage/doctors/October2022/bUQvygFvIjHfVhrus394.jpg",
     },
@@ -183,6 +199,7 @@ export const data = [
       designation:'Consultant',
       location:'mSmart Hospital, Ajmer',
       speciality:'Medical Oncology',
+      
       image:
         "https://api.parashospitals.com/storage/doctors/October2022/Pax3Hi843qgWaeZ4sMnF.jpg",
     },
@@ -192,6 +209,7 @@ export const data = [
       designation:'Chairman',
       location:'mSmart Hospital, Delhi',
       speciality:'Cardiology',
+      
       image:
         "https://api.parashospitals.com/storage/doctors/October2022/xxBk2CUdtatkvf4ub26x.jpg",
     },
@@ -201,6 +219,7 @@ export const data = [
       designation:'Chairman',
       location:'mSmart Hospital, Gurugram',
       speciality:'Orthopedics & Joint Replacement',
+      
       image:
         "https://api.parashospitals.com/storage/doctors/October2022/2BpjtH2fPMVEboCTnMHc.jpg",
     },
@@ -210,6 +229,7 @@ export const data = [
       designation:'Chairman',
       location:'mSmart Hospital, jaipur',
       speciality:'Oncology',
+      
       image:
         "https://api.parashospitals.com/storage/doctors/October2022/KOcv5cW2KImmOPtXQjJy.jpg",
     },
@@ -219,6 +239,7 @@ export const data = [
       designation:'Chairman Neurosciences',
       location:'mSmart Hospital, Ajmer',
       speciality:'Neuro Surgery',
+      
       image:
         "https://api.parashospitals.com/storage/doctors/October2022/BicYlWjUe8sH7WnlfFD6.jpg",
     },
@@ -228,6 +249,7 @@ export const data = [
       designation:'Director & HOD',
       location:'mSmart Hospital, Delhi',
       speciality:'Cardiology - Interventional',
+      
       image:
         "https://api.parashospitals.com/storage/doctors/September2022/7IKigx0IUWwlBe2DOx86.jpg",
     },
@@ -237,6 +259,7 @@ export const data = [
       designation:'Director & HOD - Nephrology & Transplant Surgey ',
       location:'mSmart Hospital, Gurugram',
       speciality:'Nephrology',
+      
       image:
         "https://api.parashospitals.com/storage/doctors/September2022/nKvtlYvqtEUyIZg7M0cK.jpg",
     },
@@ -246,6 +269,7 @@ export const data = [
       designation:'Consultant General & Laparoscopic Surgery',
       location:'mSmart Hospital, Ajmer',
       speciality:(<br/>),
+      
       image:
         "https://api.parashospitals.com/storage/doctors/September2022/0gt3x16BfPMzFkP5UmDT.jpg",
     },
@@ -548,5 +572,207 @@ export const data = [
       }
     ]
 
+const disease=[
+  {
+    "departmentId":2,
+    "name":"Tooth decay",
+    "description":"damage to a tooth's surface, which can lead to cavities."
+},
+{
+  "departmentId":2,
+    "name":"Periodontal Disease",
+    "description":"The buildup of plaque-causing bacteria eventually leads to the development of gingivitis or periodontitis."
+},
+{
+  "departmentId":2,
+    "name":"Oral Cancer",
+    "description":" This disease usually manifests as a swollen or tingling sore with a red or white surface which can be caused by excess tobacco consumption or Human Papilloma Virus (HPV)."
+},
+{
+  "departmentId":2,
+    "name":"Cleft Lip or Palate",
+    "description":"A cleft lip is not actually a disease; rather, it is a developmental issue."
+},
+{
+  "departmentId":2,
+    "name":"Oral Thrush",
+    "description":"oral infections caused by the growth of harmful Candida fungus in the mouth."
+},
+{
+  "departmentId":2,
+    "name":"Halitosis",
+    "description":"More commonly known as “bad breath”, halitosis is a chronic condition that can be caused by a number of risk factors, including smoking, poor dental hygiene, and existing respiratory tract infections."
+}
 
-    
+]
+    [
+      {
+        "doctorId":1,
+"eventTypeId":1,
+"monday":"9.00-17.00",
+"tuesday":"9.00-17.00",
+"wednesday":"10.00-17.00",
+"thursday":"9.00-15.00",
+"friday":"9.00-12.00",
+"saturday":"Unavailable",
+"sunday":"Unavailable",
+"startDate":"6/12/2022",
+"endDate":"6/12/2023"
+      }, 
+      {
+        "doctorId":2,
+"eventTypeId":2,
+"monday":"9.00-17.00",
+"tuesday":"9.00-17.00",
+"wednesday":"10.00-17.00",
+"thursday":"9.00-15.00",
+"friday":"9.00-12.00",
+"saturday":"Unavailable",
+"sunday":"Unavailable",
+"startDate":"6/12/2022",
+"endDate":"6/12/2023"
+    },
+    {
+      "doctorId":3,
+"eventTypeId":3,
+"monday":"9.00-17.00",
+"tuesday":"9.00-17.00",
+"wednesday":"10.00-17.00",
+"thursday":"9.00-15.00",
+"friday":"9.00-12.00",
+"saturday":"Unavailable",
+"sunday":"Unavailable",
+"startDate":"6/12/2022",
+"endDate":"6/12/2023"
+  },
+  {
+    "doctorId":4,
+"eventTypeId":4,
+"monday":"9.00-17.00",
+"tuesday":"9.00-17.00",
+"wednesday":"10.00-17.00",
+"thursday":"9.00-15.00",
+"friday":"9.00-12.00",
+"saturday":"Unavailable",
+"sunday":"Unavailable",
+"startDate":"6/12/2022",
+"endDate":"6/12/2023"
+},
+{
+  "doctorId":5,
+"eventTypeId":5,
+"monday":"9.00-17.00",
+"tuesday":"9.00-17.00",
+"wednesday":"10.00-17.00",
+"thursday":"9.00-15.00",
+"friday":"9.00-12.00",
+"saturday":"Unavailable",
+"sunday":"Unavailable",
+"startDate":"6/12/2022",
+"endDate":"6/12/2023"
+},
+{
+  "doctorId":6,
+"eventTypeId":6,
+"monday":"9.00-17.00",
+"tuesday":"9.00-17.00",
+"wednesday":"10.00-17.00",
+"thursday":"9.00-15.00",
+"friday":"9.00-12.00",
+"saturday":"Unavailable",
+"sunday":"Unavailable",
+"startDate":"6/12/2022",
+"endDate":"6/12/2023"
+},
+{
+  "doctorId":7,
+"eventTypeId":7,
+"monday":"9.00-17.00",
+"tuesday":"9.00-17.00",
+"wednesday":"10.00-17.00",
+"thursday":"9.00-15.00",
+"friday":"9.00-12.00",
+"saturday":"Unavailable",
+"sunday":"Unavailable",
+"startDate":"6/12/2022",
+"endDate":"6/12/2023"
+},
+{
+  "doctorId":8,
+"eventTypeId":8,
+"monday":"9.00-17.00",
+"tuesday":"9.00-17.00",
+"wednesday":"10.00-17.00",
+"thursday":"9.00-15.00",
+"friday":"9.00-12.00",
+"saturday":"Unavailable",
+"sunday":"Unavailable",
+"startDate":"6/12/2022",
+"endDate":"6/12/2023"
+},
+{
+  "doctorId":9,
+"eventTypeId":9,
+"monday":"9.00-17.00",
+"tuesday":"9.00-17.00",
+"wednesday":"10.00-17.00",
+"thursday":"9.00-15.00",
+"friday":"9.00-12.00",
+"saturday":"Unavailable",
+"sunday":"Unavailable",
+"startDate":"6/12/2022",
+"endDate":"6/12/2023"
+},
+{
+  "doctorId":10,
+"eventTypeId":10,
+"monday":"9.00-17.00",
+"tuesday":"9.00-17.00",
+"wednesday":"10.00-17.00",
+"thursday":"9.00-15.00",
+"friday":"9.00-12.00",
+"saturday":"Unavailable",
+"sunday":"Unavailable",
+"startDate":"6/12/2022",
+"endDate":"6/12/2023"
+},
+{
+  "doctorId":11,
+"eventTypeId":11,
+"monday":"9.00-17.00",
+"tuesday":"9.00-17.00",
+"wednesday":"10.00-17.00",
+"thursday":"9.00-15.00",
+"friday":"9.00-12.00",
+"saturday":"Unavailable",
+"sunday":"Unavailable",
+"startDate":"6/12/2022",
+"endDate":"6/12/2023"
+},
+{
+  "doctorId":12,
+"eventTypeId":12,
+"monday":"9.00-17.00",
+"tuesday":"9.00-17.00",
+"wednesday":"10.00-17.00",
+"thursday":"9.00-15.00",
+"friday":"9.00-12.00",
+"saturday":"Unavailable",
+"sunday":"Unavailable",
+"startDate":"6/12/2022",
+"endDate":"6/12/2023"
+},
+{
+  "doctorId":13,
+"eventTypeId":13,
+"monday":"9.00-17.00",
+"tuesday":"9.00-17.00",
+"wednesday":"10.00-17.00",
+"thursday":"9.00-15.00",
+"friday":"9.00-12.00",
+"saturday":"Unavailable",
+"sunday":"Unavailable",
+"startDate":"6/12/2022",
+"endDate":"6/12/2023"
+}
+    ]

@@ -75,7 +75,7 @@ const BillReceipt = ({doctorData,date,selected,open,setOpen}) => {
           startY:230,
           head: [['Code','Descrition of Service', 'Rate','total']],
           body: [
-            ['101','Consultation Charge', '800','800'],
+            ['101','Consultation Charge', doctorData.basicCharges,'800'],
             [],
             [],
             [],
@@ -187,7 +187,7 @@ const r = (Math.random() * 100000)
             <Table.Body>
               <Table.Row>
                 <Table.Cell>Consultation Charge</Table.Cell>
-              <Table.Cell>800 Rs</Table.Cell>
+              <Table.Cell>{doctorData.basicCharges}Rs</Table.Cell>
               </Table.Row>
             </Table.Body>
             
