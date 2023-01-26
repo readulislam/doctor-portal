@@ -63,8 +63,7 @@ const UpcomingAppointment = () => {
   const TableRowData = () => {
     if (doctorId) {
       return (
-
-        !isEmpty(appointments) &&
+       !isEmpty(appointments) &&
         appointments.map((data) => (
           <>
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">

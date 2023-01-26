@@ -13,6 +13,11 @@ const doctorManu = [
   { id: 1, menu: "Rechecking", icon: <MdModelTraining size={20} /> },
   { id: 1, menu: "Profile", icon: <CgProfile size={20} /> },
 ];
+const adminMenu=[
+  { id:1,menu:"Dashboard" ,icon:<RxDashboard size={20}/> },
+  { id:2,menu:"Doctor" ,icon:<CgProfile size={20}/> },
+  { id:3,menu:"patient" ,icon:<CgProfile size={20}/> },
+];
 const DashboardMenu = () => {
   const navigate = useNavigate()
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -45,6 +50,18 @@ if(menu==='Dashboard')  return navigate('/dashboard');
 }
   return (
     <ul className="mt-12 uppercase">
+      {/* {adminMenu.map(({id,menu,icon})=>(
+        <>
+          <li 
+              onClick={()=>menuHandler(menu)}
+              className="flex hover:bg-gray-100/50 py-2 w-full justify-between text-gray-700 cursor-pointer items-center mb-4 rounded-md pl-3">
+                <p className="flex items-center focus:outline-none focus:ring-2 focus:ring-white">
+                  <span> {icon}</span>
+                  <span className="text-sm ml-2">{menu}</span>
+                </p>
+              </li>
+        </>
+      ))} */}
       {doctorManu.map(({ id, menu, icon }) => (
         <>
           {menu === "Appointment" ? (
