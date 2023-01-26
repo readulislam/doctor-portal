@@ -7,14 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { AddDoctorAppointment, BaseUrl, ListDiseases, LoginPatient, PatientRegister, updateTimeSlot } from "../../APi/api";
 import useFirebaseAuth from "../../hooks/useFirebaseAuth";
-import { authActions, patientLoginByPhone } from "../../Store/Auth-Slice";
+import { patientLoginByPhone } from "../../Store/Auth-Slice";
 
-import OtpVerifyModal from "./OtpVerifyModal";
-import RegistarModal from "./RegistarModal";
 import moment from "moment";
 import AppointmentBookedModal from "./AppointmentBookedModal";
+import OtpVerifyModal from "./OtpVerifyModal";
+import RegistarModal from "./RegistarModal";
 
-import { isEmpty } from "lodash";
 
 const ModalView = ({
   open,
@@ -146,7 +145,7 @@ const ModalView = ({
       setOpen(false);
       
     } else {
-      setOpenConfirmModal(!openConfirmModal);
+      // setOpenConfirmModal(!openConfirmModal);
     }
   };
 
@@ -176,7 +175,7 @@ const ModalView = ({
     setRegisterModel(false);
     const data = await PatientRegister(apiData);
     if (data) {
-      //  dispatch(authActions.userRegister({userId:data.id, userInfo:data}))
+     
 
       console.log(data);
       const response = await setupRecaptcha(number, "patientBooking");
@@ -191,11 +190,13 @@ const ModalView = ({
   return (
     <>
       {" "}
-      <Modal show={open} position="center" onClose={() => setOpen(false)}>
+      <Modal show={open}  size='4xl' position="center" onClose={() => setOpen(false)}>
+
+        <div className="bg-green-200 rounded-md">
         <form id="form" onSubmit={handleSubmit}>
-          <Modal.Header>Book An Appointment</Modal.Header>
+          <Modal.Header className="!py-4">Book An Appointment</Modal.Header>
           <Modal.Body>
-            <div className="space-y-6 p-6">
+            <div className="space-y-2">
               <div className="grid grid-cols-2 gap-4 ">
                 <TextInput
                   id="email1"
@@ -220,6 +221,7 @@ const ModalView = ({
                 />
 
                 <TextInput
+              
                   id="date"
                   type="date"
                   required={true}
@@ -228,30 +230,12 @@ const ModalView = ({
                     setDate(e.target.value);
                   }}
                 />
+
+
+            
               </div>
               <div>
-                <div className="flex items-center">
-                <select
-                required={true}
-                onChange={(e)=>{
-                  if(e.target.value==="others"){
-                    setOpenDiseaseInput(true)
-                  }else{
-                    setSelectedDisease( e.target.value)
-                  }
-                }}
-                  id="underline_select"
-                  className=" py-2.5 mt-4 w-auto  text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0  peer"
-                  name='experience'
-                 >
-                     <option selected>Disease</option>
-                     {!isEmpty(disease)&&disease.map((data)=>{
-                       return(<option value={data.id} >{data.name}</option>)
-                     })}
-                     <option value="others" >others</option>
-                 </select>
-                 {openDiseaseInput && <input required={true} onChange={(e)=>{}} className="mt-5 ml-5 border-b-2" name="disease" placeholder="disease name" />}
-                </div>
+                
               <div className="flex mt-5 items-center">
                 <input
                   id="checkbox-table-search-2"
@@ -267,8 +251,8 @@ const ModalView = ({
 
               </div>
 
-              <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                Consultation Charge : <span className="text-black">{doctorData.basicCharges} Rs</span>
+              <p className="text-base leading-relaxed  text-gray-700 dark:text-gray-400">
+                Consultation Charge : <span className="">{doctorData.basicCharges} Rs</span>
               </p>
               {slotsInfo?.data && (
                 <h3 className="font-semibold w-full  text-center text-xl">
@@ -281,11 +265,11 @@ const ModalView = ({
                     <div
                       key={index}
                       onClick={() => setSelected(data)}
-                      className={`text-base ${
+                      className={`text-base bg-white max-w-[100px] ${
                         selected?.id === data.id && "bg-blue-600 text-white"
                       } ${
                         !data.isAvailable || data.time < currentTime
-                          ? "bg-gray-400/10 text-gray-400/50"
+                          ? "bg-white text-gray-400/50"
                           : "shadow-md hover:bg-sky-500 hover:text-white cursor-pointer  "
                       } border   py-1 px-3 text-center rounded-md`}
                     >
@@ -300,7 +284,7 @@ const ModalView = ({
                       <span>Phone Number</span>
                       <PhoneInput
                         defaultCountry="IN"
-                        className="border-2"
+                        className="border-none px-3 py- placeholder-blueGray-300 text-gray-700 bg-white rounded text-md shadow appearance-none focus:outline-none focus:ring-0  w-full ease-linear active:outline-none "
                         placeholder="Enter phone number"
                         value={number}
                         onChange={setNumber}
@@ -313,7 +297,7 @@ const ModalView = ({
               </div>
             </div>
           </Modal.Body>
-          <Modal.Footer className="flex justify-between">
+          <Modal.Footer className="flex !py-4 justify-between">
             <Button color="gray" onClick={() => setOpen(false)}>
               Decline
             </Button>
@@ -327,6 +311,7 @@ const ModalView = ({
             </Button>
           </Modal.Footer>
         </form>
+        </div>
       </Modal>
       <OtpVerifyModal
         OTPresult={OTPresult}
@@ -339,6 +324,7 @@ const ModalView = ({
 
       {registerModel&&<RegistarModal
         number={number}
+        setNumber={setNumber}
         newDate={newDate}
         selected={selected}
         handleRegisterModel={handleRegisterModel}

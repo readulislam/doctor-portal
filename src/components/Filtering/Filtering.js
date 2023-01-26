@@ -42,7 +42,7 @@ const Filtering = ({handleSearch}) => {
       {({ handleSubmit, isSubmitting, setFieldValue }) => (
       <>  
     <form autoComplete="off" onSubmit={handleSubmit} >
-      <div className=" items-center content-center container mx-auto flex justify-between my-5  ">
+      <div className=" items-center grid md:grid-cols-2 justify-center content-center container mx-auto flex-col xl:flex-row gap-y-4 xl:gap-y-0 justify-items-center xl:flex xl:justify-between my-5  ">
 
       <label for="table-search" className="sr-only">Search</label>
         <div className="relative ">

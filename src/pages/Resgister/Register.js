@@ -3,49 +3,28 @@ import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import {
-  ListCities,
-  ListHospitals,
-  ListStates,
-  PatientRegister
+  ListCities, PatientRegister
 } from "../../APi/api";
 import OtpVerifyModal from "../../Common/OtpVerifyModal";
+import useCommonApi from "../../hooks/useCommonApi";
 import useFirebaseAuth from "../../hooks/useFirebaseAuth";
 import { authActions } from "../../Store/Auth-Slice";
 import RegisterView from "./RegisterView";
 
 const Register = () => {
   const [patientInfo, setPatientInfo] = useState({});
-  const [states, setStates] = useState([]);
-  const [cities, setCities] = useState([]);
+ 
   const [number, setNumber] = useState(null);
   const [stateId, setStateId] = useState(null);
-  const [hospitals, setHospitals] = useState(null);
+
   const [openOtp, setOpenOtp] = useState(false);
   const [OTPresult, setOTPResult] = useState("");
   const { setupRecaptcha } = useFirebaseAuth();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await ListStates();
-      setStates(data);
-
-      const hospitalList = await ListHospitals();
-      setHospitals(hospitalList.data);
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-    
-      if (stateId) {
-        const cities = await ListCities(stateId);
-        setCities(cities);
-      }
-    };
-    fetchData();
-  }, [stateId]);
+  const {hospitals,states,cities} = useCommonApi({stateId})
+  
+  
   const handleFormSubmit = async (values) => {
     setPatientInfo({
       ...values,
