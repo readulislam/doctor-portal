@@ -24,7 +24,9 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
   const [openOtp, setOpenOtp] = useState(false);
   // const dispatch=useDispatch();
   const [OTPresult, setOTPResult] = useState("");
+  //  const today=new Date();
   const [date, setDate] = useState(new Date());
+ 
   const [selected, setSelected] = useState(null);
   const [slotsInfo, setSlotsInfo] = useState(null);
   const [number, setNumber] = useState("");
@@ -57,15 +59,14 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
         const { data } = await axios.post(
           `${BaseUrl}/get-slots?date=${newDate}&doctorId=${doctorId}`
         );
-        console.log(data);
+        
         setSlotsInfo(data);
-
-        console.log(moment().hours());
-        if (date === new Date().toJSON().slice(0, 10)) {
+        if (newDate===  yearMonthDay(new Date())) {
           setcurrentTime(`${moment().hours()} : ${moment().minutes()}`);
-          console.log(currentTime);
+          
         } else {
-          setcurrentTime();
+          console.log("askdlsfkd");
+        
         }
       }
     };
