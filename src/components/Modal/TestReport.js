@@ -1,96 +1,69 @@
 import axios from 'axios';
-import { Button, Label, Modal, Textarea } from 'flowbite-react';
+import { Button, Label, Modal, Radio, Textarea } from 'flowbite-react';
 import React, { useEffect, useState } from 'react'
-import { BaseUrl, PostReport } from '../../APi/api';
+import { BaseUrl, ListDiseases, PostReport } from '../../APi/api';
 
-const TestReport = ({open,setOpen,reportData,reload,setReload,setReportData}) => {
-  const [data, setData] = useState([]);
-  const [file, setFile] = useState();
+const TestReport = ({open,setOpen,doctorData,doctorId}) => {
+  const [disease, setDisease] = useState([]);
+  const [others, setOthers] = useState(false);
   
   
   useEffect(() => {
-    const reportfetch=async()=>{
-          const {data}=await axios.get(`${BaseUrl}/get-testReports?patientId=${reportData.patientId}&doctorId=${reportData.doctorId}&appointmentId=${reportData.id}`)
-          setData(data)
-          }
-    reportfetch()
-}, [reload,reportData.id])
+    const fetch=async()=>{
+      // const {data}=await ListDiseases(doctorData.departmentId)
+      const {data}=await ListDiseases(2)
+      setDisease(data)
+        
+    }
+   fetch()
+  }, [])
 
-
+console.log(disease);
 
   const handleSubmit=async(e)=>{
     e.preventDefault()
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("name", e.target.name.value);
-    formData.append("patientId", reportData.patientId);
-    formData.append("doctorId", reportData.doctorId);
-    formData.append("appointmentId", reportData.id);
-    
-    console.log(formData,reportData);
-    const data= await PostReport(formData)
-    setReload(!reload)
-    setFile('');
+
     
   }
-  // const onButtonClick = (file,name) => {
-  //   // using Java Script method to get PDF file
-  //   fetch(`${BaseUrl}/${file}`).then(response => {
-  //       response.blob().then(blob => {
-  //           // Creating new object of PDF file
-  //           const fileURL = window.URL.createObjectURL(blob);
-  //           // Setting various property values
-  //           let alink = document.createElement('a');
-  //           alink.href = fileURL;
-  //           alink.download = `${file}`;
-  //           alink.click();
-  //       })
-  //   })
-  // }
   return (
     <React.Fragment>
     <Modal
-      show={open}
+      show={true}
+      size='4xl'
       position="center"
       onClose={() => {
         setOpen(false);
-        setFile('');
       }}
     >
+      <div className="bg-green-200 rounded-md">
+      
      <Modal.Header className=""> Test Report </Modal.Header>
         
         <Modal.Body>
-          <div>
-            <div>
-              {data.map((value,index)=> 
-                <div className="pt-5">
-                  <a href={`${BaseUrl}/${value.link}`}  target="_blank">
-                  {value.name}
-                </a>
-                {/* <Button onClick={onButtonClick(value.link,value.name)} >download</Button> */}
+            <div className='grid container mx-auto md:grid-cols-2   xl:grid-cols-3 xl:gap-x-5   gap-y-5   mt-16 place-items-center' >
+              {disease.map((values)=>(
+              <div className='text-base shadow-md  hover:bg-sky-500 hover:text-white cursor-pointer  py-1 px-3 bg-white border  rounded-md '>{values.name}</div>
+              ))}
+            </div>
+            <div className='grid container mx-auto md:grid-cols-2   xl:grid-cols-2 xl:gap-x-5   gap-y-10   mt-16 place-items-center'>
+              <div onClick={()=>setOthers(!others)}>
+                others
+              </div>
+              {others &&<div>
+                 <input className='' type="text" /> 
+              </div>}
+              <div >
+                type of appointment
+                <div className='mt-3'>
+                  <input type="radio" id="normal" name="drone" value="normal" checked/>
+                  <label className='ml-5' for="normal">normal Appointment</label>
                 </div>
-
-              )}
-            </div>
-            <form onSubmit={handleSubmit} className='mt-5' >
-            <div>
-            <Label>
-              Enter name of Report : 
-            <input
-              type='text'
-              name="name"
-              />
-            </Label>
-            </div>
-            <div className='mt-5'>
-            <input type="file" id="file" name="file" accept="application/*"
-              onChange={(e) => { setFile(e.target.files[0]) }} 
-            />
-            </div>
-            <Button className='mt-5' type='submit' >ADD</Button>
-            </form>
-        <br/>
-       
+                <div className='mt-3'>
+                  <input type="radio" id="follow" name="drone" value="follow"/>
+                  <label className='ml-5'  for="follow">follow up Appointment</label>
+                </div>
+                
+              </div>
             </div>
         </Modal.Body>
         <Modal.Footer className="flex justify-between">
@@ -99,20 +72,20 @@ const TestReport = ({open,setOpen,reportData,reload,setReload,setReportData}) =>
             color="gray"
             onClick={() => {
               setOpen(false);
-              setFile('');
             }}
           >
-            Cancel
+            prev
           </Button>
           <Button
             
             className="px-2 "
             gradientDuoTone="cyanToBlue"
-            onClick={()=>{setOpen(false);setFile('');}}
+            onClick={()=>{setOpen(false)}}
           >
-            Submit
+            next
           </Button>
         </Modal.Footer>
+        </div>
     </Modal>
   </React.Fragment>
   )

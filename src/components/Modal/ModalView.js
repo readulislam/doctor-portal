@@ -13,6 +13,8 @@ import moment from "moment";
 import AppointmentBookedModal from "./AppointmentBookedModal";
 import OtpVerifyModal from "./OtpVerifyModal";
 import RegistarModal from "./RegistarModal";
+import InputField from "../../Common/InputField";
+import { Field } from "formik";
 
 
 const ModalView = ({
@@ -194,12 +196,13 @@ const ModalView = ({
 
         <div className="bg-green-200 rounded-md">
         <form id="form" onSubmit={handleSubmit}>
-          <Modal.Header className="!py-4">Book An Appointment</Modal.Header>
+          <Modal.Header  className="!py-4">Book An Appointment</Modal.Header>
           <Modal.Body>
             <div className="space-y-2">
               <div className="grid grid-cols-2 gap-4 ">
                 <TextInput
                   id="email1"
+                  className="text-gray-700 dark:text-gray-400"
                   type="text"
                   placeholder="name@flowbite.com"
                   disabled
@@ -207,6 +210,7 @@ const ModalView = ({
                 />
                 <TextInput
                   id="email1"
+                  className="text-gray-700 dark:text-gray-400"
                   type="text"
                   placeholder="name@flowbite.com"
                   disabled
@@ -214,6 +218,7 @@ const ModalView = ({
                 />
                 <TextInput
                   id="email1"
+                  className="text-gray-700 dark:text-gray-400"
                   type="text"
                   placeholder="name@flowbite.com"
                   disabled
@@ -224,6 +229,7 @@ const ModalView = ({
               
                   id="date"
                   type="date"
+                  className="text-gray-700 dark:text-gray-400"
                   required={true}
                   min={disableDate()}
                   onChange={(e) => {

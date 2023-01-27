@@ -2,9 +2,7 @@ import { isEmpty } from "lodash";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { heading } from "../../Common/Table";
-import { AiFillEye, AiOutlineDownload } from "react-icons/ai";
-import axios from "axios";
-import { BaseUrl } from "../../APi/api";
+
 import DoctorPanelView from "./DoctorPanelView";
 
 const DoctorPanel = () => {

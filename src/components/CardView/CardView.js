@@ -10,6 +10,7 @@ import Filtering from "../Filtering/Filtering";
 import AppointmentRegistar from "../Form/AppoinmentRegistar/AppointmentRegistar";
 import DoctorDetail from "../Modal/DoctorDetail";
 import useReactQuery from "../../hooks/useReactQuery";
+import TestReport from "../Modal/TestReport";
 
 const CardView = () => {
   const { userId } = useSelector((state) => state.Auth);
@@ -206,6 +207,7 @@ const CardView = () => {
           totalPages={totalPage}
         />
       </div>
+      <TestReport/>
     </>
   );
 };
