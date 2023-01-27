@@ -66,7 +66,7 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
           
         } else {
           console.log("askdlsfkd");
-        
+          setcurrentTime();
         }
       }
     };
