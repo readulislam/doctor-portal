@@ -62,10 +62,11 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
         
         setSlotsInfo(data);
         if (newDate===  yearMonthDay(new Date())) {
+      
           setcurrentTime(`${moment().hours()} : ${moment().minutes()}`);
           
         } else {
-          console.log("askdlsfkd");
+          setcurrentTime();
         
         }
       }
@@ -203,7 +204,7 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
     open,
     handleSubmit,
     date,
-    
+
   };
 
   return (
