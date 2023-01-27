@@ -7,10 +7,10 @@ import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { BaseUrl, ListDepartments, ListStates } from "../../APi/api";
 import Filtering from "../Filtering/Filtering";
-import AppointmentRegistar from "../Form/AppoinmentRegistar/AppointmentRegistar";
 import DoctorDetail from "../Modal/DoctorDetail";
 import useReactQuery from "../../hooks/useReactQuery";
-import TestReport from "../Modal/TestReport";
+
+import AppointmentBooking from "../AppointmentBooking";
 
 const CardView = () => {
   const { userId } = useSelector((state) => state.Auth);
@@ -185,7 +185,7 @@ const CardView = () => {
       </div>
 
       {open && (
-        <AppointmentRegistar
+        <AppointmentBooking
           doctorId={doctorId}
           doctorData={doctorData}
           open={open}
@@ -207,7 +207,6 @@ const CardView = () => {
           totalPages={totalPage}
         />
       </div>
-      <TestReport/>
     </>
   );
 };

@@ -1,6 +1,6 @@
 import { Button, Card, Modal } from 'flowbite-react'
 import React, { useState } from 'react'
-import ModalView from './ModalView';
+import ModelViewWrapper from './ModelViewWrapper';
 
 
 const DoctorDetail = ({doctorData,open,setOpen}) => {
@@ -54,7 +54,7 @@ const DoctorDetail = ({doctorData,open,setOpen}) => {
             </Button>
           </Modal.Footer>
       </Modal>
-        {appointmentOpen && <ModalView doctorData={doctorData} doctorid={doctorData.id} open={appointmentOpen} setOpen={setAppointmentOpen} /> }
+        {appointmentOpen && <ModelViewWrapper doctorData={doctorData} doctorid={doctorData.id} open={appointmentOpen} setOpen={setAppointmentOpen} /> }
   </div>
   )
 }

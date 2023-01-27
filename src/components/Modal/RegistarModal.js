@@ -80,10 +80,11 @@ const RegistarModal = ({
           // validationSchema={EditLocationError}
         >
           {({ handleSubmit, isSubmitting, setFieldValue }) => (
-            <form autoComplete="off" onSubmit={handleSubmit} class=" flex-1   ">
+            <form autoComplete="off" onSubmit={handleSubmit} class=" ">
               <RegistrationForm props={props} setFieldValue={setFieldValue}>
-              
-                <div className="flex flex-wrap pt-4 px-4  justify-between">
+              <hr className=' mt-4'/>
+                <div className="flex flex-wrap px-4 mt-4 justify-between">
+                 
                   <PrimaryButton>Cancel</PrimaryButton>
                   <PrimaryButton type="submit">Submit</PrimaryButton>
                 </div>
