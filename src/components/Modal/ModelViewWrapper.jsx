@@ -9,7 +9,7 @@ const ModelViewWrapper = ({
   props,children,modalHeaderTitle,PrimaryButtonTitle,PrimaryButtonType,
 }) => {
 
-  const {doctorData,setDate,slotsInfo,selected,setSelected,userId, number,setNumber,currentTime,disableDate,setOpen,open,handleSubmit,}= props ;
+  const {setOpen,open,handleSubmit,}= props ;
   
   return (
     <>

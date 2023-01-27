@@ -1,18 +1,14 @@
 import { Route, Routes } from "react-router";
 
+import PreviousAppointment from "./components/PreviousAppointment";
+import UpcomingAppointment from "./components/UpcomingAppointment";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Resgister";
 import ToasterContainer from "./Utils/ToasterContainer";
-import UpcomingAppointment from "./components/UpcomingAppointment";
-import PreviousAppointment from "./components/PreviousAppointment";
-import DoctorView from "./components/DoctorView/DoctorView";
-import Navbar from "./components/Navbar/Navbar";
-import Header from "./components/Header/Header";
-import Filtering from "./components/Filtering/Filtering";
-import CardView from "./components/CardView/CardView";
-
 import HomePage from "./pages/Home/HomePage";
+
+
 
 const App = () => {
   return (
