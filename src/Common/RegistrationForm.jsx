@@ -1,10 +1,9 @@
 import { Field } from 'formik'
 import { isEmpty } from 'lodash'
-import React, { useState } from 'react'
+import React from 'react'
 import PhoneInput from 'react-phone-number-input'
-import { genderValue, location, martial, title } from '../Utils/mockData'
+import { genderValue, martial, title } from '../Utils/mockData'
 import InputField from './InputField'
-import PrimaryButton from './PrimaryButton'
 import SelectInput from './SelectInput'
 
 
@@ -13,7 +12,7 @@ const {cities, setStateId,hospitals,number,setNumber, states,} = props
 
   return (
     <>
-     <div class="relative flex flex-col min-w-0 break-words w-full mb-6 bg-green-200 rounded-lg bg-blueGray-100 border-0">
+     <div class="relative flex flex-col min-w-0 bg-green-200 break-words w-full mb-6   rounded-lg bg-blueGray-100 border-0">
     <div class="rounded-t  mb-0 text-center px-6 py-6">
     <p className='text-[#499AFA] font-bold uppercase text-2xl'>Registration</p>
     </div>
