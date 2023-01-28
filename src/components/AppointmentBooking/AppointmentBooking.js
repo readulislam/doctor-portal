@@ -13,6 +13,7 @@ import OtpVerifyModal from "../../Common/OtpVerifyModal";
 import useDateFormat from "../../hooks/useDateFormat";
 import useFirebaseAuth from "../../hooks/useFirebaseAuth";
 import { patientLoginByPhone } from "../../Store/Auth-Slice";
+import AppointmentDiseases from "../Modal/AppointmentDiseases";
 import RegistarModal from "../Modal/RegistarModal";
 import AppointmentBookingView from "./AppointmentBookingView";
 
@@ -34,9 +35,9 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
   const [appointment, setAppointment] = useState({});
   const [registerModel, setRegisterModel] = useState(false);
   const [currentTime, setcurrentTime] = useState();
-  const [disease, setDisease] = useState([]);
-  const [selectedDisease, setSelectedDisease] = useState(null);
-  const [openDiseaseInput, setOpenDiseaseInput] = useState(false);
+  const [selectedDisease, setSelectedDisease] = useState({});
+  const [openDiseaseModal, setOpenDiseaseModal] = useState(false);
+  const [otherDisease, setOtherDisease] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
 
@@ -72,13 +73,6 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
     };
     fetching();
   }, [date, doctorId]);
-  useEffect(() => {
-    const fetch = async () => {
-      const { data } = await ListDiseases(doctorData.departmentId);
-      setDisease(data);
-    };
-    fetch();
-  }, [doctorId]);
   const disableDate = () => {
     var dtToday = new Date();
 
@@ -123,8 +117,8 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
         // }
         console.log(doctorData);
         console.log("rrrrrr");
-        setOpenConfirmModal(!openConfirmModal);
-        console.log(openConfirmModal, "jdfdi");
+        setOpenDiseaseModal(!openDiseaseModal);
+        console.log(openDiseaseModal, "jdfdi");
       } else {
         if (selected && number) {
           const response = await LoginPatient(number);
@@ -137,17 +131,17 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
           }
 
           if (userId && isLoggedIn) {
-            setOpenConfirmModal(!openConfirmModal);
+            setOpenDiseaseModal(!openDiseaseModal);
           }
         }
       }
     } catch (error) {}
 
     if (isLoggedIn) {
-      setOpenConfirmModal(!openConfirmModal);
-      setOpen(false);
+      setOpenDiseaseModal(!openDiseaseModal);
+      // setOpen(false);
     } else {
-      // setOpenConfirmModal(!openConfirmModal);
+      // setOpenDiseaseModal(!openDiseaseModal);
     }
   };
 
@@ -166,8 +160,8 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
   }, [contact, number, isRegistered, setupRecaptcha]);
   const handleDispatch = async () => {
     dispatch(patientLoginByPhone(number));
-    setOpen(false);
-    setOpenConfirmModal(!openConfirmModal);
+    // setOpen(false);
+    setOpenDiseaseModal(!openDiseaseModal);
   };
   const handleOtpSubmit = () => {
     // setOpenOtp(false)
@@ -185,6 +179,40 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
       }
     }
   };
+  const handleDiseaseSubmit=(e)=>{
+    e.preventDefault()
+  if(otherDisease){
+    setAppointment({
+      doctorId,
+        patientId: userId,
+        time: selected.time,
+        timeSlotId: selected.id,
+        diseaseId:null,
+        appointmentType:e.target.bordered.value,
+        diseaseName:e.target.disease.value,
+        requestedByEmail: "",
+        requestedByPhone: "",
+        date,
+        status: false,
+    })
+    
+  }else{
+    setAppointment({
+      doctorId,
+        patientId: userId,
+        time: selected.time,
+        timeSlotId: selected.id,
+        diseaseId:selectedDisease.id,
+        appointmentType:e.target.bordered.value,
+        diseaseName:selectedDisease.name,
+        requestedByEmail: "",
+        requestedByPhone: "",
+        date,
+        status: false,
+    })
+    
+  }
+  }
 
   console.log(openConfirmModal, "jdfdixs");
 
@@ -234,6 +262,17 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
           setOpen={setRegisterModel}
         />
       )}
+      {openDiseaseModal && <AppointmentDiseases
+      open={openDiseaseModal}
+      setOpen={setOpenDiseaseModal}
+      doctorData={doctorData}
+      doctorId={doctorId}
+      otherDisease={otherDisease}
+      selectedDisease={selectedDisease}
+      setSelectedDisease={setSelectedDisease}
+      setOtherDisease={setOtherDisease}
+      handleDiseaseSubmit={handleDiseaseSubmit}
+      /> }
       {/* {openConfirmModal && 
       <AppointmentBookedModal
       openConfirmModal={openConfirmModal}

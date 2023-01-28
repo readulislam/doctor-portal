@@ -11,7 +11,6 @@ import DoctorDetail from "../Modal/DoctorDetail";
 import useReactQuery from "../../hooks/useReactQuery";
 
 import AppointmentBooking from "../AppointmentBooking";
-import TestReport from "../Modal/AppointmentDiseases";
 
 const CardView = () => {
   const { userId } = useSelector((state) => state.Auth);
@@ -209,7 +208,6 @@ const CardView = () => {
         />
       </div>
 
-      <TestReport/>
     </>
   );
 };
