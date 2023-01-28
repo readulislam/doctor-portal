@@ -13,7 +13,9 @@ import OtpVerifyModal from "../../Common/OtpVerifyModal";
 import useDateFormat from "../../hooks/useDateFormat";
 import useFirebaseAuth from "../../hooks/useFirebaseAuth";
 import { patientLoginByPhone } from "../../Store/Auth-Slice";
+
 import AppointmentDiseases from "../Modal/AppointmentDiseases";
+import BookingConfirmation from "../BookingConfirmation";
 import RegistarModal from "../Modal/RegistarModal";
 import AppointmentBookingView from "./AppointmentBookingView";
 
@@ -39,7 +41,7 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
   const [openDiseaseModal, setOpenDiseaseModal] = useState(false);
   const [otherDisease, setOtherDisease] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
-  const [openConfirmModal, setOpenConfirmModal] = useState(false);
+  const [openConfirmModal, setOpenConfirmModal] = useState(true);
 
   const {yearMonthDay} = useDateFormat()
 
@@ -262,6 +264,7 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
           setOpen={setRegisterModel}
         />
       )}
+
       {openDiseaseModal && <AppointmentDiseases
       open={openDiseaseModal}
       setOpen={setOpenDiseaseModal}
@@ -274,7 +277,7 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
       handleDiseaseSubmit={handleDiseaseSubmit}
       /> }
       {/* {openConfirmModal && 
-      <AppointmentBookedModal
+      <BookingConfirmation
       openConfirmModal={openConfirmModal}
       setOpenConfirmModal={setOpenConfirmModal}
         doctorData={doctorData}
