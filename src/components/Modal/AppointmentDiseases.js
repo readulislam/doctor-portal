@@ -45,7 +45,7 @@ const AppointmentDiseases = ({ open, setOpen, doctorData, doctorId }) => {
   };
 
   const props = {
-    open: true,
+    // open: true,
     handleSubmit,
   };
   return (

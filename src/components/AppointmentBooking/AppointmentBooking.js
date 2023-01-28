@@ -13,6 +13,7 @@ import OtpVerifyModal from "../../Common/OtpVerifyModal";
 import useDateFormat from "../../hooks/useDateFormat";
 import useFirebaseAuth from "../../hooks/useFirebaseAuth";
 import { patientLoginByPhone } from "../../Store/Auth-Slice";
+import BookingConfirmation from "../BookingConfirmation";
 import RegistarModal from "../Modal/RegistarModal";
 import AppointmentBookingView from "./AppointmentBookingView";
 
@@ -38,7 +39,7 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
   const [selectedDisease, setSelectedDisease] = useState(null);
   const [openDiseaseInput, setOpenDiseaseInput] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
-  const [openConfirmModal, setOpenConfirmModal] = useState(false);
+  const [openConfirmModal, setOpenConfirmModal] = useState(true);
 
   const {yearMonthDay} = useDateFormat()
 
@@ -235,14 +236,14 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
           setOpen={setRegisterModel}
         />
       )}
-      {/* {openConfirmModal && 
-      <AppointmentBookedModal
+      {openConfirmModal && 
+      <BookingConfirmation
       openConfirmModal={openConfirmModal}
       setOpenConfirmModal={setOpenConfirmModal}
         doctorData={doctorData}
         date={newDate}
         selected={selected}
-      />} */}
+      />}
     </>
   );
 };
