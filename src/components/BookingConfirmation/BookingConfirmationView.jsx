@@ -125,7 +125,7 @@ const BookingConfirmationView = ({
           for="message"
           class="block font-serif mb-2 pt-10 text-sm font-medium text-gray-900 dark:text-white"
         >
-          Your message
+          About Your Disease
         </label>
         <textarea
           id="message"
