@@ -53,7 +53,7 @@ const AppointmentDiseases = ({ open, setOpen, doctorData,setOtherDisease,selecte
         props={props}
       >
         <div className="grid  md:grid-cols-2 xl:grid-cols-3 gap-4 items-center ">
-          {d.map((data, index) => (
+          {disease.map((data, index) => (
             <>
               {/* "bg-blue-600 text-white" */}
               <p
