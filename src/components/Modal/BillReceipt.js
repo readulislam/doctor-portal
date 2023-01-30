@@ -152,7 +152,7 @@ const BillReceipt = ({doctorData,appointment,serialNO,open,setOpen}) => {
         </Modal.Body>
         <Modal.Footer className='flex !py-3 justify-between  w-full' >
           <Button color="gray" onClick={() => setOpen(false)}>
-            Cancel
+            Close
           </Button>
           <Button
             color
