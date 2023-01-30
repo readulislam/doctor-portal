@@ -53,12 +53,13 @@ const AppointmentDiseases = ({ open, setOpen, doctorData,setOtherDisease,selecte
         props={props}
       >
         <div className="grid  md:grid-cols-2 xl:grid-cols-3 gap-4 items-center ">
-          {d.map((data, index) => (
+          {disease.map((data, index) => (
             <>
               {/* "bg-blue-600 text-white" */}
               <p
                 onClick={() => setSelectedDisease(data)}
                 key={index}
+                required={true}
                 className={`${
                   selectedDisease.id === data.id && "bg-blue-600 text-white"
                 } bg-white hover:bg-sky-500 hover:text-white shadow-sm rounded-full font-serif font-[500]  text-gray-700 cursor-pointer text-center py-2`}
@@ -84,6 +85,7 @@ const AppointmentDiseases = ({ open, setOpen, doctorData,setOtherDisease,selecte
                   Enter Disease name
                 </span>
                 <input
+                  required={true}
                   type="text"
                   name="disease"
                   className="border-none px-3 py-2.5 placeholder-blueGray-300 text-gray-700 bg-white rounded text-md shadow appearance-none focus:outline-none focus:ring-0  focus:border-cyan-200   w-full ease-linear active:outline-none "
@@ -111,6 +113,7 @@ const AppointmentDiseases = ({ open, setOpen, doctorData,setOtherDisease,selecte
                     id="bordered-radio-1"
                     type="radio"
                     value={name}
+                    required={true}
                     name="bordered"
                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />

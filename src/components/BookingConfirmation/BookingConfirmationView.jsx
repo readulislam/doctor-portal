@@ -1,40 +1,33 @@
 import { Button, Modal } from "flowbite-react";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { AddDoctorAppointment, updateTimeSlot } from "../../APi/api";
 import BillReceipt from "../Modal/BillReceipt";
 import ModelViewWrapper from "../Modal/ModelViewWrapper";
 
 const BookingConfirmationView = ({
   appointment,
   setOpenConfirmModal,
+  slotsInfo,
   openConfirmModal,
   doctorData,
   date,
-  selected,
+  
 }) => {
   const { userInfo, userId } = useSelector((state) => state.Auth);
   console.log("hiiiiii");
   const [openBillReceipt, setOpenBillReceipt] = useState(false);
-  const handleSubmit = (e) => {
+  console.log(appointment);
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    // const data = await AddDoctorAppointment({
-    //   doctorId,
-    //   patientId: userId,
-    //   time: selected.time,
-    //   timeSlotId: selected.id,
-    //   requestedByEmail: "",
-    //   requestedByPhone: "",
-    //   date,
-    //   status: false,
-    // });
-
-    // setAppointment(data)
+    // const data = await AddDoctorAppointment(appointment);
+    // console.log(data);
     // if (data) {
     //   // doctorId, date, timeRange, slotId
     //   const query = {
-    //     doctorId,
+    //     doctorId:appointment.doctorId,
     //     timeRange: slotsInfo.timeRange,
-    //     slotId: selected.id,
+    //     slotId: appointment.timeSlotId,
     //     date,
     //     weekday: slotsInfo.weekday,
     //   };
@@ -46,9 +39,9 @@ const BookingConfirmationView = ({
   const serialNO = Math.ceil(random);
   console.log(serialNO);
   const props = {
-    open: true,
-    handleSubmit,
-    setOpen: false,
+    open: openConfirmModal,
+    setOpen:setOpenConfirmModal,
+    handleSubmit
   };
   return (
     <React.Fragment>
@@ -65,7 +58,7 @@ const BookingConfirmationView = ({
         <div className="flex flex-col text-md  w-full text-left ml-5 ">
           <div>
             <p className="text-sm font-serif leading-relaxed  text-gray-500 dark:text-gray-400">
-              Date :{date}
+              Date :{appointment.date}
             </p>
 
             <p className=" leading-relaxed font-serif  text-gray-500 dark:text-gray-400">
@@ -73,7 +66,7 @@ const BookingConfirmationView = ({
             </p>
 
             <p className=" font-serif leading-relaxed text-gray-500 dark:text-gray-400">
-              Time :{selected?.time} 8.00am
+              Time :{appointment?.time}
             </p>
           </div>
         </div>
@@ -84,10 +77,10 @@ const BookingConfirmationView = ({
               Doctor Name : {doctorData?.name}
             </p>
             <p className="  font-serif dark:text-gray-400">
-              Specialty : Oncology
+              Specialty : {doctorData?.department.name}
             </p>
             <p className="  font-serif dark:text-gray-400">
-              Mobile No : +96125484264
+              Mobile No : {doctorData?.contactNo}
             </p>
             <p className="  font-serif  dark:text-gray-400">
               Hospital name :{" "}
@@ -102,13 +95,13 @@ const BookingConfirmationView = ({
 
           <div className="">
             <p className="  font-serif dark:text-gray-400">
-              Patient Name : {doctorData?.name}
+              Patient Name : {(userInfo?.firstName).toUpperCase()}  {(userInfo?.lastName).toUpperCase()}
             </p>
             <p className="  font-serif dark:text-gray-400">
-              Disease : Oncology
+              Disease : {appointment?.diseaseName}
             </p>
             <p className="  font-serif dark:text-gray-400">
-              Mobile No : +96125484264
+              Mobile No : {userInfo?.contact}
             </p>
             <p className="  font-serif  dark:text-gray-400">
               Hospital name :{" "}
@@ -117,7 +110,7 @@ const BookingConfirmationView = ({
                 doctorData?.hospital?.address}
             </p>
             <p className=" font-serif dark:text-gray-400">
-              Address: Delhi ,India
+              Address : {userInfo?.address}
             </p>
           </div>
         </div>
@@ -142,7 +135,7 @@ border-none px-3 py-2.5 placeholder-blueGray-300     focus:outline-none focus:ri
         ></textarea>
 
         <p className="  leading-relaxed font-serif justify-center  text-gray-500 pt-4 text-sm dark:text-gray-400">
-              Thank You <span className="text-black">{userInfo?.firstName+' '+userInfo?.middleName +" "}</span>
+              Thank You <span className="text-black">{userInfo?.firstName+' '+userInfo?.lastName +" "}</span>
               for entrusting Your health to us 
             </p>
       </ModelViewWrapper>
@@ -153,8 +146,8 @@ border-none px-3 py-2.5 placeholder-blueGray-300     focus:outline-none focus:ri
           open={openBillReceipt}
           setOpen={setOpenBillReceipt}
           doctorData={doctorData}
-          date={date}
-          selected={selected}
+          serialNO={serialNO}
+          appointment={appointment}
         />
       )}
     </React.Fragment>
