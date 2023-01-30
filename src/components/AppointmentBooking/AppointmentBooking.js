@@ -197,10 +197,9 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
         date,
         status: false,
     })
-    
-  }else{
-    setAppointment({
-      doctorId,
+    }else{
+      setAppointment({
+        doctorId,
         patientId: userId,
         time: selected.time,
         timeSlotId: selected.id,
@@ -211,9 +210,9 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
         requestedByPhone: "",
         date,
         status: false,
-    })
-    
-  }
+      })
+    }
+    setOpenConfirmModal(!openConfirmModal)
   }
 
   console.log(openConfirmModal, "jdfdixs");
@@ -276,14 +275,15 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
       setOtherDisease={setOtherDisease}
       handleDiseaseSubmit={handleDiseaseSubmit}
       /> }
-      {/* {openConfirmModal && 
+      {openConfirmModal && 
       <BookingConfirmation
+      appointment={appointment}
       openConfirmModal={openConfirmModal}
       setOpenConfirmModal={setOpenConfirmModal}
         doctorData={doctorData}
         date={newDate}
         selected={selected}
-      />} */}
+      />}
     </>
   );
 };
