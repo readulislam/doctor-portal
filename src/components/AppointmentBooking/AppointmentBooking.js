@@ -92,31 +92,7 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
 
     try {
       if (doctorId && userId) {
-        // const data = await AddDoctorAppointment({
-        //   doctorId,
-        //   patientId: userId,
-        //   time: selected.time,
-        //   timeSlotId: selected.id,
-        //   diseaseId: parseInt(selectedDisease),
-        //   diseaseName: "",
-        //   requestedByEmail: "",
-        //   requestedByPhone: "",
-        //   date,
-        //   status: false,
-        // });
-
-        // setAppointment(data);
-        // if (data) {
-        //   // doctorId, date, timeRange, slotId
-        //   const query = {
-        //     doctorId,
-        //     timeRange: slotsInfo.timeRange,
-        //     slotId: selected.id,
-        //     date,
-        //     weekday: slotsInfo.weekday,
-        //   };
-        //   const update = await updateTimeSlot(query);
-        // }
+        
         console.log(doctorData);
         console.log("rrrrrr");
         setOpenDiseaseModal(!openDiseaseModal);
@@ -141,7 +117,7 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
 
     if (isLoggedIn) {
       setOpenDiseaseModal(!openDiseaseModal);
-      // setOpen(false);
+
     } else {
       // setOpenDiseaseModal(!openDiseaseModal);
     }
@@ -162,7 +138,6 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
   }, [contact, number, isRegistered, setupRecaptcha]);
   const handleDispatch = async () => {
     dispatch(patientLoginByPhone(number));
-    // setOpen(false);
     setOpenDiseaseModal(!openDiseaseModal);
   };
   const handleOtpSubmit = () => {
@@ -194,7 +169,7 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
         diseaseName:e.target.disease.value,
         requestedByEmail: "",
         requestedByPhone: "",
-        date,
+        date:newDate ,
         status: false,
     })
     }else{
@@ -208,7 +183,7 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
         diseaseName:selectedDisease.name,
         requestedByEmail: "",
         requestedByPhone: "",
-        date,
+        date:newDate ,
         status: false,
       })
     }
@@ -277,12 +252,14 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
       /> }
       {openConfirmModal && 
       <BookingConfirmation
-      appointment={appointment}
-      openConfirmModal={openConfirmModal}
-      setOpenConfirmModal={setOpenConfirmModal}
+        setOpen={setOpen}
+        slotsInfo={slotsInfo}
+        appointment={appointment}
+        openConfirmModal={openConfirmModal}
+        setOpenConfirmModal={setOpenConfirmModal}
         doctorData={doctorData}
         date={newDate}
-        selected={selected}
+       
       />}
     </>
   );

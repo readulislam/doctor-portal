@@ -4,13 +4,14 @@ import autoTable from 'jspdf-autotable'
 import React from 'react'
 import { useSelector } from 'react-redux';
 
-const BillReceipt = ({doctorData,date,selected,open,setOpen}) => {
+const BillReceipt = ({doctorData,appointment,serialNO,open,setOpen}) => {
     const { userInfo, userId } = useSelector(
         (state) => state.Auth
       );
-      console.log(date,selected);
+      console.log(appointment);
       console.log(userInfo,'info');
-      console.log("hi",doctorData,date,selected);
+      console.log("hi",doctorData,appointment);
+      const r = (Math.random() * 100000)
       const downloadBill=()=>{
         const doc=new jsPDF('landscape','px','a4','false')
         doc.setFillColor(240, 253,244)
@@ -21,7 +22,7 @@ const BillReceipt = ({doctorData,date,selected,open,setOpen}) => {
 
         doc.setFontSize(12)
         doc.setFont("","","normal")
-        doc.text(`ReceiptNumber :`,400,50)
+        doc.text(`ReceiptNumber :${r}`,400,50)
         doc.setDrawColor("#457cb1")
         doc.setLineWidth(5)
         doc.line(20,10,610,10)
@@ -38,7 +39,7 @@ const BillReceipt = ({doctorData,date,selected,open,setOpen}) => {
 
         doc.text(`Name :  ${doctorData.name}`,400,95)
         
-        doc.text(`Name : ${(userInfo?.firstName).toUpperCase()}  ${(userInfo?.middleName).toUpperCase()}`,40,95)
+        doc.text(`Name : ${(userInfo?.firstName).toUpperCase()}  ${(userInfo?.lastName).toUpperCase()}`,40,95)
 
         doc.setFontSize(12)
         doc.setFont("","","normal")
@@ -56,17 +57,17 @@ const BillReceipt = ({doctorData,date,selected,open,setOpen}) => {
 
        
         doc.text('Appointment number',40,180)
-        //doc.text(appintment value,40,195)
+        doc.text(`${serialNO}`,40,195)
 
         
 
         doc.text('date',300,180)
-        doc.text("date",300,195)
+        doc.text(appointment?.date,300,195)
 
         
 
         doc.text('time',490,180)
-        doc.text("selected?.time",490,195)
+        doc.text(appointment?.time,490,195)
 
         doc.line(35,200,580,200)
         
@@ -75,7 +76,7 @@ const BillReceipt = ({doctorData,date,selected,open,setOpen}) => {
           startY:230,
           head: [['Code','Descrition of Service', 'Rate','total']],
           body: [
-            ['101','Consultation Charge', doctorData.basicCharges,'800'],
+            ['101','Consultation Charge', (appointment.appointmentType==="Regular") ?(doctorData.basicCharges):(doctorData.followupCharges),'800'],
             [],
             [],
             [],
@@ -94,92 +95,44 @@ const BillReceipt = ({doctorData,date,selected,open,setOpen}) => {
         doc.save('bil.pdf')
       }
      
-const r = (Math.random() * 100000)
+
   return (
     <React.Fragment>
-      <Modal show={open} position="center" onClose={() => setOpen(false)}>
-        <Modal.Header className='justify-between' >Appoinment is Confirm </Modal.Header>
+      <Modal show={open}  className="bg-gray-900 " position="center"  onClose={() => setOpen(false)}>
+      <div className="bg-green-200 rounded-md ">
+      <Modal.Header className='justify-between' >Appointment Confirmed </Modal.Header>
         <Modal.Body>
          <div>
-          <div id='bill' className='flex' >
-              <div className='w-1/2' >
-                <div className='pb-3'>
-                  <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                  Receipt Number: <span className="text-black">{r}</span>
-                </p>
-                </div>
-                <div className='pb-3'>
-                  <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                  Hospital name : <span className="text-black">
-                  {doctorData?.hospital?.name}
-                  </span>
-                </p>
-                </div>
-                <div className='pb-3'>
-                  <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                  Doctor Name : <span className="text-black">
-                  {doctorData?.name}
-                  </span>
-                </p>
-                </div>
-                <div className='pb-3'>
-                  <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                  Appointment number : <span className="text-black"></span>
-                </p>
-                </div>
-                <div className='pb-3'>
-                  <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                  Hospital location : <span className="text-black">
-                  {doctorData?.hospital?.address}
-                  </span>
-                </p>
-                </div>
-              </div>
-              <div className='w-1/2' >
-                <div className='pb-3'>
-                  <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                  Date & Time : <span className="text-black">
-                    {date} & {selected?.time}
-                  </span>
-                </p>
-                </div>
-                <div className='pb-3'>
-                  <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                  patient Information
-                </p>
-                </div>
-                <div className='pb-3'>
-                  <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                  Patient name : <span className="text-black">
-                  {userInfo?.firstName+' '+userInfo?.middleName}
-                  </span>
-                </p>
-                </div>
-                <div className='pb-3'>
-                  <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                  Address: <span className="text-black">
-                      {userInfo?.address}
-                  </span>
-                </p>
-                </div>
-                <div className='pb-3'>
-                  <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                  Phone Number : <span className="text-black">
-                  {userInfo?.contact}
-                  </span>
-                </p>
-                </div>
-                <div className='pb-3'>
-                  <p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
-                  State/City : <span className="text-black">
+         <div className='text-md  w-full  ml-5 '>
+              <p className="text-base leading-relaxed   text-gray-500 dark:text-gray-400 ">
+              Thank You <span className="text-black">{userInfo?.firstName+' '+userInfo?.lastName +" "}</span> your Appoinment has been Confirmed.
+              <br/>Your Appointment Detail are Below :
+            </p>
+            </div>
+         
+          <div className="flex flex-col  text-md  w-full  ml-5 ">
+            
+            <div>
+              <p className="text-sm font-serif leading-relaxed  text-gray-500 dark:text-gray-400">
+                Date :{appointment.date}
+              </p>
 
-                  {/* {userInfo.state+" / "+userInfo.city} */}
-                  </span>
-                </p>
-                </div>
-              </div>
+              <p className=" leading-relaxed font-serif  text-gray-500 dark:text-gray-400">
+                AP No : {serialNO}
+              </p>
+
+              <p className=" font-serif leading-relaxed text-gray-500 dark:text-gray-400">
+                Time :{appointment?.time}
+              </p>
+            </div>
+            
           </div>
-          <Table striped={true}>
+          <div className=' mt-3 ml-5  w-full'>
+              <p className="text-base leading-relaxed   text-gray-500 dark:text-gray-400 mb-2">
+              Here are the details of charges
+            </p>
+            </div>
+          <Table striped={true} className="mt-2">
             <Table.Head>
               <Table.Cell>Descrition of Service</Table.Cell>
               <Table.Cell>Charges</Table.Cell>
@@ -187,30 +140,31 @@ const r = (Math.random() * 100000)
             <Table.Body>
               <Table.Row>
                 <Table.Cell>Consultation Charge</Table.Cell>
-              <Table.Cell>{doctorData.basicCharges}Rs</Table.Cell>
+              <Table.Cell>{(appointment.appointmentType==="Regular") ?(doctorData.basicCharges):(doctorData.followupCharges)}Rs</Table.Cell>
               </Table.Row>
             </Table.Body>
             
           </Table>
-          <div className="flex justify-end"><p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
+          {/* <div className="flex justify-end"><p className="text-base leading-relaxed  text-gray-500 dark:text-gray-400">
                 Total: <span className="text-black">800 Rs</span>
-              </p></div>
-              <div className="flex justify-end"><Button onClick={downloadBill} >download Receipt</Button></div>
-         </div>
+              </p></div>*/}
+         </div> 
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className='flex !py-3 justify-between  w-full' >
           <Button color="gray" onClick={() => setOpen(false)}>
-            Decline
+            Close
           </Button>
           <Button
             color
             className="px-2 "
             gradientDuoTone="cyanToBlue"
-            onClick={() => setOpen(false)}
+            onClick={downloadBill}
           >
-            Submit
+            download Receipt
           </Button>
         </Modal.Footer>
+      </div>
+        
       </Modal>
       
     </React.Fragment>
