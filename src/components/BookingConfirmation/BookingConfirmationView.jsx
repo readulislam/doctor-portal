@@ -5,6 +5,7 @@ import BillReceipt from "../Modal/BillReceipt";
 import ModelViewWrapper from "../Modal/ModelViewWrapper";
 
 const BookingConfirmationView = ({
+  appointment,
   setOpenConfirmModal,
   openConfirmModal,
   doctorData,

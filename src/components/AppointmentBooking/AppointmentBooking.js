@@ -41,7 +41,7 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
   const [openDiseaseModal, setOpenDiseaseModal] = useState(false);
   const [otherDisease, setOtherDisease] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
-  const [openConfirmModal, setOpenConfirmModal] = useState(true);
+  const [openConfirmModal, setOpenConfirmModal] = useState(false);
 
   const {yearMonthDay} = useDateFormat()
 
