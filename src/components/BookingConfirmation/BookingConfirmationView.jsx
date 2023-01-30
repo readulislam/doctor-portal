@@ -9,13 +9,13 @@ const BookingConfirmationView = ({
   appointment,
   setOpenConfirmModal,
   slotsInfo,
+  setOpen,
   openConfirmModal,
   doctorData,
   date,
   
 }) => {
   const { userInfo, userId } = useSelector((state) => state.Auth);
-  console.log("hiiiiii");
   const [openBillReceipt, setOpenBillReceipt] = useState(false);
   console.log(appointment);
   const handleSubmit = async(e) => {
@@ -33,7 +33,10 @@ const BookingConfirmationView = ({
     //   };
     //   const update = await updateTimeSlot(query);
     // }
+    
+
     setOpenBillReceipt(true);
+    setOpen(false);
   };
   const random = 100000 * Math.random(1000);
   const serialNO = Math.ceil(random);
@@ -89,7 +92,7 @@ const BookingConfirmationView = ({
                 doctorData?.hospital?.address}
             </p>
             <p className=" font-serif dark:text-gray-400">
-              Consultation Charge : 800 Rs
+              Consultation Charge : {(appointment.appointmentType==="Regular") ?(doctorData.basicCharges):(doctorData.followupCharges)}
             </p>
           </div>
 

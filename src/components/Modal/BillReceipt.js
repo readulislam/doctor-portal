@@ -76,7 +76,7 @@ const BillReceipt = ({doctorData,appointment,serialNO,open,setOpen}) => {
           startY:230,
           head: [['Code','Descrition of Service', 'Rate','total']],
           body: [
-            ['101','Consultation Charge', doctorData.basicCharges,'800'],
+            ['101','Consultation Charge', (appointment.appointmentType==="Regular") ?(doctorData.basicCharges):(doctorData.followupCharges),'800'],
             [],
             [],
             [],
@@ -98,7 +98,7 @@ const BillReceipt = ({doctorData,appointment,serialNO,open,setOpen}) => {
 
   return (
     <React.Fragment>
-      <Modal show={open}  className="bg-gray-900 " position="center" onClose={() => setOpen(false)}>
+      <Modal show={open}  className="bg-gray-900 " position="center"  onClose={() => setOpen(false)}>
       <div className="bg-green-200 rounded-md ">
       <Modal.Header className='justify-between' >Appointment Confirmed </Modal.Header>
         <Modal.Body>
@@ -152,7 +152,7 @@ const BillReceipt = ({doctorData,appointment,serialNO,open,setOpen}) => {
         </Modal.Body>
         <Modal.Footer className='flex !py-3 justify-between  w-full' >
           <Button color="gray" onClick={() => setOpen(false)}>
-            Decline
+            Cancel
           </Button>
           <Button
             color
