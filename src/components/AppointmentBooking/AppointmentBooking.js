@@ -117,7 +117,7 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
 
     if (isLoggedIn) {
       setOpenDiseaseModal(!openDiseaseModal);
-      // setOpen(false);
+
     } else {
       // setOpenDiseaseModal(!openDiseaseModal);
     }
@@ -138,7 +138,6 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
   }, [contact, number, isRegistered, setupRecaptcha]);
   const handleDispatch = async () => {
     dispatch(patientLoginByPhone(number));
-    // setOpen(false);
     setOpenDiseaseModal(!openDiseaseModal);
   };
   const handleOtpSubmit = () => {
@@ -253,6 +252,7 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
       /> }
       {openConfirmModal && 
       <BookingConfirmation
+        setOpen={setOpen}
         slotsInfo={slotsInfo}
         appointment={appointment}
         openConfirmModal={openConfirmModal}
