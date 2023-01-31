@@ -49,6 +49,7 @@ const AppointmentDiseases = ({ open, setOpen, doctorData,setOtherDisease,selecte
       <ModelViewWrapper
         PrimaryButtonTitle={"next"}
         PrimaryButtonType="submit"
+        PrimaryButtonTitle2={"Back"}
         modalHeaderTitle={"Select your Disease"}
         props={props}
       >

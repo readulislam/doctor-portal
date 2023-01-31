@@ -6,7 +6,7 @@ import PrimaryButton from "../../Common/PrimaryButton";
 
 
 const ModelViewWrapper = ({
-  props,children,modalHeaderTitle,PrimaryButtonTitle,PrimaryButtonType,
+  props,children,modalHeaderTitle,PrimaryButtonTitle,PrimaryButtonType,PrimaryButtonTitle2
 }) => {
 
   const {setOpen,open,handleSubmit,}= props ;
@@ -30,7 +30,7 @@ const ModelViewWrapper = ({
           </div>
           <Modal.Footer className="flex !py-3 justify-between  w-full">
             <Button color="gray" onClick={() => setOpen(false)}>
-              Cancel
+             {PrimaryButtonTitle2}
             </Button>
             <PrimaryButton type={PrimaryButtonType}>
               {PrimaryButtonTitle}

@@ -37,6 +37,7 @@ const AppointmentBookingView = ({ props, modalHeaderTitle }) => {
       <ModelViewWrapper
         PrimaryButtonType={"submit"}
         PrimaryButtonTitle={"Next"}
+        PrimaryButtonTitle2={"Cancel"}
         modalHeaderTitle={modalHeaderTitle}
         props={props}
       >

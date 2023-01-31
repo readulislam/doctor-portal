@@ -6,14 +6,22 @@ import { getAllAppointment } from "../../Store/Doctor-Slice";
 import TotalPageCounter from "../../Utils/TotalPageCounter";
 import TreatmentDetail from "../TreatmentDetail";
 import UpcomingAppointmentView from "./UpcomingAppointmentView";
+import { FaTrashAlt } from "react-icons/fa";
+
 import { AiFillEye, AiOutlineDownload } from "react-icons/ai";
 import axios from "axios";
-import { BaseUrl } from "../../APi/api";
+import {
+  BaseUrl,
+  CancelAppointment,
+  GetSlotByData,
+  updateTimeSlot,
+} from "../../APi/api";
 
 const UpcomingAppointment = () => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
+  const [cancel, setCancel] = useState(false);
   const [limit, setLimit] = useState(8);
   const [reReload, setReReload] = useState(false);
   const [selectedPatient, setSelectedPatient] = useState({});
@@ -44,9 +52,36 @@ const UpcomingAppointment = () => {
         });
         setPatientAppointment(data.rows);
       }
+      console.log(cancel);
     };
     fetchUserAppointment();
-  }, [page]);
+  }, [page, cancel, userId]);
+
+  const appointmentCancelHandler = async (data) => {
+    const { id, doctorId, timeSlot, timeSlotId, date } = data;
+const confirmation = window.confirm('Are you want to Delete this Appointment ?')
+if(confirmation){
+  console.log(data);
+  const deleteAppointment = await CancelAppointment(id);
+  const timeSlotInfo = await GetSlotByData({ doctorId, date });
+  console.log(timeSlotInfo);
+  console.log(deleteAppointment);
+  setCancel(!cancel);
+  if (timeSlotInfo) {
+    const query = {
+      doctorId,
+      timeRange: timeSlotInfo.timeRange,
+      slotId: timeSlotId,
+      date: timeSlotInfo.date,
+      weekday: timeSlotInfo.weekday,
+      isAvailable: true,
+    };
+    const update = await updateTimeSlot(query);
+    console.log(update);
+  }
+}
+    
+  };
 
   const TableHeader = () => {
     return (
@@ -63,7 +98,7 @@ const UpcomingAppointment = () => {
   const TableRowData = () => {
     if (doctorId) {
       return (
-       !isEmpty(appointments) &&
+        !isEmpty(appointments) &&
         appointments.map((data) => (
           <>
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -136,7 +171,19 @@ const UpcomingAppointment = () => {
               <td className="px-6 py-4">{data.time}</td>
               <td className="px-6 py-4">{data.date}</td>
               <td className="px-6 py-4">
-                
+                <span className="flex  items-center gap-2">
+                  <AiOutlineDownload
+                    className="cursor-pointer hover:text-red-400"
+                    title="Download Details"
+                    size={22}
+                  />{" "}
+                  <FaTrashAlt
+                    onClick={() => appointmentCancelHandler(data)}
+                    title="Delete Appointment"
+                    className="cursor-pointer hover:text-red-400"
+                    size={22}
+                  />
+                </span>
               </td>
             </tr>
           </>
@@ -152,7 +199,7 @@ const UpcomingAppointment = () => {
     TableRowData,
     TableHeader,
     totalPage,
-    
+
     appointments,
   };
 

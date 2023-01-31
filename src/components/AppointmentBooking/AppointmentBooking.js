@@ -5,6 +5,7 @@ import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import {
   BaseUrl,
+  GetSlots,
   ListDiseases,
   LoginPatient,
   PatientRegister
@@ -59,9 +60,9 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
   useEffect(() => {
     const fetching = async () => {
       if (date && doctorId) {
-        const { data } = await axios.post(
-          `${BaseUrl}/get-slots?date=${newDate}&doctorId=${doctorId}`
-        );
+        const data =await GetSlots({date:newDate, doctorId})
+        console.log(data);
+      
         
         setSlotsInfo(data);
         if (newDate===  yearMonthDay(new Date())) {

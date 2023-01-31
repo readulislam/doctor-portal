@@ -98,16 +98,15 @@ const BillReceipt = ({doctorData,appointment,serialNO,open,setOpen}) => {
 
   return (
     <React.Fragment>
-      <Modal show={open}  className="bg-gray-900 " position="center"  onClose={() => setOpen(false)}>
+      <Modal size={'xl'} show={open}  className="bg-gray-900 " position="center"  onClose={() => setOpen(false)}>
       <div className="bg-green-200 rounded-md ">
-      <Modal.Header className='justify-between' >Appointment Confirmed </Modal.Header>
+    
         <Modal.Body>
          <div>
          <div className='text-md  w-full  ml-5 '>
-              <p className="text-base leading-relaxed   text-gray-500 dark:text-gray-400 ">
-              Thank You <span className="text-black">{userInfo?.firstName+' '+userInfo?.lastName +" "}</span> your Appoinment has been Confirmed.
-              <br/>Your Appointment Detail are Below :
-            </p>
+             
+            Your Appointment Detail are Below :
+           
             </div>
          
           <div className="flex flex-col  text-md  w-full  ml-5 ">
@@ -155,12 +154,13 @@ const BillReceipt = ({doctorData,appointment,serialNO,open,setOpen}) => {
             Close
           </Button>
           <Button
+          title='Download Receipt'
             color
             className="px-2 "
             gradientDuoTone="cyanToBlue"
             onClick={downloadBill}
           >
-            download Receipt
+           Download
           </Button>
         </Modal.Footer>
       </div>

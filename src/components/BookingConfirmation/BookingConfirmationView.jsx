@@ -13,44 +13,23 @@ const BookingConfirmationView = ({
   openConfirmModal,
   doctorData,
   date,
+  props,openBillReceipt, setOpenBillReceipt
   
 }) => {
   const { userInfo, userId } = useSelector((state) => state.Auth);
-  const [openBillReceipt, setOpenBillReceipt] = useState(false);
-  console.log(appointment);
-  const handleSubmit = async(e) => {
-    e.preventDefault();
-    // const data = await AddDoctorAppointment(appointment);
-    // console.log(data);
-    // if (data) {
-    //   // doctorId, date, timeRange, slotId
-    //   const query = {
-    //     doctorId:appointment.doctorId,
-    //     timeRange: slotsInfo.timeRange,
-    //     slotId: appointment.timeSlotId,
-    //     date,
-    //     weekday: slotsInfo.weekday,
-    //   };
-    //   const update = await updateTimeSlot(query);
-    // }
-    
 
-    setOpenBillReceipt(true);
-    setOpen(false);
-  };
+  console.log(appointment);
+
   const random = 100000 * Math.random(1000);
   const serialNO = Math.ceil(random);
   console.log(serialNO);
-  const props = {
-    open: openConfirmModal,
-    setOpen:setOpenConfirmModal,
-    handleSubmit
-  };
+
   return (
     <React.Fragment>
       <ModelViewWrapper
         PrimaryButtonTitle={"Submit"}
         PrimaryButtonType="submit"
+        PrimaryButtonTitle2={"Back"}
         modalHeaderTitle={"Appointment Confirmation"}
         props={props}
       >
@@ -144,15 +123,7 @@ border-none px-3 py-2.5 placeholder-blueGray-300     focus:outline-none focus:ri
       </ModelViewWrapper>
 
       
-      {openBillReceipt && (
-        <BillReceipt
-          open={openBillReceipt}
-          setOpen={setOpenBillReceipt}
-          doctorData={doctorData}
-          serialNO={serialNO}
-          appointment={appointment}
-        />
-      )}
+    
     </React.Fragment>
   );
 };
