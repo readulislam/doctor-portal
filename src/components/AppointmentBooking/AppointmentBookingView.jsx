@@ -104,7 +104,7 @@ const AppointmentBookingView = ({ props, modalHeaderTitle }) => {
                       : "shadow-md hover:bg-sky-500 hover:text-white cursor-pointer  "
                   } border   py-1 px-3 text-center rounded-md`}
                 >
-                  {data.time}
+                  {data?.time}
                 </div>
               ))}
           </div>

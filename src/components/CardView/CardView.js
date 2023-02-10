@@ -11,8 +11,10 @@ import DoctorDetail from "../Modal/DoctorDetail";
 import useReactQuery from "../../hooks/useReactQuery";
 
 import AppointmentBooking from "../AppointmentBooking";
+import BillReceipt from "../Modal/BillReceipt";
 
 const CardView = () => {
+  const [openBillReceipt, setOpenBillReceipt] = useState(false);
   const { userId } = useSelector((state) => state.Auth);
   const [open, setOpen] = useState(false);
   const [doctors, setDoctors] = useState([]);
@@ -20,7 +22,7 @@ const CardView = () => {
   const [totalPage, setTotalPage] = useState(1);
   const [doctorId, setDoctorId] = useState("");
   const [doctorData, setDoctorData] = useState({});
-
+  const [appointment, setAppointment] = useState({});
   const [doctorDetailModal, setDoctorDetailModal] = useState(false);
   const [name, setName] = useState("");
   const [locationInput, setLocationInput] = useState(null);
@@ -190,6 +192,9 @@ const CardView = () => {
           doctorData={doctorData}
           open={open}
           setOpen={setOpen}
+          setOpenBillReceipt={setOpenBillReceipt}
+          setAppointment={setAppointment}
+          appointment={appointment}
         />
       )}
       {doctorDetailModal && (
@@ -207,7 +212,14 @@ const CardView = () => {
           totalPages={totalPage}
         />
       </div>
-
+      {openBillReceipt && (
+        <BillReceipt
+          open={openBillReceipt}
+          setOpen={setOpenBillReceipt}
+          doctorData={doctorData}
+          appointment={appointment}
+        />
+      )}
     </>
   );
 };

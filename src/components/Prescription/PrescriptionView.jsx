@@ -88,7 +88,7 @@ const PrescriptionView = ({
     totalPage: 1,
   };
   return (
-    <div className="mt-10">
+    <div className="">
       <span className="mb-2  text-lg font-semibold">Prescription</span>
   <div className="  py-3 flex  items-center content-center justify-between">
         {doctorId && <>

@@ -7,7 +7,8 @@ import TotalPageCounter from "../../Utils/TotalPageCounter";
 import TreatmentDetail from "../TreatmentDetail";
 import UpcomingAppointmentView from "./UpcomingAppointmentView";
 import { FaTrashAlt } from "react-icons/fa";
-
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable'
 import { AiFillEye, AiOutlineDownload } from "react-icons/ai";
 import axios from "axios";
 import {
@@ -83,6 +84,91 @@ if(confirmation){
     
   };
 
+
+  const downloadBill=(doctorData, patient,appointment)=>{
+    console.log(doctorData,patient);
+    const doc=new jsPDF('landscape','px','a4','false')
+    doc.setFillColor(240, 253,244)
+    doc.rect(0,0,650,600,"F")
+    doc.setFontSize(16)
+    doc.setFont("","","bold")
+    doc.text((doctorData.hospital.name).toUpperCase(),250,30)
+
+    doc.setFontSize(12)
+    doc.setFont("","","normal")
+    doc.text(`ReceiptNumber :${''}`,400,50)
+    doc.setDrawColor("#457cb1")
+    doc.setLineWidth(5)
+    doc.line(20,10,610,10)
+    doc.setLineWidth(2)
+    doc.line(35,70,35,145)
+    doc.setLineWidth(2)
+    doc.line(390,70,390,145)
+    doc.setTextColor("#457cb1")
+    doc.setFont("","","bold")
+    doc.setFontSize(16)
+    doc.text('PATIENT INFORMATION',40,80)
+    doc.text('DOCTOR INFO',400,80)
+    doc.setTextColor("#1e1e1e")
+
+    doc.text(`Name :  ${doctorData.name}`,400,95)
+    
+    doc.text(`Name : ${(patient?.firstName).toUpperCase()}  ${(patient?.lastName).toUpperCase()}`,40,95)
+
+    doc.setFontSize(12)
+    doc.setFont("","","normal")
+    doc.text(`Contact : ${doctorData.contactNo}`,400,110)
+    doc.text(`Speciality : ${doctorData.department.name}`,400,125)
+    doc.text(`Hospital location : ${doctorData.hospital.address}`,400,140)
+    doc.text(`Contact : ${patient?.contact}`,40,110)
+    doc.text(`address : ${patient?.address}`,40,125)
+    doc.text(`city,state : ${patient?.city} , ${patient?.state}`,40,140)
+    //Appointment Detail
+    
+    doc.setLineWidth(1)
+    
+    doc.line(35,170,580,170)
+
+   
+    doc.text('Appointment number',40,180)
+    doc.text(`${''}`,40,195)
+
+    
+
+    doc.text('date',300,180)
+    doc.text(appointment?.date,300,195)
+
+    
+
+    doc.text('time',490,180)
+    doc.text(appointment?.time,490,195)
+
+    doc.line(35,200,580,200)
+    
+    
+    autoTable(doc, {
+      startY:230,
+      head: [['Code','Descrition of Service', 'Rate','total']],
+      body: [
+        ['101','Consultation Charge', (appointment.appointmentType==="Regular") ?(doctorData.basicCharges):(doctorData.followupCharges),'800'],
+        [],
+        [],
+        [],
+        [],
+        ['','','','total = 800']
+        // ...
+      ], 
+      margin: { horizontal: 20 },
+      styles: { overflow: 'linebreak',cellPadding:5 ,fontSize:14},
+      bodyStyles: { valign: 'top' },
+      columnStyles: { total: { columnWidth: 'wrap' } },
+      theme: "striped"
+    })
+    // doc.text('total = 800',530,410)
+    
+    doc.save('bil.pdf')
+  }
+ 
   const TableHeader = () => {
     return (
       !isEmpty(heading) &&
@@ -173,6 +259,7 @@ if(confirmation){
               <td className="px-6 py-4">
                 <span className="flex  items-center gap-2">
                   <AiOutlineDownload
+                  onClick={()=>downloadBill(data.doctor, data.patient,data)}
                     className="cursor-pointer hover:text-red-400"
                     title="Download Details"
                     size={22}

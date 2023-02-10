@@ -13,7 +13,7 @@ const BookingConfirmationView = ({
   openConfirmModal,
   doctorData,
   date,
-  props,openBillReceipt, setOpenBillReceipt
+  props,
   
 }) => {
   const { userInfo, userId } = useSelector((state) => state.Auth);
@@ -39,15 +39,15 @@ const BookingConfirmationView = ({
 
         <div className="flex flex-col text-md  w-full text-left ml-5 ">
           <div>
-            <p className="text-sm font-serif leading-relaxed  text-gray-500 dark:text-gray-400">
-              Date :{appointment.date}
+            <p className="text-sm  leading-relaxed  text-gray-500 dark:text-gray-400">
+              Date :{appointment?.date}
             </p>
 
-            <p className=" leading-relaxed font-serif  text-gray-500 dark:text-gray-400">
+            <p className=" leading-relaxed   text-gray-500 dark:text-gray-400">
               AP No : {serialNO}
             </p>
 
-            <p className=" font-serif leading-relaxed text-gray-500 dark:text-gray-400">
+            <p className="  leading-relaxed text-gray-500 dark:text-gray-400">
               Time :{appointment?.time}
             </p>
           </div>
@@ -55,43 +55,43 @@ const BookingConfirmationView = ({
 
         <div className="grid sm:grid-cols-2 gap-1 text-lg sm:gap-y-0 gap-y-3 pt-6 justify-items-center">
           <div className="">
-            <p className="  font-serif dark:text-gray-400">
+            <p className="   dark:text-gray-400">
               Doctor Name : {doctorData?.name}
             </p>
-            <p className="  font-serif dark:text-gray-400">
+            <p className="   dark:text-gray-400">
               Specialty : {doctorData?.department.name}
             </p>
-            <p className="  font-serif dark:text-gray-400">
+            <p className="   dark:text-gray-400">
               Mobile No : {doctorData?.contactNo}
             </p>
-            <p className="  font-serif  dark:text-gray-400">
+            <p className="    dark:text-gray-400">
               Hospital name :{" "}
               {doctorData?.hospital?.name +
                 ", " +
                 doctorData?.hospital?.address}
             </p>
-            <p className=" font-serif dark:text-gray-400">
-              Consultation Charge : {(appointment.appointmentType==="Regular") ?(doctorData.basicCharges):(doctorData.followupCharges)}
+            <p className="  dark:text-gray-400">
+              Consultation Charge : {(appointment?.appointmentType==="Regular") ?(doctorData.basicCharges):(doctorData.followupCharges)}
             </p>
           </div>
 
           <div className="">
-            <p className="  font-serif dark:text-gray-400">
+            <p className="   dark:text-gray-400">
               Patient Name : {(userInfo?.firstName).toUpperCase()}  {(userInfo?.lastName).toUpperCase()}
             </p>
-            <p className="  font-serif dark:text-gray-400">
+            <p className="   dark:text-gray-400">
               Disease : {appointment?.diseaseName}
             </p>
-            <p className="  font-serif dark:text-gray-400">
+            <p className="   dark:text-gray-400">
               Mobile No : {userInfo?.contact}
             </p>
-            <p className="  font-serif  dark:text-gray-400">
+            <p className="    dark:text-gray-400">
               Hospital name :{" "}
               {doctorData?.hospital?.name +
                 ", " +
                 doctorData?.hospital?.address}
             </p>
-            <p className=" font-serif dark:text-gray-400">
+            <p className="  dark:text-gray-400">
               Address : {userInfo?.address}
             </p>
           </div>
@@ -99,7 +99,7 @@ const BookingConfirmationView = ({
 
         <label
           for="message"
-          class="block font-serif mb-2 pt-10 text-sm font-medium text-gray-900 dark:text-white"
+          class="block  mb-2 pt-10 text-sm font-medium text-gray-900 dark:text-white"
         >
           About Your Disease
         </label>
@@ -116,7 +116,7 @@ border-none px-3 py-2.5 placeholder-blueGray-300     focus:outline-none focus:ri
           placeholder="Write your thoughts here..."
         ></textarea>
 
-        <p className="  leading-relaxed font-serif justify-center  text-gray-500 pt-4 text-sm dark:text-gray-400">
+        <p className="  leading-relaxed  justify-center  text-gray-500 pt-4 text-sm dark:text-gray-400">
               Thank You <span className="text-black">{userInfo?.firstName+' '+userInfo?.lastName +" "}</span>
               for entrusting Your health to us 
             </p>

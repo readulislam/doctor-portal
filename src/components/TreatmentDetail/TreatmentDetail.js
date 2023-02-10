@@ -1,14 +1,31 @@
-import React from 'react'
-import TreatmentDetailModal from './TreatmentDetailModal'
+import React, { useState } from "react";
+import DiseaseDetails from "../DiseaseDetails";
+import TreatmentDetailModal from "./TreatmentDetailModal";
 
-const TreatmentDetail = ({selectedPatient,open,setOpen, setReReload,
-  reReload,}) => {
+const TreatmentDetail = ({
+  selectedPatient,
+  open,
+  setOpen,
+  setReReload,
+  reReload,
+}) => {
+  
+
   return (
-    <div>
+    
+    
+        <>
+          <TreatmentDetailModal
+            reReload={reReload}
+            setReReload={setReReload}
+            open={open}
+            setOpen={setOpen}
+            selectedPatient={selectedPatient}
+           
+          />
+        </>
+       
+  );
+};
 
-        <TreatmentDetailModal reReload={reReload}  setReReload={setReReload} open={open}  setOpen={setOpen} selectedPatient={selectedPatient}/>
-    </div>
-  )
-}
-
-export default TreatmentDetail
+export default TreatmentDetail;

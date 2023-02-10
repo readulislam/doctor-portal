@@ -7,7 +7,7 @@ const UpcomingAppointmentView = ({props}) => {
     <>
     <p className="text-xl mb-2 uppercase font-[500]">Upcoming</p>
       <Table props={props}>
-        <SearchBar data={data}/>
+        {/* <SearchBar data={data}/> */}
       </Table>
     </>
   );

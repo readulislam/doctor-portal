@@ -31,6 +31,7 @@ const AppointmentDiseases = ({ open, setOpen, doctorData,setOtherDisease,selecte
       const {data}=await ListDiseases(doctorData.departmentId)
       // const { data } = await ListDiseases(2);
       setDisease(data);
+      console.log(data)
     };
     fetch();
   }, []);

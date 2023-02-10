@@ -19,8 +19,9 @@ import AppointmentDiseases from "../Modal/AppointmentDiseases";
 import BookingConfirmation from "../BookingConfirmation";
 import RegistarModal from "../Modal/RegistarModal";
 import AppointmentBookingView from "./AppointmentBookingView";
+import BillReceipt from "../Modal/BillReceipt";
 
-const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
+const AppointmentBooking = ({ doctorData, doctorId, setOpen, open,appointment, setAppointment,setOpenBillReceipt }) => {
   const { isLoggedIn, isRegister, userInfo, userId } = useSelector(
     (state) => state.Auth
   );
@@ -35,7 +36,7 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
   const [slotsInfo, setSlotsInfo] = useState(null);
   const [number, setNumber] = useState("");
   const [contact, setContact] = useState(false);
-  const [appointment, setAppointment] = useState({});
+  
   const [registerModel, setRegisterModel] = useState(false);
   const [currentTime, setcurrentTime] = useState();
   const [selectedDisease, setSelectedDisease] = useState({});
@@ -43,7 +44,7 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
   const [otherDisease, setOtherDisease] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
-
+ 
   const {yearMonthDay} = useDateFormat()
 
 
@@ -260,8 +261,11 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open }) => {
         setOpenConfirmModal={setOpenConfirmModal}
         doctorData={doctorData}
         date={newDate}
-       
+   
+       setOpenBillReceipt={setOpenBillReceipt}
       />}
+
+
     </>
   );
 };

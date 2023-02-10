@@ -112,26 +112,26 @@ const BillReceipt = ({doctorData,appointment,serialNO,open,setOpen}) => {
           <div className="flex flex-col  text-md  w-full  ml-5 ">
             
             <div>
-              <p className="text-sm font-serif leading-relaxed  text-gray-500 dark:text-gray-400">
+              <p className="text-xs pt-1 leading-relaxed  text-gray-500 dark:text-gray-400">
                 Date :{appointment.date}
               </p>
 
-              <p className=" leading-relaxed font-serif  text-gray-500 dark:text-gray-400">
+              <p className=" leading-relaxed text-xs  text-gray-500 dark:text-gray-400">
                 AP No : {serialNO}
               </p>
 
-              <p className=" font-serif leading-relaxed text-gray-500 dark:text-gray-400">
+              <p className="  leading-relaxed text-xs text-gray-500 dark:text-gray-400">
                 Time :{appointment?.time}
               </p>
             </div>
             
           </div>
-          <div className=' mt-3 ml-5  w-full'>
-              <p className="text-base leading-relaxed   text-gray-500 dark:text-gray-400 mb-2">
+          <div className=' ml-5  w-full'>
+              <p className="leading-relaxed text-xs   text-gray-600 dark:text-gray-400 mb-2">
               Here are the details of charges
             </p>
             </div>
-          <Table striped={true} className="mt-2">
+          <Table striped={true} className="mt-2 ">
             <Table.Head>
               <Table.Cell>Descrition of Service</Table.Cell>
               <Table.Cell>Charges</Table.Cell>
@@ -160,7 +160,7 @@ const BillReceipt = ({doctorData,appointment,serialNO,open,setOpen}) => {
             gradientDuoTone="cyanToBlue"
             onClick={downloadBill}
           >
-           Download
+           Download Receipt
           </Button>
         </Modal.Footer>
       </div>

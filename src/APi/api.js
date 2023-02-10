@@ -30,6 +30,7 @@ const END_POINTS = {
   GET_DISEASE: () => "/get-diseases",
   DELETE_APPOINTMENT: () => "/AppointmentDelete",
   GET_PATIENT_DISEASES: () => "/patient-diseases",
+  GET_PATIENT_APPOINTMENT_BY_DISEASES: () => "/appointmentByDisease",
 };
 const URL = (End_Point) => `${BaseUrl}${End_Point}`;
 
@@ -45,6 +46,13 @@ export const CancelAppointment = async (appointmentId) => {
 export const GetPatientDiseases = async (patientId) => {
   const { data } = await axios.get(URL(END_POINTS.GET_PATIENT_DISEASES()), {
     params: { patientId},
+  });
+
+  return data;
+};
+export const GetAppointmentByDiseases = async (patientInfo) => {
+  const { data } = await axios.get(URL(END_POINTS.GET_PATIENT_APPOINTMENT_BY_DISEASES()), {
+    params: { ...patientInfo},
   });
 
   return data;

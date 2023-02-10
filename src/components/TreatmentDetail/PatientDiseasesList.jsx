@@ -1,26 +1,49 @@
 import { isEmpty } from 'lodash';
 import React from 'react'
 import { useState } from 'react';
-import Table, { heading } from '../../Common/Table'
+import Table from '../../Common/Table'
 import { AiFillEye, AiOutlineDownload } from "react-icons/ai";
 import SearchBar from '../../Common/SearchBar';
 import { useEffect } from 'react';
-import { GetPatientDiseases } from '../../APi/api';
+import { GetAppointmentByDiseases, GetPatientDiseases } from '../../APi/api';
 import { useSelector } from 'react-redux';
-const data =['d']
-const PatientDiseasesList = () => {
-    const { userId } = useSelector((state) => state.Auth);
+import { computeHeadingLevel } from '@testing-library/react';
+// const data =['d']
+const heading = ['Doctor Name', 'Disease', 'Date', 'Appointment Type','Action']
+const PatientDiseasesList = ({patient,setOpenDiseaseDetail,setSelectedDiseaseAppointment}) => {
+    // const { userId } = useSelector((state) => state.Auth);
+    const [data,setData]= useState([]);
+    const [appointments,setAppointments] =useState([])
+    const [selectedMenu,setSelectedMenu] = useState(data[0]);
+    console.log(selectedMenu)
+// const diseaseFilterData = []
+    useEffect(()=>{
+
+        const dataFetching=async()=>{
+            const diseases =  await GetPatientDiseases(patient.id)
+            console.log(diseases)
+         const newDiseases = diseases.map((d)=> d.diseaseName)
+         console.log(newDiseases)
+
+         setData(newDiseases)
+}
+        dataFetching()
+       
+    },[patient])
 
 
     useEffect(()=>{
 
-        const dataFetching=async()=>{
-            const data =  await GetPatientDiseases(userId)
-            console.log(data)
-        }
-        dataFetching()
-    },[userId])
-
+      const fetching =async ()=>{
+        if(selectedMenu){
+          const appointment = await GetAppointmentByDiseases({patientId:patient.id,diseaseName:selectedMenu});
+          setAppointments(appointment.rows)
+          console.log(appointment.rows)
+         }
+      }
+      fetching()
+    },[selectedMenu])
+    // console.log(diseaseFilterData)
     const [page,setPage] = useState(1);
 
     const TableHeader = () => {
@@ -41,8 +64,8 @@ const PatientDiseasesList = () => {
 
       const TableRowData = () => {
         return (
-          // !isEmpty(prescriptionData) &&
-          // prescriptionData.map((data,index) => (
+          !isEmpty(appointments) &&
+          appointments.map((data,index) => (
             <>
               <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <td className="w-4 p-4">
@@ -61,29 +84,30 @@ const PatientDiseasesList = () => {
                   scope="row"
                   className="px-10 py-4 uppercase font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  Readul Islam Riad
+                {data.doctor.name}
                 </th>
-                <td className="px-10 py-4">+8801758819483</td>
-                <td className="px-10 py-4">11.00am</td>
-                <td className="px-10 py-4">11.00am</td>
+                <td className="px-10 py-4">{data.diseaseName}</td>
+                <td className="px-10 py-4">{data.date}</td>
+                <td className="px-10 py-4">{data.appointmentType}</td>
     
                 <td className=" py-4">
-                  <p className=" text-[#499AFA] flex items-center  dark:text-blue-500 hover:underline">
+                  <p className=" text-[#499AFA]    dark:text-blue-500 hover:underline">
                     <a >
                       <AiFillEye
+                      onClick={()=>{setOpenDiseaseDetail(true)
+                      
+                        setSelectedDiseaseAppointment(data)
+                      }}
                         className="hover:text-red-400 cursor-pointer"
                         size={23}
                       />{" "}
                     </a>
-                    <AiOutlineDownload
-                      className="ml-1 cursor-pointer hover:text-red-400"
-                      size={23}
-                    />
+                   
                   </p>
                 </td>
               </tr>
             </>
-          // ))
+          ))
         );
       };
      const props = {
@@ -99,7 +123,7 @@ const PatientDiseasesList = () => {
     
     <Table props={props}>
 
-    <SearchBar data={data} />
+    <SearchBar selectedMenu={selectedMenu} setSelectedMenu={setSelectedMenu} data={data} />
     </Table>
     
     </div>
