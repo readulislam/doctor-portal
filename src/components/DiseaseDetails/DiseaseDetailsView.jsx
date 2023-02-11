@@ -1,6 +1,6 @@
 import { computeHeadingLevel } from "@testing-library/react";
 import React, { useEffect, useState } from "react";
-import { ListPrescription } from "../../APi/api";
+import { BaseUrl, ListPrescription } from "../../APi/api";
 
 const DiseaseDetailsView = ({ selectedDiseaseAppointment }) => {
     const [PrescriptionData,setPrescriptionData] = useState([])
@@ -25,6 +25,7 @@ const DiseaseDetailsView = ({ selectedDiseaseAppointment }) => {
           selectedDiseaseAppointment.patient.lastName}
       </p>
       <p>Gender: {selectedDiseaseAppointment.patient.gender}</p>
+      <img src={`${BaseUrl}/${PrescriptionData?.link}`}  alt=""/> 
     </div>
   );
 };

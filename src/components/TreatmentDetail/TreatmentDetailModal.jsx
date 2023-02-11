@@ -1,5 +1,6 @@
 import { MdOutlineEditCalendar } from "react-icons/md";
 import { AiOutlineCheck } from "react-icons/ai";
+import { BiEdit } from "react-icons/bi";
 
 import { Button, Modal } from "flowbite-react";
 import React, { useEffect, useState } from "react";
@@ -163,10 +164,10 @@ const TreatmentDetailModal = ({
                         />
                         <span className="absolute top-[32px] cursor-pointer right-16 px-1">
                           {" "}
-                          <MdOutlineEditCalendar
+                          <BiEdit
                             className={`${edit ? "hidden" : "flex"}`}
                             onClick={() => setEdit(true)}
-                            size={23}
+                            size={24}
                           />
                           <AiOutlineCheck
                             onClick={() => setEdit(false)}

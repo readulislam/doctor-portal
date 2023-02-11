@@ -5,8 +5,9 @@ import { useSelector } from "react-redux";
 import { BaseUrl } from "../../APi/api";
 import PrimaryButton from "../../Common/PrimaryButton";
 import Table from "../../Common/Table";
-const heading = ["No", "Date",  "Action"];
-const data = [];
+
+const heading = ["No", "Date", "Time", "Action"];
+const data = ['No', 'FollowUP Date','date','action'];
 const PrescriptionView = ({
   setDate,
   setImage,
@@ -19,8 +20,8 @@ const PrescriptionView = ({
   const {doctorId} = useSelector(state => state.Doctor)
   const TableHeader = () => {
     return (
-      !isEmpty(heading) &&
-      heading.map((name, index) => (
+      !isEmpty(data) &&
+      data.map((name, index) => (
         <th
           key={index}
           scope="col"
@@ -32,11 +33,17 @@ const PrescriptionView = ({
       ))
     );
   };
+  var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
 
+today =  yyyy+ '-' + mm + '-' + dd ;
+ 
+console.log(prescriptionData)
   const TableRowData = () => {
     return (
       !isEmpty(prescriptionData) &&
-      prescriptionData.map((data,index) => (
         <>
           <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
             <td className="w-4 p-4">
@@ -57,7 +64,9 @@ const PrescriptionView = ({
             >
               {1}
             </th>
-            <td className="px-10 py-4">{prescriptionData?.Date}</td>
+            <td className="px-10 py-4">{prescriptionData?.followUpDate?prescriptionData?.followUpDate:'---' }</td>
+            <td className="px-10 py-4">{today}</td>
+           
 
             <td className=" py-4">
               <p className=" text-[#499AFA] flex items-center  dark:text-blue-500 hover:underline">
@@ -75,7 +84,7 @@ const PrescriptionView = ({
             </td>
           </tr>
         </>
-      ))
+
     );
   };
 
