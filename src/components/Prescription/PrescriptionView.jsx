@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { BaseUrl } from "../../APi/api";
 import PrimaryButton from "../../Common/PrimaryButton";
 import Table from "../../Common/Table";
-const heading = ["No", "Date", "Time", "Action"];
+const heading = ["No", "Date",  "Action"];
 const data = [];
 const PrescriptionView = ({
   setDate,
@@ -35,8 +35,8 @@ const PrescriptionView = ({
 
   const TableRowData = () => {
     return (
-      // !isEmpty(prescriptionData) &&
-      // prescriptionData.map((data,index) => (
+      !isEmpty(prescriptionData) &&
+      prescriptionData.map((data,index) => (
         <>
           <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
             <td className="w-4 p-4">
@@ -58,7 +58,6 @@ const PrescriptionView = ({
               {1}
             </th>
             <td className="px-10 py-4">{prescriptionData?.Date}</td>
-            <td className="px-10 py-4">{prescriptionData?.time}</td>
 
             <td className=" py-4">
               <p className=" text-[#499AFA] flex items-center  dark:text-blue-500 hover:underline">
@@ -76,7 +75,7 @@ const PrescriptionView = ({
             </td>
           </tr>
         </>
-      // ))
+      ))
     );
   };
 
