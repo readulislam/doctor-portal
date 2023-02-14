@@ -39,7 +39,6 @@ var yyyy = today.getFullYear();
 
 today =  yyyy+ '-' + mm + '-' + dd ;
  
-console.log(prescriptionData)
   const TableRowData = () => {
     return (
       !isEmpty(prescriptionData) &&

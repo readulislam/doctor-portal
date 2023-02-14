@@ -13,13 +13,11 @@ const initialState = {
 
 export const getDoctor = createAsyncThunk("get/doctor", async (phone) => {
   const response = await GetDoctorById(phone);
-  console.log(response)
 
   return response;
 });
 export const getAllAppointment = createAsyncThunk("get/allAppointment", async (info) => {
   const response = await DoctorAppointments(info);
-  console.log(response,'rrr')
 
   return response;
 });

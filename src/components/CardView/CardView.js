@@ -36,11 +36,9 @@ const CardView = () => {
           offset: page,
         },
       });
-      console.log(data);
       const da = await ListStates();
       setDoctors(data.rows);
       setTotalPage(Math.ceil(data.count / 8));
-      console.log(Math.ceil(data.count / 8), "page");
       const d = await ListDepartments();
     };
     const fetchFilterData = async () => {
@@ -65,7 +63,6 @@ const CardView = () => {
       if (data.massage) {
         toast.error(data.massage, { id: 1 });
       }
-      console.log(locationInput, departmentInput, name, data);
     };
     if (name || locationInput || departmentInput) {
       fetchFilterData();
@@ -74,7 +71,6 @@ const CardView = () => {
     }
   }, [page]);
 
-  console.log(doctors);
   // const {
   //   isIdle,
   //   isLoading,
@@ -84,7 +80,6 @@ const CardView = () => {
   //   refetch,
   //   isFetching,
   // } = useQuery('filter', ()=>{
-  //   console.log(page,"dsds");
   //   if(name || locationInput || departmentInput){
   //     fetchFilterData()
   //   }
@@ -96,12 +91,11 @@ const CardView = () => {
   // })
 
   const handleSearch = async (values, { resetForm }) => {
-    console.log(values.hospital, values.department);
 
     let locationvalue = values.hospital;
     let departmentValue = values.department;
     let nameValue = values.name;
-    console.log(typeof locationvalue, typeof departmentValue, nameValue);
+    console.lKog(typeof locationvalue, typeof departmentValue, nameValue);
     // if (departmentValue) {
     //   departmentValue=parseInt(departmentValue);
     // }
@@ -110,7 +104,6 @@ const CardView = () => {
     // }
 
     setName(nameValue);
-    // console.log(locationInput,departmentInput,name)
     // if(locationInput === 'Location' || departmentInput=== 'Speciality'){
     //   setLocationInput('');
     //   setDepartmentInput('');
@@ -132,7 +125,6 @@ const CardView = () => {
     if (data.massage) {
       toast.error(data.massage, { id: 1 });
     }
-    console.log(locationInput, departmentInput, name, data);
     // event.target.reset()
     resetForm();
   };
@@ -143,7 +135,7 @@ const CardView = () => {
       <div className="grid container mx-auto md:grid-cols-2   xl:grid-cols-4 xl:gap-x-20   gap-y-10   mt-16 place-items-center">
         {doctors.map((d) => (
           <div key={d.id} className="max-w-xs  ">
-            <Card className="p-0 m-0">
+            <Card className="p-0 m-0 h-[450px] dark:bg-accent">
               <img
                 className="w-[334px] border cover rounded-lg h-[201px]"
                 src={`${BaseUrl}/${d.img}`}
@@ -204,7 +196,7 @@ const CardView = () => {
           setOpen={setDoctorDetailModal}
         />
       )}
-      <div className="w-full flex justify-center mt-6 mb-32">
+      <div className="w-full flex justify-center mt-6 pb-20">
         <Pagination
           currentPage={page}
           onPageChange={(e) => setPage(e)}

@@ -44,7 +44,6 @@ const Register = () => {
   };
   const handleDispatch = async () => {
     const data = await PatientRegister(patientInfo);
-    console.log(data);
     if (data) {
       dispatch(authActions.userRegister({ userId: data.id, userInfo: data }));
       toast.success('Registration successful',{id:1})

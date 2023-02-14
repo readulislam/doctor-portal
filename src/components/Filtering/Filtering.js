@@ -51,7 +51,7 @@ const Filtering = ({handleSearch}) => {
             </div>
             <input type="text"
             name='name'
-            id="table-search" className="block  p-2 pl-10 text-sm text-gray-900 border focus:outline-none border-gray-300 rounded-lg w-[280px]  bg-gray-50 focus:border-green-300/70 focus:ring-0 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for items"/>
+            id="table-search" className="block  p-2 pl-10 text-sm text-gray-900 dark:border dark:border-gray-700 border-gray-300  focus:outline-none  rounded-lg w-[280px]  bg-gray-50 focus:border-green-300/70 focus:ring-0 dark:bg-accent  dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700" placeholder="Search for items"/>
         </div>
 
          {/* <input 
@@ -68,7 +68,7 @@ const Filtering = ({handleSearch}) => {
               <select
               name='hospital'
                 id="underline_select"
-                className=" block  p-2 pl-10 text-sm text-gray-900 border focus:outline-none border-gray-300 rounded-lg w-[280px]  bg-gray-50 focus:border-green-300/70 focus:ring-0 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className=" block  p-2 pl-10 text-sm text-gray-900 dark:border dark:border-gray-700 border-gray-300  focus:outline-none  rounded-lg w-[280px]  bg-gray-50 focus:border-green-300/70 focus:ring-0 dark:bg-accent  dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
                 onChange={(e)=>{setFieldValue("hospital",e.target.value)}}
               >
                 <option selected>Location</option>
@@ -79,7 +79,7 @@ const Filtering = ({handleSearch}) => {
         <div className="">
           <select
             id="underline_select"
-            className=" block  p-2 pl-10 text-sm text-gray-900 border focus:outline-none border-gray-300 rounded-lg w-[280px]  bg-gray-50 focus:border-green-300/70 focus:ring-0 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className=" block  p-2 pl-10 text-sm text-gray-900 dark:border dark:border-gray-700 border-gray-300  focus:outline-none  rounded-lg w-[280px]  bg-gray-50 focus:border-green-300/70 focus:ring-0 dark:bg-accent  dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
             name='department'
             onChange={(e)=>{setFieldValue("department",e.target.value)}}
           >

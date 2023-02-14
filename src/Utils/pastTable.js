@@ -49,7 +49,6 @@ const PastTableView = ({ heading, data }) => {
     };
     fetching();
   }, [userId, page,doctorId,doctorPage]);
-console.log("hi past",patientAppointment);
 
   
   return (

@@ -17,7 +17,6 @@ const BookingConfirmation = ({
     e.preventDefault();
     setOpenBillReceipt(true);
     const data = await AddDoctorAppointment(appointment);
-    console.log(data);
 
     if (data) {
       // doctorId, date, timeRange, slotId

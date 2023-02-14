@@ -40,7 +40,7 @@ const Navbar = () => {
   return (
     <>
     
-<nav class=" border-gray-200 px-2 sm:px-4 py-2.5  dark:bg-gray-900">
+<nav class=" border-gray-200 px-2 bg-primary-light dark:bg-primary-dark sm:px-4 py-2.5  ">
   <div class=" container mx-auto flex-wrap flex items-center justify-between ">
   {/* <a href="https://flowbite.com/" class="flex items-center">
       <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 mr-3 sm:h-9" alt="Flowbite Logo" />

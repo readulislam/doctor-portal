@@ -49,7 +49,6 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open,appointment, s
 
 
 
-// console.log(formatDate(new Date()),'dd');
 
   // const splitting = date.split("-");
   const newDate = yearMonthDay(date);
@@ -62,7 +61,6 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open,appointment, s
     const fetching = async () => {
       if (date && doctorId) {
         const data =await GetSlots({date:newDate, doctorId})
-        console.log(data);
       
         
         setSlotsInfo(data);
@@ -95,10 +93,7 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open,appointment, s
     try {
       if (doctorId && userId) {
         
-        console.log(doctorData);
-        console.log("rrrrrr");
         setOpenDiseaseModal(!openDiseaseModal);
-        console.log(openDiseaseModal, "jdfdi");
       } else {
         if (selected && number) {
           const response = await LoginPatient(number);
@@ -128,7 +123,6 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open,appointment, s
   useEffect(() => {
     const verify = async () => {
       if (number && contact) {
-        console.log(number);
         const response = await setupRecaptcha(number, "patientBooking");
         setOTPResult(response);
         if (response) {
@@ -146,11 +140,9 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open,appointment, s
     // setOpenOtp(false)
   };
   const handleRegisterModel = async (apiData) => {
-    console.log(apiData);
     setRegisterModel(false);
     const data = await PatientRegister(apiData);
     if (data) {
-      console.log(data);
       const response = await setupRecaptcha(number, "patientBooking");
       setOTPResult(response);
       if (response) {
@@ -192,7 +184,6 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open,appointment, s
     setOpenConfirmModal(!openConfirmModal)
   }
 
-  console.log(openConfirmModal, "jdfdixs");
 
   const props = {
     doctorData,

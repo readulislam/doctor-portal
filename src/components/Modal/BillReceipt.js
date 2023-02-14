@@ -8,9 +8,6 @@ const BillReceipt = ({doctorData,appointment,serialNO,open,setOpen}) => {
     const { userInfo, userId } = useSelector(
         (state) => state.Auth
       );
-      console.log(appointment);
-      console.log(userInfo,'info');
-      console.log("hi",doctorData,appointment);
       const r = (Math.random() * 100000)
       const downloadBill=()=>{
         const doc=new jsPDF('landscape','px','a4','false')

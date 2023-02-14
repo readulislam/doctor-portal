@@ -12,10 +12,8 @@ const Prescription = ({selectedPatient, setReReload,
   const [prescriptionData, setPrescriptionData] = useState();
   const [reload ,setReload] = useState(false)
   const handleSubmit=async()=>{
-    console.log(image);
 if(!image) return toast.error('Select a prescription',{id:1});
 if(!date) return toast.error('Select follow up date',{id:1});
-console.log('hoica')
     const key = "79c2ec0f6d6859d731f98a37a94e5c70";
     const formData = new FormData();
     formData.append("file", image);
@@ -26,11 +24,9 @@ console.log('hoica')
     formData.append("doctorId", selectedPatient.doctorId);
     formData.append("appointmentId", selectedPatient.id);
     const data= await PostPrescription(formData)
-    console.log(data);
 
 if(!selectedPatient.status){
   const update =await updateAppointment(selectedPatient.id);
-  console.log(update);
   setReReload(!reReload)
 }
 setReload(!reload)
@@ -44,7 +40,6 @@ setReload(!reload)
     //   .then((res) => res.json())
     //   .then(async(result) => {
     //     if (result) {
-    //    console.log(result.data.url)
     //       const PrescriptionInfo = {
     //         patientId:selectedPatient.patientId,
     //         doctorId:selectedPatient.doctorId,
@@ -52,7 +47,6 @@ setReload(!reload)
     //         link: result.data.url,
     //         followUpDate:date
     //       };
-    //       console.log(PrescriptionInfo);
           
        
     //     }
