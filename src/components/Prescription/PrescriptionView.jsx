@@ -41,6 +41,9 @@ var yyyy = today.getFullYear();
 today =  yyyy+ '-' + mm + '-' + dd ;
  
 console.log(prescriptionData)
+const handlePrint=()=>{
+  window.open(`${BaseUrl}/${prescriptionData?.link}`, "PRINT", "height=400,width=600");
+}
   const TableRowData = () => {
     return (
       !isEmpty(prescriptionData) &&
@@ -80,6 +83,7 @@ console.log(prescriptionData)
                   className="ml-1 cursor-pointer hover:text-red-400"
                   size={23}
                 />
+                <button onClick={handlePrint}> print</button>
               </p>
             </td>
           </tr>

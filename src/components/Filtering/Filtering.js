@@ -71,7 +71,7 @@ const Filtering = ({handleSearch}) => {
                 className=" block  p-2 pl-10 text-sm text-gray-900 border focus:outline-none border-gray-300 rounded-lg w-[280px]  bg-gray-50 focus:border-green-300/70 focus:ring-0 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 onChange={(e)=>{setFieldValue("hospital",e.target.value)}}
               >
-                <option selected>Location</option>
+                <option value="" selected>Location</option>
                 {hospitalList?.map(h=><option value={h.id}>{h.name},{h.address}</option>)}
               </select>
          
@@ -83,7 +83,7 @@ const Filtering = ({handleSearch}) => {
             name='department'
             onChange={(e)=>{setFieldValue("department",e.target.value)}}
           >
-            <option selected>Speciality</option>
+            <option value="" selected>Speciality</option>
            {departmentList?.map(d=><option value={d.id}>{d.name}</option>)}
               
           </select>
