@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { BaseUrl } from "../../APi/api";
 import PrimaryButton from "../../Common/PrimaryButton";
 import Table from "../../Common/Table";
+
 const heading = ["No", "Date", "Time", "Action"];
 const data = ['No', 'FollowUP Date','date','action'];
 const PrescriptionView = ({
@@ -39,10 +40,15 @@ var yyyy = today.getFullYear();
 
 today =  yyyy+ '-' + mm + '-' + dd ;
  
+
+console.log(prescriptionData)
+const handlePrint=()=>{
+  window.open(`${BaseUrl}/${prescriptionData?.link}`, "PRINT", "height=400,width=600");
+}
+
   const TableRowData = () => {
     return (
       !isEmpty(prescriptionData) &&
-    
         <>
           <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
             <td className="w-4 p-4">
@@ -79,6 +85,7 @@ today =  yyyy+ '-' + mm + '-' + dd ;
                   className="ml-1 cursor-pointer hover:text-red-400"
                   size={23}
                 />
+                <button onClick={handlePrint}> print</button>
               </p>
             </td>
           </tr>

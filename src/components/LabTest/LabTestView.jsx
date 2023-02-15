@@ -23,7 +23,10 @@ const LabTestView = ({handleSubmit,setName,setReportFile,data}) => {
       ))
     );
   };
- 
+  const handlePrint=(doc)=>{
+    
+    window.open(doc, "PRINT", "height=400,width=600");
+  }
 
   const TableRowData = () => {
     return (
@@ -62,6 +65,7 @@ const LabTestView = ({handleSubmit,setName,setReportFile,data}) => {
                 </a>
                <AiOutlineDownload className="ml-1 cursor-pointer hover:text-red-400" size={23}/>
               </p>
+              <button onClick={handlePrint(`${BaseUrl}/${data.link}`)} > print</button>
             </td>
           </tr>
         </>
@@ -78,6 +82,7 @@ const LabTestView = ({handleSubmit,setName,setReportFile,data}) => {
     
 
   };
+  
   return (
     <>
       <div className="mt-10 ">
