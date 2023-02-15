@@ -1,33 +1,29 @@
-
 import { isEmpty } from "lodash";
 import React, { useState } from "react";
-import { AiFillEye ,AiOutlineDownload} from 'react-icons/ai';
+import { AiFillEye, AiOutlineDownload } from "react-icons/ai";
 import { BaseUrl } from "../../APi/api";
 import PrimaryButton from "../../Common/PrimaryButton";
 import Table from "../../Common/Table";
-const heading = ['No','Date','Time','Action',]
+const heading = ["No", "Date", "Time", "Action"];
 
-const LabTestView = ({handleSubmit,setName,setReportFile,data}) => {
-  const [page,setPage] = useState(1)
+const LabTestView = ({ handleSubmit, setName, setReportFile, data }) => {
+  const [page, setPage] = useState(1);
   const TableHeader = () => {
     return (
       !isEmpty(heading) &&
       heading.map((name, index) => (
-        <th key={index} scope="col" className={`
-         ${(heading.length -1) === index ? 'py-3'
-        :'pl-10  py-3'
-        
-        }`}>
+        <th
+          key={index}
+          scope="col"
+          className={`
+         ${heading.length - 1 === index ? "py-3" : "pl-10  py-3"}`}
+        >
           {name}
         </th>
       ))
     );
   };
-  const handlePrint=(doc)=>{
-    
-    window.open(doc, "PRINT", "height=400,width=600");
-  }
-
+ 
   const TableRowData = () => {
     return (
       !isEmpty(data) &&
@@ -54,35 +50,38 @@ const LabTestView = ({handleSubmit,setName,setReportFile,data}) => {
             </th>
             <td className="px-10 py-4">{data.Date}</td>
             <td className="px-10 py-4">{data.time}</td>
-          
+
             <td className=" py-4">
               <p className=" text-[#499AFA] flex items-center  dark:text-blue-500 hover:underline">
-             
-               
-               
-               <a href={`${BaseUrl}/${data.link}`}  target="_blank">
-               <AiFillEye className="hover:text-red-400 cursor-pointer" size={23}/> 
+                <a href={`${BaseUrl}/${data.link}`} target="_blank">
+                  <AiFillEye
+                    className="hover:text-red-400 cursor-pointer"
+                    size={23}
+                  />
                 </a>
-               <AiOutlineDownload className="ml-1 cursor-pointer hover:text-red-400" size={23}/>
+                <AiOutlineDownload
+                  className="ml-1 cursor-pointer hover:text-red-400"
+                  size={23}
+                />
               </p>
-              <button onClick={handlePrint(`${BaseUrl}/${data.link}`)} > print</button>
+             
+             
             </td>
           </tr>
+         
         </>
       ))
     );
   };
 
- const props = {
+  const props = {
     page,
     setPage,
     TableRowData,
     TableHeader,
-    totalPage:1
-    
-
+    totalPage: 1,
   };
-  
+
   return (
     <>
       <div className="mt-10 ">
@@ -91,26 +90,37 @@ const LabTestView = ({handleSubmit,setName,setReportFile,data}) => {
           <label class="block max-w-sm">
             <span class="sr-only">Choose File</span>
             <input
-             type="file" id="file" name="file" accept="application/*"
-             onChange={(e) => { setReportFile(e.target.files[0]) }}
+              type="file"
+              id="file"
+              name="file"
+              accept="application/*"
+              onChange={(e) => {
+                setReportFile(e.target.files[0]);
+              }}
               class="block w-full border-none rounded-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
             />
           </label>
           <span>
-          <input 
-         required={true} 
-         onChange={(e)=>{setName(e.target.value)}}
-          type='text' placeholder="name of Report" 
-          className="w-[190px] border-1 focus:border-gray-300 outline-none  focus:ring-0 rounded-md mr-2"
-         
-          />
-          <PrimaryButton 
-          handleSubmit={handleSubmit} 
-          type={'button'} isBg={'!bg-gray-700 '}>Add</PrimaryButton>
+            <input
+              required={true}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+              type="text"
+              placeholder="name of Report"
+              className="w-[190px] border-1 focus:border-gray-300 outline-none  focus:ring-0 rounded-md mr-2"
+            />
+            <PrimaryButton
+              handleSubmit={handleSubmit}
+              type={"button"}
+              isBg={"!bg-gray-700 "}
+            >
+              Add
+            </PrimaryButton>
           </span>
         </div>
 
-        <Table  props={props}></Table>
+        <Table props={props}></Table>
       </div>
     </>
   );
