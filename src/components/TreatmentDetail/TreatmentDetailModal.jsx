@@ -25,8 +25,8 @@ const TreatmentDetailModal = ({
 }) => {
   const {
     Auth: { userId },
-    Doctor: { doctorId,doctorInfo:{departmentId} },
-  } = useSelector((state) => state);
+    Doctor: { doctorId, },
+  } = useSelector((state) => state) ||{};
   console.log(selectedPatient)
   const { date, time, doctor, patient } = selectedPatient || {};
   const [isDiseases, setIsDiseases] = useState(false);
@@ -43,7 +43,7 @@ const TreatmentDetailModal = ({
 
   useEffect(() => {
     const fetch = async () => {
-      const {data}=await ListDiseases(departmentId)
+      const {data}=await ListDiseases(selectedPatient.doctor.departmentId)
       // const { data } = await ListDiseases(2);
 
       if(data){
@@ -54,7 +54,8 @@ const TreatmentDetailModal = ({
       }
     };
     fetch();
-  }, [departmentId,edit]);
+    console.log(reload)
+  }, [selectedPatient.doctor.departmentId,reload]);
 
   const initialValue ={
     value: selectedPatient.diseaseName,
@@ -71,7 +72,8 @@ const updateHandler =async()=>{
 
 
   setEdit(false)
-  const update =await updateAppointmentWithDisease({diseaseName:diseasesName.label, departmentId,
+  const update =await updateAppointmentWithDisease({diseaseName:diseasesName.label, 
+    departmentId:selectedPatient.doctor.departmentId,
   appointmentId:selectedPatient.id
   })
   setReload(!reReload)
@@ -193,7 +195,7 @@ console.log(update)
                   </div>
                   {/* 2 */}
 
-                  {!isDiseases ? (
+                  {!isDiseases&& doctorId ? (
                     <>
                       <div className="relative mt-14 mb-6 max-w-sm">
                         <p className="px-2 text-gary-600 font-semibold text-sm pb-1">

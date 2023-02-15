@@ -1,8 +1,9 @@
 import { computeHeadingLevel } from "@testing-library/react";
+import { isEmpty } from "lodash";
 import React, { useEffect, useState } from "react";
 import { BaseUrl, ListPrescription } from "../../APi/api";
 
-const DiseaseDetailsView = ({ selectedDiseaseAppointment }) => {
+const DiseaseDetailsView = ({ selectedDiseaseAppointment,data }) => {
     const [PrescriptionData,setPrescriptionData] = useState([])
     useEffect(()=>{
         const fetching = async()=>{
@@ -25,6 +26,12 @@ const DiseaseDetailsView = ({ selectedDiseaseAppointment }) => {
       </p>
       <p>Gender: {selectedDiseaseAppointment.patient.gender}</p>
       <img src={`${BaseUrl}/${PrescriptionData?.link}`}  alt=""/> 
+
+
+      { !isEmpty(data) && data.map(report=><>
+      
+        <img src={`${BaseUrl}/${report?.link}`}  alt=""/> 
+      </>)}
     </div>
   );
 };
