@@ -18,11 +18,9 @@ const BookingConfirmationView = ({
 }) => {
   const { userInfo, userId } = useSelector((state) => state.Auth);
 
-  console.log(appointment);
 
   const random = 100000 * Math.random(1000);
   const serialNO = Math.ceil(random);
-  console.log(serialNO);
 
   return (
     <React.Fragment>

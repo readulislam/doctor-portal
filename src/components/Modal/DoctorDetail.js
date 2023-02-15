@@ -5,7 +5,6 @@ import ModelViewWrapper from './ModelViewWrapper';
 
 const DoctorDetail = ({doctorData,open,setOpen}) => {
   const [appointmentOpen, setAppointmentOpen] = useState(false);
-  console.log(doctorData);
   return (
     <div>
         <Modal show={open} position="center" onClose={() => setOpen(false)}>

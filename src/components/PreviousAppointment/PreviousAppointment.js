@@ -56,7 +56,6 @@ const PreviousAppointment = () => {
     );
   };
 
-  console.log(appointments);
 
   const TableRowData = () => {
     if (doctorId) {
@@ -141,7 +140,6 @@ const PreviousAppointment = () => {
     
   };
   const totalPage = TotalPageCounter(appointmentCount, limit);
-console.log(open);
   const props = {
     page,
     setPage,

@@ -13,7 +13,6 @@ const Viewpres = ({id,doctorId,patientId}) => {
               const {data}=await axios.get(`${BaseUrl}/get-prescriptionByPatientId?patientId=${patientId}&doctorId=${doctorId}&appointmentId=${id}`)
               setlink(data.link)
               setfollowUpDate(data.followUpDate)
-              console.log(link);
               }
         prescriptionfetch()
     }, [])

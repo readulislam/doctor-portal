@@ -75,7 +75,6 @@ const AddDoctor = () => {
           };
        
         const data = await RegistrationDoctor(doctorInfo);
-        console.log(data);
         }
       });
   };

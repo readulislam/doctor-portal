@@ -43,7 +43,6 @@ const TableView = ({ heading, data }) => {
     };
     fetching();
   }, [userId, page, doctorId, doctorPage]);
-  console.log("hi", patientAppointment);
 
   return (
     <>
@@ -70,7 +69,6 @@ const TableView = ({ heading, data }) => {
                     onClick={() => {
                       setOpen(true);
                       setprescriptionData(d);
-                      console.log(d);
                     }}
                   >
                     Upload

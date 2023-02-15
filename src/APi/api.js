@@ -31,6 +31,7 @@ const END_POINTS = {
   DELETE_APPOINTMENT: () => "/AppointmentDelete",
   GET_PATIENT_DISEASES: () => "/patient-diseases",
   GET_PATIENT_APPOINTMENT_BY_DISEASES: () => "/appointmentByDisease",
+  UPDATE_APPOINTMENT_WITH_DISEASE: () => "/updateAppointment",
 };
 const URL = (End_Point) => `${BaseUrl}${End_Point}`;
 
@@ -50,6 +51,13 @@ export const GetPatientDiseases = async (patientId) => {
 
   return data;
 };
+export const updateAppointmentWithDisease = async (query)=>{
+  const { data } = await axios.post(URL(END_POINTS.UPDATE_APPOINTMENT_WITH_DISEASE()), {
+   ...query  
+  });
+
+  return data;
+}
 export const GetAppointmentByDiseases = async (patientInfo) => {
   const { data } = await axios.get(URL(END_POINTS.GET_PATIENT_APPOINTMENT_BY_DISEASES()), {
     params: { ...patientInfo},
@@ -87,7 +95,6 @@ export const LoginPatient = async (phone) => {
   return data;
 };
 export const DoctorAppointments = async (info) => {
-  console.log(info);
   const { data } = await axios.get(URL(END_POINTS.GET_DOCTOR_APPOINTMENTS()), {
     params: {
       doctorId: info.doctorId,
@@ -106,7 +113,6 @@ export const updateTimeSlot = async (query) => {
   return data;
 };
 export const updateAppointment = async (id) => {
-  console.log(id, "ddddddd");
 
   const data = await axios.put(URL(END_POINTS.UPDATE_APPOINTMENT()), {
     id,

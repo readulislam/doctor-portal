@@ -53,7 +53,6 @@ const UpcomingAppointment = () => {
         });
         setPatientAppointment(data.rows);
       }
-      console.log(cancel);
     };
     fetchUserAppointment();
   }, [page, cancel, userId]);
@@ -62,11 +61,8 @@ const UpcomingAppointment = () => {
     const { id, doctorId, timeSlot, timeSlotId, date } = data;
 const confirmation = window.confirm('Are you want to Delete this Appointment ?')
 if(confirmation){
-  console.log(data);
   const deleteAppointment = await CancelAppointment(id);
   const timeSlotInfo = await GetSlotByData({ doctorId, date });
-  console.log(timeSlotInfo);
-  console.log(deleteAppointment);
   setCancel(!cancel);
   if (timeSlotInfo) {
     const query = {
@@ -78,7 +74,6 @@ if(confirmation){
       isAvailable: true,
     };
     const update = await updateTimeSlot(query);
-    console.log(update);
   }
 }
     
@@ -86,7 +81,6 @@ if(confirmation){
 
 
   const downloadBill=(doctorData, patient,appointment)=>{
-    console.log(doctorData,patient);
     const doc=new jsPDF('landscape','px','a4','false')
     doc.setFillColor(240, 253,244)
     doc.rect(0,0,650,600,"F")
@@ -179,7 +173,6 @@ if(confirmation){
       ))
     );
   };
-  console.log(patientAppointment);
 
   const TableRowData = () => {
     if (doctorId) {

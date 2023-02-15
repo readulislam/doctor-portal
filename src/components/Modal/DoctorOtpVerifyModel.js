@@ -15,7 +15,6 @@ const DoctorOtpVerifyModel = ({
   const otpHandler = (Otp) => {
     setOtp(Otp);
   };
-  console.log(OTPresult);
   const handleSubmit = async () => {
     if (!otp && otp === undefined) return;
     try {

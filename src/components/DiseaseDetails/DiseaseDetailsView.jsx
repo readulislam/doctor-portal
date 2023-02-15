@@ -11,7 +11,6 @@ const DiseaseDetailsView = ({ selectedDiseaseAppointment }) => {
         }
         fetching()
       },[])
-      console.log(PrescriptionData)
   return (
     <div className="pt-2">
       <p>Date: {selectedDiseaseAppointment.date}</p>

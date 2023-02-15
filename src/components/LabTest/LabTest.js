@@ -4,7 +4,6 @@ import { BaseUrl, PostReport } from '../../APi/api'
 import LabTestView from './LabTestView'
 
 const LabTest = ({selectedPatient}) => {
-  console.log(selectedPatient,'lap')
   const {patientId,doctorId,id} = selectedPatient|| {}
   const [reportFile ,setReportFile] = useState('');
   const [data, setData] = useState([]);
@@ -20,7 +19,6 @@ const LabTest = ({selectedPatient}) => {
 }, [doctorId,id,patientId, refetch])
 
 
-console.log(data,'rp')
   const handleSubmit=async()=>{
    
     const formData = new FormData();
@@ -30,7 +28,6 @@ console.log(data,'rp')
     formData.append("doctorId", selectedPatient.doctorId);
     formData.append("appointmentId", selectedPatient.id);
     
-    console.log(formData,selectedPatient);
     const data= await PostReport(formData)
     setRefetch(!refetch)
     setReportFile('');

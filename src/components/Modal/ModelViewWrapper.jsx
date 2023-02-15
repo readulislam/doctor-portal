@@ -14,9 +14,9 @@ const ModelViewWrapper = ({
   return (
     <>
       {" "}
-      <Modal className="bg-gray-900 " show={open}  size='4xl' position="center" onClose={() => setOpen(false)}>
+      <Modal className="!bg-[rgba(16,24,46,.9)]" show={open}  size='4xl' position="center" onClose={() => setOpen(false)}>
 
-        <div className="bg-green-200 rounded-md ">
+        <div className="bg-secondary dark:bg-secondary rounded-md ">
         <form id="form" onSubmit={handleSubmit}>
           <Modal.Header className="!py-3 px-8 !text-gray-700 uppercase">{modalHeaderTitle}</Modal.Header>
           <div className="h-[680px] overflow-y-auto">

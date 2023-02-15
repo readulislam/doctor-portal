@@ -30,7 +30,6 @@ const AppointmentBookingView = ({ props, modalHeaderTitle }) => {
     return [year, month, day].join("-");
   }
 
-  console.log(formatDate(new Date()), "dd");
 
   return (
     <>
@@ -44,6 +43,7 @@ const AppointmentBookingView = ({ props, modalHeaderTitle }) => {
         <div className="space-y-">
           <div className="grid grid-cols-2 gap-4 ">
             <TextInput
+         
               id="email1"
               type="text"
               placeholder="name@flowbite.com"
@@ -96,12 +96,12 @@ const AppointmentBookingView = ({ props, modalHeaderTitle }) => {
                 <div
                   key={index}
                   onClick={() => setSelected(data)}
-                  className={`text-base bg-white max-w-[100px] ${
+                  className={`text-base bg-white cursor-pointer dark:border-none  max-w-[100px] ${
                     selected?.id === data.id && "bg-blue-600 text-white"
                   } ${
                     !data.isAvailable || data.time < currentTime
-                      ? "bg-white text-gray-400/50"
-                      : "shadow-md hover:bg-sky-500 hover:text-white cursor-pointer  "
+                      ? "bg-white dark:bg-[rgba(16,24,46,1)]  text-gray-400/50"
+                      : "shadow-md   hover:bg-sky-500   hover:text-white cursor-pointer  "
                   } border   py-1 px-3 text-center rounded-md`}
                 >
                   {data?.time}
@@ -115,7 +115,7 @@ const AppointmentBookingView = ({ props, modalHeaderTitle }) => {
                   <span>Phone Number</span>
                   <PhoneInput
                     defaultCountry="IN"
-                    className="border-none px-3  mt-1 placeholder-blueGray-300 text-gray-700 bg-white rounded text-md shadow appearance-none focus:outline-none focus:ring-0  w-full ease-linear active:outline-none "
+                    className="border-none px-3  mt-1 placeholder-blueGray-300 text-gray-700 dark:bg-slate-900 bg-white rounded text-md shadow appearance-none focus:outline-none focus:ring-0  w-full ease-linear active:outline-none "
                     placeholder="Enter phone number"
                     value={number}
                     onChange={setNumber}

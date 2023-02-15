@@ -28,7 +28,6 @@ const RegistarModal = ({
     const userDate = splitting[2] + "/" + splitting[1] + "/" + splitting[0];
    
 
-    console.log(values);
 
     handleRegisterModel({
       ...values,

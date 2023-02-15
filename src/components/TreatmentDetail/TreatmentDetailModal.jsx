@@ -1,8 +1,8 @@
-import { MdOutlineEditCalendar } from "react-icons/md";
 import { AiOutlineCheck } from "react-icons/ai";
 import { BiEdit } from "react-icons/bi";
-
-import { Button, Modal } from "flowbite-react";
+import Select from "react-select";
+import Creatable from 'react-select/creatable';
+import { Modal } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import PrimaryButton from "../../Common/PrimaryButton";
@@ -10,7 +10,12 @@ import DiseaseDetails from "../DiseaseDetails";
 import LabTest from "../LabTest";
 import Prescription from "../Prescription";
 import PatientDiseasesList from "./PatientDiseasesList";
-
+import { ListDiseases, updateAppointmentWithDisease } from "../../APi/api";
+const options = [
+  { value: 1, label: "Chocolate" },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" },
+];
 const TreatmentDetailModal = ({
   open,
   setOpen,
@@ -20,20 +25,58 @@ const TreatmentDetailModal = ({
 }) => {
   const {
     Auth: { userId },
-    Doctor: { doctorId },
+    Doctor: { doctorId,doctorInfo:{departmentId} },
   } = useSelector((state) => state);
+  console.log(selectedPatient)
   const { date, time, doctor, patient } = selectedPatient || {};
   const [isDiseases, setIsDiseases] = useState(false);
   const [edit, setEdit] = useState(false);
+  const [confirm, setConfirm] = useState(false);
+  const [reload, setReload] = useState(false);
+
+
   const [openDiseaseDetail, setOpenDiseaseDetail] = useState(false);
   const [selectedDiseaseAppointment, setSelectedDiseaseAppointment] = useState(
     {}
   );
-  const [diseasesName, setDiseasesName] = useState("");
-  console.log(doctor);
+  const [disease, setDisease] = useState([]);
+
   useEffect(() => {
-    setDiseasesName(selectedPatient.diseaseName);
-  }, [selectedPatient.diseaseName]);
+    const fetch = async () => {
+      const {data}=await ListDiseases(departmentId)
+      // const { data } = await ListDiseases(2);
+
+      if(data){
+    const values  =    data.map(value => {
+          return { value: value.id, label: value.name }
+        })
+        setDisease(values);
+      }
+    };
+    fetch();
+  }, [departmentId,edit]);
+
+  const initialValue ={
+    value: selectedPatient.diseaseName,
+    label: selectedPatient.diseaseName,
+  }
+  const [diseasesName, setDiseasesName] = useState(initialValue);
+const diseasesNameChange=(selectOption)=>{
+  setDiseasesName(selectOption)
+  setConfirm(true)
+}
+console.log(diseasesName);
+const updateHandler =async()=>{
+  setConfirm(false); 
+
+
+  setEdit(false)
+  const update =await updateAppointmentWithDisease({diseaseName:diseasesName.label, departmentId,
+  appointmentId:selectedPatient.id
+  })
+  setReload(!reReload)
+console.log(update)
+}
   return (
     <>
       <React.Fragment>
@@ -156,13 +199,22 @@ const TreatmentDetailModal = ({
                         <p className="px-2 text-gary-600 font-semibold text-sm pb-1">
                           Disease
                         </p>
-                        <input
+                        {/* <input
                         onChange={(e)=>setDiseasesName(e.target.value)}
-                          disabled={!edit}
+                        
                           className="rounded-md px-2 py-2"
                           value={diseasesName}
+                        /> */}
+                        <Creatable
+                          className="border-none bg-red-200"
+                          defaultValue={diseasesName}
+                          isDisabled={!edit}
+                          onChange={diseasesNameChange}
+                          options={disease}
+                          isClearable={true}
                         />
-                        <span className="absolute top-[32px] cursor-pointer right-16 px-1">
+
+                        <span className="absolute top-[32px] cursor-pointer right-10 px-1">
                           {" "}
                           <BiEdit
                             className={`${edit ? "hidden" : "flex"}`}
@@ -170,11 +222,11 @@ const TreatmentDetailModal = ({
                             size={24}
                           />
                           <AiOutlineCheck
-                            onClick={() => setEdit(false)}
+                            onClick={updateHandler}
                             className={`${
-                              !edit && "hidden"
-                            } text-green-500 font-bold `}
-                            size={24}
+                              !confirm && "hidden"
+                            } text-green-500 font-bold mr-6 `}
+                            size={22}
                           />
                         </span>
                       </div>

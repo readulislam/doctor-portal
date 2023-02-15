@@ -29,9 +29,7 @@ const OtpVerifyModal = ({
     setResend(true)
     
     // if (number && resend) {
-    //   console.log(true);
     //   const response = await setupRecaptcha(number,'resend_otp');
-    //   console.log(response)
     //   setOTPResult(response);
     //   if(response){
     //  toast.success('response sending')
@@ -47,7 +45,6 @@ const OtpVerifyModal = ({
     if (!otp && otp === undefined) return;
     try {
       const verify = await OTPresult.confirm(otp);
-      console.log(verify);
 
       // const { idToken, isNewUser } = verify.UserCredentialImpl._tokenResponse;
       // if (!idToken) {
@@ -63,7 +60,6 @@ const OtpVerifyModal = ({
         return;
       }
       handleDispatch();
-      console.log('handleDispatch done')
     } catch (error) {
       toast.error('something went wrong',{id:1})
     }

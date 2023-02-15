@@ -6,7 +6,6 @@ import TableFooter from './TableFooter'
 
 const Table = ({ children,props,footerWidth}) => {
     const {TableHeader,TableRowData,page, setPage,totalPage} = props;
-    console.log(totalPage)
   return (
     <>
     

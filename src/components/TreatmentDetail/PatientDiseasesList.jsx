@@ -15,15 +15,12 @@ const PatientDiseasesList = ({patient,setOpenDiseaseDetail,setSelectedDiseaseApp
     const [data,setData]= useState([]);
     const [appointments,setAppointments] =useState([])
     const [selectedMenu,setSelectedMenu] = useState(data[0]);
-    console.log(selectedMenu)
 // const diseaseFilterData = []
     useEffect(()=>{
 
         const dataFetching=async()=>{
             const diseases =  await GetPatientDiseases(patient.id)
-            console.log(diseases)
          const newDiseases = diseases.map((d)=> d.diseaseName)
-         console.log(newDiseases)
 
          setData(newDiseases)
 }
@@ -38,12 +35,10 @@ const PatientDiseasesList = ({patient,setOpenDiseaseDetail,setSelectedDiseaseApp
         if(selectedMenu){
           const appointment = await GetAppointmentByDiseases({patientId:patient.id,diseaseName:selectedMenu});
           setAppointments(appointment.rows)
-          console.log(appointment.rows)
          }
       }
       fetching()
     },[selectedMenu])
-    // console.log(diseaseFilterData)
     const [page,setPage] = useState(1);
 
     const TableHeader = () => {
