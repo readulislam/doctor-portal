@@ -7,7 +7,7 @@ const ManageAvailabilitiesView = () => {
   const [monday, setMonday] = useState(false);
   const [tuesday, setTuesday] = useState(false);
   const [wednesday, setWednesday] = useState(false);
-  const [thrusday, setThrusday] = useState(false);
+  const [thursday, setThursday] = useState(false);
   const [friday, setFriday] = useState(false);
   const [saturday, setSaturday] = useState(false);
 
@@ -46,7 +46,7 @@ const ManageAvailabilitiesView = () => {
               handleChange(setSunday, e);
             }}
           />
-          <label htmlFor="Sunday">Sunday</label>
+          <label >Sun</label>
           {sunday && <HandleAvailability name="sunday" />}
         </div>
         <div className="flex items-center gap-2">
@@ -56,7 +56,7 @@ const ManageAvailabilitiesView = () => {
               handleChange(setMonday, e);
             }}
           />
-          <label htmlFor="Monday">Monday</label>
+          <label htmlFor="Monday">Mon</label>
           {monday && <HandleAvailability name="monday" />}
         </div>
         <div className="flex items-center gap-2">
@@ -66,7 +66,7 @@ const ManageAvailabilitiesView = () => {
               handleChange(setTuesday, e);
             }}
           />
-          <label htmlFor="Tuesday">Tuesday</label>
+          <label htmlFor="Tuesday">Tue</label>
           {tuesday && <HandleAvailability name="tuesday" />}
         </div>
         <div className="flex  items-center gap-2">
@@ -76,18 +76,18 @@ const ManageAvailabilitiesView = () => {
               handleChange(setWednesday, e);
             }}
           />
-          <label htmlFor="Wednesday">Wednesday</label>
+          <label htmlFor="Wednesday">Wed</label>
           {wednesday && <HandleAvailability name="wednesday" />}
         </div>
         <div className="flex  items-center gap-2">
           <Checkbox
-            id="Thrusday"
+            id="Thursday"
             onChange={(e) => {
-              handleChange(setThrusday, e);
+              handleChange(setThursday, e);
             }}
           />
-          <label htmlFor="Thrusday">Thrusday</label>
-          {thrusday && <HandleAvailability name="thrusday" />}
+          <label >Thu</label>
+          {thursday && <HandleAvailability name="thursday" />}
         </div>
         <div className="flex  items-center gap-2">
           <Checkbox
@@ -96,7 +96,7 @@ const ManageAvailabilitiesView = () => {
               handleChange(setFriday, e);
             }}
           />
-          <label htmlFor="Friday">Friday</label>
+          <label htmlFor="Friday">Fri</label>
           {friday && <HandleAvailability name="friday" />}
         </div>
         <div className="flex items-center gap-2">
@@ -106,7 +106,7 @@ const ManageAvailabilitiesView = () => {
               handleChange(setSaturday, e);
             }}
           />
-          <label htmlFor="saturday">Saturday</label>
+          <label htmlFor="saturday">Sat</label>
           {saturday && <HandleAvailability name="saturday" />}
         </div>
       </div>
