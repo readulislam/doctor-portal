@@ -16,7 +16,7 @@ const DiseaseDetails = ({selectedDiseaseAppointment}) => {
           }
     reportFetch()
 }, [doctorId,patientId,id])
-console.log(data);
+
 
   return (
     <>

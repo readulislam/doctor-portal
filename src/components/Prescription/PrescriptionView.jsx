@@ -1,6 +1,7 @@
 import { isEmpty } from "lodash";
 import React, { useState } from "react";
-import { AiFillEye, AiOutlineDownload } from "react-icons/ai";
+import { AiFillEye, AiOutlineDownload,AiFillPrinter } from "react-icons/ai";
+import { FcPrint } from "react-icons/fc";
 import { useSelector } from "react-redux";
 import { BaseUrl } from "../../APi/api";
 import PrimaryButton from "../../Common/PrimaryButton";
@@ -74,7 +75,7 @@ const handlePrint=()=>{
            
 
             <td className=" py-4">
-              <p className=" text-[#499AFA] flex items-center  dark:text-blue-500 hover:underline">
+              <p className=" text-[#499AFA] flex  items-center  dark:text-blue-500 hover:underline">
                 <a href={`${BaseUrl}/${prescriptionData?.link}`} target="_blank">
                   <AiFillEye
                     className="hover:text-red-400 cursor-pointer"
@@ -85,7 +86,7 @@ const handlePrint=()=>{
                   className="ml-1 cursor-pointer hover:text-red-400"
                   size={23}
                 />
-                <button onClick={handlePrint}> print</button>
+                <AiFillPrinter  className="ml-0.5 cursor-pointer text-gray-500/90 hover:text-red-400"  size={23} onClick={handlePrint}/> 
               </p>
             </td>
           </tr>
