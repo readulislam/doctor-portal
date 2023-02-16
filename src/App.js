@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Resgister";
 import ToasterContainer from "./Utils/ToasterContainer";
 import HomePage from "./pages/Home/HomePage";
+import ManageAvailabilities from "./components/ManageAvailabilities";
 
 
 
@@ -26,6 +27,7 @@ const App = () => {
           <Route index element={<UpcomingAppointment />} />
           <Route path="upcoming" element={<UpcomingAppointment />} />
           <Route path="previous" element={<PreviousAppointment />} />
+          <Route path="availability" element={<ManageAvailabilities />} />
         </Route>
       </Routes>
       <ToasterContainer />

@@ -1,10 +1,10 @@
 import { isEmpty } from "lodash";
 import React, { useState } from "react";
-import { AiFillEye, AiOutlineDownload } from "react-icons/ai";
+import { AiFillEye, AiOutlineDownload,AiFillPrinter } from "react-icons/ai";
 import { BaseUrl } from "../../APi/api";
 import PrimaryButton from "../../Common/PrimaryButton";
 import Table from "../../Common/Table";
-const heading = ["No", "Date", "Time", "Action"];
+const heading = ['No','Date','report name','Action',]
 
 const LabTestView = ({ handleSubmit, setName, setReportFile, data }) => {
   const [page, setPage] = useState(1);
@@ -12,22 +12,25 @@ const LabTestView = ({ handleSubmit, setName, setReportFile, data }) => {
     return (
       !isEmpty(heading) &&
       heading.map((name, index) => (
-        <th
-          key={index}
-          scope="col"
-          className={`
-         ${heading.length - 1 === index ? "py-3" : "pl-10  py-3"}`}
-        >
+        <th key={index} scope="col" className={`
+         ${(heading.length -1) === index ? 'py-3'
+        :'pl-9  py-3'
+        
+        }`}>
           {name}
         </th>
       ))
     );
   };
+  const handlePrint=(doc)=>{
+    
+    window.open(doc, "PRINT", "height=400,width=600");
+  }
  
   const TableRowData = () => {
     return (
       !isEmpty(data) &&
-      data.map((data) => (
+      data.map((data,index) => (
         <>
           <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
             <td className="w-4 p-4">
@@ -46,12 +49,12 @@ const LabTestView = ({ handleSubmit, setName, setReportFile, data }) => {
               scope="row"
               className="px-10 py-4 uppercase font-medium text-gray-900 whitespace-nowrap dark:text-white"
             >
-              {data.id}
+              {index+1}
             </th>
-            <td className="px-10 py-4">{data.Date}</td>
-            <td className="px-10 py-4">{data.time}</td>
-
-            <td className=" py-4">
+            <td className="px-10 py-4">{'12/02/2023'}</td>
+            <td className="px-10 py-4">{data.name}</td>
+          
+            <td className="px-[-4px]] py-4">
               <p className=" text-[#499AFA] flex items-center  dark:text-blue-500 hover:underline">
                 <a href={`${BaseUrl}/${data.link}`} target="_blank">
                   <AiFillEye
@@ -59,13 +62,9 @@ const LabTestView = ({ handleSubmit, setName, setReportFile, data }) => {
                     size={23}
                   />
                 </a>
-                <AiOutlineDownload
-                  className="ml-1 cursor-pointer hover:text-red-400"
-                  size={23}
-                />
+               <AiOutlineDownload className=" cursor-pointer hover:text-red-400" size={23}/>
+              <AiFillPrinter  className=" cursor-pointer text-gray-500/90 hover:text-red-400"  size={23} onClick={()=>handlePrint(`${BaseUrl}/${data.link}`)} />
               </p>
-             
-             
             </td>
           </tr>
          

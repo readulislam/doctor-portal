@@ -5,12 +5,14 @@ import {
 } from "react-icons/md";
 import { RxDashboard } from "react-icons/rx";
 import { TbBrandBooking } from "react-icons/tb";
+import { SiManageiq } from "react-icons/si";
 import { useNavigate } from "react-router";
 import { Link,NavLink } from "react-router-dom";
+import ManageAvailabilities from "../components/ManageAvailabilities";
 const doctorManu = [
   { id: 1, menu: "Dashboard", icon: <RxDashboard size={20} /> },
-  { id: 1, menu: "Appointment", icon: <TbBrandBooking size={20} /> },
-  { id: 1, menu: "Rechecking", icon: <MdModelTraining size={20} /> },
+  { id: 1, menu: "Appointment", icon: <TbBrandBooking size={22} /> },
+  { id: 3, menu: "AvailAbility", icon: <SiManageiq size={20} /> },
   { id: 1, menu: "Profile", icon: <CgProfile size={20} /> },
 ];
 const adminMenu=[
@@ -104,7 +106,7 @@ if(menu==='Dashboard')  return navigate('/dashboard');
                 </NavLink>
                 <NavLink  to='previous' >
                 {({ isActive }) => (
-                  <p class={` ${isActive&&'!bg-gray-100/50'}  cursor-pointer py-2 text-sm text-gray-700 transition-all duration-75 rounded-md group hover:bg-gray-100/50 dark:text-white dark:hover:bg-gray-700 ml-3 pl-7`}>
+                  <p class={` ${isActive&&'!bg-gray-100/50'}  cursor-pointer py-2  text-sm text-gray-700 transition-all duration-75 rounded-md group hover:bg-gray-100/50 dark:text-white dark:hover:bg-gray-700 ml-3 pl-7`}>
                     Previous
                   </p>
                   )}
@@ -113,15 +115,31 @@ if(menu==='Dashboard')  return navigate('/dashboard');
             </li>
           ) : (
             <>
-              <li 
+              
+                 
+              {menu ==='AvailAbility' ?
+                
+                
+                 <NavLink to='AvailAbility'>
+                {({ isActive }) => (
+                  <p class={` ${isActive&&'!bg-gray-100/50'} mb-4 flex hover:bg-gray-100/50 py-2 w-full  text-gray-700 cursor-pointer items-center mb-4 rounded-md pl-3 `}>
+                      <span> {icon}</span>
+                      <span className="text-sm ml-2">{menu}</span>
+                  </p>
+                  )}
+                </NavLink>:   <li 
               onClick={()=>menuHandler(menu)}
               className="flex hover:bg-gray-100/50 py-2 w-full justify-between text-gray-700 cursor-pointer items-center mb-4 rounded-md pl-3">
                 <p className="flex items-center focus:outline-none focus:ring-2 focus:ring-white">
                   <span> {icon}</span>
+             
                   <span className="text-sm ml-2">{menu}</span>
                 </p>
                 {/* <div className="py-1 px-3 bg-gray-600 rounded text-white flex items-center justify-center text-xs">5</div> */}
-              </li>
+              </li>}
+              
+            
+         
             </>
           )}
         </>
