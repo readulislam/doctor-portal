@@ -2,7 +2,6 @@ import axios from "axios";
 import { Button, Label, Modal, Radio, Textarea } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { BaseUrl, ListDiseases, PostReport } from "../../APi/api";
-import InputField from "../../Common/InputField";
 import ModelViewWrapper from "./ModelViewWrapper";
 const d = [
   "Futurionic Private",
@@ -23,25 +22,32 @@ const d = [
 ];
 
 const appointType = ["Regular", "Follow Up"];
-const AppointmentDiseases = ({ open, setOpen, doctorData,setOtherDisease,selectedDisease,otherDisease,setSelectedDisease, doctorId,handleDiseaseSubmit }) => {
+const AppointmentDiseases = ({
+  open,
+  setOpen,
+  doctorData,
+  setOtherDisease,
+  selectedDisease,
+  otherDisease,
+  setSelectedDisease,
+  doctorId,
+  handleDiseaseSubmit,
+}) => {
   const [disease, setDisease] = useState([]);
 
   useEffect(() => {
     const fetch = async () => {
-      const {data}=await ListDiseases(doctorData.departmentId)
+      const { data } = await ListDiseases(doctorData.departmentId);
       // const { data } = await ListDiseases(2);
       setDisease(data);
     };
     fetch();
   }, []);
 
-
-  
-
   const props = {
     open: open,
-    setOpen:setOpen,
-    handleSubmit:handleDiseaseSubmit,
+    setOpen: setOpen,
+    handleSubmit: handleDiseaseSubmit,
   };
   return (
     <React.Fragment>
@@ -93,42 +99,40 @@ const AppointmentDiseases = ({ open, setOpen, doctorData,setOtherDisease,selecte
               </label>
             </>
           )}
-
         </div>
-        <hr className="my-6   "/>
-          <div className=" ">
-            <span class="block uppercase text-gray-700 text-sm font-semibold mb-2">
-              Appointment type
-            </span>
-            {appointType.map((name, index) => (
-              <>
-                <div
-                  onClick={() => {}}
-                  class="flex items-center  pl-1  rounded dark:border-gray-700"
+        <hr className="my-6   " />
+        <div className=" ">
+          <span class="block uppercase text-gray-700 text-sm font-semibold mb-2">
+            Appointment type
+          </span>
+          {appointType.map((name, index) => (
+            <>
+              <div
+                onClick={() => {}}
+                class="flex items-center  pl-1  rounded dark:border-gray-700"
+              >
+                <input
+                  // onClick={(e) => {
+                  //   setAppointTypeValue(e.target.value);
+                  // }}
+                  id="bordered-radio-1"
+                  type="radio"
+                  value={name}
+                  required={true}
+                  name="bordered"
+                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
+                <label
+                  for="bordered"
+                  class="w-full py-2 ml-2 text-sm font-medium text-gray-700 dark:text-gray-300"
                 >
-                  <input
-                    // onClick={(e) => {
-                    //   setAppointTypeValue(e.target.value);
-                    // }}
-                    id="bordered-radio-1"
-                    type="radio"
-                    value={name}
-                    required={true}
-                    name="bordered"
-                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  />
-                  <label
-                    for="bordered"
-                    class="w-full py-2 ml-2 text-sm font-medium text-gray-700 dark:text-gray-300"
-                  >
-                    {name}
-                  </label>
-                </div>
-              </>
-            ))}
-          </div>
+                  {name}
+                </label>
+              </div>
+            </>
+          ))}
+        </div>
       </ModelViewWrapper>
-      
     </React.Fragment>
   );
 };

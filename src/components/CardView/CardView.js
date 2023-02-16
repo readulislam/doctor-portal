@@ -42,10 +42,7 @@ const CardView = () => {
       const d = await ListDepartments();
     };
     const fetchFilterData = async () => {
-      if (locationInput === "Location" || departmentInput === "Speciality") {
-        setLocationInput("");
-        setDepartmentInput("");
-      }
+      
       const { data } = await axios.get(`${BaseUrl}/get-doctorFiltering`, {
         params: {
           limit: 5,
@@ -58,7 +55,7 @@ const CardView = () => {
       if (!data.massage && data) {
         setDoctors(data.rows);
       
-        setTotalPage(Math.ceil(data.count / 8));
+        setTotalPage(Math.ceil(data.count / 5));
       }
       if (data.massage) {
         toast.error(data.massage, { id: 1 });
@@ -95,13 +92,16 @@ const CardView = () => {
     let locationvalue = values.hospital;
     let departmentValue = values.department;
     let nameValue = values.name;
-    console.lKog(typeof locationvalue, typeof departmentValue, nameValue);
+    console.log(values.department,"fsf",values.hospital,"dsd");
+
     // if (departmentValue) {
     //   departmentValue=parseInt(departmentValue);
     // }
     // if (locationvalue) {
     //   locationvalue =parseInt(locationvalue);
     // }
+    setLocationInput()
+
 
     setName(nameValue);
     // if(locationInput === 'Location' || departmentInput=== 'Speciality'){
@@ -111,7 +111,7 @@ const CardView = () => {
 
     const { data } = await axios.get(`${BaseUrl}/get-doctorFiltering`, {
       params: {
-        limit: 5,
+        limit: 8,
         offset: 1,
         name: nameValue,
         locationInput: locationvalue,
