@@ -32,6 +32,7 @@ const END_POINTS = {
   GET_PATIENT_DISEASES: () => "/patient-diseases",
   GET_PATIENT_APPOINTMENT_BY_DISEASES: () => "/appointmentByDisease",
   UPDATE_APPOINTMENT_WITH_DISEASE: () => "/updateAppointment",
+  UPDATE_AVAILABILITY_BY_DOCTOR_ID:()=>"/setAvailabilityByDoctorId"
 };
 const URL = (End_Point) => `${BaseUrl}${End_Point}`;
 
@@ -58,6 +59,13 @@ export const updateAppointmentWithDisease = async (query)=>{
 
   return data;
 }
+
+export const setAvailabilityByDoctor=async(query)=>{
+  const { data }= await axios.put(URL(END_POINTS.UPDATE_AVAILABILITY_BY_DOCTOR_ID()),{
+    ...query
+  })
+}
+
 export const GetAppointmentByDiseases = async (patientInfo) => {
   const { data } = await axios.get(URL(END_POINTS.GET_PATIENT_APPOINTMENT_BY_DISEASES()), {
     params: { ...patientInfo},
