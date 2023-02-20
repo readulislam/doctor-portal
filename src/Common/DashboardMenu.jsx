@@ -9,6 +9,7 @@ import { SiManageiq } from "react-icons/si";
 import { useNavigate } from "react-router";
 import { Link,NavLink } from "react-router-dom";
 import ManageAvailabilities from "../components/ManageAvailabilities";
+import { useSelector } from "react-redux";
 const doctorManu = [
   { id: 1, menu: "Dashboard", icon: <RxDashboard size={20} /> },
   { id: 1, menu: "Appointment", icon: <TbBrandBooking size={22} /> },
@@ -21,6 +22,11 @@ const adminMenu=[
   { id:3,menu:"patient" ,icon:<CgProfile size={20}/> },
 ];
 const DashboardMenu = () => {
+  const {
+    Auth: { userId },
+    Doctor: { doctorId, },
+  } = useSelector((state) => state) ||{};
+  console.log(doctorId)
   const navigate = useNavigate()
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [nestedMenu, setNestedMenu] = useState(false);
@@ -115,19 +121,23 @@ if(menu==='Dashboard')  return navigate('/dashboard');
             </li>
           ) : (
             <>
+              {doctorId && <>
               
+              </>}
                  
-              {menu ==='AvailAbility' ?
-                
-                
-                 <NavLink to='AvailAbility'>
-                {({ isActive }) => (
-                  <p class={` ${isActive&&'!bg-gray-100/50'} mb-4 flex hover:bg-gray-100/50 py-2 w-full  text-gray-700 cursor-pointer items-center mb-4 rounded-md pl-3 `}>
-                      <span> {icon}</span>
-                      <span className="text-sm ml-2">{menu}</span>
-                  </p>
-                  )}
-                </NavLink>:   <li 
+              {(menu ==='AvailAbility' )?
+                <>
+             {doctorId &&    
+              <NavLink to='AvailAbility'>
+             {({ isActive }) => (
+               <p class={` ${isActive&&'!bg-gray-100/50'} mb-4 flex hover:bg-gray-100/50 py-2 w-full  text-gray-700 cursor-pointer items-center mb-4 rounded-md pl-3 `}>
+                   <span> {icon}</span>
+                   <span className="text-sm ml-2">{menu}</span>
+               </p>
+               )}
+             </NavLink>}
+             
+             </>  :   <li 
               onClick={()=>menuHandler(menu)}
               className="flex hover:bg-gray-100/50 py-2 w-full justify-between text-gray-700 cursor-pointer items-center mb-4 rounded-md pl-3">
                 <p className="flex items-center focus:outline-none focus:ring-2 focus:ring-white">

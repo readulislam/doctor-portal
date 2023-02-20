@@ -8,7 +8,16 @@ const initialState = {
   status: "idle",
   error: "",
   appointments: [],
-  appointmentCount:''
+  appointmentCount:'',
+  availability:{
+    sunday:false,
+    monday:false,
+    tuesday:false,
+    wednesday:false,
+    thursday:false,
+    friday:false,
+    saturday:false,
+  }
 };
 
 export const getDoctor = createAsyncThunk("get/doctor", async (phone) => {

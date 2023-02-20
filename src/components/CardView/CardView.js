@@ -36,6 +36,7 @@ const CardView = () => {
           offset: page,
         },
       });
+      console.log(data)
       const da = await ListStates();
       setDoctors(data.rows);
       setTotalPage(Math.ceil(data.count / 8));
