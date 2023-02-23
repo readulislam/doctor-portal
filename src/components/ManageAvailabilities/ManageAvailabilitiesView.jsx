@@ -1,222 +1,198 @@
-import { Checkbox } from "flowbite-react";
-import { AiOutlineCheck } from "react-icons/ai";
-import { BiEdit } from "react-icons/bi";
-import React, { useState } from "react";
-import DoctorDashBoard from "../DoctorDashBoard/DoctorDashBoard";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { AiOutlinePlus } from "react-icons/ai";
+import { FiCopy } from "react-icons/fi";
+import { useSelector } from "react-redux";
+import moment from 'moment';
+import {
+  AddWeeklyAvailability,
+  BaseUrl,
+  GetWeeklyAvailability,
+  updateWeeklyAvailability,
+} from "../../APi/api";
+import { setDefaultAbailability } from "../../Utils/mockData";
+import { toast } from "react-hot-toast";
 
 const ManageAvailabilitiesView = () => {
-  const [sunday, setSunday] = useState(false);
-  const [monday, setMonday] = useState(false);
-  const [tuesday, setTuesday] = useState(false);
-  const [wednesday, setWednesday] = useState(false);
-  const [thursday, setThursday] = useState(false);
-  const [friday, setFriday] = useState(false);
-  const [saturday, setSaturday] = useState(false);
-  const [sundayTime, setSundayTime] = useState({ startTime: "", endTime: "" });
-  const [mondayTime, setMondayTime] = useState({ startTime: "", endTime: "" });
-  const [tuesdayTime, setTuesdayTime] = useState({
-    startTime: "",
-    endTime: "",
-  });
-  const [wednesdayTime, setWednesdayTime] = useState({
-    startTime: "",
-    endTime: "",
-  });
-  const [thursdayTime, setThursdayTime] = useState({
-    startTime: "",
-    endTime: "",
-  });
-  const [fridayTime, setFridayTime] = useState({ startTime: "", endTime: "" });
-  const [saturdayTime, setSaturdayTime] = useState({
-    startTime: "",
-    endTime: "",
+  const {
+    Auth: { userId },
+    Doctor: { doctorId },
+  } = useSelector((state) => state) || {};
+  const [defaultTime, setDefaultTime] = useState({
+    startTime: "09:00",
+    endTime: "17:00",
   });
 
-  const handleChange = (setChange, e) => {
-    setChange(e.target.checked);
-  };
-  const HandleAvailability = ({
-    name,
-    setAvailability,
-    availability,
-    inputDisabled,
-    setInputDisabled
-  }) => {
+  const [availability, setAvailability] = useState([
+    { name: "sunday", schedule: null },
+    { name: "monday", schedule: null },
+    { name: "Tuesday", schedule: null },
+    { name: "wednesday", schedule: null },
+    { name: "thursday", schedule: null },
+    { name: "friday", schedule: null },
+    { name: "saturday", schedule: null },
+  ]);
+  const [reload, setReload] = useState(false);
 
-    const handleSubmit = () => {
-      console.log("handleSubmit called", name, availability);
+  useEffect(() => {
+    const fetching = async () => {
+      const isAvailability = await GetWeeklyAvailability(doctorId);
+      console.log(isAvailability);
 
-      setInputDisabled(!inputDisabled)
+      if (!isAvailability) {
+        const addAvailability = await AddWeeklyAvailability({
+          ...setDefaultAbailability,
+          doctorId,
+        });
+        console.log(addAvailability);
+      } else {
+        setAvailability([
+          { name: "sunday", schedule: isAvailability.sunday },
+          { name: "monday", schedule: isAvailability.monday },
+          { name: "tuesday", schedule: isAvailability.tuesday },
+          { name: "wednesday", schedule: isAvailability.wednesday },
+          { name: "thursday", schedule: isAvailability.thursday },
+          { name: "friday", schedule: isAvailability.friday },
+          { name: "saturday", schedule: isAvailability.saturday },
+        ]);
+      }
     };
+    fetching();
+  }, [doctorId, reload]);
 
-    return (
-      <div id={name} className="flex flex-row place-items-center">
-        <label className="px-4">
-          <input
-            id={name}
-            disabled={!inputDisabled}
-            type="time"
-            min="00:00"
-            value={availability?.startTime}
-            max="23:59"
-            className=" h-8"
-            onChange={(e) => {
-              setAvailability({
-                startTime: e.target.value,
-                endTime: availability.endTime,
-              });
-            }}
-          />
-        </label>
-        <label className="px-4">
-          <span className="pr-4">to</span>
-          <input
-            id={name}
-            disabled={!inputDisabled}
-            type="time"
-            min="00:00"
-            max="23:59"
-            value={availability?.endTime}
-            className="h-8"
-            onChange={(e) => {
-              setAvailability({
-                startTime: availability.startTime,
-                endTime: e.target.value,
-              });
-            }}
-          />
-        </label>
-        {inputDisabled && <AiOutlineCheck onClick={handleSubmit} />}
-      </div>
-    );
+  const availabilityHandler = async (name, schedule) => {
+    console.log(schedule, name);
+    if (!schedule) {
+      const update = await updateWeeklyAvailability({
+        id:1,
+        doctorId,
+        ...defaultTime,
+        weekday: name,
+      });
+      setReload(!reload);
+      console.log(update);
+    }else{
+      const update = await axios.put(`${BaseUrl}/set-empty`,{
+        doctorId,
+        weekday: name,
+      })
+ setReload(!reload);
+      console.log(schedule.length)
+    }
   };
+const startTimeHandler = async (event,id,name,endTime) => {
 
+console.log(id, name)
+const update = await updateWeeklyAvailability({
+  id:1,
+  doctorId,
+ startTime: event.target.value,
+ endTime,
+  weekday: name,
+});
+setReload(!reload);
+console.log(defaultTime)
+}
+const endTimeHandler = async (event,id,name,startTime) => {
+const endTime= event.target.value;
+
+if(endTime > startTime){
+  const update = await updateWeeklyAvailability({
+    id:1,
+    doctorId,
+   startTime,
+   endTime,
+    weekday: name,
+  });
+  setReload(!reload);
+}else{
+  toast.error('This is smaller to start time',{id:1})
+}
+console.log(defaultTime)
+}
   return (
-    <div className="flex">
-      <div className="flex flex-col gap-4 " id="checkbox">
-        <p className="text-xl mb-2 uppercase font-[500]">Set Availability</p>
-        <div className="flex items-center gap-2">
-          <Checkbox
-            id="Sunday"
-            checked={sunday}
-            onChange={(e) => {
-              handleChange(setSunday, e);
-            }}
-          />
-          <label className="pr-2" >Sun</label>
-          <HandleAvailability
-            name="sunday"
-            inputDisabled={sunday}
-            setInputDisabled={setSunday}
-            setAvailability={setSundayTime}
-            availability={sundayTime}
-          />
-        </div>
-        <div className="flex items-center gap-2">
-          <Checkbox
-            id="Monday"
-            checked={monday}
-            onChange={(e) => {
-              handleChange(setMonday, e);
-            }}
-          />
-          <label className="pr-1" >Mon</label>
-          <HandleAvailability
-            name="monday"
-            inputDisabled={monday}
-            setInputDisabled={setMonday}
-            setAvailability={setMondayTime}
-            availability={mondayTime}
-          />
-        </div>
-        <div className="flex items-center gap-2">
-          <Checkbox
-            id="Tuesday"
-            checked={tuesday}
-            onChange={(e) => {
-              handleChange(setTuesday, e);
-            }}
-          />
-          <label className="pr-2" >Tue</label>
-          <HandleAvailability
-            name="tuesday"
-            inputDisabled={tuesday}
-            setInputDisabled={setTuesday}
-            setAvailability={setTuesdayTime}
-            availability={tuesdayTime}
-          />
-        </div>
-        <div className="flex  items-center gap-2">
-          <Checkbox
-            id="Wednesday"
-            checked={wednesday}
-            onChange={(e) => {
-              handleChange(setWednesday, e);
-            }}
-          />
-          <label className="" >Wed</label>
-          <HandleAvailability
-            name="wednesday"
-            inputDisabled={wednesday}
-            setInputDisabled={setWednesday}
-            setAvailability={setWednesdayTime}
-            availability={wednesdayTime}
-          />
-        </div>
-        <div className="flex  items-center gap-2">
-          <Checkbox
-            id="Thursday"
-            checked={thursday}
-            onChange={(e) => {
-              handleChange(setThursday, e);
-            }}
-          />
-          <label className="pr-1.5">Thu</label>
-          <HandleAvailability
-            name="thursday"
-            inputDisabled={thursday}
-            setInputDisabled={setThursday}
-            setAvailability={setThursdayTime}
-            availability={thursdayTime}
-          />
-        </div>
-        <div className="flex  items-center gap-2">
-          <Checkbox
-            id="Friday"
-            checked={friday}
-            onChange={(e) => {
-              handleChange(setFriday, e);
-            }}
-          />
-          <label className="pr-4" >Fri</label>
-          <HandleAvailability
-            name="friday"
-            inputDisabled={friday}
-            setInputDisabled={setFriday}
-            setAvailability={setFridayTime}
-            availability={fridayTime}
-          />
-        </div>
-        <div className="flex items-center gap-2">
-          <Checkbox
-            id="saturday"
-            checked={saturday}
-            onChange={(e) => {
-              handleChange(setSaturday, e);
-            }}
-          />
-          <label className="pr-2" >Sat</label>
-          <HandleAvailability
-            name="saturday"
-            inputDisabled={saturday}
-            setInputDisabled={setSaturday}
-            setAvailability={setSaturdayTime}
-            availability={saturdayTime}
-          />
-        </div>
+
+    <div className="bg-white h-[84vh] mt-2 rounded-lg grid  md:grid-cols-4 border">
+      <div
+        className={`row-span-1 md:col-span-2   md:border-r px-8 overflow-y-auto`}
+      >
+        <p className="  font-semibold pt-6 pb-9">Set your weekly hours</p>
+        {availability.map(({ name, schedule }, index) => (
+          <>
+            <div key={index} class="flex items-center justify-between ">
+              <div className="flex items-center">
+                <label
+                  onClick={() => availabilityHandler(name, schedule)}
+                  className="w-20 "
+                >
+                  <input
+                   checked={schedule? true: false}
+                    type="checkbox"
+                    value={name}
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:ring-offset-gray-800 focus:ring-0 dark:bg-gray-700 dark:border-gray-600"
+                  />
+                  <span class="ml-2 text-sm font-bold uppercase tracking-widest  text-gray-900 dark:text-gray-300">
+                    {name.slice(0, 3)}
+                  </span>
+                </label>
+              </div>
+
+              {/* */}
+
+              {schedule ? (
+                <>
+                  {schedule.map((data) => (
+                    <>
+                      <div>
+                        <input
+                        
+                        onChange={(e)=>startTimeHandler(e,data.id,name, data.endTime)}
+                          type="time"
+                          class="h-10  px-1 mr-[2px] rounded-md border-2 border-gray-300"
+                          value={data?.startTime}
+                          name="startTime"
+                        />
+                        <span>-</span>
+                        <input
+                         onChange={(e)=>endTimeHandler(e,data.id,name, data.startTime)}
+                          type="time"
+                          class="h-10 px-1 ml-[2px] rounded-md border-2 border-gray-300"
+                          value={data?.endTime}
+                          name="timein"
+                        />
+                      </div>
+                    </>
+                  ))}
+                </>
+              ) : (
+                <p className="text-sm font-medium text-gray-500">Unavailable</p>
+              )}
+
+              <div className="flex items-center gap-x-4 text-gray-500">
+                <AiOutlinePlus
+                  className="cursor-pointer hover:bg-gray-200 p-1 rounded-md"
+                  size={32}
+                />
+                <FiCopy
+                  className="cursor-pointer hover:bg-gray-200 rounded-md p-1"
+                  size={32}
+                />
+              </div>
+            </div>
+            {!(index === availability.length - 1) && (
+              <hr className="md:my-6 " />
+            )}
+          </>
+        ))}
       </div>
-      <div className="pl-5 w-1/3">
-        {/* <DoctorDashBoard/> */}
+      <div className="px-8 col-span-2 w-full">
+        <p className=" font-semibold py-5">Add date overrides</p>
+        <p className="text-sm text-gray-500">
+          Add dates when your availability changes from your weekly hours
+        </p>
+        <button className=" p-1.5 px-4 border-blue-700 text-blue-700 rounded-full mx-auto my-6 border">
+          Add a date override
+        </button>
       </div>
     </div>
   );

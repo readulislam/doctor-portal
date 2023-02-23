@@ -14,6 +14,7 @@ const END_POINTS = {
   LOGIN_PATIENT: () => "/patient-login", //  query CONTACT NUMBER
   ADD_DATE_OVERRIDE: () => "/add-dateOverride",
   ADD_WEEKLY_AVAILABILITY: () => "/add-weeklyAvailability",
+  UPDATE_WEEKLY_AVAILABILITY: () => "/update-availability",
   GET_WEEKLY_AVAILABILITY: () => "/get-weeklyAvailabilityByDoctorId", // query doctorId
   GET_STATES: () => "/get-states",
   GET_CITIES: () => "/get-citiesByStateId", //  query stateId
@@ -36,11 +37,23 @@ const END_POINTS = {
 };
 const URL = (End_Point) => `${BaseUrl}${End_Point}`;
 
+
+
+
+
+
 //DELETE APPOINTMENT
 
 export const CancelAppointment = async (appointmentId) => {
   const { data } = await axios.delete(URL(END_POINTS.DELETE_APPOINTMENT()), {
     params: { id: appointmentId },
+  });
+
+  return data;
+};
+export const GetWeeklyAvailability = async (doctorId) => {
+  const { data } = await axios.get(URL(END_POINTS.GET_WEEKLY_AVAILABILITY()), {
+    params: { doctorId },
   });
 
   return data;
@@ -240,8 +253,15 @@ it takes more info as like below
 Note: time format 24 hours as like 13:00 or 17:00
 */
 export const AddWeeklyAvailability = async (availabilityINfo) => {
-  const { data } = await axios.get(URL(END_POINTS.ADD_PATIENT()), {
+  const { data } = await axios.post(URL(END_POINTS.ADD_WEEKLY_AVAILABILITY()), {
     ...availabilityINfo,
+  });
+  return data;
+};
+export const updateWeeklyAvailability = async (availabilityINfo) => {
+  console.log('aou',availabilityINfo)
+  const { data } = await axios.put(URL(END_POINTS.UPDATE_WEEKLY_AVAILABILITY()), {
+   params:{ ...availabilityINfo,}
   });
   return data;
 };

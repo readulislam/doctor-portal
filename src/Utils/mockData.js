@@ -776,3 +776,18 @@ const disease=[
 "endDate":"6/12/2023"
 }
     ]
+
+
+ export   const setDefaultAbailability = {
+    
+      eventTypeId:8,
+      sunday: "",
+      monday: "",
+      tuesday: "",
+      wednesday: "",
+      thursday: "",
+      friday: "",
+      saturday: "",
+      startDate:"",
+      endDate:""
+    }

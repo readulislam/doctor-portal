@@ -9,7 +9,7 @@ const ToasterContainer = () => {
   gutter={8}
 //   containerClassName=""
   containerStyle={{
-    top: 80,
+    top: 20,
     
   }}
   toastOptions={{
