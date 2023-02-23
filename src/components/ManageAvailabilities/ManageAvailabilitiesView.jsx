@@ -148,6 +148,9 @@ console.log(defaultTime)
                         
                         onChange={(e)=>startTimeHandler(e,data.id,name, data.endTime)}
                           type="time"
+                          min="00:00" 
+                          step="900"
+                          max="23:59"
                           class="h-10  px-1 mr-[2px] rounded-md border-2 border-gray-300"
                           value={data?.startTime}
                           name="startTime"
@@ -156,6 +159,7 @@ console.log(defaultTime)
                         <input
                          onChange={(e)=>endTimeHandler(e,data.id,name, data.startTime)}
                           type="time"
+                          step="900"
                           class="h-10 px-1 ml-[2px] rounded-md border-2 border-gray-300"
                           value={data?.endTime}
                           name="timein"
