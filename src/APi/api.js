@@ -1,7 +1,7 @@
 import axios from "axios";
 // export const BaseUrl = 'http://ec2-65-2-177-179.ap-south-1.compute.amazonaws.com:4000'
-// export const BaseUrl = 'http://ec2-13-127-51-48.ap-south-1.compute.amazonaws.com:4000'
-export const BaseUrl = "http://localhost:4000";
+export const BaseUrl = 'http://ec2-13-127-51-48.ap-south-1.compute.amazonaws.com:4000'
+// export const BaseUrl = "http://localhost:4000";
 // take end point
 const END_POINTS = {
   ADD_DEPARTMENT: () => "/add-department",

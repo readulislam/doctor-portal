@@ -25,8 +25,9 @@ const CardView = () => {
   const [appointment, setAppointment] = useState({});
   const [doctorDetailModal, setDoctorDetailModal] = useState(false);
   const [name, setName] = useState("");
-  const [locationInput, setLocationInput] = useState(null);
-  const [departmentInput, setDepartmentInput] = useState(null);
+  const [locationInput, setLocationInput] = useState("");
+  const [departmentInput, setDepartmentInput] = useState("");
+  const [reload, setReload] = useState(false);
 
   useEffect(() => {
     const fetching = async () => {
@@ -66,7 +67,7 @@ const CardView = () => {
     } else {
       fetching();
     }
-  }, [page]);
+  }, [page,reload]);
 
   // const {
   //   isIdle,
@@ -86,45 +87,45 @@ const CardView = () => {
   // }, {
 
   // })
+  console.log(departmentInput,"fAAA",locationInput,"dskd");
 
   const handleSearch = async (values, { resetForm }) => {
 
-    let locationvalue = values.hospital;
-    let departmentValue = values.department;
+    let locationvalue = values.hospital!=="location"?(values.hospital!==""?(values.hospital):(locationInput)):("");
+    let departmentValue = values.department!=="Speciality"?(values.department!==""?(values.department):(departmentInput)):("");
     let nameValue = values.name;
-    console.log(values.department,"fsf",values.hospital,"dsd");
+    console.log(values.department,"fsf",locationvalue,"dsd");
 
-    // if (departmentValue) {
-    //   departmentValue=parseInt(departmentValue);
-    // }
-    // if (locationvalue) {
-    //   locationvalue =parseInt(locationvalue);
-    // }
-    setLocationInput()
+    setDepartmentInput(departmentValue)
+    setLocationInput(locationvalue)
+
+  
 
 
     setName(nameValue);
-    // if(locationInput === 'Location' || departmentInput=== 'Speciality'){
-    //   setLocationInput('');
-    //   setDepartmentInput('');
-    // }
+    
+    if (nameValue || departmentValue || locationvalue) {
+      const { data } = await axios.get(`${BaseUrl}/get-doctorFiltering`, {
+        params: {
+          limit: 8,
+          offset: 1,
+          name: nameValue,
+          locationInput: locationvalue,
+          departmentInput: departmentValue,
+        },
+      });
+      if (!data.massage && data) {
+        setDoctors(data.rows);
+        setTotalPage(Math.ceil(data.count / 8));
+      }
+      if (data.massage) {
+        toast.error(data.massage, { id: 1 });
+       }
+    }else{
+      setReload(!reload)
+    }
 
-    const { data } = await axios.get(`${BaseUrl}/get-doctorFiltering`, {
-      params: {
-        limit: 8,
-        offset: 1,
-        name: nameValue,
-        locationInput: locationvalue,
-        departmentInput: departmentValue,
-      },
-    });
-    if (!data.massage && data) {
-      setDoctors(data.rows);
-      setTotalPage(Math.ceil(data.count / 8));
-    }
-    if (data.massage) {
-      toast.error(data.massage, { id: 1 });
-    }
+    
     // event.target.reset()
     resetForm();
   };

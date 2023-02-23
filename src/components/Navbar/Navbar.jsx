@@ -74,8 +74,8 @@ const Navbar = () => {
   
    {/* {!isLoggedIn &&  <Link to='/login'>
     <Button className='mr-4 !p-0 bg-[#499AFA]'>Login</Button>
-  </Link> } */}
-  {/* {(!isLoggedIn && !isRegister) && <Link to='/register'>
+  </Link> }
+  {(!isLoggedIn && !isRegister) && <Link to='/register'>
     <Button className='mr-4 !p-0 bg-[#499AFA]' >Register</Button>
   </Link>} */}
   </>}

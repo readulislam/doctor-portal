@@ -120,7 +120,7 @@ const ManageAvailabilitiesView = () => {
               handleChange(setMonday, e);
             }}
           />
-          <label className="pr-1" htmlFor="Monday">Mon</label>
+          <label className="pr-1" >Mon</label>
           <HandleAvailability
             name="monday"
             inputDisabled={monday}
@@ -137,7 +137,7 @@ const ManageAvailabilitiesView = () => {
               handleChange(setTuesday, e);
             }}
           />
-          <label className="pr-2" htmlFor="Tuesday">Tue</label>
+          <label className="pr-2" >Tue</label>
           <HandleAvailability
             name="tuesday"
             inputDisabled={tuesday}
@@ -154,7 +154,7 @@ const ManageAvailabilitiesView = () => {
               handleChange(setWednesday, e);
             }}
           />
-          <label className="" htmlFor="Wednesday">Wed</label>
+          <label className="" >Wed</label>
           <HandleAvailability
             name="wednesday"
             inputDisabled={wednesday}
@@ -188,7 +188,7 @@ const ManageAvailabilitiesView = () => {
               handleChange(setFriday, e);
             }}
           />
-          <label className="pr-4" htmlFor="Friday">Fri</label>
+          <label className="pr-4" >Fri</label>
           <HandleAvailability
             name="friday"
             inputDisabled={friday}
@@ -205,7 +205,7 @@ const ManageAvailabilitiesView = () => {
               handleChange(setSaturday, e);
             }}
           />
-          <label className="pr-2" htmlFor="saturday">Sat</label>
+          <label className="pr-2" >Sat</label>
           <HandleAvailability
             name="saturday"
             inputDisabled={saturday}
