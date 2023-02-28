@@ -21,8 +21,9 @@ const CardView = () => {
   const [appointment, setAppointment] = useState({});
   const [doctorDetailModal, setDoctorDetailModal] = useState(false);
   const [name, setName] = useState("");
-  const [locationInput, setLocationInput] = useState(null);
-  const [departmentInput, setDepartmentInput] = useState(null);
+  const [locationInput, setLocationInput] = useState("");
+  const [departmentInput, setDepartmentInput] = useState("");
+  const [reload, setReload] = useState(false);
 
   useEffect(() => {
     const fetching = async () => {
@@ -62,7 +63,8 @@ const CardView = () => {
     } else {
       fetching();
     }
-  }, [page]);
+  }, [page,reload]);
+
 
   const handleSearch = async (values, { resetForm }) => {
     let locationvalue = values.hospital;
@@ -87,6 +89,7 @@ const CardView = () => {
     if (data.massage) {
       toast.error(data.massage, { id: 1 });
     }
+
     resetForm();
   };
 

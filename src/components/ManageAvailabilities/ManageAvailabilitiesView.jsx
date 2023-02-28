@@ -154,7 +154,9 @@ const defaultData =  [{id:1, startTime:'09:00', endTime:'12:00'}]
   };
   console.log(availability);
   return (
+
     <div className="bg-white overflow-y-auto md:flex h-[84vh] mt-2 rounded-lg    border">
+
       <div
         className={` w-full   relative md:border-r px-6 overflow-y-auto`}
       >
@@ -181,6 +183,7 @@ const defaultData =  [{id:1, startTime:'09:00', endTime:'12:00'}]
 
               {/* */}
 
+
               <div>
                 {schedule ? (
                   <>
@@ -206,6 +209,7 @@ const defaultData =  [{id:1, startTime:'09:00', endTime:'12:00'}]
                             value={data?.endTime}
                             name="timein"
                           />
+
 
                           <TbTrash
                             onClick={() => scheduleDeleteHandler(index, name)}
