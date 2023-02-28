@@ -8,7 +8,7 @@ import {
   GetSlots,
   ListDiseases,
   LoginPatient,
-  PatientRegister
+  PatientRegister,
 } from "../../APi/api";
 import OtpVerifyModal from "../../Common/OtpVerifyModal";
 import useDateFormat from "../../hooks/useDateFormat";
@@ -21,22 +21,28 @@ import RegistarModal from "../Modal/RegistarModal";
 import AppointmentBookingView from "./AppointmentBookingView";
 import BillReceipt from "../Modal/BillReceipt";
 
-const AppointmentBooking = ({ doctorData, doctorId, setOpen, open,appointment, setAppointment,setOpenBillReceipt }) => {
-  const { isLoggedIn, isRegister, userInfo, userId } = useSelector(
-    (state) => state.Auth
-  );
+const AppointmentBooking = ({
+  doctorData,
+  doctorId,
+  setOpen,
+  open,
+  appointment,
+  setAppointment,
+  setOpenBillReceipt,
+}) => {
+  const {
+    Auth: { isLoggedIn, isRegister, userInfo, userId },
+    Doctor: { availability },
+  } = useSelector((state) => state) || {};
+
   const { setupRecaptcha } = useFirebaseAuth();
   const [openOtp, setOpenOtp] = useState(false);
-  // const dispatch=useDispatch();
   const [OTPresult, setOTPResult] = useState("");
-  //  const today=new Date();
   const [date, setDate] = useState(new Date());
- 
   const [selected, setSelected] = useState(null);
   const [slotsInfo, setSlotsInfo] = useState(null);
   const [number, setNumber] = useState("");
   const [contact, setContact] = useState(false);
-  
   const [registerModel, setRegisterModel] = useState(false);
   const [currentTime, setcurrentTime] = useState();
   const [selectedDisease, setSelectedDisease] = useState({});
@@ -44,55 +50,43 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open,appointment, s
   const [otherDisease, setOtherDisease] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
- 
-  const {yearMonthDay} = useDateFormat()
 
-
-
-
-  // const splitting = date.split("-");
+  const { yearMonthDay } = useDateFormat();
   const newDate = yearMonthDay(date);
- 
   const dispatch = useDispatch();
 
- 
-  // const navigate = useNavigate();
   useEffect(() => {
     const fetching = async () => {
       if (date && doctorId) {
-        const data =await GetSlots({date:newDate, doctorId})
-      
-        
+        const data = await GetSlots({ date: newDate, doctorId });
+
         setSlotsInfo(data);
-        if (newDate===  yearMonthDay(new Date())) {
-      
+        if (newDate === yearMonthDay(new Date())) {
           setcurrentTime(`${moment().hours()} : ${moment().minutes()}`);
-          
         } else {
-          setcurrentTime();        
+          setcurrentTime();
         }
       }
     };
     fetching();
-  }, [date, doctorId]);
+  }, [date, doctorId, availability, newDate, yearMonthDay]);
+
   const disableDate = () => {
     var dtToday = new Date();
-
     var month = dtToday.getMonth() + 1;
     var day = dtToday.getDate();
     var year = dtToday.getFullYear();
     if (month < 10) month = "0" + month.toString();
     if (day < 10) day = "0" + day.toString();
-
     return year + "-" + month + "-" + day;
   };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const { date } = slotsInfo;
 
     try {
       if (doctorId && userId) {
-        
         setOpenDiseaseModal(!openDiseaseModal);
       } else {
         if (selected && number) {
@@ -114,7 +108,6 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open,appointment, s
 
     if (isLoggedIn) {
       setOpenDiseaseModal(!openDiseaseModal);
-
     } else {
       // setOpenDiseaseModal(!openDiseaseModal);
     }
@@ -132,13 +125,16 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open,appointment, s
     };
     verify();
   }, [contact, number, isRegistered, setupRecaptcha]);
+
   const handleDispatch = async () => {
     dispatch(patientLoginByPhone(number));
     setOpenDiseaseModal(!openDiseaseModal);
   };
+
   const handleOtpSubmit = () => {
     // setOpenOtp(false)
   };
+
   const handleRegisterModel = async (apiData) => {
     setRegisterModel(false);
     const data = await PatientRegister(apiData);
@@ -150,40 +146,40 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open,appointment, s
       }
     }
   };
-  const handleDiseaseSubmit=(e)=>{
-    e.preventDefault()
-  if(otherDisease){
-    setAppointment({
-      doctorId,
-        patientId: userId,
-        time: selected.time,
-        timeSlotId: selected.id,
-        diseaseId:null,
-        appointmentType:e.target.bordered.value,
-        diseaseName:e.target.disease.value,
-        requestedByEmail: "",
-        requestedByPhone: "",
-        date:newDate ,
-        status: false,
-    })
-    }else{
+
+  const handleDiseaseSubmit = (e) => {
+    e.preventDefault();
+    if (otherDisease) {
       setAppointment({
         doctorId,
         patientId: userId,
         time: selected.time,
         timeSlotId: selected.id,
-        diseaseId:selectedDisease.id,
-        appointmentType:e.target.bordered.value,
-        diseaseName:selectedDisease.name,
+        diseaseId: null,
+        appointmentType: e.target.bordered.value,
+        diseaseName: e.target.disease.value,
         requestedByEmail: "",
         requestedByPhone: "",
-        date:newDate ,
+        date: newDate,
         status: false,
-      })
+      });
+    } else {
+      setAppointment({
+        doctorId,
+        patientId: userId,
+        time: selected.time,
+        timeSlotId: selected.id,
+        diseaseId: selectedDisease.id,
+        appointmentType: e.target.bordered.value,
+        diseaseName: selectedDisease.name,
+        requestedByEmail: "",
+        requestedByPhone: "",
+        date: newDate,
+        status: false,
+      });
     }
-    setOpenConfirmModal(!openConfirmModal)
-  }
-
+    setOpenConfirmModal(!openConfirmModal);
+  };
 
   const props = {
     doctorData,
@@ -200,16 +196,14 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open,appointment, s
     open,
     handleSubmit,
     date,
-
   };
 
   return (
     <>
-      <AppointmentBookingView modalHeaderTitle={'Book An Appointment'} props={props} />
-
-
-
-
+      <AppointmentBookingView
+        modalHeaderTitle={"Book An Appointment"}
+        props={props}
+      />
 
       <OtpVerifyModal
         OTPresult={OTPresult}
@@ -232,31 +226,31 @@ const AppointmentBooking = ({ doctorData, doctorId, setOpen, open,appointment, s
         />
       )}
 
-      {openDiseaseModal && <AppointmentDiseases
-      open={openDiseaseModal}
-      setOpen={setOpenDiseaseModal}
-      doctorData={doctorData}
-      doctorId={doctorId}
-      otherDisease={otherDisease}
-      selectedDisease={selectedDisease}
-      setSelectedDisease={setSelectedDisease}
-      setOtherDisease={setOtherDisease}
-      handleDiseaseSubmit={handleDiseaseSubmit}
-      /> }
-      {openConfirmModal && 
-      <BookingConfirmation
-        setOpen={setOpen}
-        slotsInfo={slotsInfo}
-        appointment={appointment}
-        openConfirmModal={openConfirmModal}
-        setOpenConfirmModal={setOpenConfirmModal}
-        doctorData={doctorData}
-        date={newDate}
-   
-       setOpenBillReceipt={setOpenBillReceipt}
-      />}
-
-
+      {openDiseaseModal && (
+        <AppointmentDiseases
+          open={openDiseaseModal}
+          setOpen={setOpenDiseaseModal}
+          doctorData={doctorData}
+          doctorId={doctorId}
+          otherDisease={otherDisease}
+          selectedDisease={selectedDisease}
+          setSelectedDisease={setSelectedDisease}
+          setOtherDisease={setOtherDisease}
+          handleDiseaseSubmit={handleDiseaseSubmit}
+        />
+      )}
+      {openConfirmModal && (
+        <BookingConfirmation
+          setOpen={setOpen}
+          slotsInfo={slotsInfo}
+          appointment={appointment}
+          openConfirmModal={openConfirmModal}
+          setOpenConfirmModal={setOpenConfirmModal}
+          doctorData={doctorData}
+          date={newDate}
+          setOpenBillReceipt={setOpenBillReceipt}
+        />
+      )}
     </>
   );
 };

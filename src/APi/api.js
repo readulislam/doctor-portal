@@ -28,22 +28,49 @@ const END_POINTS = {
   ADD_PRESCRIPTION: () => "/add-prescription",
   GET_PRESCRIPTION: () => "/get-prescription",
   ADD_REPORT: () => "/add-testReports",
+  GET_ALL_OVERRIDE_DATE: () => "/get-allOverrideDate",
+  ADD_OVERRIDE_DATE: () => "/add-dateOverride",
+  DELETE_OVERRIDE_DATE: () => "/delete-dateOverride",
   GET_DISEASE: () => "/get-diseases",
   DELETE_APPOINTMENT: () => "/AppointmentDelete",
   GET_PATIENT_DISEASES: () => "/patient-diseases",
   GET_PATIENT_APPOINTMENT_BY_DISEASES: () => "/appointmentByDisease",
   UPDATE_APPOINTMENT_WITH_DISEASE: () => "/updateAppointment",
-  UPDATE_AVAILABILITY_BY_DOCTOR_ID:()=>"/setAvailabilityByDoctorId"
+  UPDATE_AVAILABILITY_BY_DOCTOR_ID: () => "/setAvailabilityByDoctorId",
+  UPDATE_MANY_AVAILABILITY: () => "/update-many-availability",
+  ADD_NEW_AVAILABILITY: () => "/add-new-availability",
+  DELETE_SCHEDULE: () => "/delete-schedule", //BY-INDEX
 };
 const URL = (End_Point) => `${BaseUrl}${End_Point}`;
 
-
-
-
-
-
 //DELETE APPOINTMENT
 
+export const getAllOverrideDate = async () => {
+  const { data } = await axios.get(URL(END_POINTS.GET_ALL_OVERRIDE_DATE()), {});
+
+  return data;
+};
+export const deleteOverrideDate = async (doctorId,id) => {
+  const { data } = await axios.delete(URL(END_POINTS.DELETE_OVERRIDE_DATE()), {
+    params:{doctorId,id}
+  });
+
+  return data;
+};
+export const deleteSchedule = async (scheduleInfo) => {
+  const { data } = await axios.delete(URL(END_POINTS.DELETE_SCHEDULE()), {
+ params:{  ...scheduleInfo}
+  });
+
+  return data;
+};
+export const addOverrideDate = async (overrideInfo) => {
+  const { data } = await axios.post(URL(END_POINTS.ADD_OVERRIDE_DATE()), {
+...overrideInfo,
+  });
+
+  return data;
+};
 export const CancelAppointment = async (appointmentId) => {
   const { data } = await axios.delete(URL(END_POINTS.DELETE_APPOINTMENT()), {
     params: { id: appointmentId },
@@ -60,29 +87,57 @@ export const GetWeeklyAvailability = async (doctorId) => {
 };
 export const GetPatientDiseases = async (patientId) => {
   const { data } = await axios.get(URL(END_POINTS.GET_PATIENT_DISEASES()), {
-    params: { patientId},
+    params: { patientId },
   });
 
   return data;
 };
-export const updateAppointmentWithDisease = async (query)=>{
-  const { data } = await axios.post(URL(END_POINTS.UPDATE_APPOINTMENT_WITH_DISEASE()), {
-   ...query  
-  });
+export const updateAppointmentWithDisease = async (query) => {
+  const { data } = await axios.post(
+    URL(END_POINTS.UPDATE_APPOINTMENT_WITH_DISEASE()),
+    {
+      ...query,
+    }
+  );
 
   return data;
-}
+};
 
-export const setAvailabilityByDoctor=async(query)=>{
-  const { data }= await axios.put(URL(END_POINTS.UPDATE_AVAILABILITY_BY_DOCTOR_ID()),{
-    ...query
-  })
-}
+export const setAvailabilityByDoctor = async (query) => {
+  const { data } = await axios.put(
+    URL(END_POINTS.UPDATE_AVAILABILITY_BY_DOCTOR_ID()),
+    {
+      ...query,
+    }
+  );
+  return data;
+};
+export const updateManyAvailability = async (query) => {
+  const { data } = await axios.put(
+    URL(END_POINTS.UPDATE_MANY_AVAILABILITY()),
+    {
+      ...query,
+    }
+  );
+  return data;
+};
+export const addNewAvailability = async (query) => {
+  const { data } = await axios.put(
+    URL(END_POINTS.ADD_NEW_AVAILABILITY()),
+    {
+      ...query,
+    }
+  );
+  return data;
+};
 
 export const GetAppointmentByDiseases = async (patientInfo) => {
-  const { data } = await axios.get(URL(END_POINTS.GET_PATIENT_APPOINTMENT_BY_DISEASES()), {
-    params: { ...patientInfo},
-  });
+  const { data } = await axios.get(
+    URL(END_POINTS.GET_PATIENT_APPOINTMENT_BY_DISEASES()),
+    {
+      params: { ...patientInfo },
+    }
+  );
 
   return data;
 };
@@ -134,7 +189,6 @@ export const updateTimeSlot = async (query) => {
   return data;
 };
 export const updateAppointment = async (id) => {
-
   const data = await axios.put(URL(END_POINTS.UPDATE_APPOINTMENT()), {
     id,
   });
@@ -259,10 +313,13 @@ export const AddWeeklyAvailability = async (availabilityINfo) => {
   return data;
 };
 export const updateWeeklyAvailability = async (availabilityINfo) => {
-  console.log('aou',availabilityINfo)
-  const { data } = await axios.put(URL(END_POINTS.UPDATE_WEEKLY_AVAILABILITY()), {
-   params:{ ...availabilityINfo,}
-  });
+  console.log("aou", availabilityINfo);
+  const { data } = await axios.put(
+    URL(END_POINTS.UPDATE_WEEKLY_AVAILABILITY()),
+    {
+      params: { ...availabilityINfo },
+    }
+  );
   return data;
 };
 
@@ -277,8 +334,7 @@ export const GetSlots = async (query) => {
 };
 export const GetSlotByData = async (query) => {
   const { data } = await axios.get(URL(END_POINTS.GET_SLOTS()), {
-    
-    params: {...query, },
+    params: { ...query },
   });
   return data;
 };

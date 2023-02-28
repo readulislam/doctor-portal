@@ -9,15 +9,7 @@ const initialState = {
   error: "",
   appointments: [],
   appointmentCount:'',
-  availability:{
-    sunday:false,
-    monday:false,
-    tuesday:false,
-    wednesday:false,
-    thursday:false,
-    friday:false,
-    saturday:false,
-  }
+  availability:false
 };
 
 export const getDoctor = createAsyncThunk("get/doctor", async (phone) => {
@@ -36,6 +28,12 @@ const DoctorSlice = createSlice({
   initialState,
   reducers: {
     // ==> normal reducer functions go here
+  },
+  reducer:{
+changeThanReload(state){
+state.availability= !state.availability
+}
+
   },
   extraReducers(builder) {
     builder
@@ -68,5 +66,5 @@ const DoctorSlice = createSlice({
       
   },
 });
-
+export const DoctorActions = DoctorSlice.actions;
 export default DoctorSlice.reducer;

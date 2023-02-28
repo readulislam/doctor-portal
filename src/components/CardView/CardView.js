@@ -1,15 +1,11 @@
 import axios from "axios";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import { Button, Card, Pagination } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-
 import { useSelector } from "react-redux";
 import { BaseUrl, ListDepartments, ListStates } from "../../APi/api";
 import Filtering from "../Filtering/Filtering";
 import DoctorDetail from "../Modal/DoctorDetail";
-import useReactQuery from "../../hooks/useReactQuery";
-
 import AppointmentBooking from "../AppointmentBooking";
 import BillReceipt from "../Modal/BillReceipt";
 
@@ -36,14 +32,13 @@ const CardView = () => {
           offset: page,
         },
       });
-      console.log(data)
+      console.log(data);
       const da = await ListStates();
       setDoctors(data.rows);
       setTotalPage(Math.ceil(data.count / 8));
       const d = await ListDepartments();
     };
     const fetchFilterData = async () => {
-      
       const { data } = await axios.get(`${BaseUrl}/get-doctorFiltering`, {
         params: {
           limit: 5,
@@ -55,7 +50,7 @@ const CardView = () => {
       });
       if (!data.massage && data) {
         setDoctors(data.rows);
-      
+
         setTotalPage(Math.ceil(data.count / 5));
       }
       if (data.massage) {
@@ -69,47 +64,13 @@ const CardView = () => {
     }
   }, [page]);
 
-  // const {
-  //   isIdle,
-  //   isLoading,
-  //   isError,
-  //   data,
-  //   error,
-  //   refetch,
-  //   isFetching,
-  // } = useQuery('filter', ()=>{
-  //   if(name || locationInput || departmentInput){
-  //     fetchFilterData()
-  //   }
-  //   else{
-  //     fetching()
-  //   }
-  // }, {
-
-  // })
-
   const handleSearch = async (values, { resetForm }) => {
-
     let locationvalue = values.hospital;
     let departmentValue = values.department;
     let nameValue = values.name;
-    console.log(values.department,"fsf",values.hospital,"dsd");
-
-    // if (departmentValue) {
-    //   departmentValue=parseInt(departmentValue);
-    // }
-    // if (locationvalue) {
-    //   locationvalue =parseInt(locationvalue);
-    // }
-    setLocationInput()
-
-
+    console.log(values.department, "fsf", values.hospital, "dsd");
+    setLocationInput();
     setName(nameValue);
-    // if(locationInput === 'Location' || departmentInput=== 'Speciality'){
-    //   setLocationInput('');
-    //   setDepartmentInput('');
-    // }
-
     const { data } = await axios.get(`${BaseUrl}/get-doctorFiltering`, {
       params: {
         limit: 8,
@@ -126,7 +87,6 @@ const CardView = () => {
     if (data.massage) {
       toast.error(data.massage, { id: 1 });
     }
-    // event.target.reset()
     resetForm();
   };
 

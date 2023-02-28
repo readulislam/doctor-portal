@@ -23,13 +23,10 @@ const AppointmentBookingView = ({ props, modalHeaderTitle }) => {
       month = "" + (d.getMonth() + 1),
       day = "" + d.getDate(),
       year = d.getFullYear();
-
     if (month.length < 2) month = "0" + month;
     if (day.length < 2) day = "0" + day;
-
     return [year, month, day].join("-");
   }
-
 
   return (
     <>
@@ -43,7 +40,6 @@ const AppointmentBookingView = ({ props, modalHeaderTitle }) => {
         <div className="space-y-">
           <div className="grid grid-cols-2 gap-4 ">
             <TextInput
-         
               id="email1"
               type="text"
               placeholder="name@flowbite.com"
