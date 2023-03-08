@@ -37,15 +37,15 @@ const ManageAvailabilitiesView = ({
     startTime: "09:00",
     endTime: "12:00",
   });
-const defaultData =  [{id:1, startTime:'09:00', endTime:'12:00'}]
+
   const [availability, setAvailability] = useState([
-    { name: "sunday", schedule: defaultData },
-    { name: "monday", schedule: defaultData },
-    { name: "Tuesday", schedule:  defaultData },
-    { name: "wednesday", schedule:  defaultData },
-    { name: "thursday", schedule:  defaultData },
-    { name: "friday", schedule:  defaultData },
-    { name: "saturday", schedule:  defaultData },
+    { name: "sunday", schedule: null },
+    { name: "monday", schedule: null },
+    { name: "Tuesday", schedule:  null },
+    { name: "wednesday", schedule:  null },
+    { name: "thursday", schedule:  null },
+    { name: "friday", schedule:  null },
+    { name: "saturday", schedule:  null },
   ]);
   const [reload, setReload] = useState(false);
 
